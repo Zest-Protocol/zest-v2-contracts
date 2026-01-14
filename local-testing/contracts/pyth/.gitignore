@@ -1,0 +1,12 @@
+
+**/settings/Mainnet.toml
+**/settings/Testnet.toml
+**/.cache/**
+history.txt
+example/relayer/target
+.DS_Store
+node_modules
+
+lcov.info
+coverage/
+costs-reports.json

@@ -1,0 +1,3 @@
+unit-tests/** linguist-vendored
+example/cbtc/** linguist-vendored
+* text=lf

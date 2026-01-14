@@ -1,0 +1,30 @@
+**/settings/Mainnet.toml
+**/settings/Testnet.toml
+.cache/**
+.tool-versions
+.DS_Store
+
+*.log
+npm-debug.log*
+coverage
+*.info
+costs-reports.json
+node_modules
+local-testing/node_modules
+
+# lock files
+yarn.lock
+package-lock.json
+pnpm-lock.json
+local-testing/yarn.lock
+local-testing/package-lock.json
+local-testing/pnpm-lock.json
+
+# local files and tools
+local-packages
+logs
+local-testing/local-packages
+local-testing/logs
+local-testing/docs/clarigen
+CLAUDE.md
+.claude

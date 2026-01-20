@@ -32,6 +32,12 @@ Zest Protocol v2 has been audited by:
 - [**Greybeard Security - Zest Protocol v2**](https://drive.google.com/file/d/1ttWULriHM4yZZ_Y3kMJiSnrFaYee-IMi/view?usp=drive_link) - December 4th, 2025
 - [**Clarity Alliance - Zest Protocol v2 Upgrade V2**](https://clarity-alliance.github.io/audits/Clarity%20Alliance%20-%20Zest%20Protocol%20v2%20Upgrade%20V2.pdf) - December 20th, 2025
 
+## Bug Bounty
+
+**Active bug bounty program on Immunefi:** https://immunefi.com/bug-bounty/zest-protocol-v2/information/
+
+For direct disclosure: security@zestprotocol.com
+
 ## Key Features
 
 - **Flexible Collateral Options**: Choose between traditional collateral (non-yield-bearing) or rehypothecatable collateral (ztokens that earn supply yield while used as collateral)
@@ -122,5 +128,5 @@ Full documentation is available in the [docs/](docs/) directory:
 | [DAO System](docs/dao.md) | Governance, treasury, proposal lifecycle |
 | [Error Codes](docs/errors.md) | Complete error code reference |
 
-For testing documentation, see [local-testing/tests/README.md](local-testing/tests/README.md) or [local-testing/README.md](local-testing/README.md).
+For testing documentation, see [local-testing/tests/README.md](local-testing/tests/README.md) and [local-testing/README.md](local-testing/README.md).
 

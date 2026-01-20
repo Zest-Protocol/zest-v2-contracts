@@ -87,6 +87,6 @@ Production contracts deployed on mainnet: [../mainnet/README.md](../mainnet/READ
 
 ## Bug Bounty
 
-**Submit reports via our Immunefi program:** https://immunefi.com/bug-bounty/zestprotocol/information/
+**Submit reports via our Immunefi program:** https://immunefi.com/bug-bounty/zest-protocol-v2/information/
 
 For direct disclosure: security@zestprotocol.com

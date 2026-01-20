@@ -56,8 +56,8 @@ Zest uses Pyth Network for price feeds:
 
 ## Bug Bounty & Security Research
 
-For local testing environment and security research: [../local-testing/README.md](../local-testing/README.md)
+For local testing environment and security research [click here](../local-testing/README.md) to get started
 
-**Submit reports via our Immunefi program:** https://immunefi.com/bug-bounty/zestprotocol/information/
+**Submit reports via our Immunefi program:** https://immunefi.com/bug-bounty/zest-protocol-v2/information/
 
 For direct disclosure: security@zestprotocol.com

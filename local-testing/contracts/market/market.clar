@@ -1293,10 +1293,6 @@
         ;; Calculate current health with current mask
         (current-group (try! (get-egroup mask)))
         (current-ltvb (buff-to-uint-be (get LTV-BORROW current-group)))
-        
-        ;; Per-egroup borrow disable check
-        ;; Each bit in BORROW-DISABLED-MASK corresponds to a debt asset ID (NOT offset by 64)
-        (disabled-borrow-mask (get BORROW-DISABLED-MASK current-group))
 
         ;; LTV
         (notional-valued-assets (get-notional-evaluation { position: position, assets: assets }))
@@ -1306,17 +1302,20 @@
     ;; preconditions
     (asserts! (> amount u0) ERR-AMOUNT-ZERO)
     (asserts! (get debt asset) ERR-BORROW-DISABLED)
-    ;; Check if this specific asset is disabled for borrowing in this egroup
-    (asserts! (is-eq (bit-and disabled-borrow-mask (pow u2 asset-id)) u0) ERR-EGROUP-ASSET-BORROW-DISABLED)
     (asserts! (is-healthy collateral-value debt-value current-ltvb) ERR-UNHEALTHY)
 
     ;; Calculate FUTURE debt (after adding this debt)
     ;; For debt: bit position = asset-id + 64 (DEBT-OFFSET)
     (let ((future-mask (bit-or mask (pow u2 (+ asset-id DEBT-OFFSET))))
+          (future-group (try! (get-egroup future-mask)))
+          ;; Per-egroup borrow disable check (uses FUTURE egroup, not current)
+          ;; Each bit in BORROW-DISABLED-MASK corresponds to a debt asset ID (NOT offset by 64)
+          (disabled-borrow-mask (get BORROW-DISABLED-MASK future-group))
           (debt-increase (try! (get-asset-value asset amount true)))
           (debt-post-increased (+ debt-value debt-increase)))
 
-
+    ;; Check if this specific asset is disabled for borrowing in the FUTURE egroup
+    (asserts! (is-eq (bit-and disabled-borrow-mask (pow u2 asset-id)) u0) ERR-EGROUP-ASSET-BORROW-DISABLED)
     ;; postconditions
     (asserts! (try! (is-healthy-with-mask collateral-value debt-post-increased future-mask)) ERR-UNHEALTHY)
 

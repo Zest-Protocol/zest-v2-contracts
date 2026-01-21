@@ -10,7 +10,7 @@ Production deployment of Zest Protocol on Stacks mainnet.
 | [dao-multisig](contracts/dao/dao-multisig.clar) | [Link](https://explorer.hiro.so/txid/0x19d42dbcddcc209fa7afbdaf4981a97ef05ede00afd4e4708ba4f710068bea45?chain=mainnet) | 13th Jan 2026 |
 | [dao-traits](contracts/dao/dao-traits.clar) | [Link](https://explorer.hiro.so/txid/0x2b04bb83d31c25d8978711cfd12a43c0a44def356f9b0baee795bc3e7813ed06?chain=mainnet) | 13th Jan 2026 |
 | [dao-treasury](contracts/dao/dao-treasury.clar) | [Link](https://explorer.hiro.so/txid/0x865b3eb488eb46027ec296cc5423be4d996b285cd164d7ede289f1bc7e4840f1?chain=mainnet) | 13th Jan 2026 |
-| [market](contracts/market/market.clar) | [Link](https://explorer.hiro.so/txid/0x6c204759ec8e0cfb95bddcac9d000e87c8016a7e390c19920cbc60059e54a818?chain=mainnet) | 13th Jan 2026 |
+| [v0-0-market](contracts/market/v0-0-market.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-0-market?chain=mainnet) | 21st Jan 2026 |
 | [market-trait](contracts/market/market-trait.clar) | [Link](https://explorer.hiro.so/txid/0x1ef222bfa482f284acaa426a498a4497af469ac5f3d475059d20096885f5f3c7?chain=mainnet) | 13th Jan 2026 |
 | [market-vault](contracts/market/market-vault.clar) | [Link](https://explorer.hiro.so/txid/0x5f23208e9884552d4c88ec1bbdd229bca25de74f559d63fa2ba0e1ee977531ca?chain=mainnet) | 13th Jan 2026 |
 | [assets](contracts/registry/assets.clar) | [Link](https://explorer.hiro.so/txid/0x634371057a4e1ca1ecc485187478fe3710c4f5b462ade2118e69fd950bae1ad5?chain=mainnet) | 13th Jan 2026 |

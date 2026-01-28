@@ -111,167 +111,167 @@
 ;; -- Vault routing: get interest rate --------------------------------------
 
 (define-private (get-vault-interest-rate (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-interest-rate))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-interest-rate))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-interest-rate))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-interest-rate))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-interest-rate))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-interest-rate))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-interest-rate))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-interest-rate))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-interest-rate))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-interest-rate))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-interest-rate))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-interest-rate))
   u0)))))))
 
 ;; -- Vault routing: get utilization -----------------------------------------
 
 (define-private (get-vault-utilization (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-utilization))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-utilization))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-utilization))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-utilization))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-utilization))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-utilization))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-utilization))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-utilization))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-utilization))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-utilization))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-utilization))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-utilization))
   u0)))))))
 
 ;; -- Vault routing: get fee reserve -----------------------------------------
 
 (define-private (get-vault-fee-reserve (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-fee-reserve))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-fee-reserve))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-fee-reserve))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-fee-reserve))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-fee-reserve))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-fee-reserve))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-fee-reserve))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-fee-reserve))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-fee-reserve))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-fee-reserve))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-fee-reserve))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-fee-reserve))
   u0)))))))
 
 ;; -- Vault routing: get total assets ----------------------------------------
 
 (define-private (get-vault-total-assets (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-total-assets))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-total-assets))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-total-assets))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-total-assets))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-total-assets))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-total-assets))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-total-assets))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-total-assets))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-total-assets))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-total-assets))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-total-assets))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-total-assets))
   u0)))))))
 
 ;; -- Vault routing: get debt ------------------------------------------------
 
 (define-private (get-vault-debt (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-debt))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-debt))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-debt))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-debt))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-debt))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-debt))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-debt))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-debt))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-debt))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-debt))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-debt))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-debt))
   u0)))))))
 
 ;; -- Vault routing: get total supply ----------------------------------------
 
 (define-private (get-vault-total-supply (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-total-supply))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-total-supply))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-total-supply))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-total-supply))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-total-supply))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-total-supply))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-total-supply))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-total-supply))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-total-supply))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-total-supply))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-total-supply))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-total-supply))
   u0)))))))
 
 ;; -- Vault routing: get borrow index ----------------------------------------
 
 (define-private (get-vault-borrow-index (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-index))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-index))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-index))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-index))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-index))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-index))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-index))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-index))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-index))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-index))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-index))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-index))
   INDEX-PRECISION)))))))
 
 ;; -- Vault routing: get liquidity index -------------------------------------
 
 (define-private (get-vault-liquidity-index (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-liquidity-index))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-liquidity-index))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-liquidity-index))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-liquidity-index))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-liquidity-index))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-liquidity-index))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-liquidity-index))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-liquidity-index))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-liquidity-index))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-liquidity-index))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-liquidity-index))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-liquidity-index))
   INDEX-PRECISION)))))))
 
 ;; -- Vault routing: get cap supply ------------------------------------------
 
 (define-private (get-vault-cap-supply (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-cap-supply))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-cap-supply))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-cap-supply))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-cap-supply))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-cap-supply))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-cap-supply))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-cap-supply))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-cap-supply))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-cap-supply))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-cap-supply))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-cap-supply))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-cap-supply))
   u0)))))))
 
 ;; -- Vault routing: get cap debt --------------------------------------------
 
 (define-private (get-vault-cap-debt (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-cap-debt))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-cap-debt))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-cap-debt))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-cap-debt))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-cap-debt))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-cap-debt))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-cap-debt))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-cap-debt))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-cap-debt))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-cap-debt))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-cap-debt))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-cap-debt))
   u0)))))))
 
 ;; -- Vault routing: get last update -----------------------------------------
 
 (define-private (get-vault-last-update (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-last-update))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-last-update))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-last-update))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-last-update))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-last-update))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-last-update))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-last-update))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-last-update))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-last-update))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-last-update))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-last-update))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-last-update))
   u0)))))))
 
 ;; -- Vault routing: get points util -----------------------------------------
 
 (define-private (get-vault-points-util (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-points-util))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-points-util))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-points-util))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-points-util))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-points-util))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-points-util))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-points-util))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-points-util))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-points-util))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-points-util))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-points-util))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-points-util))
   (list u0 u0 u0 u0 u0 u0 u0 u0))))))))
 
 ;; -- Vault routing: get points rate -----------------------------------------
 
 (define-private (get-vault-points-rate (vid uint))
-  (if (is-eq vid STX) (unwrap-panic (contract-call? .vault-stx get-points-rate))
-  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .vault-sbtc get-points-rate))
-  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .vault-ststx get-points-rate))
-  (if (is-eq vid USDC) (unwrap-panic (contract-call? .vault-usdc get-points-rate))
-  (if (is-eq vid USDH) (unwrap-panic (contract-call? .vault-usdh get-points-rate))
-  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .vault-ststxbtc get-points-rate))
+  (if (is-eq vid STX) (unwrap-panic (contract-call? .v0-vault-stx get-points-rate))
+  (if (is-eq vid sBTC) (unwrap-panic (contract-call? .v0-vault-sbtc get-points-rate))
+  (if (is-eq vid stSTX) (unwrap-panic (contract-call? .v0-vault-ststx get-points-rate))
+  (if (is-eq vid USDC) (unwrap-panic (contract-call? .v0-vault-usdc get-points-rate))
+  (if (is-eq vid USDH) (unwrap-panic (contract-call? .v0-vault-usdh get-points-rate))
+  (if (is-eq vid stSTXbtc) (unwrap-panic (contract-call? .v0-vault-ststxbtc get-points-rate))
   (list u0 u0 u0 u0 u0 u0 u0 u0))))))))
 
 ;; -- Vault routing: convert shares to underlying assets ---------------------
 
 (define-private (get-vault-underlying-balance (vid uint) (account principal))
   (if (is-eq vid STX)
-      (let ((shares (unwrap-panic (contract-call? .vault-stx get-balance account))))
-        (unwrap-panic (contract-call? .vault-stx convert-to-assets shares)))
+      (let ((shares (unwrap-panic (contract-call? .v0-vault-stx get-balance account))))
+        (unwrap-panic (contract-call? .v0-vault-stx convert-to-assets shares)))
   (if (is-eq vid sBTC)
-      (let ((shares (unwrap-panic (contract-call? .vault-sbtc get-balance account))))
-        (unwrap-panic (contract-call? .vault-sbtc convert-to-assets shares)))
+      (let ((shares (unwrap-panic (contract-call? .v0-vault-sbtc get-balance account))))
+        (unwrap-panic (contract-call? .v0-vault-sbtc convert-to-assets shares)))
   (if (is-eq vid stSTX)
-      (let ((shares (unwrap-panic (contract-call? .vault-ststx get-balance account))))
-        (unwrap-panic (contract-call? .vault-ststx convert-to-assets shares)))
+      (let ((shares (unwrap-panic (contract-call? .v0-vault-ststx get-balance account))))
+        (unwrap-panic (contract-call? .v0-vault-ststx convert-to-assets shares)))
   (if (is-eq vid USDC)
-      (let ((shares (unwrap-panic (contract-call? .vault-usdc get-balance account))))
-        (unwrap-panic (contract-call? .vault-usdc convert-to-assets shares)))
+      (let ((shares (unwrap-panic (contract-call? .v0-vault-usdc get-balance account))))
+        (unwrap-panic (contract-call? .v0-vault-usdc convert-to-assets shares)))
   (if (is-eq vid USDH)
-      (let ((shares (unwrap-panic (contract-call? .vault-usdh get-balance account))))
-        (unwrap-panic (contract-call? .vault-usdh convert-to-assets shares)))
+      (let ((shares (unwrap-panic (contract-call? .v0-vault-usdh get-balance account))))
+        (unwrap-panic (contract-call? .v0-vault-usdh convert-to-assets shares)))
   (if (is-eq vid stSTXbtc)
-      (let ((shares (unwrap-panic (contract-call? .vault-ststxbtc get-balance account))))
-        (unwrap-panic (contract-call? .vault-ststxbtc convert-to-assets shares)))
+      (let ((shares (unwrap-panic (contract-call? .v0-vault-ststxbtc get-balance account))))
+        (unwrap-panic (contract-call? .v0-vault-ststxbtc convert-to-assets shares)))
   u0)))))))
 
 ;; -- Vault routing: get underlying address ----------------------------------
@@ -290,12 +290,12 @@
 ;; This is assets - total-borrowed (what's sitting in the vault)
 
 (define-private (get-vault-available-liquidity (vid uint))
-  (if (is-eq vid STX) (contract-call? .vault-stx get-available-assets)
-  (if (is-eq vid sBTC) (contract-call? .vault-sbtc get-available-assets)
-  (if (is-eq vid stSTX) (contract-call? .vault-ststx get-available-assets)
-  (if (is-eq vid USDC) (contract-call? .vault-usdc get-available-assets)
-  (if (is-eq vid USDH) (contract-call? .vault-usdh get-available-assets)
-  (if (is-eq vid stSTXbtc) (contract-call? .vault-ststxbtc get-available-assets)
+  (if (is-eq vid STX) (contract-call? .v0-vault-stx get-available-assets)
+  (if (is-eq vid sBTC) (contract-call? .v0-vault-sbtc get-available-assets)
+  (if (is-eq vid stSTX) (contract-call? .v0-vault-ststx get-available-assets)
+  (if (is-eq vid USDC) (contract-call? .v0-vault-usdc get-available-assets)
+  (if (is-eq vid USDH) (contract-call? .v0-vault-usdh get-available-assets)
+  (if (is-eq vid stSTXbtc) (contract-call? .v0-vault-ststxbtc get-available-assets)
   u0)))))))
 
 ;; -- APY calculation --------------------------------------------------------
@@ -376,7 +376,7 @@
   (let ((max-id (get max-id acc)))
     (if (>= id max-id)
         acc
-        (let ((asset-status (unwrap-panic (contract-call? .assets get-status id)))
+        (let ((asset-status (unwrap-panic (contract-call? .v0-assets get-status id)))
               (entry {
                 id: id,
                 addr: (get addr asset-status),
@@ -407,7 +407,7 @@
   (let ((max-id (get max-id acc)))
     (if (>= id max-id)
         acc
-        (let ((egroup-data (contract-call? .egroup lookup id))
+        (let ((egroup-data (contract-call? .v0-egroup lookup id))
               (entry {
                 id: id,
                 mask: (get MASK egroup-data),
@@ -432,8 +432,8 @@
 ;; Returns complete user position with health data
 ;; Batches all position data into single response
 (define-read-only (get-user-position (account principal))
-  (let ((enabled-mask (contract-call? .assets get-bitmap)))
-    (match (contract-call? .market-vault get-position account enabled-mask)
+  (let ((enabled-mask (contract-call? .v0-assets get-bitmap)))
+    (match (contract-call? .v0-market-vault get-position account enabled-mask)
       position
         (let ((mask (get mask position))
               (collateral-list (get collateral position))
@@ -448,7 +448,7 @@
                               (if (is-eq debt-usd u0) u0 BPS)
                               (mul-div-down debt-usd BPS coll-usd)))
               ;; Get egroup for health calculation
-              (egroup-result (contract-call? .egroup resolve mask)))
+              (egroup-result (contract-call? .v0-egroup resolve mask)))
           (match egroup-result
             egroup
               (let ((ltv-borrow (buff-to-uint-be (get LTV-BORROW egroup)))
@@ -490,7 +490,7 @@
 (define-private (build-debt-entry (debt-entry { aid: uint, scaled: uint }))
   (let ((aid (get aid debt-entry))
         (scaled (get scaled debt-entry))
-        (asset-status (unwrap-panic (contract-call? .assets get-status aid)))
+        (asset-status (unwrap-panic (contract-call? .v0-assets get-status aid)))
         (borrow-index (get-vault-borrow-index aid))
         ;; Calculate actual debt with compound interest
         (actual (mul-div-down scaled borrow-index INDEX-PRECISION))
@@ -510,7 +510,7 @@
 (define-private (sum-collateral-usd (entry { aid: uint, amount: uint }) (acc uint))
   (let ((aid (get aid entry))
         (amount (get amount entry))
-        (asset-data (unwrap-panic (contract-call? .assets get-status aid)))
+        (asset-data (unwrap-panic (contract-call? .v0-assets get-status aid)))
         (decimals (get decimals asset-data))
         (price (get-asset-price aid)))
     (+ acc (/ (* amount price) (pow u10 decimals)))))
@@ -527,7 +527,7 @@
 (define-private (sum-debt-usd (entry { aid: uint, scaled: uint }) (acc uint))
   (let ((aid (get aid entry))
         (scaled (get scaled entry))
-        (asset-data (unwrap-panic (contract-call? .assets get-status aid)))
+        (asset-data (unwrap-panic (contract-call? .v0-assets get-status aid)))
         (decimals (get decimals asset-data))
         (borrow-index (get-vault-borrow-index aid))
         (actual (mul-div-down scaled borrow-index INDEX-PRECISION))
@@ -593,7 +593,7 @@
 ;; ---------------------------------------------------------------------------
 ;; Returns all registered assets with their status (dynamic - scales to nonce)
 (define-read-only (get-all-assets)
-  (let ((nonce (unwrap-panic (contract-call? .assets get-nonce)))
+  (let ((nonce (unwrap-panic (contract-call? .v0-assets get-nonce)))
         (init { max-id: nonce, result: (list) })
         (result (fold iter-build-asset ITER-UINT-128 init)))
     (ok {
@@ -629,7 +629,7 @@
 ;; ---------------------------------------------------------------------------
 ;; Returns all efficiency groups
 (define-read-only (get-all-egroups)
-  (let ((nonce (unwrap-panic (contract-call? .egroup get-nonce)))
+  (let ((nonce (unwrap-panic (contract-call? .v0-egroup get-nonce)))
         (init { max-id: nonce, result: (list) })
         (result (fold iter-build-egroup ITER-UINT-128 init)))
     (ok {
@@ -642,7 +642,7 @@
 ;; ---------------------------------------------------------------------------
 ;; Returns single egroup by ID
 (define-read-only (get-egroup (id uint))
-  (let ((egroup-data (contract-call? .egroup lookup id)))
+  (let ((egroup-data (contract-call? .v0-egroup lookup id)))
     (ok {
       id: id,
       mask: (get MASK egroup-data),
@@ -726,8 +726,8 @@
         (get total-borrowed usdc-data))
         (get total-borrowed usdh-data))
         (get total-borrowed ststxbtc-data)),
-      asset-count: (unwrap-panic (contract-call? .assets get-nonce)),
-      egroup-count: (unwrap-panic (contract-call? .egroup get-nonce))
+      asset-count: (unwrap-panic (contract-call? .v0-assets get-nonce)),
+      egroup-count: (unwrap-panic (contract-call? .v0-egroup get-nonce))
     })))
 
 ;; ---------------------------------------------------------------------------
@@ -738,7 +738,7 @@
 ;; - Vault share balances (zTokens held in wallet - for reference)
 ;; - Market-vault collateral (any collateral-enabled tokens deposited)
 (define-read-only (get-supplies-user (account principal))
-  (let ((enabled-mask (contract-call? .assets get-bitmap))
+  (let ((enabled-mask (contract-call? .v0-assets get-bitmap))
         ;; Get underlying balances (convert zTokens to underlying - USEFUL)
         (stx-underlying (get-vault-underlying-balance STX account))
         (sbtc-underlying (get-vault-underlying-balance sBTC account))
@@ -747,14 +747,14 @@
         (usdh-underlying (get-vault-underlying-balance USDH account))
         (ststxbtc-underlying (get-vault-underlying-balance stSTXbtc account))
         ;; Also get share balances for reference
-        (vault-stx-shares (unwrap-panic (contract-call? .vault-stx get-balance account)))
-        (vault-sbtc-shares (unwrap-panic (contract-call? .vault-sbtc get-balance account)))
-        (vault-ststx-shares (unwrap-panic (contract-call? .vault-ststx get-balance account)))
-        (vault-usdc-shares (unwrap-panic (contract-call? .vault-usdc get-balance account)))
-        (vault-usdh-shares (unwrap-panic (contract-call? .vault-usdh get-balance account)))
-        (vault-ststxbtc-shares (unwrap-panic (contract-call? .vault-ststxbtc get-balance account))))
+        (vault-stx-shares (unwrap-panic (contract-call? .v0-vault-stx get-balance account)))
+        (vault-sbtc-shares (unwrap-panic (contract-call? .v0-vault-sbtc get-balance account)))
+        (vault-ststx-shares (unwrap-panic (contract-call? .v0-vault-ststx get-balance account)))
+        (vault-usdc-shares (unwrap-panic (contract-call? .v0-vault-usdc get-balance account)))
+        (vault-usdh-shares (unwrap-panic (contract-call? .v0-vault-usdh get-balance account)))
+        (vault-ststxbtc-shares (unwrap-panic (contract-call? .v0-vault-ststxbtc get-balance account))))
     ;; Try to get market-vault position (may not exist)
-    (match (contract-call? .market-vault get-position account enabled-mask)
+    (match (contract-call? .v0-market-vault get-position account enabled-mask)
       position
         (ok {
           account: account,
@@ -811,8 +811,8 @@
 ;; - Actual debt (scaled x index - what user actually owes)
 ;; - Interest accrued (compound interest accumulated)
 (define-read-only (get-user-borrows (account principal))
-  (let ((enabled-mask (contract-call? .assets get-bitmap)))
-    (match (contract-call? .market-vault get-position account enabled-mask)
+  (let ((enabled-mask (contract-call? .v0-assets get-bitmap)))
+    (match (contract-call? .v0-market-vault get-position account enabled-mask)
       position
         (let ((debt-list (get debt position))
               ;; Map each debt entry to enriched format with actual balances
@@ -840,32 +840,32 @@
   (ok {
     stx: {
       vault-id: STX,
-      shares-to-assets: (unwrap-panic (contract-call? .vault-stx convert-to-assets u1000000)),
+      shares-to-assets: (unwrap-panic (contract-call? .v0-vault-stx convert-to-assets u1000000)),
       underlying: UNDERLYING-STX
     },
     sbtc: {
       vault-id: sBTC,
-      shares-to-assets: (unwrap-panic (contract-call? .vault-sbtc convert-to-assets u100000000)),
+      shares-to-assets: (unwrap-panic (contract-call? .v0-vault-sbtc convert-to-assets u100000000)),
       underlying: UNDERLYING-SBTC
     },
     ststx: {
       vault-id: stSTX,
-      shares-to-assets: (unwrap-panic (contract-call? .vault-ststx convert-to-assets u1000000)),
+      shares-to-assets: (unwrap-panic (contract-call? .v0-vault-ststx convert-to-assets u1000000)),
       underlying: UNDERLYING-STSTX
     },
     usdc: {
       vault-id: USDC,
-      shares-to-assets: (unwrap-panic (contract-call? .vault-usdc convert-to-assets u1000000)),
+      shares-to-assets: (unwrap-panic (contract-call? .v0-vault-usdc convert-to-assets u1000000)),
       underlying: UNDERLYING-USDC
     },
     usdh: {
       vault-id: USDH,
-      shares-to-assets: (unwrap-panic (contract-call? .vault-usdh convert-to-assets u100000000)),
+      shares-to-assets: (unwrap-panic (contract-call? .v0-vault-usdh convert-to-assets u100000000)),
       underlying: UNDERLYING-USDH
     },
     ststxbtc: {
       vault-id: stSTXbtc,
-      shares-to-assets: (unwrap-panic (contract-call? .vault-ststxbtc convert-to-assets u1000000)),
+      shares-to-assets: (unwrap-panic (contract-call? .v0-vault-ststxbtc convert-to-assets u1000000)),
       underlying: UNDERLYING-STSTXBTC
     }
   }))
@@ -879,22 +879,22 @@
   (ok {
     ;; Underlying tokens held by market-vault
     underlying: {
-      wstx: (unwrap-panic (contract-call? .wstx get-balance .market-vault)),
-      sbtc: (unwrap-panic (contract-call? 'SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token get-balance .market-vault)),
-      ststx: (unwrap-panic (contract-call? 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.ststx-token get-balance .market-vault)),
-      usdc: (unwrap-panic (contract-call? 'SP120SBRBQJ00MCWS7TM5R8WJNTTKD5K0HFRC2CNE.usdcx get-balance .market-vault)),
-      usdh: (unwrap-panic (contract-call? 'SPN5AKG35QZSK2M8GAMR4AFX45659RJHDW353HSG.usdh-token-v1 get-balance .market-vault)),
-      ststxbtc: (unwrap-panic (contract-call? 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.ststxbtc-token-v2 get-balance .market-vault))
+      wstx: (unwrap-panic (contract-call? .wstx get-balance .v0-market-vault)),
+      sbtc: (unwrap-panic (contract-call? 'SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token get-balance .v0-market-vault)),
+      ststx: (unwrap-panic (contract-call? 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.ststx-token get-balance .v0-market-vault)),
+      usdc: (unwrap-panic (contract-call? 'SP120SBRBQJ00MCWS7TM5R8WJNTTKD5K0HFRC2CNE.usdcx get-balance .v0-market-vault)),
+      usdh: (unwrap-panic (contract-call? 'SPN5AKG35QZSK2M8GAMR4AFX45659RJHDW353HSG.usdh-token-v1 get-balance .v0-market-vault)),
+      ststxbtc: (unwrap-panic (contract-call? 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.ststxbtc-token-v2 get-balance .v0-market-vault))
     },
     ;; ZToken vault shares held by market-vault
     ;; These are user collateral tracked in market-vault's position maps
     ztokens: {
-      vault-stx: (unwrap-panic (contract-call? .vault-stx get-balance .market-vault)),
-      vault-sbtc: (unwrap-panic (contract-call? .vault-sbtc get-balance .market-vault)),
-      vault-ststx: (unwrap-panic (contract-call? .vault-ststx get-balance .market-vault)),
-      vault-usdc: (unwrap-panic (contract-call? .vault-usdc get-balance .market-vault)),
-      vault-usdh: (unwrap-panic (contract-call? .vault-usdh get-balance .market-vault)),
-      vault-ststxbtc: (unwrap-panic (contract-call? .vault-ststxbtc get-balance .market-vault))
+      vault-stx: (unwrap-panic (contract-call? .v0-vault-stx get-balance .v0-market-vault)),
+      vault-sbtc: (unwrap-panic (contract-call? .v0-vault-sbtc get-balance .v0-market-vault)),
+      vault-ststx: (unwrap-panic (contract-call? .v0-vault-ststx get-balance .v0-market-vault)),
+      vault-usdc: (unwrap-panic (contract-call? .v0-vault-usdc get-balance .v0-market-vault)),
+      vault-usdh: (unwrap-panic (contract-call? .v0-vault-usdh get-balance .v0-market-vault)),
+      vault-ststxbtc: (unwrap-panic (contract-call? .v0-vault-ststxbtc get-balance .v0-market-vault))
     }
   }))
 
@@ -903,7 +903,7 @@
 ;; ---------------------------------------------------------------------------
 ;; Returns user's supply balances across vaults and market-vault
 (define-read-only (get-market-vault-balances-user (account principal))
-  (let ((enabled-mask (contract-call? .assets get-bitmap))
+  (let ((enabled-mask (contract-call? .v0-assets get-bitmap))
         ;; Vault balances (zTokens -> underlying amounts)
         (stx-vault (get-vault-underlying-balance STX account))
         (sbtc-vault (get-vault-underlying-balance sBTC account))
@@ -912,7 +912,7 @@
         (usdh-vault (get-vault-underlying-balance USDH account))
         (ststxbtc-vault (get-vault-underlying-balance stSTXbtc account)))
     ;; Get market-vault collateral
-    (match (contract-call? .market-vault get-position account enabled-mask)
+    (match (contract-call? .v0-market-vault get-position account enabled-mask)
       position
         (ok {
           vault-balances: {
@@ -942,23 +942,66 @@
 ;; get-user-sbtc-balances
 ;; ---------------------------------------------------------------------------
 ;; Returns user's sBTC holdings across vault and market-vault
+;; Includes both sBTC (underlying) and zsBTC (vault token) used as collateral
 (define-read-only (get-user-sbtc-balances (account principal))
   (let (
-    (vault-shares (unwrap-panic (contract-call? .vault-sbtc get-balance account)))
-    (vault-underlying (unwrap-panic (contract-call? .vault-sbtc convert-to-assets vault-shares)))
-    
-    (market-sbtc
-      (match (contract-call? .market-vault get-position account u4)  ;; mask = 2^2 = 4 (sBTC collateral bit)
+    (vault-shares (unwrap-panic (contract-call? .v0-vault-sbtc get-balance account)))
+    (vault-underlying (unwrap-panic (contract-call? .v0-vault-sbtc convert-to-assets vault-shares)))
+    (enabled-mask (contract-call? .v0-assets get-bitmap))
+
+    ;; Get sBTC collateral (underlying asset)
+    (market-sbtc-underlying
+      (match (contract-call? .v0-market-vault get-position account enabled-mask)
         position
-          (get amount (fold find-collateral-amount-iter 
-                           (get collateral position) 
+          (get amount (fold find-collateral-amount-iter
+                           (get collateral position)
                            {target: sBTC, amount: u0}))
         err-no-position u0))
-    
+
+    ;; Get zsBTC collateral (vault token) and convert to underlying
+    (market-zsbtc-shares
+      (match (contract-call? .v0-market-vault get-position account enabled-mask)
+        position
+          (get amount (fold find-collateral-amount-iter
+                           (get collateral position)
+                           {target: zsBTC, amount: u0}))
+        err-no-position u0))
+
+    (market-zsbtc-underlying (unwrap-panic (contract-call? .v0-vault-sbtc convert-to-assets market-zsbtc-shares)))
+
+    ;; Total market collateral = sBTC + zsBTC (converted to underlying)
+    (market-sbtc (+ market-sbtc-underlying market-zsbtc-underlying))
+
     (total (+ vault-underlying market-sbtc)))
-    
+
     (ok {
       vault-underlying: vault-underlying,
       market-collateral: market-sbtc,
       total: total
     })))
+
+;; ---------------------------------------------------------------------------
+;; get-user-ststxbtc-balances
+;; ---------------------------------------------------------------------------
+;; Returns user's stSTXbtc holdings across vault and market-vault
+;; Includes both stSTXbtc in vault and and zstSTXbtc (vault token) used as collateral
+(define-read-only (get-user-ststxbtc-balances (account principal))
+  (let (
+    (vault-shares (unwrap-panic (contract-call? .v0-vault-ststxbtc get-balance account)))
+    (vault-underlying (unwrap-panic (contract-call? .v0-vault-ststxbtc convert-to-assets vault-shares)))
+    (enabled-mask (contract-call? .v0-assets get-bitmap))
+
+    ;; Get zstSTXbtc collateral (vault token) and convert to underlying
+    (market-zststxbtc-shares
+      (match (contract-call? .v0-market-vault get-position account enabled-mask)
+        position
+          (get amount (fold find-collateral-amount-iter
+                           (get collateral position)
+                           {target: zstSTXbtc, amount: u0}))
+        err-no-position u0))
+
+    (market-zststxbtc-underlying (unwrap-panic (contract-call? .v0-vault-ststxbtc convert-to-assets market-zststxbtc-shares)))
+
+    (total (+ vault-underlying market-zststxbtc-underlying)))
+
+    (ok total)))

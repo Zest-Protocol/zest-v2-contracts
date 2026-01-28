@@ -187,57 +187,57 @@
 ;; -- Vault routing ----------------------------------------------------------
 
 (define-private (vault-accrue (aid uint))
-  (if (is-eq aid STX) (contract-call? .vault-stx accrue)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc accrue)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx accrue)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc accrue)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh accrue)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc accrue)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx accrue)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc accrue)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx accrue)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc accrue)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh accrue)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc accrue)
   ERR-UNKNOWN-VAULT)))))))
 
 (define-private (vault-system-borrow (aid uint) (amount uint) (receiver principal))
-  (if (is-eq aid STX) (contract-call? .vault-stx system-borrow amount receiver)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc system-borrow amount receiver)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx system-borrow amount receiver)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc system-borrow amount receiver)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh system-borrow amount receiver)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc system-borrow amount receiver)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx system-borrow amount receiver)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc system-borrow amount receiver)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx system-borrow amount receiver)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc system-borrow amount receiver)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh system-borrow amount receiver)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc system-borrow amount receiver)
   ERR-UNKNOWN-VAULT)))))))
 
 (define-private (vault-system-repay (aid uint) (amount uint) (ft <ft-trait>) (ft-address principal))
-  (if (is-eq aid STX) (contract-call? .vault-stx system-repay amount)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc system-repay amount)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx system-repay amount)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc system-repay amount)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh system-repay amount)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc system-repay amount)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx system-repay amount)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc system-repay amount)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx system-repay amount)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc system-repay amount)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh system-repay amount)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc system-repay amount)
   ERR-UNKNOWN-VAULT)))))))
 
 (define-private (vault-socialize-debt (aid uint) (amount uint))
-  (if (is-eq aid STX) (contract-call? .vault-stx socialize-debt amount)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc socialize-debt amount)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx socialize-debt amount)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc socialize-debt amount)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh socialize-debt amount)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc socialize-debt amount)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx socialize-debt amount)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc socialize-debt amount)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx socialize-debt amount)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc socialize-debt amount)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh socialize-debt amount)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc socialize-debt amount)
   ERR-UNKNOWN-VAULT)))))))
 
 (define-private (vault-deposit (aid uint) (amount uint) (min-out uint) (recipient principal))
-  (if (is-eq aid STX) (contract-call? .vault-stx deposit amount min-out recipient)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc deposit amount min-out recipient)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx deposit amount min-out recipient)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc deposit amount min-out recipient)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh deposit amount min-out recipient)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc deposit amount min-out recipient)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx deposit amount min-out recipient)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc deposit amount min-out recipient)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx deposit amount min-out recipient)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc deposit amount min-out recipient)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh deposit amount min-out recipient)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc deposit amount min-out recipient)
   ERR-UNKNOWN-VAULT)))))))
 
 (define-private (vault-redeem (aid uint) (amount uint) (min-out uint) (recipient principal))
-  (if (is-eq aid STX) (contract-call? .vault-stx redeem amount min-out recipient)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc redeem amount min-out recipient)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx redeem amount min-out recipient)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc redeem amount min-out recipient)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh redeem amount min-out recipient)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc redeem amount min-out recipient)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx redeem amount min-out recipient)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc redeem amount min-out recipient)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx redeem amount min-out recipient)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc redeem amount min-out recipient)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh redeem amount min-out recipient)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc redeem amount min-out recipient)
   ERR-UNKNOWN-VAULT)))))))
 
 ;; -- Accrual & caching ------------------------------------------------------
@@ -326,7 +326,8 @@
 (define-private (resolve-dia (ident (buff 32)))
   (let ((key (unwrap-panic (from-consensus-buff? (string-ascii 32) ident)))
         (res (try! (call-dia key))))
-    (ok res)))
+    ;; DIA returns timestamp in milliseconds, convert to seconds for staleness check
+    (ok { value: (get value res), timestamp: (/ (get timestamp res) u1000) })))
 
 (define-private (resolve-price-feed (type (buff 1)) (ident (buff 32)))
   (if (is-eq type TYPE-PYTH) (resolve-pyth ident)
@@ -451,32 +452,32 @@
 ;; -- Registry wrappers ------------------------------------------------------
 
 (define-private (get-enabled-bitmap)
-  (contract-call? .assets get-bitmap))
+  (contract-call? .v0-assets get-bitmap))
 
 (define-private (get-status-multi (ids (list 64 uint)))
-  (contract-call? .assets status-multi ids))
+  (contract-call? .v0-assets status-multi ids))
 
 (define-private (get-egroup (mask uint))
-  (contract-call? .egroup resolve mask))
+  (contract-call? .v0-egroup resolve mask))
 
 (define-private (get-account-scaled-debt (account principal) (asset-id uint))
-  (contract-call? .market-vault get-account-scaled-debt account asset-id))
+  (contract-call? .v0-market-vault get-account-scaled-debt account asset-id))
 
 (define-private (get-position (account principal)) ;; enabled only
   (let ((mask (get-enabled-bitmap)))
-    (contract-call? .market-vault get-position account mask)))
+    (contract-call? .v0-market-vault get-position account mask)))
 
 (define-private (get-full-position (account principal)) ;; all collaterals
-  (contract-call? .market-vault get-position account MAX-U64))
+  (contract-call? .v0-market-vault get-position account MAX-U64))
 
 (define-private (get-liquidation-position (account principal)) ;; liquidation specific (enabled collateral + all debt)
   (let ((mask (get-enabled-bitmap)))
-    (contract-call? .market-vault get-position account mask)))
+    (contract-call? .v0-market-vault get-position account mask)))
 
 ;; -- Context & asset helpers ------------------------------------------------
 
 (define-private (get-asset (asset principal))
-  (contract-call? .assets get-asset-status asset))
+  (contract-call? .v0-assets get-asset-status asset))
 
 (define-private (get-assets (mask-user uint))
   (let ((mask-enabled (get-enabled-bitmap))
@@ -889,7 +890,7 @@
             ;; Socialize in vault - pass scaled directly to avoid rounding
             (unwrap! (vault-socialize-debt asset-id scaled-debt) failed-status)
             ;; Remove from obligation
-            (unwrap! (contract-call? .market-vault
+            (unwrap! (contract-call? .v0-market-vault
                                       debt-remove-scaled
                                       borrower
                                       scaled-debt
@@ -1022,7 +1023,7 @@
     (asserts! (is-eq contract-caller tx-sender) ERR-AUTHORIZATION)
     ;; Validate future mask has valid egroup AND check health if user has debt
     
-    (match (contract-call? .market-vault resolve-safe account)
+    (match (contract-call? .v0-market-vault resolve-safe account)
       user-registry-data
         ;; User has existing position - check if adding NEW collateral asset
         (let ((current-raw-mask (get mask user-registry-data))
@@ -1052,6 +1053,17 @@
                     ;; Calculate future mask and validate egroup exists
                     (let ((current-coll-usd (get collateral current-notional))
                           (current-capacity (* current-coll-usd current-ltv))
+                          ;; Prime cache for new zToken collateral underlying if not already cached
+                          (cache-primed (if (is-ztoken asset-id)
+                                            (let ((vault-id (if (is-eq asset-id zSTX) STX
+                                                            (if (is-eq asset-id zsBTC) sBTC
+                                                            (if (is-eq asset-id zstSTX) stSTX
+                                                            (if (is-eq asset-id zUSDC) USDC
+                                                            (if (is-eq asset-id zUSDH) USDH
+                                                            (if (is-eq asset-id zstSTXbtc) stSTXbtc
+                                                            u100))))))))
+                                              (try! (accrue-and-cache vault-id)))
+                                            { index: u0, lindex: u0 }))
                           (added-collateral-value (try! (get-asset-value asset amount false)))
                           (future-ltv (buff-to-uint-be (get LTV-BORROW future-group)))
                           (future-coll-usd (+ current-coll-usd added-collateral-value))
@@ -1071,7 +1083,7 @@
           true))
 
     ;; Execute collateral add (existing logic)
-    (let ((result (try! (contract-call? .market-vault collateral-add account amount ft asset-id))))
+    (let ((result (try! (contract-call? .v0-market-vault collateral-add account amount ft asset-id))))
       
       (print {
         action: "collateral-add",
@@ -1153,7 +1165,7 @@
                 (is-healthy (- total-collateral-value removal-notional) debt-value current-ltvb)))
           ERR-UNHEALTHY))
 
-    (let ((result (try! (contract-call? .market-vault
+    (let ((result (try! (contract-call? .v0-market-vault
                                         collateral-remove
                                         account
                                         amount
@@ -1207,12 +1219,12 @@
                 (try! (vault-deposit asset-id amount min-shares account)))))))
       
       ;; Step 3: Add the minted zTokens as collateral
-      (if (is-eq asset-id STX) (collateral-add .vault-stx shares-minted price-feeds)
-      (if (is-eq asset-id sBTC) (collateral-add .vault-sbtc shares-minted price-feeds)
-      (if (is-eq asset-id stSTX) (collateral-add .vault-ststx shares-minted price-feeds)
-      (if (is-eq asset-id USDC) (collateral-add .vault-usdc shares-minted price-feeds)
-      (if (is-eq asset-id USDH) (collateral-add .vault-usdh shares-minted price-feeds)
-      (if (is-eq asset-id stSTXbtc) (collateral-add .vault-ststxbtc shares-minted price-feeds)
+      (if (is-eq asset-id STX) (collateral-add .v0-vault-stx shares-minted price-feeds)
+      (if (is-eq asset-id sBTC) (collateral-add .v0-vault-sbtc shares-minted price-feeds)
+      (if (is-eq asset-id stSTX) (collateral-add .v0-vault-ststx shares-minted price-feeds)
+      (if (is-eq asset-id USDC) (collateral-add .v0-vault-usdc shares-minted price-feeds)
+      (if (is-eq asset-id USDH) (collateral-add .v0-vault-usdh shares-minted price-feeds)
+      (if (is-eq asset-id stSTXbtc) (collateral-add .v0-vault-ststxbtc shares-minted price-feeds)
       ERR-UNKNOWN-VAULT))))))))
 )
 
@@ -1299,7 +1311,7 @@
     (try! (vault-system-borrow asset-id amount funds-receiver))
     (let ((scaled-debt-added (convert-to-scaled-debt asset-id amount true))
           (borrow-index (get index (unwrap-panic (get-cached-indexes asset-id)))))
-      (try! (contract-call? .market-vault
+      (try! (contract-call? .v0-market-vault
                             debt-add-scaled
                             account
                             scaled-debt-added
@@ -1364,7 +1376,7 @@
 
     (try! (vault-system-repay asset-id amount-to-repay ft address))
     ;; update
-    (try! (contract-call? .market-vault
+    (try! (contract-call? .v0-market-vault
                             debt-remove-scaled
                             account
                             repaid-scaled-debt
@@ -1495,14 +1507,14 @@
     (try! (vault-system-repay debt-aid debt-to-repay debt-ft debt-address))
 
     ;; update obligations and socialize bad debt
-    (let ((debt-updated (try! (contract-call? .market-vault
+    (let ((debt-updated (try! (contract-call? .v0-market-vault
                               debt-remove-scaled
                               borrower
                               scaled-to-remove
                               debt-aid)))
           ;; Collateral receiver defaults to liquidator if not specified
           (actual-receiver (match collateral-receiver recv recv liquidator))
-          (coll-removed (try! (contract-call? .market-vault
+          (coll-removed (try! (contract-call? .v0-market-vault
                               collateral-remove
                               borrower
                               coll-final

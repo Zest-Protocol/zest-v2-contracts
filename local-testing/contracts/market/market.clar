@@ -336,7 +336,8 @@
 (define-private (resolve-dia (ident (buff 32)))
   (let ((key (unwrap-panic (from-consensus-buff? (string-ascii 32) ident)))
         (res (try! (call-dia key))))
-    (ok res)))
+    ;; DIA returns timestamp in milliseconds, convert to seconds for staleness check
+    (ok { value: (get value res), timestamp: (/ (get timestamp res) u1000) })))
 
 ;; @staging
 ;; Mock oracle for testing bad debt socialization
@@ -1075,6 +1076,17 @@
                     ;; Calculate future mask and validate egroup exists
                     (let ((current-coll-usd (get collateral current-notional))
                           (current-capacity (* current-coll-usd current-ltv))
+                          ;; Prime cache for new zToken collateral underlying if not already cached
+                          (cache-primed (if (is-ztoken asset-id)
+                                            (let ((vault-id (if (is-eq asset-id zSTX) STX
+                                                            (if (is-eq asset-id zsBTC) sBTC
+                                                            (if (is-eq asset-id zstSTX) stSTX
+                                                            (if (is-eq asset-id zUSDC) USDC
+                                                            (if (is-eq asset-id zUSDH) USDH
+                                                            (if (is-eq asset-id zstSTXbtc) stSTXbtc
+                                                            u100))))))))
+                                              (try! (accrue-and-cache vault-id)))
+                                            { index: u0, lindex: u0 }))
                           (added-collateral-value (try! (get-asset-value asset amount false)))
                           (future-ltv (buff-to-uint-be (get LTV-BORROW future-group)))
                           (future-coll-usd (+ current-coll-usd added-collateral-value))
@@ -1535,7 +1547,7 @@
 
           (no-collateral-left (and
                                 (is-eq (len (get collateral pos-full)) u1)
-                                (is-eq user-coll-balance coll-actual))))
+                                (is-eq coll-removed u0))))
 
       ;; Handle bad debt socialization if no collateral left
       (let ((bad-debt-socialized 

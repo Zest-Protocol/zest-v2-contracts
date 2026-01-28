@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; stx vault - 0
+;; ststx vault - 2
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; ============================================================================
@@ -16,9 +16,9 @@
 ;; ============================================================================
 
 ;; -- Core configuration
-(define-constant UNDERLYING .wstx)
-(define-constant NAME "Zest STX")
-(define-constant SYMBOL "zSTX")
+(define-constant UNDERLYING 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.ststxbtc-token-v2)
+(define-constant NAME "Zest stSTXbtc")
+(define-constant SYMBOL "zstSTXbtc")
 (define-constant DECIMALS u6)
 
 ;; -- Precision & scaling
@@ -39,31 +39,31 @@
 (define-constant ITER-UINT-8 (list u0 u1 u2 u3 u4 u5 u6 u7))
 
 ;; ============================================================================
-;; ERRORS (800xxx prefix for vault-stx)
+;; ERRORS (810xxx prefix for vault-ststxbtc)
 ;; ============================================================================
-(define-constant ERR-AUTH (err u800001))
-(define-constant ERR-INIT (err u800002))
-(define-constant ERR-ALREADY-INITIALIZED (err u800003))
-(define-constant ERR-REENTRANCY (err u800004))
-(define-constant ERR-RESERVE-VALIDATION (err u800005))
-(define-constant ERR-PAUSED (err u800006))
-(define-constant ERR-TOKENIZED-VAULT-PRECONDITIONS (err u800007))
-(define-constant ERR-TOKENIZED-VAULT-POSTCONDITIONS (err u800008))
-(define-constant ERR-AMOUNT-ZERO (err u800009))
-(define-constant ERR-SLIPPAGE (err u800010))
-(define-constant ERR-SUPPLY-CAP-EXCEEDED (err u800011))
-(define-constant ERR-OUTPUT-ZERO (err u800012))
-(define-constant ERR-INSUFFICIENT-BALANCE (err u800013))
-(define-constant ERR-INSUFFICIENT-LIQUIDITY (err u800014))
-(define-constant ERR-LENDING-PRECONDITIONS (err u800015))
-(define-constant ERR-LENDING-POSTCONDITIONS (err u800016))
-(define-constant ERR-NO-RESERVES (err u800017))
-(define-constant ERR-INSUFFICIENT-VAULT-LIQUIDITY (err u800018))
-(define-constant ERR-DEBT-CAP-EXCEEDED (err u800019))
-(define-constant ERR-INSUFFICIENT-ASSETS (err u800020))
-(define-constant ERR-INVALID-ADDRESS (err u800021))
-(define-constant ERR-INSUFFICIENT-FLASHLOAN-LIQUIDITY (err u800022))
-(define-constant ERR-FLASHLOAN-UNAUTHORIZED (err u800024))
+(define-constant ERR-AUTH (err u810001))
+(define-constant ERR-INIT (err u810002))
+(define-constant ERR-ALREADY-INITIALIZED (err u810003))
+(define-constant ERR-REENTRANCY (err u810004))
+(define-constant ERR-RESERVE-VALIDATION (err u810005))
+(define-constant ERR-PAUSED (err u810006))
+(define-constant ERR-TOKENIZED-VAULT-PRECONDITIONS (err u810007))
+(define-constant ERR-TOKENIZED-VAULT-POSTCONDITIONS (err u810008))
+(define-constant ERR-AMOUNT-ZERO (err u810009))
+(define-constant ERR-SLIPPAGE (err u810010))
+(define-constant ERR-SUPPLY-CAP-EXCEEDED (err u810011))
+(define-constant ERR-OUTPUT-ZERO (err u810012))
+(define-constant ERR-INSUFFICIENT-BALANCE (err u810013))
+(define-constant ERR-INSUFFICIENT-LIQUIDITY (err u810014))
+(define-constant ERR-LENDING-PRECONDITIONS (err u810015))
+(define-constant ERR-LENDING-POSTCONDITIONS (err u810016))
+(define-constant ERR-NO-RESERVES (err u810017))
+(define-constant ERR-INSUFFICIENT-VAULT-LIQUIDITY (err u810018))
+(define-constant ERR-DEBT-CAP-EXCEEDED (err u810019))
+(define-constant ERR-INSUFFICIENT-ASSETS (err u810020))
+(define-constant ERR-INVALID-ADDRESS (err u810021))
+(define-constant ERR-INSUFFICIENT-FLASHLOAN-LIQUIDITY (err u810022))
+(define-constant ERR-FLASHLOAN-UNAUTHORIZED (err u810024))
 
 ;; -- Shared/external errors (from pack utilities - prefix 700)
 (define-constant ERR-INVALID-U16 (err u700001))
@@ -290,18 +290,18 @@
 
 (define-private (receive-underlying (amount uint) (account principal))
   (begin
-    (try! (contract-call? .wstx transfer amount account current-contract none))
+    (try! (contract-call? 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.ststxbtc-token-v2 transfer amount account current-contract none))
     (ok true)))
 
-(define-private (send-underlying (amt uint) (account principal))
+(define-private (send-underlying (amount uint) (account principal))
   (begin
-    (try! (as-contract? ((with-stx amt))
-      (try! (contract-call? .wstx transfer amt tx-sender account none))
+    (try! (as-contract? ((with-ft UNDERLYING "ststxbtc" amount))
+      (try! (contract-call? 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.ststxbtc-token-v2 transfer amount tx-sender account none))
       true))
     (ok true)))
 
 (define-private (ubalance)
-  (unwrap-panic (contract-call? .wstx get-balance current-contract)))
+  (unwrap-panic (contract-call? 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.ststxbtc-token-v2 get-balance current-contract)))
 
 ;; -- Conversion helpers -----------------------------------------------------
 
@@ -779,7 +779,7 @@
     (try! (receive-underlying amount account))
     (try! (ft-mint? zft inkind recipient))
     (var-set assets (+ current-assets amount))
-    
+
     (print {
       action: "deposit",
       caller: contract-caller,
@@ -815,7 +815,7 @@
   (try! (ft-burn? zft amount account))
   (try! (send-underlying inkind recipient))
   (var-set assets (- current-assets inkind))
-  
+
   (print {
     action: "redeem",
     caller: contract-caller,
@@ -946,15 +946,24 @@
         (borrowed (var-get total-borrowed))
         (idx (var-get index))
         (current-assets (var-get assets))
-        (debt-reduction (mul-div-down scaled-amount idx INDEX-PRECISION)))
+        (current-lindex (var-get lindex))
+        (old-total-assets (total-assets))
+        (debt-reduction (mul-div-down scaled-amount idx INDEX-PRECISION))
+        (principal-reduction (if (> scaled-principal u0)
+                                (mul-div-down scaled-amount borrowed scaled-principal)
+                                u0))
+        ;; Write down lindex proportionally to loss in total-assets
+        (new-lindex (if (and (> old-total-assets u0) (> old-total-assets debt-reduction))
+                       (mul-div-down current-lindex (- old-total-assets debt-reduction) old-total-assets)
+                       u0)))
 
     (try! (check-caller-auth))
     (asserts! (> scaled-amount u0) ERR-AMOUNT-ZERO)
-    
-    (var-set principal-scaled (if (> scaled-principal scaled-amount) (- scaled-principal scaled-amount) u0))
-    (var-set total-borrowed (if (> borrowed debt-reduction) (- borrowed debt-reduction) u0))
-    (var-set assets (if (> current-assets debt-reduction) (- current-assets debt-reduction) u0))
 
+    (var-set lindex new-lindex)
+    (var-set principal-scaled (if (> scaled-principal scaled-amount) (- scaled-principal scaled-amount) u0))
+    (var-set total-borrowed (if (> borrowed principal-reduction) (- borrowed principal-reduction) u0))
+    (var-set assets (if (> current-assets principal-reduction) (- current-assets principal-reduction) u0))
 
     (print {
       action: "socialize-debt",
@@ -962,8 +971,12 @@
       data: {
         scaled-amount: scaled-amount,
         debt-reduction: debt-reduction,
+        principal-reduction: principal-reduction,
+        old-lindex: current-lindex,
+        new-lindex: new-lindex,
+        old-total-assets: old-total-assets,
         principal-scaled: (if (> scaled-principal scaled-amount) (- scaled-principal scaled-amount) u0),
-        total-borrowed: (if (> borrowed debt-reduction) (- borrowed debt-reduction) u0),
+        total-borrowed: (if (> borrowed principal-reduction) (- borrowed principal-reduction) u0),
         index: idx
       }
     })
@@ -1018,7 +1031,7 @@
 
     ;; Clear reentrancy guard
     (var-set in-flashloan false)
-    
+
     (print {
       action: "flashloan",
       caller: contract-caller,

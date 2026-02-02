@@ -10,19 +10,19 @@ Production deployment of Zest Protocol on Stacks mainnet.
 | [dao-multisig](contracts/dao/dao-multisig.clar) | [Link](https://explorer.hiro.so/txid/0x19d42dbcddcc209fa7afbdaf4981a97ef05ede00afd4e4708ba4f710068bea45?chain=mainnet) | 13th Jan 2026 |
 | [dao-traits](contracts/dao/dao-traits.clar) | [Link](https://explorer.hiro.so/txid/0x2b04bb83d31c25d8978711cfd12a43c0a44def356f9b0baee795bc3e7813ed06?chain=mainnet) | 13th Jan 2026 |
 | [dao-treasury](contracts/dao/dao-treasury.clar) | [Link](https://explorer.hiro.so/txid/0x865b3eb488eb46027ec296cc5423be4d996b285cd164d7ede289f1bc7e4840f1?chain=mainnet) | 13th Jan 2026 |
-| [v0-1-market](contracts/market/v0-1-market.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-1-market?chain=mainnet) | 21st Jan 2026 |
+| [v0-2-market](contracts/market/v0-2-market.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-2-market?chain=mainnet) | 1st Feb 2026 |
 | [market-trait](contracts/market/market-trait.clar) | [Link](https://explorer.hiro.so/txid/0x1ef222bfa482f284acaa426a498a4497af469ac5f3d475059d20096885f5f3c7?chain=mainnet) | 13th Jan 2026 |
-| [v0-market-vault](contracts/market/v0-market-vault.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-market-vault?chain=mainnet) | 21st Jan 2026 |
-| [v0-assets](contracts/registry/v0-assets.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-assets?chain=mainnet) | 21st Jan 2026 |
-| [v0-egroup](contracts/registry/v0-egroup.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-egroup?chain=mainnet) | 21st Jan 2026 |
-| [v0-1-data](contracts/utility/v0-1-data.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-1-data?chain=mainnet) | 21st Jan 2026 |
-| [v0-vault-sbtc](contracts/vault/v0-vault-sbtc.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-sbtc?chain=mainnet) | 21st Jan 2026 |
-| [v0-vault-ststx](contracts/vault/v0-vault-ststx.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-ststx?chain=mainnet) | 21st Jan 2026 |
-| [v0-vault-ststxbtc](contracts/vault/v0-vault-ststxbtc.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-ststxbtc?chain=mainnet) | 21st Jan 2026 |
-| [v0-vault-stx](contracts/vault/v0-vault-stx.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-stx?chain=mainnet) | 21st Jan 2026 |
+| [v0-market-vault](contracts/market/v0-market-vault.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-market-vault?chain=mainnet) | 27th Jan 2026 |
+| [v0-assets](contracts/registry/v0-assets.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-assets?chain=mainnet) | 27th Jan 2026 |
+| [v0-egroup](contracts/registry/v0-egroup.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-egroup?chain=mainnet) | 27th Jan 2026 |
+| [v0-1-data](contracts/utility/v0-1-data.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-1-data?chain=mainnet) | 27th Jan 2026 |
+| [v0-vault-sbtc](contracts/vault/v0-vault-sbtc.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-sbtc?chain=mainnet) | 27th Jan 2026 |
+| [v0-vault-ststx](contracts/vault/v0-vault-ststx.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-ststx?chain=mainnet) | 27th Jan 2026 |
+| [v0-vault-ststxbtc](contracts/vault/v0-vault-ststxbtc.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-ststxbtc?chain=mainnet) | 27th Jan 2026 |
+| [v0-vault-stx](contracts/vault/v0-vault-stx.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-stx?chain=mainnet) | 27th Jan 2026 |
 | [vault-traits](contracts/vault/vault-traits.clar) | [Link](https://explorer.hiro.so/txid/0x6479861fca5151afd72bb7cbf0400a5ef829ff6b7cd0f9b5cad24af6288210e8?chain=mainnet) | 13th Jan 2026 |
-| [v0-vault-usdc](contracts/vault/v0-vault-usdc.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-usdc?chain=mainnet) | 21st Jan 2026 |
-| [v0-vault-usdh](contracts/vault/v0-vault-usdh.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-usdh?chain=mainnet) | 21st Jan 2026 |
+| [v0-vault-usdc](contracts/vault/v0-vault-usdc.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-usdc?chain=mainnet) | 27th Jan 2026 |
+| [v0-vault-usdh](contracts/vault/v0-vault-usdh.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-vault-usdh?chain=mainnet) | 27th Jan 2026 |
 | wstx | [Link](https://explorer.hiro.so/txid/0xd501ea33e5a0a5467fd81d09ad4d52b45c5301630713daa1acd4de72183c9555?chain=mainnet) | 13th Jan 2026 |
 
 ## Deployment Details

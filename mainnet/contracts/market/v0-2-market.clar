@@ -889,6 +889,10 @@
 
             ;; Socialize in vault - pass scaled directly to avoid rounding
             (unwrap! (vault-socialize-debt asset-id scaled-debt) failed-status)
+            ;; Refresh cache with new indexes post-write-down (lindex decreased)
+            (map-set index-cache
+                     { timestamp: stacks-block-time, aid: asset-id }
+                     (unwrap! (vault-accrue asset-id) failed-status))
             ;; Remove from obligation
             (unwrap! (contract-call? .v0-market-vault
                                       debt-remove-scaled

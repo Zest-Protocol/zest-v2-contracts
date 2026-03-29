@@ -133,11 +133,34 @@ Error codes use a 6-digit format where:
 
 All vaults share the same error structure with different prefixes:
 
-| Vault | Prefix |
-|-------|--------|
-| vault-stx | 800xxx |
-| vault-sbtc | 801xxx |
-| vault-ststx | 802xxx |
+| Vault | Prefix | Error Range |
+|-------|--------|-------------|
+| vault-stx | 800xxx | u800001 - u800024 |
+| vault-sbtc | 801xxx | u801001 - u801024 |
+| vault-usdc | 802xxx | u802001 - u802024 |
+| vault-usdh | 803xxx | u803001 - u803024 |
+| vault-ststx | 804xxx | u804001 - u804024 |
+| vault-ststxbtc | 805xxx | u805001 - u805024 |
+
+#### Common Vault Errors (shared across all vaults)
+All vault-* contracts share the same error codes with their specific prefixes:
+
+| Code (stx) | Name | Description |
+|------|------|-------------|
+| u800001 | ERR-AUTH | Caller is not authorized (usually not DAO) |
+| u800002 | ERR-INIT | Initialization failed |
+| u800003 | ERR-ALREADY-INITIALIZED | Vault is already initialized |
+| u800004 | ERR-REENTRANCY | Action blocked during flashloan |
+| u800005 | ERR-RESERVE-VALIDATION | Value outside permitted bounds (e.g. fee > BPS) |
+| u800006 | ERR-PAUSED | This operation is currently paused |
+| u800009 | ERR-AMOUNT-ZERO | Amount must be greater than zero |
+| u800010 | ERR-SLIPPAGE | Slippage protection (min-out) triggered |
+| u800011 | ERR-SUPPLY-CAP-EXCEEDED | Total value in vault exceeds supply cap |
+| u800013 | ERR-INSUFFICIENT-BALANCE | User has insufficient zTokens |
+| u800014 | ERR-INSUFFICIENT-LIQUIDITY | Vault has insufficient underlying assets for withdrawal |
+| u800018 | ERR-INSUFFICIENT-VAULT-LIQUIDITY | Vault has insufficient assets for borrow/flashloan |
+| u800019 | ERR-DEBT-CAP-EXCEEDED | Total borrowed amount exceeds debt cap |
+| u800024 | ERR-FLASHLOAN-UNAUTHORIZED | Account not authorized for flashloans |
 | vault-usdc | 803xxx |
 | vault-usdh | 804xxx |
 | vault-ststxbtc | 810xxx |

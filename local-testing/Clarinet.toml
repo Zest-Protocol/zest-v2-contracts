@@ -185,6 +185,86 @@ path = 'contracts/proposals/proposal-set-stx-interest-rates.clar'
 clarity_version = 4
 epoch = 3.3
 
+[contracts.proposal-set-flash-fee-stx]
+path = 'contracts/proposals/proposal-set-flash-fee-stx.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-set-flash-fee-usdc]
+path = 'contracts/proposals/proposal-set-flash-fee-usdc.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-set-flash-fee-sbtc]
+path = 'contracts/proposals/proposal-set-flash-fee-sbtc.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-set-flash-fee-usdh]
+path = 'contracts/proposals/proposal-set-flash-fee-usdh.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-set-flash-fee-ststx]
+path = 'contracts/proposals/proposal-set-flash-fee-ststx.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-pause-vault-stx]
+path = 'contracts/proposals/proposal-pause-vault-stx.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-unpause-vault-stx]
+path = 'contracts/proposals/proposal-unpause-vault-stx.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-pause-vault-sbtc]
+path = 'contracts/proposals/proposal-pause-vault-sbtc.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-unpause-vault-sbtc]
+path = 'contracts/proposals/proposal-unpause-vault-sbtc.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-pause-vault-usdc]
+path = 'contracts/proposals/proposal-pause-vault-usdc.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-unpause-vault-usdc]
+path = 'contracts/proposals/proposal-unpause-vault-usdc.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-pause-vault-usdh]
+path = 'contracts/proposals/proposal-pause-vault-usdh.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-unpause-vault-usdh]
+path = 'contracts/proposals/proposal-unpause-vault-usdh.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-pause-vault-ststx]
+path = 'contracts/proposals/proposal-pause-vault-ststx.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-unpause-vault-ststx]
+path = 'contracts/proposals/proposal-unpause-vault-ststx.clar'
+clarity_version = 4
+epoch = 3.3
+
+[contracts.proposal-whitelist-flashloan-bob-all-vaults]
+path = 'contracts/proposals/proposal-whitelist-flashloan-bob-all-vaults.clar'
+clarity_version = 4
+epoch = 3.3
+
 # Pyth Oracle Contracts (for local testing)
 [contracts.pyth-governance-v3]
 path = 'contracts/pyth/contracts/pyth-governance-v3.clar'

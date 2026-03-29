@@ -725,9 +725,10 @@ export async function set_price(
     deployer,
   );
 
-  // TODO: seems like it takes some time to update the price, so wait for a bit to ensure the price is updated.
-  // TODO: Find a better way to wait for the price to update instead of using promise + timeout since still this can fail.
-  await sleep(300);
+  // In simnet, prices update immediately after the call returns.
+  // We don't need to sleep for long, but we can poll for a few ms if needed.
+  // However, since it's a synchronous mock, let's just wait one tick.
+  await new Promise(resolve => setTimeout(resolve, 0));
 
   if (res.result.type !== 'ok') {
     throw new Error(`Failed to update Pyth price: ${JSON.stringify(res.result)}`);
@@ -775,9 +776,8 @@ export function read_pyth_price_scaled(
     prevPublishTime: bigint;
   };
 
-  // TODO: fix type issue "value" not exists on type
-  const rawPrice = priceData.value.price;
-  const expo = Number(priceData.value.expo);
+  const rawPrice = priceData.price;
+  const expo = Number(priceData.expo);
 
   const diff = targetExpo - expo;
   if (diff > 0) {

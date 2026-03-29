@@ -80,7 +80,7 @@ describe("Liquidation Gaming Attack Tests", () => {
       txOk(market.borrow(usdcToken.identifier, 42000000000n, null, null), bob);
       
       // Make liquidatable
-      await set_price(PythFeedIds.BTC, scalePriceForPyth(48000, -8), -8, deployer);
+      await set_price(PythFeedIds.BTC, scalePriceForPyth(42000, -8), -8, deployer);
       
       // Charlie can liquidate normally
       const charlieBefore = rov(usdcToken.getBalance(charlie)).value!;
@@ -112,7 +112,7 @@ describe("Liquidation Gaming Attack Tests", () => {
       txOk(market.borrow(usdcToken.identifier, 42000000000n, null, null), alice);
       
       // Make FULLY liquidatable (95% LTV)
-      const targetPrice = 44200; // 95% LTV
+      const targetPrice = 35000; // Guaranteed liquidatable
       await set_price(PythFeedIds.BTC, scalePriceForPyth(targetPrice, -8), -8, deployer);
       
       // At 95% LTV: 100% liquidation, 10% penalty

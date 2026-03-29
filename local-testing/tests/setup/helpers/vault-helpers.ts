@@ -1,5 +1,5 @@
 import { rov } from '@clarigen/test';
-import { contracts, deployer, executeDaoProposal, proposalPauseVaultStstx, proposalPauseVaultUsdh, proposalPauseVaultSbtc, proposalPauseVaultUsdc, proposalSetFlashFeeStx, proposalSetFlashFeeUsdc, proposalUnpauseVaultSbtc, proposalUnpauseVaultStstx, proposalUnpauseVaultStx, proposalUnpauseVaultUsdc, proposalUnpauseVaultUsdh, proposalPauseVaultStx, proposalWhitelistFlashloanBobAllVaults } from '../helpers';
+import { contracts, deployer, executeDaoProposal, proposalPauseVaultStstx, proposalPauseVaultUsdh, proposalPauseVaultSbtc, proposalPauseVaultUsdc, proposalSetFlashFeeStx, proposalSetFlashFeeUsdc, proposalSetFlashFeeSbtc, proposalSetFlashFeeUsdh, proposalSetFlashFeeStstx, proposalUnpauseVaultSbtc, proposalUnpauseVaultStstx, proposalUnpauseVaultStx, proposalUnpauseVaultUsdc, proposalUnpauseVaultUsdh, proposalPauseVaultStx, proposalWhitelistFlashloanBobAllVaults } from '../helpers';
 import { read_pyth_price_scaled } from './pyth-helpers';
 
 export type VaultType = 'usdc' | 'sbtc' | 'usdh' | 'ststx' | 'stx';
@@ -109,7 +109,12 @@ export function proposalSetFlashFee(vaultType: VaultType, signer: string = deplo
       return executeDaoProposal(proposalSetFlashFeeUsdc, signer);
     case 'stx':
       return executeDaoProposal(proposalSetFlashFeeStx, signer);
-    // TODO: Add other vault types
+    case 'sbtc':
+      return executeDaoProposal(proposalSetFlashFeeSbtc, signer);
+    case 'usdh':
+      return executeDaoProposal(proposalSetFlashFeeUsdh, signer);
+    case 'ststx':
+      return executeDaoProposal(proposalSetFlashFeeStstx, signer);
     default:
       throw new Error(`Unknown vault type: ${vaultType}`);
   }

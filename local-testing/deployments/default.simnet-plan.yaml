@@ -260,9 +260,59 @@ plan:
             path: contracts/proposals/proposal-init-vaults.clar
             clarity-version: 4
         - emulated-contract-publish:
+            contract-name: proposal-pause-vault-sbtc
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-pause-vault-sbtc.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-pause-vault-ststx
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-pause-vault-ststx.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-pause-vault-stx
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-pause-vault-stx.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-pause-vault-usdc
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-pause-vault-usdc.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-pause-vault-usdh
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-pause-vault-usdh.clar
+            clarity-version: 4
+        - emulated-contract-publish:
             contract-name: proposal-protocol-init
             emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
             path: contracts/proposals/mainnet/proposal-protocol-init.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-set-flash-fee-sbtc
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-set-flash-fee-sbtc.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-set-flash-fee-ststx
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-set-flash-fee-ststx.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-set-flash-fee-stx
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-set-flash-fee-stx.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-set-flash-fee-usdc
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-set-flash-fee-usdc.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-set-flash-fee-usdh
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-set-flash-fee-usdh.clar
             clarity-version: 4
         - emulated-contract-publish:
             contract-name: proposal-set-price-staleness
@@ -279,10 +329,43 @@ plan:
             emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
             path: contracts/proposals/proposal-set-stx-interest-rates.clar
             clarity-version: 4
+      epoch: "3.3"
+    - id: 3
+      transactions:
         - emulated-contract-publish:
             contract-name: proposal-set-usdc-interest-rates
             emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
             path: contracts/proposals/proposal-set-usdc-interest-rates.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-unpause-vault-sbtc
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-unpause-vault-sbtc.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-unpause-vault-ststx
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-unpause-vault-ststx.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-unpause-vault-stx
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-unpause-vault-stx.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-unpause-vault-usdc
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-unpause-vault-usdc.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-unpause-vault-usdh
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-unpause-vault-usdh.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: proposal-whitelist-flashloan-bob-all-vaults
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/proposals/proposal-whitelist-flashloan-bob-all-vaults.clar
             clarity-version: 4
         - emulated-contract-publish:
             contract-name: protocol-data

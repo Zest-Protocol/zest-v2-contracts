@@ -2797,14 +2797,24 @@ sbtc vault - 1
         (borrowed (var-get total-borrowed))
         (idx (var-get index))
         (current-assets (var-get assets))
-        (debt-reduction (mul-div-down scaled-amount idx INDEX-PRECISION)))
+        (current-lindex (var-get lindex))
+        (old-total-assets (total-assets))
+        (debt-reduction (mul-div-down scaled-amount idx INDEX-PRECISION))
+        (principal-reduction (if (> scaled-principal u0)
+                                (mul-div-down scaled-amount borrowed scaled-principal)
+                                u0))
+        ;; Write down lindex proportionally to loss in total-assets
+        (new-lindex (if (and (> old-total-assets u0) (> old-total-assets debt-reduction))
+                       (mul-div-down current-lindex (- old-total-assets debt-reduction) old-total-assets)
+                       u0)))
 
     (try! (check-caller-auth))
     (asserts! (> scaled-amount u0) ERR-AMOUNT-ZERO)
-    
+
+    (var-set lindex new-lindex)
     (var-set principal-scaled (if (> scaled-principal scaled-amount) (- scaled-principal scaled-amount) u0))
-    (var-set total-borrowed (if (> borrowed debt-reduction) (- borrowed debt-reduction) u0))
-    (var-set assets (if (> current-assets debt-reduction) (- current-assets debt-reduction) u0))
+    (var-set total-borrowed (if (> borrowed principal-reduction) (- borrowed principal-reduction) u0))
+    (var-set assets (if (> current-assets principal-reduction) (- current-assets principal-reduction) u0))
 
     (print {
       action: "socialize-debt",
@@ -2812,8 +2822,12 @@ sbtc vault - 1
       data: {
         scaled-amount: scaled-amount,
         debt-reduction: debt-reduction,
+        principal-reduction: principal-reduction,
+        old-lindex: current-lindex,
+        new-lindex: new-lindex,
+        old-total-assets: old-total-assets,
         principal-scaled: (if (> scaled-principal scaled-amount) (- scaled-principal scaled-amount) u0),
-        total-borrowed: (if (> borrowed debt-reduction) (- borrowed debt-reduction) u0),
+        total-borrowed: (if (> borrowed principal-reduction) (- borrowed principal-reduction) u0),
         index: idx
       }
     })
@@ -2831,7 +2845,7 @@ sbtc vault - 1
 
 ### flashloan
 
-[View in file](../../contracts/vault/vault-sbtc.clar#L976)
+[View in file](../../contracts/vault/vault-sbtc.clar#L990)
 
 `(define-public (flashloan ((amount uint) (funds-receiver (optional principal)) (fc trait_reference) (data (optional (buff 4096)))) (response bool uint))`
 

@@ -31,6 +31,24 @@ export const proposalCreateMultipleEgroups = contracts.proposalCreateMultipleEgr
 export const proposalSetUsdcInterestRates = contracts.proposalSetUsdcInterestRates;
 export const proposalSetSbtcInterestRates = contracts.proposalSetSbtcInterestRates;
 export const proposalSetStxInterestRates = contracts.proposalSetStxInterestRates;
+export const proposalSetFlashFeeStx = contracts.proposalSetFlashFeeStx;
+export const proposalSetFlashFeeUsdc = contracts.proposalSetFlashFeeUsdc;
+export const proposalSetFlashFeeSbtc = contracts.proposalSetFlashFeeSbtc;
+export const proposalSetFlashFeeUsdh = contracts.proposalSetFlashFeeUsdh;
+export const proposalSetFlashFeeStstx = contracts.proposalSetFlashFeeStstx;
+
+export const proposalPauseVaultStx = contracts.proposalPauseVaultStx;
+export const proposalUnpauseVaultStx = contracts.proposalUnpauseVaultStx;
+export const proposalPauseVaultSbtc = contracts.proposalPauseVaultSbtc;
+export const proposalUnpauseVaultSbtc = contracts.proposalUnpauseVaultSbtc;
+export const proposalPauseVaultUsdc = contracts.proposalPauseVaultUsdc;
+export const proposalUnpauseVaultUsdc = contracts.proposalUnpauseVaultUsdc;
+export const proposalPauseVaultUsdh = contracts.proposalPauseVaultUsdh;
+export const proposalUnpauseVaultUsdh = contracts.proposalUnpauseVaultUsdh;
+export const proposalPauseVaultStstx = contracts.proposalPauseVaultStstx;
+export const proposalUnpauseVaultStstx = contracts.proposalUnpauseVaultStstx;
+
+export const proposalWhitelistFlashloanBobAllVaults = contracts.proposalWhitelistFlashloanBobAllVaults;
 
 // Mainnet proposal
 export const proposalProtocolInit = contracts.proposalProtocolInit;
@@ -59,10 +77,7 @@ export const usdcToken = contracts.usdc;
 export const ststxToken = contracts.ststx;
 export const ststxbtcToken = contracts.ststxbtc;
 
-// Mock token contracts (for testing)
-export const mockToken01 = contracts.mockToken01;
-export const mockToken02 = contracts.mockToken02;
-export const mockToken03 = contracts.mockToken03;
+// Mock token contracts (for testing - remove if not exists)
 
 // Mock oracle contract (for bad debt testing)
 export const mockOracle = contracts.mockOracle;

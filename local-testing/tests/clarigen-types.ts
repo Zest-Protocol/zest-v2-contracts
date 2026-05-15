@@ -3408,6 +3408,91 @@ proposalInitVaults: {
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'proposal-init-vaults',
   },
+proposalPauseVaultSbtc: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-pause-vault-sbtc',
+  },
+proposalPauseVaultStstx: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-pause-vault-ststx',
+  },
+proposalPauseVaultStx: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-pause-vault-stx',
+  },
+proposalPauseVaultUsdc: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-pause-vault-usdc',
+  },
+proposalPauseVaultUsdh: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-pause-vault-usdh',
+  },
 proposalProtocolInit: {
   "functions": {
     execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
@@ -3909,6 +3994,91 @@ proposalProtocolInit: {
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'proposal-protocol-init',
   },
+proposalSetFlashFeeSbtc: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-set-flash-fee-sbtc',
+  },
+proposalSetFlashFeeStstx: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-set-flash-fee-ststx',
+  },
+proposalSetFlashFeeStx: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-set-flash-fee-stx',
+  },
+proposalSetFlashFeeUsdc: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-set-flash-fee-usdc',
+  },
+proposalSetFlashFeeUsdh: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-set-flash-fee-usdh',
+  },
 proposalSetPriceStaleness: {
   "functions": {
     execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"none"}}}} as TypedAbiFunction<[], Response<boolean, null>>
@@ -4114,6 +4284,108 @@ proposalSetUsdcInterestRates: {
   ],
   "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
   contractName: 'proposal-set-usdc-interest-rates',
+  },
+proposalUnpauseVaultSbtc: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-unpause-vault-sbtc',
+  },
+proposalUnpauseVaultStstx: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-unpause-vault-ststx',
+  },
+proposalUnpauseVaultStx: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-unpause-vault-stx',
+  },
+proposalUnpauseVaultUsdc: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-unpause-vault-usdc',
+  },
+proposalUnpauseVaultUsdh: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-unpause-vault-usdh',
+  },
+proposalWhitelistFlashloanBobAllVaults: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  contractName: 'proposal-whitelist-flashloan-bob-all-vaults',
   },
 protocolData: {
   "functions": {
@@ -7488,7 +7760,7 @@ vaultSbtc: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_313_915n,
+  lastUpdate: 1_774_782_857n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -8300,7 +8572,7 @@ vaultStstx: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_313_935n,
+  lastUpdate: 1_774_782_897n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -9112,7 +9384,7 @@ vaultStstxbtc: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_313_855n,
+  lastUpdate: 1_774_783_007n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -9924,7 +10196,7 @@ vaultStx: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_313_905n,
+  lastUpdate: 1_774_782_827n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -10753,7 +11025,7 @@ vaultUsdc: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_313_885n,
+  lastUpdate: 1_774_783_077n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -11565,7 +11837,7 @@ vaultUsdh: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_314_075n,
+  lastUpdate: 1_774_783_027n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -12367,7 +12639,7 @@ wstx: {
 
 export const accounts = {"deployer":{"address":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM","balance":"100000000000000"},"faucet":{"address":"STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6","balance":"100000000000000"},"wallet_1":{"address":"ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5","balance":"100000000000000"},"wallet_2":{"address":"ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG","balance":"100000000000000"},"wallet_3":{"address":"ST2JHG361ZXG51QTKY2NQCVBPPRRE2KZB1HR05NNC","balance":"100000000000000"},"wallet_4":{"address":"ST2NEB84ASENDXKYGJPQW86YXQCEFEX2ZQPG87ND","balance":"100000000000000"},"wallet_5":{"address":"ST2REHHS5J3CERCRBEPMGH7921Q6PYKAADT7JP2VB","balance":"100000000000000"},"wallet_6":{"address":"ST3AM1A56AK2C1XAFJ4115ZSV26EB49BVQ10MGCS0","balance":"100000000000000"},"wallet_7":{"address":"ST3PF13W7Z0RRM42A8VZRVFQ75SV1K26RXEP8YGKJ","balance":"100000000000000"},"wallet_8":{"address":"ST3NBRSFKX28FQ2ZJ1MAKX58HKHSDGNV5N7R21XCP","balance":"100000000000000"}} as const;
 
-export const identifiers = {"assets":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","daoExecutor":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","daoMultisig":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","daoTraits":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","daoTreasury":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","diaOracle":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle","egroup":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","ftTrait":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","market":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","marketTrait":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","marketVault":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","mockOracle":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","proposalCreateEgroupSbtcUsdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","proposalCreateMultipleEgroups":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","proposalInitAssets":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","proposalInitMarketVault":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","proposalInitVaults":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","proposalProtocolInit":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","proposalSetPriceStaleness":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","proposalSetSbtcInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","proposalSetStxInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","proposalSetUsdcInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","protocolData":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","pythGovernanceV3":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-governance-v3","pythOracleV4":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-oracle-v4","pythPnauDecoderV3":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-pnau-decoder-v3","pythStorageV4":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-storage-v4","pythTraitsV2":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-traits-v2","sbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","ststx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","ststxbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","traitDiaOracle":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","usdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","usdh":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","vaultSbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","vaultStstx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","vaultStstxbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","vaultStx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","vaultTraits":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","vaultUsdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","vaultUsdh":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","wormholeCoreV4":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-core-v4","wormholeTraitsV2":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-traits-v2","wstx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx"} as const
+export const identifiers = {"assets":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","daoExecutor":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","daoMultisig":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","daoTraits":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","daoTreasury":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","diaOracle":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle","egroup":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","ftTrait":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","market":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","marketTrait":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","marketVault":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","mockOracle":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","proposalCreateEgroupSbtcUsdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","proposalCreateMultipleEgroups":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","proposalInitAssets":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","proposalInitMarketVault":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","proposalInitVaults":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","proposalPauseVaultSbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-sbtc","proposalPauseVaultStstx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-ststx","proposalPauseVaultStx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-stx","proposalPauseVaultUsdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-usdc","proposalPauseVaultUsdh":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-usdh","proposalProtocolInit":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","proposalSetFlashFeeSbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-sbtc","proposalSetFlashFeeStstx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-ststx","proposalSetFlashFeeStx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-stx","proposalSetFlashFeeUsdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-usdc","proposalSetFlashFeeUsdh":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-usdh","proposalSetPriceStaleness":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","proposalSetSbtcInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","proposalSetStxInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","proposalSetUsdcInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","proposalUnpauseVaultSbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-sbtc","proposalUnpauseVaultStstx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-ststx","proposalUnpauseVaultStx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-stx","proposalUnpauseVaultUsdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-usdc","proposalUnpauseVaultUsdh":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-usdh","proposalWhitelistFlashloanBobAllVaults":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-whitelist-flashloan-bob-all-vaults","protocolData":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","pythGovernanceV3":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-governance-v3","pythOracleV4":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-oracle-v4","pythPnauDecoderV3":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-pnau-decoder-v3","pythStorageV4":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-storage-v4","pythTraitsV2":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-traits-v2","sbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","ststx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","ststxbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","traitDiaOracle":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","usdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","usdh":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","vaultSbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","vaultStstx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","vaultStstxbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","vaultStx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","vaultTraits":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","vaultUsdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","vaultUsdh":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","wormholeCoreV4":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-core-v4","wormholeTraitsV2":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-traits-v2","wstx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx"} as const
 
 export const simnet = {
   accounts,
@@ -12376,7 +12648,7 @@ export const simnet = {
 } as const;
 
 
-export const deployments = {"assets":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","testnet":null,"mainnet":null},"daoExecutor":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","testnet":null,"mainnet":null},"daoMultisig":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","testnet":null,"mainnet":null},"daoTraits":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","testnet":null,"mainnet":null},"daoTreasury":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","testnet":null,"mainnet":null},"diaOracle":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dia-oracle","simnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle","testnet":null,"mainnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle"},"egroup":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","testnet":null,"mainnet":null},"ftTrait":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","testnet":null,"mainnet":null},"market":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","testnet":null,"mainnet":null},"marketTrait":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","testnet":null,"mainnet":null},"marketVault":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","testnet":null,"mainnet":null},"mockOracle":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","testnet":null,"mainnet":null},"proposalCreateEgroupSbtcUsdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","testnet":null,"mainnet":null},"proposalCreateMultipleEgroups":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","testnet":null,"mainnet":null},"proposalInitAssets":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","testnet":null,"mainnet":null},"proposalInitMarketVault":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","testnet":null,"mainnet":null},"proposalInitVaults":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","testnet":null,"mainnet":null},"proposalProtocolInit":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","testnet":null,"mainnet":null},"proposalSetPriceStaleness":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","testnet":null,"mainnet":null},"proposalSetSbtcInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","testnet":null,"mainnet":null},"proposalSetStxInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","testnet":null,"mainnet":null},"proposalSetUsdcInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","testnet":null,"mainnet":null},"protocolData":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","testnet":null,"mainnet":null},"pythGovernanceV3":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-governance-v3","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-governance-v3","testnet":null,"mainnet":null},"pythOracleV4":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-oracle-v4","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-oracle-v4","testnet":null,"mainnet":null},"pythPnauDecoderV3":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-pnau-decoder-v3","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-pnau-decoder-v3","testnet":null,"mainnet":null},"pythStorageV4":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-storage-v4","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-storage-v4","testnet":null,"mainnet":null},"pythTraitsV2":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-traits-v2","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-traits-v2","testnet":null,"mainnet":null},"sbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","testnet":null,"mainnet":null},"ststx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","testnet":null,"mainnet":null},"ststxbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","testnet":null,"mainnet":null},"traitDiaOracle":{"devnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","simnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","testnet":null,"mainnet":null},"usdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","testnet":null,"mainnet":null},"usdh":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","testnet":null,"mainnet":null},"vaultSbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","testnet":null,"mainnet":null},"vaultStstx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","testnet":null,"mainnet":null},"vaultStstxbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","testnet":null,"mainnet":null},"vaultStx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","testnet":null,"mainnet":null},"vaultTraits":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","testnet":null,"mainnet":null},"vaultUsdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","testnet":null,"mainnet":null},"vaultUsdh":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","testnet":null,"mainnet":null},"wormholeCoreV4":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-core-v4","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-core-v4","testnet":null,"mainnet":null},"wormholeTraitsV2":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-traits-v2","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-traits-v2","testnet":null,"mainnet":null},"wstx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx","testnet":null,"mainnet":null}} as const;
+export const deployments = {"assets":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","testnet":null,"mainnet":null},"daoExecutor":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","testnet":null,"mainnet":null},"daoMultisig":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","testnet":null,"mainnet":null},"daoTraits":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","testnet":null,"mainnet":null},"daoTreasury":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","testnet":null,"mainnet":null},"diaOracle":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dia-oracle","simnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle","testnet":null,"mainnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle"},"egroup":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","testnet":null,"mainnet":null},"ftTrait":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","testnet":null,"mainnet":null},"market":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","testnet":null,"mainnet":null},"marketTrait":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","testnet":null,"mainnet":null},"marketVault":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","testnet":null,"mainnet":null},"mockOracle":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","testnet":null,"mainnet":null},"proposalCreateEgroupSbtcUsdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","testnet":null,"mainnet":null},"proposalCreateMultipleEgroups":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","testnet":null,"mainnet":null},"proposalInitAssets":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","testnet":null,"mainnet":null},"proposalInitMarketVault":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","testnet":null,"mainnet":null},"proposalInitVaults":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","testnet":null,"mainnet":null},"proposalPauseVaultSbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-sbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-sbtc","testnet":null,"mainnet":null},"proposalPauseVaultStstx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-ststx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-ststx","testnet":null,"mainnet":null},"proposalPauseVaultStx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-stx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-stx","testnet":null,"mainnet":null},"proposalPauseVaultUsdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-usdc","testnet":null,"mainnet":null},"proposalPauseVaultUsdh":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-usdh","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-pause-vault-usdh","testnet":null,"mainnet":null},"proposalProtocolInit":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","testnet":null,"mainnet":null},"proposalSetFlashFeeSbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-sbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-sbtc","testnet":null,"mainnet":null},"proposalSetFlashFeeStstx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-ststx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-ststx","testnet":null,"mainnet":null},"proposalSetFlashFeeStx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-stx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-stx","testnet":null,"mainnet":null},"proposalSetFlashFeeUsdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-usdc","testnet":null,"mainnet":null},"proposalSetFlashFeeUsdh":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-usdh","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-flash-fee-usdh","testnet":null,"mainnet":null},"proposalSetPriceStaleness":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","testnet":null,"mainnet":null},"proposalSetSbtcInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","testnet":null,"mainnet":null},"proposalSetStxInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","testnet":null,"mainnet":null},"proposalSetUsdcInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","testnet":null,"mainnet":null},"proposalUnpauseVaultSbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-sbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-sbtc","testnet":null,"mainnet":null},"proposalUnpauseVaultStstx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-ststx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-ststx","testnet":null,"mainnet":null},"proposalUnpauseVaultStx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-stx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-stx","testnet":null,"mainnet":null},"proposalUnpauseVaultUsdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-usdc","testnet":null,"mainnet":null},"proposalUnpauseVaultUsdh":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-usdh","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-unpause-vault-usdh","testnet":null,"mainnet":null},"proposalWhitelistFlashloanBobAllVaults":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-whitelist-flashloan-bob-all-vaults","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-whitelist-flashloan-bob-all-vaults","testnet":null,"mainnet":null},"protocolData":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","testnet":null,"mainnet":null},"pythGovernanceV3":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-governance-v3","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-governance-v3","testnet":null,"mainnet":null},"pythOracleV4":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-oracle-v4","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-oracle-v4","testnet":null,"mainnet":null},"pythPnauDecoderV3":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-pnau-decoder-v3","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-pnau-decoder-v3","testnet":null,"mainnet":null},"pythStorageV4":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-storage-v4","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-storage-v4","testnet":null,"mainnet":null},"pythTraitsV2":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-traits-v2","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-traits-v2","testnet":null,"mainnet":null},"sbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","testnet":null,"mainnet":null},"ststx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","testnet":null,"mainnet":null},"ststxbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","testnet":null,"mainnet":null},"traitDiaOracle":{"devnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","simnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","testnet":null,"mainnet":null},"usdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","testnet":null,"mainnet":null},"usdh":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","testnet":null,"mainnet":null},"vaultSbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","testnet":null,"mainnet":null},"vaultStstx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","testnet":null,"mainnet":null},"vaultStstxbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","testnet":null,"mainnet":null},"vaultStx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","testnet":null,"mainnet":null},"vaultTraits":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","testnet":null,"mainnet":null},"vaultUsdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","testnet":null,"mainnet":null},"vaultUsdh":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","testnet":null,"mainnet":null},"wormholeCoreV4":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-core-v4","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-core-v4","testnet":null,"mainnet":null},"wormholeTraitsV2":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-traits-v2","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-traits-v2","testnet":null,"mainnet":null},"wstx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx","testnet":null,"mainnet":null}} as const;
 
 export const project = {
   contracts,

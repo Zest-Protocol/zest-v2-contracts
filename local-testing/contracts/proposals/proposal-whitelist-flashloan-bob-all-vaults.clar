@@ -1,0 +1,11 @@
+(impl-trait .dao-traits.proposal-script)
+(define-public (execute)
+  (begin
+    (try! (contract-call? .vault-stx set-flashloan-permissions 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5 true true))
+    (try! (contract-call? .vault-sbtc set-flashloan-permissions 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5 true true))
+    (try! (contract-call? .vault-usdc set-flashloan-permissions 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5 true true))
+    (try! (contract-call? .vault-usdh set-flashloan-permissions 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5 true true))
+    (try! (contract-call? .vault-ststx set-flashloan-permissions 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5 true true))
+    (ok true)
+  )
+)

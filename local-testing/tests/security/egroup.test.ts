@@ -1,7 +1,7 @@
 import { describe, expect, it, beforeEach } from "vitest";
 import { Cl, cvToValue } from "@stacks/transactions";
 import { txOk, txErr, rov } from '@clarigen/test';
-import { EGROUP_MASKS, getCollateralBitMask } from '../assetConfig';
+import { EGROUP_MASKS, getCollateralBitMask } from '../assetConfig.ts';
 import {
   initializeProtocol,
   contracts,
@@ -10,13 +10,13 @@ import {
   bob,
   executeDaoProposal,
   proposalCreateMultipleEgroups,
-} from '../setup/helpers';
+} from '../setup/helpers.ts';
 import {
   init_pyth,
   set_initial_price,
   PythFeedIds,
   scalePriceForPyth,
-} from '../setup/helpers/pyth-helpers';
+} from '../setup/helpers/pyth-helpers.ts';
 
 const market = contracts.market;
 const marketVault = contracts.marketVault;

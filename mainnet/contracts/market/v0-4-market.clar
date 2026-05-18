@@ -79,6 +79,7 @@
 (define-constant ERR-ORACLE-DIA (err u400013))
 (define-constant ERR-ORACLE-INVARIANT (err u400014))
 (define-constant ERR-ORACLE-MULTI (err u400015))
+(define-constant MAX-ORACLE-FUTURE-DRIFT u5)
 (define-constant ERR-LIQUIDATION-PAUSED (err u400016))
 (define-constant ERR-PRICE-CONFIDENCE-LOW (err u400017))
 (define-constant ERR-HEALTHY (err u400018))
@@ -363,10 +364,12 @@
   (> p u0))
 
 (define-private (oracle-timestamp-fresh (ts uint) (prev uint) (max-staleness uint))
-  (let ((delta (if (> ts stacks-block-time)
+  (let ((max-future (+ stacks-block-time MAX-ORACLE-FUTURE-DRIFT))
+        (delta (if (> ts stacks-block-time)
                    u0
                    (- stacks-block-time ts))))
     (and
+      (<= ts max-future)
       (<= delta max-staleness)
       (>= ts prev))))
 

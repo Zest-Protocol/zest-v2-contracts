@@ -578,13 +578,13 @@
       (let ((usdh-price (default-to u0 (get-dia-price DIA-USDH)))
             (lindex (get-vault-liquidity-index USDH)))
         (mul-div-down usdh-price lindex INDEX-PRECISION))
-  ;; stSTXbtc - BTC price (liquid staked STX with BTC yield)
+  ;; stSTXbtc - STX price
   (if (is-eq aid stSTXbtc) (default-to u0 (get-pyth-price PYTH-STX))
   ;; zstSTXbtc - stSTXbtc price x liquidity index
   (if (is-eq aid zstSTXbtc)
-      (let ((btc-price (default-to u0 (get-pyth-price PYTH-STX)))
+      (let ((stx-price (default-to u0 (get-pyth-price PYTH-STX)))
             (lindex (get-vault-liquidity-index stSTXbtc)))
-        (mul-div-down btc-price lindex INDEX-PRECISION))
+        (mul-div-down stx-price lindex INDEX-PRECISION))
   ;; Unknown asset - return 0
   u0)))))))))))))
 

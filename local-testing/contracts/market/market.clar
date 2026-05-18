@@ -82,6 +82,7 @@
 (define-constant ERR-ORACLE-INVARIANT (err u400014))
 (define-constant ERR-ORACLE-MOCK (err u400019))  ;; Mock oracle call failed
 (define-constant ERR-ORACLE-MULTI (err u400015))
+(define-constant MAX-ORACLE-FUTURE-DRIFT u5)
 (define-constant ERR-LIQUIDATION-PAUSED (err u400016))
 (define-constant ERR-PRICE-CONFIDENCE-LOW (err u400017))
 (define-constant ERR-HEALTHY (err u400018))
@@ -330,7 +331,7 @@
     (ok { value: final-price, timestamp: timestamp })))
 
 (define-private (call-dia (key (string-ascii 32)))
-  (let ((res (unwrap! (contract-call? 'SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle get-value key) ERR-ORACLE-DIA)))
+  (let ((res (unwrap! (contract-call? .mock-oracle get-value key) ERR-ORACLE-DIA)))
     (ok res)))
 
 (define-private (resolve-dia (ident (buff 32)))
@@ -385,10 +386,12 @@
   (> p u0))
 
 (define-private (oracle-timestamp-fresh (ts uint) (prev uint) (max-staleness uint))
-  (let ((delta (if (> ts stacks-block-time)
+  (let ((max-future (+ stacks-block-time MAX-ORACLE-FUTURE-DRIFT))
+        (delta (if (> ts stacks-block-time)
                    u0
                    (- stacks-block-time ts))))
     (and
+      (<= ts max-future)
       (<= delta max-staleness)
       (>= ts prev))))
 

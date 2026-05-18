@@ -10,14 +10,14 @@ import {
   charlie,
   executeDaoProposal,
   proposalCreateMultipleEgroups,
-} from '../setup/helpers';
+} from '../setup/helpers.ts';
 import {
   init_pyth,
   set_initial_price,
   set_price,
   PythFeedIds,
   scalePriceForPyth,
-} from '../setup/helpers/pyth-helpers';
+} from '../setup/helpers/pyth-helpers.ts';
 
 const market = contracts.market;
 const marketVault = contracts.marketVault;

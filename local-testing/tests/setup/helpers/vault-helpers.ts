@@ -1,6 +1,6 @@
 import { rov } from '@clarigen/test';
-import { contracts, deployer, executeDaoProposal, proposalPauseVaultStstx, proposalPauseVaultUsdh, proposalPauseVaultSbtc, proposalPauseVaultUsdc, proposalSetFlashFeeStx, proposalSetFlashFeeUsdc, proposalUnpauseVaultSbtc, proposalUnpauseVaultStstx, proposalUnpauseVaultStx, proposalUnpauseVaultUsdc, proposalUnpauseVaultUsdh, proposalPauseVaultStx, proposalWhitelistFlashloanBobAllVaults } from '../helpers';
-import { read_pyth_price_scaled } from './pyth-helpers';
+import { contracts, deployer, executeDaoProposal, proposalPauseVaultStstx, proposalPauseVaultUsdh, proposalPauseVaultSbtc, proposalPauseVaultUsdc, proposalSetFlashFeeStx, proposalSetFlashFeeUsdc, proposalUnpauseVaultSbtc, proposalUnpauseVaultStstx, proposalUnpauseVaultStx, proposalUnpauseVaultUsdc, proposalUnpauseVaultUsdh, proposalPauseVaultStx, proposalWhitelistFlashloanBobAllVaults } from '../helpers.ts';
+import { read_pyth_price_scaled } from './pyth-helpers.ts';
 
 export type VaultType = 'usdc' | 'sbtc' | 'usdh' | 'ststx' | 'stx';
 

@@ -1,4 +1,4 @@
-import { project, accounts } from '../clarigen-types';
+import { project, accounts } from '../clarigen-types.ts';
 import {
   cvToValue,
   projectErrors,
@@ -6,7 +6,7 @@ import {
   CoreNodeEventType
 } from '@clarigen/core';
 import { rovOk, txOk, txErr, filterEvents, rov } from '@clarigen/test';
-import { AssetIds } from './types';
+import type { AssetIds } from './types.ts';
 
 // Initialize contract instances using projectFactory
 export const contracts = projectFactory(project, "simnet");

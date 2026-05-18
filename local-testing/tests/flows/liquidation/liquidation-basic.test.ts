@@ -13,10 +13,10 @@ import {
   contracts,
   proposalCreateMultipleEgroups,
   pythStorageV4,
-} from '../../setup/helpers';
+} from '../../setup/helpers.ts';
 
 // Import asset config
-import { ASSET_IDS } from '../../assetConfig';
+import { ASSET_IDS } from '../../assetConfig.ts';
 
 // Import Pyth helpers
 import {
@@ -25,7 +25,7 @@ import {
   set_price,
   PythFeedIds,
   scalePriceForPyth,
-} from '../../setup/helpers/pyth-helpers';
+} from '../../setup/helpers/pyth-helpers.ts';
 
 // Contract instances
 const {

@@ -27,7 +27,7 @@ import {
   
   // Errors
   errors
-} from './helpers';
+} from './helpers.ts';
 
 describe('Protocol Initialization Tests', () => {
   const MINIMUM_LIQUIDITY = 1000n;

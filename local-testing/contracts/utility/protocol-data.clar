@@ -101,11 +101,10 @@
 
 ;; -- Oracle: DIA price resolution -------------------------------------------
 
-;; Get price from DIA oracle (for USDH)
+;; Get price from mock DIA oracle (for USDH in local tests)
 ;; DIA returns { value: uint, timestamp: uint } where value is in 8 decimal precision
-;; Note: Uses unwrap-panic since DIA oracle is external and type cannot be determined at compile time
 (define-private (get-dia-price (key (string-ascii 32)))
-  (some (get value (unwrap-panic (contract-call? 'SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle get-value key)))))
+  (some (get value (unwrap-panic (contract-call? .mock-oracle get-value key)))))
 
 ;; -- Oracle: stSTX ratio ----------------------------------------------------
 

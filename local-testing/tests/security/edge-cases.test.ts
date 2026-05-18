@@ -3,7 +3,7 @@
  *
  * Example tests of boundary conditions
  *
- * Test IDs: EDGE-01 through EDGE-06
+ * Test IDs: EDGE-01 through EDGE-07
  */
 
 import { describe, it, expect, beforeEach } from 'vitest';
@@ -17,17 +17,30 @@ import {
   charlie,
   executeDaoProposal,
   proposalCreateMultipleEgroups,
-} from '../setup/helpers';
+} from '../setup/helpers.ts';
 import {
   init_pyth,
   set_initial_price,
   set_price,
   PythFeedIds,
   scalePriceForPyth,
-} from '../setup/helpers/pyth-helpers';
-import { ASSET_IDS } from '../assetConfig';
+} from '../setup/helpers/pyth-helpers.ts';
+import { ASSET_IDS } from '../assetConfig.ts';
 
 const { market, marketVault, vaultSbtc, vaultUsdc, sbtc: sbtcToken, usdc: usdcToken } = contracts;
+
+function getPythPublishTime(priceResult: {
+  value?: { publishTime?: bigint; 'publish-time'?: bigint };
+  publishTime?: bigint;
+  'publish-time'?: bigint;
+}) {
+  const price = priceResult.value ?? priceResult;
+  return price.publishTime ?? price['publish-time'];
+}
+
+function getResponseValue(result: { value?: unknown } | unknown) {
+  return typeof result === 'object' && result !== null && 'value' in result ? result.value : result;
+}
 
 describe('Edge Case Tests (EDGE-*)', () => {
   beforeEach(async () => {
@@ -260,6 +273,95 @@ describe('Edge Case Tests (EDGE-*)', () => {
         alice
       );
       expect(result).toBeDefined();
+    });
+  });
+
+  describe('EDGE-07: Oracle future timestamp rejection', () => {
+    it('should reject future-dated price updates without poisoning the feed', async () => {
+      const btcPriceId = Buffer.from(PythFeedIds.BTC);
+      const initialPrice = rov(contracts.pythStorageV4.getPrice({ priceIdentifier: btcPriceId })) as {
+        publishTime?: bigint;
+        'publish-time'?: bigint;
+        prevPublishTime?: bigint;
+        'prev-publish-time'?: bigint;
+        price: bigint;
+        expo: bigint;
+        conf: bigint;
+        emaPrice: bigint;
+        emaConf: bigint;
+      };
+      const initialPublishTime = BigInt(getPythPublishTime(initialPrice)!);
+      const futurePublishTime = initialPublishTime + 10_000_000n;
+
+      const futureUpdate = txOk(
+        contracts.pythStorageV4.setPriceTestnet({
+          priceIdentifier: btcPriceId,
+          price: scalePriceForPyth(61000, -8),
+          conf: 10n,
+          expo: -8,
+          emaPrice: scalePriceForPyth(61000, -8),
+          emaConf: 9n,
+          publishTime: futurePublishTime,
+          prevPublishTime: initialPublishTime,
+        }),
+        deployer
+      );
+
+      expect(getResponseValue(futureUpdate)).toBe(5002n); // ERR_STALE_PRICE
+
+      const afterRejectedUpdate = rov(contracts.pythStorageV4.getPrice({ priceIdentifier: btcPriceId })) as {
+        publishTime?: bigint;
+        'publish-time'?: bigint;
+        prevPublishTime?: bigint;
+        'prev-publish-time'?: bigint;
+        price: bigint;
+        expo: bigint;
+        conf: bigint;
+        emaPrice: bigint;
+        emaConf: bigint;
+      };
+
+      expect(BigInt(getPythPublishTime(afterRejectedUpdate)!)).toBe(initialPublishTime);
+      expect(BigInt(getPythPublishTime(afterRejectedUpdate)!)).toBeLessThan(futurePublishTime);
+
+      const validPublishTime = initialPublishTime + 1n;
+      const validUpdate = txOk(
+        contracts.pythStorageV4.setPriceTestnet({
+          priceIdentifier: btcPriceId,
+          price: scalePriceForPyth(59000, -8),
+          conf: 10n,
+          expo: -8,
+          emaPrice: scalePriceForPyth(59000, -8),
+          emaConf: 9n,
+          publishTime: validPublishTime,
+          prevPublishTime: initialPublishTime,
+        }),
+        deployer
+      );
+
+      expect(getPythPublishTime(validUpdate as any)).toBe(validPublishTime);
+
+      const afterValidUpdate = rov(contracts.pythStorageV4.getPrice({ priceIdentifier: btcPriceId })) as {
+        publishTime?: bigint;
+        'publish-time'?: bigint;
+        prevPublishTime?: bigint;
+        'prev-publish-time'?: bigint;
+        price: bigint;
+        expo: bigint;
+        conf: bigint;
+        emaPrice: bigint;
+        emaConf: bigint;
+      };
+
+      expect(BigInt(getPythPublishTime(afterValidUpdate)!)).toBe(validPublishTime);
+
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice);
+      const borrowResult = txOk(
+        market.borrow(usdcToken.identifier, 1000000000n, null, null),
+        alice
+      );
+
+      expect(borrowResult).toBeDefined();
     });
   });
 });

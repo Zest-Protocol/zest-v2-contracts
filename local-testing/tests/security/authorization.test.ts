@@ -25,14 +25,14 @@ import {
   errors,
   executeDaoProposal,
   proposalCreateMultipleEgroups,
-} from '../setup/helpers';
-import { ASSET_IDS } from '../assetConfig';
+} from '../setup/helpers.ts';
+import { ASSET_IDS } from '../assetConfig.ts';
 import {
   init_pyth,
   set_initial_price,
   PythFeedIds,
   scalePriceForPyth,
-} from '../setup/helpers/pyth-helpers';
+} from '../setup/helpers/pyth-helpers.ts';
 
 describe('Authorization Bypass Tests (AUTH-*)', () => {
   beforeEach(async () => {

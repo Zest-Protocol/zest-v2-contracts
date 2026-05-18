@@ -54,6 +54,7 @@
 			(stale-price-threshold (contract-call? .pyth-governance-v3 get-stale-price-threshold))
 			(latest-stacks-timestamp (unwrap! (get-stacks-block-info? time (- stacks-block-height u1)) ERR_STALE_PRICE)))
 		(asserts! (>= (get publish-time entry) (+ (- latest-stacks-timestamp stale-price-threshold) STACKS_BLOCK_TIME)) ERR_STALE_PRICE)
+		(asserts! (<= (get publish-time entry) (+ latest-stacks-timestamp STACKS_BLOCK_TIME)) ERR_STALE_PRICE)
 		(ok entry)))
 
 (define-public (write (batch-updates (list 64 {
@@ -88,6 +89,8 @@
 		(asserts! (is-price-update-more-recent (get price-identifier entry) publish-time) ERR_NEWER_PRICE_AVAILABLE)
 		;; Ensure that price is not stale
 		(asserts! (>= publish-time (+ (- latest-stacks-timestamp stale-price-threshold) STACKS_BLOCK_TIME)) ERR_STALE_PRICE)
+		;; Ensure that price is not from the future
+		(asserts! (<= publish-time (+ latest-stacks-timestamp STACKS_BLOCK_TIME)) ERR_STALE_PRICE)
 		;; Update storage
 		(map-set prices 
 			(get price-identifier entry) 

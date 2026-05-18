@@ -5,9 +5,9 @@ import { hmac } from '@noble/hashes/hmac';
 import { sha256 } from '@noble/hashes/sha256';
 import { hexToBytes } from '@noble/hashes/utils';
 import { webcrypto } from 'node:crypto';
-import { Simnet } from '@stacks/clarinet-sdk';
+import type { Simnet } from '@stacks/clarinet-sdk';
 import { rov } from '@clarigen/test';
-import { contracts } from '../helpers';
+import { contracts } from '../helpers.ts';
 
 // Get simnet instance
 const simnet = (globalThis as any).simnet as Simnet;

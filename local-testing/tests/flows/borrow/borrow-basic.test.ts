@@ -11,7 +11,7 @@ import {
   executeDaoProposal,
   contracts,
   proposalCreateMultipleEgroups,
-} from '../../setup/helpers';
+} from '../../setup/helpers.ts';
 
 // Import Pyth helpers
 import {
@@ -20,7 +20,7 @@ import {
   set_price,
   PythFeedIds,
   scalePriceForPyth,
-} from '../../setup/helpers/pyth-helpers';
+} from '../../setup/helpers/pyth-helpers.ts';
 
 // Contract instances from helpers
 const {

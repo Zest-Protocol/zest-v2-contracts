@@ -14,13 +14,11 @@ import {
 } from '../../setup/helpers';
 
 // Import Pyth helpers
-import {
-  init_pyth,
+import { init_pyth,
   set_initial_price,
   set_price,
   PythFeedIds,
-  scalePriceForPyth,
-} from '../../setup/helpers/pyth-helpers';
+  scalePriceForPyth, priceFeeds } from '../../setup/helpers/pyth-helpers';
 
 const {
   market,
@@ -81,11 +79,11 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     txOk(sbtcToken.mint(sbtcAmount * 2n, alice), deployer);
     
     // Add initial sBTC collateral
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // Add MORE sBTC (existing collateral type - should skip health check)
     const addMoreResult = txOk(
-      market.collateralAdd(sbtcToken.identifier, sbtcAmount, null),
+      market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()),
       alice
     );
     
@@ -100,11 +98,11 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     
     const sbtcAmount = 100000000n; // 1 BTC = $60,000
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // Borrow $30,000 USDC (safe, under $42k capacity)
     const borrowAmount = 30000000000n;
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     // Add $10,000 USDC as collateral
     // This switches to Egroup 10 (sBTC + USDC coll + USDC debt) with 60% LTV
@@ -113,7 +111,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     txOk(usdcToken.mint(usdcCollAmount, alice), deployer);
     
     const addUsdcResult = txOk(
-      market.collateralAdd(usdcToken.identifier, usdcCollAmount, null),
+      market.collateralAdd(usdcToken.identifier, usdcCollAmount, priceFeeds()),
       alice
     );
     
@@ -130,11 +128,11 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     
     const sbtcAmount = 100000000n; // 1 BTC = $60,000
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // Borrow $41,000 USDC (near max capacity)
     const borrowAmount = 41000000000n;
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     // Try to add stSTX as NEW collateral
     // This would switch to Egroup 4 (sBTC + stSTX coll + USDC debt) with 45% LTV
@@ -143,7 +141,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     txOk(ststxToken.mint(ststxAmount, alice), deployer);
     
     const addStstxResult = txErr(
-      market.collateralAdd(ststxToken.identifier, ststxAmount, null),
+      market.collateralAdd(ststxToken.identifier, ststxAmount, priceFeeds()),
       alice
     );
     
@@ -162,11 +160,11 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     
     const sbtcAmount = 100000000n; // 1 BTC = $60,000
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // Borrow MAX: $42,000 USDC (at 70% limit)
     const maxBorrowAmount = 42000000000n;
-    txOk(market.borrow(usdcToken.identifier, maxBorrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, maxBorrowAmount, alice, priceFeeds()), alice);
     
     // Attacker tries to add $1 of stSTX to trigger egroup change
     // This would switch to Egroup 4 (45% LTV)
@@ -175,7 +173,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     txOk(ststxToken.mint(dustAmount, alice), deployer);
     
     const attackResult = txErr(
-      market.collateralAdd(ststxToken.identifier, dustAmount, null),
+      market.collateralAdd(ststxToken.identifier, dustAmount, priceFeeds()),
       alice
     );
     
@@ -191,10 +189,10 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     // Setup: User at max borrow (70% LTV)
     const sbtcAmount = 100000000n; // 1 BTC = $60,000
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     const maxBorrow = 42000000000n; // $42,000
-    txOk(market.borrow(usdcToken.identifier, maxBorrow, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, maxBorrow, alice, priceFeeds()), alice);
     
     // Try to add multiple dust collaterals sequentially
     const dustAmount = 1000000n;
@@ -202,7 +200,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     // First dust: stSTX
     txOk(ststxToken.mint(dustAmount, alice), deployer);
     const firstAttack = txErr(
-      market.collateralAdd(ststxToken.identifier, dustAmount, null),
+      market.collateralAdd(ststxToken.identifier, dustAmount, priceFeeds()),
       alice
     );
     expect(cvToValue(firstAttack.result).value).toBe('400005');
@@ -221,7 +219,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     
     // Add first collateral (no previous position)
     const addFirstResult = txOk(
-      market.collateralAdd(sbtcToken.identifier, sbtcAmount, null),
+      market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()),
       alice
     );
     
@@ -239,10 +237,10 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     // User has $60,000 sBTC at 70% LTV, borrows $42,000
     const sbtcAmount = 100000000n; // 1 BTC
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     const borrowAmount = 42000000000n; // $42,000
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     // Drop BTC price to make position underwater
     // New price: $55,000 → capacity = $55,000 × 70% = $38,500 < $42,000 debt
@@ -260,7 +258,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     txOk(ststxToken.mint(ststxAmount, alice), deployer);
     
     const addResult = txErr(
-      market.collateralAdd(ststxToken.identifier, ststxAmount, null),
+      market.collateralAdd(ststxToken.identifier, ststxAmount, priceFeeds()),
       alice
     );
     
@@ -276,10 +274,10 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     // Setup: Create underwater position
     const sbtcAmount = 100000000n; // 1 BTC = $60,000
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     const borrowAmount = 42000000000n; // $42,000
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     // Drop BTC price to create underwater position
     await set_price(
@@ -298,7 +296,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     txOk(usdcToken.mint(usdcAmount, alice), deployer);
     
     const addResult = txOk(
-      market.collateralAdd(usdcToken.identifier, usdcAmount, null),
+      market.collateralAdd(usdcToken.identifier, usdcAmount, priceFeeds()),
       alice
     );
     
@@ -317,11 +315,11 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     
     const sbtcAmount = 50000000n; // 0.5 BTC = $30,000
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // Borrow $15,000 (50% of capacity, safe margin)
     const borrowAmount = 15000000000n;
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     // Add USDC collateral
     // Before: $30,000 @ 70% = $21,000 capacity
@@ -330,7 +328,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     txOk(usdcToken.mint(usdcAmount, alice), deployer);
     
     const addResult = txOk(
-      market.collateralAdd(usdcToken.identifier, usdcAmount, null),
+      market.collateralAdd(usdcToken.identifier, usdcAmount, priceFeeds()),
       alice
     );
     
@@ -351,7 +349,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
     
     // This should work (sBTC is enabled)
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     console.log('✓ TEST 10: Enabled collateral validation works');
     console.log('  - Note: Disabled assets would fail at ERR-COLLATERAL-DISABLED');
@@ -362,7 +360,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     const zeroAmount = 0n;
     
     const result = txErr(
-      market.collateralAdd(sbtcToken.identifier, zeroAmount, null),
+      market.collateralAdd(sbtcToken.identifier, zeroAmount, priceFeeds()),
       alice
     );
     
@@ -378,15 +376,15 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     // Step 1: Add sBTC collateral
     const sbtcAmount = 100000000n; // 1 BTC = $60,000
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // Step 2: Borrow $20,000 USDC (safe, allows capacity to improve later)
     const borrowAmount = 20000000000n;
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     // Step 3: Add more sBTC (existing collateral - should work)
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // Step 4: Now try to add USDC (new collateral)
     // Before: $120,000 @ 70% = $84,000 capacity
@@ -394,14 +392,14 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     // Debt: $20,000 < $84,000 → Should work!
     const usdcAmount = 20000000000n; // $20,000
     txOk(usdcToken.mint(usdcAmount, alice), deployer);
-    txOk(market.collateralAdd(usdcToken.identifier, usdcAmount, null), alice);
+    txOk(market.collateralAdd(usdcToken.identifier, usdcAmount, priceFeeds()), alice);
     
     // Step 5: Repay some debt
     txOk(usdcToken.mint(5000000000n, alice), deployer);
     txOk(market.repay(usdcToken.identifier, 15000000000n, alice), alice);
     
     // Step 6: Remove some collateral
-    txOk(market.collateralRemove(sbtcToken.identifier, sbtcAmount / 2n, alice, null), alice);
+    txOk(market.collateralRemove(sbtcToken.identifier, sbtcAmount / 2n, alice, priceFeeds()), alice);
     
     console.log('✓ TEST 12: Full workflow integration successful');
     console.log('  - Add → Borrow → Add more → Repay → Remove ✓');
@@ -413,11 +411,11 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     
     const sbtcAmount = 100000000n; // 1 BTC = $60,000
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // Borrow $30,000
     const borrowAmount = 30000000000n;
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     // Add exactly $10,000 USDC to hit boundary
     // Before: $60,000 @ 70% = $42,000
@@ -426,7 +424,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     txOk(usdcToken.mint(usdcAmount, alice), deployer);
     
     const boundaryResult = txOk(
-      market.collateralAdd(usdcToken.identifier, usdcAmount, null),
+      market.collateralAdd(usdcToken.identifier, usdcAmount, priceFeeds()),
       alice
     );
     
@@ -442,14 +440,14 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     
     const sbtcAmount = 100000000n; // 1 BTC = $60,000
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // Add new collateral type (no debt to worry about)
     const ststxAmount = 10000000n; // ~$12 of stSTX
     txOk(ststxToken.mint(ststxAmount, alice), deployer);
     
     const addResult = txOk(
-      market.collateralAdd(ststxToken.identifier, ststxAmount, null),
+      market.collateralAdd(ststxToken.identifier, ststxAmount, priceFeeds()),
       alice
     );
     
@@ -468,18 +466,18 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     
     // First add (creates position)
     const firstAdd = txOk(
-      market.collateralAdd(sbtcToken.identifier, sbtcAmount, null),
+      market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()),
       alice
     );
     
     // Second add (existing collateral - minimal overhead)
     const secondAdd = txOk(
-      market.collateralAdd(sbtcToken.identifier, sbtcAmount, null),
+      market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()),
       alice
     );
     
     // Borrow minimal USDC  
-    txOk(market.borrow(usdcToken.identifier, 5000000000n, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, 5000000000n, alice, priceFeeds()), alice);
     
     // Third add - new collateral type (health check overhead)
     // Need to add enough to offset LTV drop
@@ -487,7 +485,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     txOk(usdcToken.mint(usdcAmount, alice), deployer);
     
     const thirdAdd = txOk(
-      market.collateralAdd(usdcToken.identifier, usdcAmount, null),
+      market.collateralAdd(usdcToken.identifier, usdcAmount, priceFeeds()),
       alice
     );
     
@@ -502,11 +500,11 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     
     const sbtcAmount = 200000000n; // 2 BTC = $120,000
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // Borrow conservatively ($30,000 against $120k to allow headroom)
     const borrowAmount = 30000000000n;
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     // Current: $120,000 @ 70% = $84,000 capacity (safe)
     
@@ -515,7 +513,7 @@ describe('Collateral-Add Health Check Fix - Egroup Transition Vulnerability', ()
     // $87,000 > $30,000 debt → OK
     const usdcAmount = 25000000000n; // $25,000
     txOk(usdcToken.mint(usdcAmount, alice), deployer);
-    txOk(market.collateralAdd(usdcToken.identifier, usdcAmount, null), alice);
+    txOk(market.collateralAdd(usdcToken.identifier, usdcAmount, priceFeeds()), alice);
     
     console.log('✓ TEST 16: Sequential new collateral additions work correctly');
   });

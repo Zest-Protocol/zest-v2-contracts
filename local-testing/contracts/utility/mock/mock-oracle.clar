@@ -1,7 +1,7 @@
 ;; Mock Oracle for Testing
 ;;
 ;; Implements the DIA oracle interface for controllable price testing.
-;; Used in simnet and mainnet staging to test bad debt socialization.
+;; Used in simnet to test bad debt socialization.
 ;;
 ;; Usage:
 ;; 1. Initialize with: (contract-call? .mock-oracle set-price "USDh/USD" u100000000) for $1.00
@@ -37,7 +37,7 @@
     })
     (ok true)))
 
-;; Transfer deployer role (for mainnet staging if needed)
+;; Transfer deployer role
 (define-public (set-deployer (new-deployer principal))
   (begin
     (asserts! (is-eq tx-sender (var-get deployer)) ERR-NOT-AUTHORIZED)

@@ -1,3 +1,0 @@
-[submodule "local-testing/contracts/pyth"]
-	path = local-testing/contracts/pyth
-	url = https://github.com/stx-labs/stacks-pyth-bridge

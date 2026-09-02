@@ -18,13 +18,11 @@ import {
   executeDaoProposal,
   proposalCreateMultipleEgroups,
 } from '../setup/helpers';
-import {
-  init_pyth,
+import { init_pyth,
   set_initial_price,
   set_price,
   PythFeedIds,
-  scalePriceForPyth,
-} from '../setup/helpers/pyth-helpers';
+  scalePriceForPyth, priceFeeds } from '../setup/helpers/pyth-helpers';
 import { ASSET_IDS } from '../assetConfig';
 
 const { market, marketVault, vaultSbtc, vaultUsdc, sbtc: sbtcToken, usdc: usdcToken } = contracts;
@@ -53,8 +51,8 @@ describe('Edge Case Tests (EDGE-*)', () => {
 
   describe('EDGE-01: Liquidate with MAX_UINT128 debt amount', () => {
     it('should cap debt at graduated formula limit', async () => {
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice);
-      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, null), alice);
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), alice);
+      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, priceFeeds()), alice);
 
       // Make position liquidatable
       await set_price(PythFeedIds.BTC, scalePriceForPyth(48000, -8), -8, deployer);
@@ -71,7 +69,7 @@ describe('Edge Case Tests (EDGE-*)', () => {
           largeAmount,
           0n,
           null,
-          null
+          priceFeeds()
         ),
         charlie
       );
@@ -88,10 +86,10 @@ describe('Edge Case Tests (EDGE-*)', () => {
 
   describe('EDGE-02: Zero amount operations', () => {
     it('should reject borrow of zero', async () => {
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice);
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), alice);
 
       const result = txErr(
-        market.borrow(usdcToken.identifier, 0n, null, null),
+        market.borrow(usdcToken.identifier, 0n, null, priceFeeds()),
         alice
       );
 
@@ -100,7 +98,7 @@ describe('Edge Case Tests (EDGE-*)', () => {
 
     it('should reject collateral-add of zero', async () => {
       const result = txErr(
-        market.collateralAdd(sbtcToken.identifier, 0n, null),
+        market.collateralAdd(sbtcToken.identifier, 0n, priceFeeds()),
         alice
       );
 
@@ -109,10 +107,10 @@ describe('Edge Case Tests (EDGE-*)', () => {
     });
 
     it('should reject collateral-remove of zero', async () => {
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice);
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), alice);
 
       const result = txErr(
-        market.collateralRemove(sbtcToken.identifier, 0n, null, null),
+        market.collateralRemove(sbtcToken.identifier, 0n, null, priceFeeds()),
         alice
       );
 
@@ -157,8 +155,8 @@ describe('Edge Case Tests (EDGE-*)', () => {
     it('should allow partial redemption within liquidity', async () => {
       txOk(vaultUsdc.deposit(1000000000n, 0n, alice), alice);
 
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), bob);
-      txOk(market.borrow(usdcToken.identifier, 800000000n, null, null), bob);
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), bob);
+      txOk(market.borrow(usdcToken.identifier, 800000000n, null, priceFeeds()), bob);
 
       // Should be able to redeem small amount
       const smallRedeem = txOk(vaultUsdc.redeem(100000000n, 0n, alice), alice);
@@ -168,11 +166,11 @@ describe('Edge Case Tests (EDGE-*)', () => {
 
   describe('EDGE-04: Position with no debt', () => {
     it('should allow collateral removal when no debt', async () => {
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice);
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), alice);
 
       // No borrow - should be able to remove all
       const result = txOk(
-        market.collateralRemove(sbtcToken.identifier, 100000000n, null, null),
+        market.collateralRemove(sbtcToken.identifier, 100000000n, null, priceFeeds()),
         alice
       );
 
@@ -180,13 +178,13 @@ describe('Edge Case Tests (EDGE-*)', () => {
     });
 
     it('should skip health check when removing collateral with no debt', async () => {
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice);
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), alice);
 
       // Even if price drops to zero, should still remove (no debt = no health check)
       await set_price(PythFeedIds.BTC, scalePriceForPyth(1, -8), -8, deployer);
 
       const result = txOk(
-        market.collateralRemove(sbtcToken.identifier, 100000000n, null, null),
+        market.collateralRemove(sbtcToken.identifier, 100000000n, null, priceFeeds()),
         alice
       );
 
@@ -198,11 +196,11 @@ describe('Edge Case Tests (EDGE-*)', () => {
     it('should handle minimum viable position', async () => {
       // Add minimal collateral
       const minCollateral = 1n; // 1 satoshi
-      txOk(market.collateralAdd(sbtcToken.identifier, minCollateral, null), alice);
+      txOk(market.collateralAdd(sbtcToken.identifier, minCollateral, priceFeeds()), alice);
 
       // Should be able to remove it
       const result = txOk(
-        market.collateralRemove(sbtcToken.identifier, minCollateral, null, null),
+        market.collateralRemove(sbtcToken.identifier, minCollateral, null, priceFeeds()),
         alice
       );
 
@@ -210,11 +208,11 @@ describe('Edge Case Tests (EDGE-*)', () => {
     });
 
     it('should reject borrow that results in dust debt', async () => {
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice);
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), alice);
 
       // Try to borrow very small amount
       const result = txOk(
-        market.borrow(usdcToken.identifier, 1n, null, null),
+        market.borrow(usdcToken.identifier, 1n, null, priceFeeds()),
         alice
       );
 
@@ -230,7 +228,7 @@ describe('Edge Case Tests (EDGE-*)', () => {
 
       txOk(sbtcToken.mint(largeAmount, alice), deployer);
       const result = txOk(
-        market.collateralAdd(sbtcToken.identifier, largeAmount, null),
+        market.collateralAdd(sbtcToken.identifier, largeAmount, priceFeeds()),
         alice
       );
 
@@ -243,8 +241,8 @@ describe('Edge Case Tests (EDGE-*)', () => {
     });
 
     it('should handle health calculation with extreme prices', { timeout: 15000 }, async () => {
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice);
-      txOk(market.borrow(usdcToken.identifier, 30000000000n, null, null), alice);
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), alice);
+      txOk(market.borrow(usdcToken.identifier, 30000000000n, null, priceFeeds()), alice);
 
       // Set extreme price - $1M per BTC
       await set_price(PythFeedIds.BTC, scalePriceForPyth(1000000, -8), -8, deployer);
@@ -256,7 +254,7 @@ describe('Edge Case Tests (EDGE-*)', () => {
 
       // Collateral removal should still work (health check uses extreme prices)
       const result = txOk(
-        market.collateralRemove(sbtcToken.identifier, 10000000n, null, null),
+        market.collateralRemove(sbtcToken.identifier, 10000000n, null, priceFeeds()),
         alice
       );
       expect(result).toBeDefined();

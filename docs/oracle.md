@@ -3,7 +3,7 @@
 ## Overview
 
 The oracle system provides **price feeds** for assets in the lending protocol. Oracle functionality is **integrated directly into market.clar** for gas optimization and to eliminate circular dependencies. It serves as the bridge between:
-- **External price sources** (Pyth, DIA oracles)
+- **External price sources** (Pyth Lazer, DIA oracles)
 - **Protocol assets** (registered in assets.clar)
 - **Market operations** (requires prices for lending calculations)
 
@@ -60,21 +60,23 @@ When registering an asset in `assets.clar`, oracle configuration is provided:
 
 All price resolution logic is implemented in `market.clar`:
 
-### 1. Pyth Network (TYPE-PYTH = 0x00)
+### 1. Pyth Lazer (TYPE-PYTH = 0x00)
 
-**Description:** Decentralized oracle network with high-frequency price updates.
+**Description:** Prices are delivered via **Pyth Lazer**: each market call carries up to 3 signed Lazer update buffers in its `price-feeds` argument. There is **no on-chain price storage** — the market verifies an update in-transaction via `pyth-lazer-oracle.verify-price-feeds` (+ `pyth-lazer-decoder-v1`), folds the decoded feeds into an in-tx `pyth-context`, and `resolve-pyth` reads from that context. The Lazer feed-id is carried in the **low 16 bytes** of the asset's 32-byte `ident`.
 
 ```clarity
-;; In market.clar
-(define-constant PYTH-STORAGE 
-  'SP1CGXWEAMG6P6FT04W66NVGJ7PQWMDAC19R7PJ0Y.pyth-storage-v4)
+;; In market.clar — verify one signed Lazer update inline (no storage write)
+(define-private (verify-lazer-update (update (buff 8192)))
+  (contract-call? .pyth-lazer-oracle verify-price-feeds
+    update .pyth-lazer-decoder-v1 none))
 
-(define-private (resolve-pyth (ident (buff 32)))
-  (let ((res (call-pyth ident))
-        (p (get price res))
-        (expo (get expo res)))
-    (normalize-pyth p expo)))  // Normalize to 8 decimals
+(define-private (resolve-pyth (ident (buff 32)) (context { feeds: (list 8 ...) }))
+  (let ((feed-id (buff-to-uint-be (slice? ident u16 u32)))  // Lazer feed-id from low 16 bytes
+        (feed    (find-compact-feed feed-id (get feeds context))))
+    (normalize-pyth (get price feed) (get exponent feed))))  // Normalize to 8 decimals
 ```
+
+The `pyth-lazer-oracle` / `pyth-lazer-decoder-v1` contracts are an independently-audited adaptation of [stx-labs/stacks-pyth-lazer](https://github.com/stx-labs/stacks-pyth-lazer).
 
 **Price Normalization:**
 
@@ -197,10 +199,10 @@ STX price: $1.00
   u3)  // aid for USDC
 ```
 
-**Step 2: Fetch base price from Pyth**
+**Step 2: Resolve base price from the in-tx Lazer context**
 ```clarity
-// resolve-price-feed → resolve-pyth
-→ call-pyth(ident)
+// resolve-price-feed → resolve-pyth (reads the verified in-tx feeds; no storage call)
+→ find-compact-feed(feed-id from ident low 16 bytes)
 → Returns: {
     value: 100000000,      // $1.00 (8 decimals)
     timestamp: 123456

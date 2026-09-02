@@ -91,13 +91,21 @@
             (to-uint (* price (pow 10 adj)))
             (to-uint (/ price (pow 10 (- adj))))))))
 
-;; Get price from Pyth oracle storage (read-only)
-;; Returns price in 8 decimal precision (e.g., $1.00 = 100000000)
+;; Map a Pyth 32-byte feed-id constant to its Lazer uint feed-id. The three feeds
+;; protocol-data reads (BTC/USDC/STX) map to Lazer ids 1/7/45 respectively.
+(define-private (pyth-feed-id-to-lazer (feed-id (buff 32)))
+  (if (is-eq feed-id PYTH-BTC) (some u1)
+  (if (is-eq feed-id PYTH-USDC) (some u7)
+  (if (is-eq feed-id PYTH-STX) (some u45)
+  none))))
+
+;; Get price for a Pyth feed. The canonical Pyth Lazer contracts are verify-only
+;; (no on-chain storage), so protocol-data cannot read stored prices. Callers that
+;; need Pyth prices must verify a signed update inline and pass the result.
+;; Until protocol-data's API is updated to accept inline feeds, this returns none.
+;; DIA prices (USDH) are still resolved via the DIA oracle.
 (define-private (get-pyth-price (feed-id (buff 32)))
-  ;; @mainnet: (match (contract-call? 'SP1CGXWEAMG6P6FT04W66NVGJ7PQWMDAC19R7PJ0Y.pyth-storage-v4 get-price feed-id)
-  (match (contract-call? .pyth-storage-v4 get-price feed-id)
-    result (some (normalize-pyth (get price result) (get expo result)))
-    err-val none))
+  none)
 
 ;; -- Oracle: DIA price resolution -------------------------------------------
 
@@ -954,21 +962,38 @@
 ;; get-user-sbtc-balances
 ;; ---------------------------------------------------------------------------
 ;; Returns user's sBTC holdings across vault and market-vault
+;; Includes both sBTC (underlying) and zsBTC (vault token) used as collateral
 (define-read-only (get-user-sbtc-balances (account principal))
   (let (
     (vault-shares (unwrap-panic (contract-call? .vault-sbtc get-balance account)))
     (vault-underlying (unwrap-panic (contract-call? .vault-sbtc convert-to-assets vault-shares)))
-    
-    (market-sbtc
-      (match (contract-call? .market-vault get-position account u4)  ;; mask = 2^2 = 4 (sBTC collateral bit)
+    (enabled-mask (contract-call? .assets get-bitmap))
+
+    ;; Get sBTC collateral (underlying asset)
+    (market-sbtc-underlying
+      (match (contract-call? .market-vault get-position account enabled-mask)
         position
-          (get amount (fold find-collateral-amount-iter 
-                           (get collateral position) 
+          (get amount (fold find-collateral-amount-iter
+                           (get collateral position)
                            {target: sBTC, amount: u0}))
         err-no-position u0))
-    
+
+    ;; Get zsBTC collateral (vault token) and convert to underlying
+    (market-zsbtc-shares
+      (match (contract-call? .market-vault get-position account enabled-mask)
+        position
+          (get amount (fold find-collateral-amount-iter
+                           (get collateral position)
+                           {target: zsBTC, amount: u0}))
+        err-no-position u0))
+
+    (market-zsbtc-underlying (unwrap-panic (contract-call? .vault-sbtc convert-to-assets market-zsbtc-shares)))
+
+    ;; Total market collateral = sBTC + zsBTC (converted to underlying)
+    (market-sbtc (+ market-sbtc-underlying market-zsbtc-underlying))
+
     (total (+ vault-underlying market-sbtc)))
-    
+
     (ok {
       vault-underlying: vault-underlying,
       market-collateral: market-sbtc,

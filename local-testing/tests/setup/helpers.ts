@@ -67,14 +67,9 @@ export const mockToken03 = contracts.mockToken03;
 // Mock oracle contract (for bad debt testing)
 export const mockOracle = contracts.mockOracle;
 
-// Pyth Oracle contracts (ensure they're deployed in simnet)
-export const pythGovernanceV3 = contracts.pythGovernanceV3;
-export const pythOracleV4 = contracts.pythOracleV4;
-export const pythPnauDecoderV3 = contracts.pythPnauDecoderV3;
-export const pythStorageV4 = contracts.pythStorageV4;
-export const pythTraitsV2 = contracts.pythTraitsV2;
-export const wormholeCoreV4 = contracts.wormholeCoreV4;
-export const wormholeTraitsV2 = contracts.wormholeTraitsV2;
+// Pyth Lazer oracle (in-tx price verification; replaces the pnau/wormhole stack)
+export const pythLazerOracle = contracts.pythLazerOracle;
+export const pythLazerDecoderV1 = contracts.pythLazerDecoderV1;
 
 // Extract project errors
 const _errors = projectErrors(project);

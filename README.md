@@ -11,7 +11,7 @@ Production deployment information including:
 
 ### 🧪 local-testing/
 **For Security Researchers:**
-- 8 example test files to get you started
+- 12 example test files to get you started (market flows, security, Pyth Lazer oracle, zvstBTC strategy vault)
 - Complete testing infrastructure with Clarity 4 contracts
 - Protocol initialization reference
 - Audit reports and technical references
@@ -42,7 +42,7 @@ For direct disclosure: security@zestprotocol.com
 
 - **Flexible Collateral Options**: Choose between traditional collateral (non-yield-bearing) or rehypothecatable collateral (ztokens that earn supply yield while used as collateral)
 - **Efficiency Groups (Egroups)**: Risk parameters defined per asset combination, enabling higher capital efficiency for correlated assets
-- **Integrated Oracle System**: Direct Pyth and DIA oracle integration in the market contract for gas optimization
+- **Integrated Oracle System**: Direct Pyth Lazer and DIA oracle integration in the market contract for gas optimization (Lazer updates are verified in-transaction; no on-chain price storage)
 - **DAO Governance**: Multisig-based governance with timelock protections
 
 ## Architecture
@@ -69,8 +69,8 @@ For direct disclosure: security@zestprotocol.com
             ▼                  ▼                  ▼
       ┌─────────┐        ┌─────────┐        ┌──────────┐
       │External │        │ Vaults  │        │   DAO    │
-      │Oracles  │        │(6 types)│        │Contracts │
-      │Pyth/DIA │        │         │        │          │
+      │Oracles  │        │(7 types)│        │Contracts │
+      │Lazer/DIA│        │         │        │          │
       └─────────┘        └─────────┘        └──────────┘
 ```
 
@@ -82,7 +82,7 @@ For direct disclosure: security@zestprotocol.com
 | `market-vault.clar` | User position storage (collateral/debt tracking via bitmasks) |
 | `assets.clar` | Asset registry with oracle configuration |
 | `egroup.clar` | Efficiency groups - risk parameters per asset combination |
-| `vault-*.clar` | 6 vaults (STX, sBTC, stSTX, USDC, USDH, stSTXbtc) issuing ztokens |
+| `vault-*.clar` | 7 vaults (STX, sBTC, stBTC, stSTX, USDC, USDH, stSTXbtc) issuing ztokens |
 | `dao-multisig.clar` | Governance proposal management |
 | `dao-executor.clar` | Proposal execution engine |
 | `dao-treasury.clar` | Protocol fee accumulation |

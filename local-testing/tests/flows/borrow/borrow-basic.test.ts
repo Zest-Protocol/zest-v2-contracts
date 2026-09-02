@@ -14,13 +14,11 @@ import {
 } from '../../setup/helpers';
 
 // Import Pyth helpers
-import {
-  init_pyth,
+import { init_pyth,
   set_initial_price,
   set_price,
   PythFeedIds,
-  scalePriceForPyth,
-} from '../../setup/helpers/pyth-helpers';
+  scalePriceForPyth, priceFeeds } from '../../setup/helpers/pyth-helpers';
 
 // Contract instances from helpers
 const {
@@ -82,7 +80,7 @@ describe('Borrow with Pyth Oracles - POC', () => {
     
     // 2. Alice adds sBTC as collateral
     const addCollateralResult = txOk(
-      market.collateralAdd(sbtcToken.identifier, sbtcAmount, null),
+      market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()),
       alice
     );
     expect(addCollateralResult).toBeDefined();
@@ -92,7 +90,7 @@ describe('Borrow with Pyth Oracles - POC', () => {
     const borrowAmount = 42000000000n; // $42,000
     
     const borrowResult = txOk(
-      market.borrow(usdcToken.identifier, borrowAmount, alice, null),
+      market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()),
       alice
     );
     expect(borrowResult).toBeDefined();
@@ -115,13 +113,13 @@ describe('Borrow with Pyth Oracles - POC', () => {
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
     
     // 2. Alice adds sBTC as collateral
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // 3. Alice tries to borrow 45,000 USDC (exceeds 70% LTV)
     const excessiveBorrowAmount = 45000000000n; // $45,000
     
     const borrowResult = txErr(
-      market.borrow(usdcToken.identifier, excessiveBorrowAmount, alice, null),
+      market.borrow(usdcToken.identifier, excessiveBorrowAmount, alice, priceFeeds()),
       alice
     );
     
@@ -147,10 +145,10 @@ describe('Borrow with Pyth Oracles - POC', () => {
     // 1. Setup: Alice has 1 BTC collateral and borrows $42,000
     const sbtcAmount = 100000000n; // 1 BTC
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     const initialBorrowAmount = 42000000000n; // $42,000 (70% of $60k)
-    txOk(market.borrow(usdcToken.identifier, initialBorrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, initialBorrowAmount, alice, priceFeeds()), alice);
     
     // 2. Update BTC price to $50,000 (16.7% drop)
     await set_price(
@@ -166,7 +164,7 @@ describe('Borrow with Pyth Oracles - POC', () => {
     const additionalBorrow = 1000000000n; // $1,000
     
     const borrowResult = txErr(
-      market.borrow(usdcToken.identifier, additionalBorrow, alice, null),
+      market.borrow(usdcToken.identifier, additionalBorrow, alice, priceFeeds()),
       alice
     );
     
@@ -190,14 +188,14 @@ describe('Borrow with Pyth Oracles - POC', () => {
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
     
     // 2. Alice adds sBTC as collateral
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // 3. Calculate max borrow: $60,000 * 0.70 = $42,000
     // Account for small rounding differences
     const maxBorrowAmount = 41999000000n; // Slightly under $42,000 to account for rounding
     
     const borrowResult = txOk(
-      market.borrow(usdcToken.identifier, maxBorrowAmount, alice, null),
+      market.borrow(usdcToken.identifier, maxBorrowAmount, alice, priceFeeds()),
       alice
     );
     expect(borrowResult).toBeDefined();
@@ -224,15 +222,15 @@ describe('Borrow with Pyth Oracles - POC', () => {
     txOk(usdcToken.mint(usdcCollateralAmount, alice), deployer);
     
     // 2. Alice adds both as collateral
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
-    txOk(market.collateralAdd(usdcToken.identifier, usdcCollateralAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
+    txOk(market.collateralAdd(usdcToken.identifier, usdcCollateralAmount, priceFeeds()), alice);
     
     // 3. Total collateral value = $30,000 (BTC) + $10,000 (USDC) = $40,000
     // With Egroup 10 (60% LTV), max borrow = $24,000
     const borrowAmount = 24000000000n; // $24,000 (at 60% limit)
     
     const borrowResult = txOk(
-      market.borrow(usdcToken.identifier, borrowAmount, alice, null),
+      market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()),
       alice
     );
     expect(borrowResult).toBeDefined();
@@ -255,11 +253,11 @@ describe('Borrow with Pyth Oracles - POC', () => {
     
     const sbtcAmount = 100000000n; // 1 BTC
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     const borrowAmount = 42000000000n; // $42,000 (70% of $60k)
     const borrowResult = txOk(
-      market.borrow(usdcToken.identifier, borrowAmount, alice, null),
+      market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()),
       alice
     );
     
@@ -280,11 +278,11 @@ describe('Borrow with Pyth Oracles - POC', () => {
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
     
     // 2. Alice adds sBTC as collateral
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // 3. Alice borrows 42,000 USDC (at 70% LTV limit)
     const borrowAmount = 42000000000n; // $42,000
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     // 4. Query debt BEFORE repayment using market-vault's debtScaled
     const usdcId = 6n; // USDC asset ID
@@ -329,11 +327,11 @@ describe('Borrow with Pyth Oracles - POC', () => {
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
     
     // 2. Alice adds sBTC as collateral
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     // 3. Alice borrows 42,000 USDC (at 70% LTV limit)
     const borrowAmount = 42000000000n; // $42,000
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     // 4. Get Alice's obligation ID for debt queries
     const MAX_U64 = 18446744073709551615n;
@@ -355,7 +353,7 @@ describe('Borrow with Pyth Oracles - POC', () => {
     
     // 8. Alice removes all collateral (now that debt is 0)
     const collateralRemoveResult = txOk(
-      market.collateralRemove(sbtcToken.identifier, sbtcAmount, alice, null),
+      market.collateralRemove(sbtcToken.identifier, sbtcAmount, alice, priceFeeds()),
       alice
     );
     expect(collateralRemoveResult).toBeDefined();

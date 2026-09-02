@@ -27,12 +27,10 @@ import {
   proposalCreateMultipleEgroups,
 } from '../setup/helpers';
 import { ASSET_IDS } from '../assetConfig';
-import {
-  init_pyth,
+import { init_pyth,
   set_initial_price,
   PythFeedIds,
-  scalePriceForPyth,
-} from '../setup/helpers/pyth-helpers';
+  scalePriceForPyth, priceFeeds } from '../setup/helpers/pyth-helpers';
 
 describe('Authorization Bypass Tests (AUTH-*)', () => {
   beforeEach(async () => {
@@ -114,8 +112,8 @@ describe('Authorization Bypass Tests (AUTH-*)', () => {
       txOk(vaultUsdc.deposit(10000000n, 0n, alice), alice);
       
       // 2. Alice adds collateral and borrows via market (authorized path)
-      txOk(market.collateralAdd(contracts.usdc.identifier, 5000000n, null), alice);
-      txOk(market.borrow(contracts.usdc.identifier, 1000000n, null, null), alice);
+      txOk(market.collateralAdd(contracts.usdc.identifier, 5000000n, priceFeeds()), alice);
+      txOk(market.borrow(contracts.usdc.identifier, 1000000n, null, priceFeeds()), alice);
       
       // Now test: Alice tries to call system-repay directly (bypassing market)
       const result = txErr(
@@ -129,8 +127,8 @@ describe('Authorization Bypass Tests (AUTH-*)', () => {
     it('should reject system-repay from bob', () => {
       // Setup: Create debt for alice via authorized path (bob has no tokens left)
       txOk(vaultUsdc.deposit(10000000n, 0n, alice), alice);
-      txOk(market.collateralAdd(contracts.usdc.identifier, 5000000n, null), alice);
-      txOk(market.borrow(contracts.usdc.identifier, 500000n, null, null), alice);
+      txOk(market.collateralAdd(contracts.usdc.identifier, 5000000n, priceFeeds()), alice);
+      txOk(market.borrow(contracts.usdc.identifier, 500000n, null, priceFeeds()), alice);
       
       // Test: Bob tries to directly call system-repay on alice's debt
       const result = txErr(
@@ -144,9 +142,9 @@ describe('Authorization Bypass Tests (AUTH-*)', () => {
     it('should reject system-repay on vault-usdc from unauthorized caller (different scenario)', () => {
       // Setup: Create debt via authorized path using sBTC collateral
       txOk(vaultSbtc.deposit(100000000n, 0n, alice), alice);
-      txOk(market.collateralAdd(contracts.sbtc.identifier, 50000000n, null), alice);
+      txOk(market.collateralAdd(contracts.sbtc.identifier, 50000000n, priceFeeds()), alice);
       // Borrow USDC against sBTC collateral (egroup exists for this pair)
-      txOk(market.borrow(contracts.usdc.identifier, 10000000n, null, null), alice);
+      txOk(market.borrow(contracts.usdc.identifier, 10000000n, null, priceFeeds()), alice);
       
       // Test: Alice tries to directly call system-repay on USDC vault (where debt exists)
       const result = txErr(
@@ -208,7 +206,7 @@ describe('Authorization Bypass Tests (AUTH-*)', () => {
 
     it('should reject collateral-remove from non-impl caller', () => {
       // Setup: Create a position with collateral via authorized path (market)
-      txOk(market.collateralAdd(contracts.usdc.identifier, 5000000n, null), alice);
+      txOk(market.collateralAdd(contracts.usdc.identifier, 5000000n, priceFeeds()), alice);
       
       // Test: Alice tries to remove collateral directly via market-vault (bypassing market)
       const result = txErr(
@@ -238,8 +236,8 @@ describe('Authorization Bypass Tests (AUTH-*)', () => {
     it('should reject debt-remove-scaled from non-impl caller', () => {
       // Setup: Create position with debt via authorized path (use alice, bob has no tokens)
       txOk(vaultUsdc.deposit(10000000n, 0n, alice), alice);
-      txOk(market.collateralAdd(contracts.usdc.identifier, 5000000n, null), alice);
-      txOk(market.borrow(contracts.usdc.identifier, 1000000n, null, null), alice);
+      txOk(market.collateralAdd(contracts.usdc.identifier, 5000000n, priceFeeds()), alice);
+      txOk(market.borrow(contracts.usdc.identifier, 1000000n, null, priceFeeds()), alice);
       
       // Test: Bob tries to remove alice's debt directly via market-vault (bypassing market)
       const result = txErr(
@@ -415,7 +413,7 @@ describe('Authorization Bypass Tests (AUTH-*)', () => {
   describe('AUTH-08: Collateral-remove implicit auth (contract-caller protection)', () => {
     it('should prevent User B from removing User A collateral', async () => {
       // Setup: Alice adds collateral
-      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, null), alice);
+      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, priceFeeds()), alice);
 
       // Verify Alice has collateral
       const alicePositionBefore = rov(marketVault.resolve(alice));
@@ -425,7 +423,7 @@ describe('Authorization Bypass Tests (AUTH-*)', () => {
       // Bob tries to remove Alice's collateral via market.collateral-remove
       // Since account = contract-caller, Bob can only affect Bob's position (which is empty)
       const result = txErr(
-        market.collateralRemove(contracts.sbtc.identifier, 100000000n, null, null),
+        market.collateralRemove(contracts.sbtc.identifier, 100000000n, null, priceFeeds()),
         bob
       );
 

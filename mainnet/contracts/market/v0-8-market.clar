@@ -1,49 +1,32 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; market - 0
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; ============================================================================
-;; TRAITS
-;; ============================================================================
 (use-trait ft-trait .ft-trait.ft-trait)
-(impl-trait .market-trait.market-trait)
+(impl-trait .market-trait-v7.market-trait-v7)
 
-;; ============================================================================
-;; CONSTANTS
-;; ============================================================================
-
-;; -- Asset IDs (Paired: underlying_id, vault_id = underlying_id + 1)
-;; These map to actual asset IDs in the asset registry
 (define-constant STX u0)
-(define-constant zSTX u1)    ;; vault-stx
+(define-constant zSTX u1)
 (define-constant sBTC u2)
-(define-constant zsBTC u3)   ;; vault-sbtc
+(define-constant zsBTC u3)
 (define-constant stSTX u4)
-(define-constant zstSTX u5)  ;; vault-ststx
+(define-constant zstSTX u5)
 (define-constant USDC u6)
-(define-constant zUSDC u7)   ;; vault-usdc
+(define-constant zUSDC u7)
 (define-constant USDH u8)
-(define-constant zUSDH u9)   ;; vault-usdh
+(define-constant zUSDH u9)
 (define-constant stSTXbtc u10)
-(define-constant zstSTXbtc u11) ;; vault-ststxbtc
+(define-constant zstSTXbtc u11)
 (define-constant stBTC u12)
-(define-constant zstBTC u13) ;; vault-stbtc
+(define-constant zstBTC u13)
 (define-constant ztokens (list zSTX zsBTC zstSTX zUSDC zUSDH zstSTXbtc zstBTC))
 
-;; -- Precision & scaling
 (define-constant BPS u10000)
-(define-constant DEPLOYER tx-sender)
-(define-constant INDEX-PRECISION u1000000000000)  ;; 1e12 for index calculations
+(define-constant INDEX-PRECISION u1000000000000)
 (define-constant MICROS-PER-SECOND u1000000)
-;; Max seconds a Lazer feed timestamp may run ahead of the chain clock.
+(define-constant MAX-PYTH-EXPONENT-ADJUSTMENT 18)
+(define-constant MIN-PYTH-EXPONENT-ADJUSTMENT -18)
 (define-constant MAX-ORACLE-FUTURE-SKEW u60)
 
-;; -- Oracle configuration
 (define-constant TYPE-PYTH 0x00)
 (define-constant TYPE-DIA 0x01)
-(define-constant TYPE-MOCK 0x02)
 
-;; -- Oracle callcodes (for price transformations)
 (define-constant CALLCODE-STSTX 0x00)
 (define-constant CALLCODE-ZSTX 0x01)
 (define-constant CALLCODE-ZSBTC 0x02)
@@ -53,32 +36,21 @@
 (define-constant CALLCODE-ZSTSTXBTC 0x06)
 (define-constant CALLCODE-STBTC 0x07)
 
-;; -- Oracle ratios
 (define-constant STSTX-RATIO-DECIMALS u1000000)
 (define-constant STBTC-RATIO-DECIMALS u100000000)
-;; stBTC ratio sanity band (x1e8): 0.5x .. 2.0x. The floor ratio starts at 1.0
-;; and drifts up as stacking rewards accrue; it dips below 1.0 only via slashing
-;; or reserve loss (bounded by design). Anything outside the band means a
-;; corrupted or hung data-stbtc-v1 and resolve-stbtc rejects it.
 (define-constant STBTC-RATIO-MIN u50000000)
 (define-constant STBTC-RATIO-MAX u200000000)
 
-;; -- Pack utilities (bit manipulation)
 (define-constant MAX-U64 u18446744073709551615)
-(define-constant DEBT-MASK u340282366920938463444927863358058659840)  ;; MAX-U128 - MAX-U64
+(define-constant DEBT-MASK u340282366920938463444927863358058659840)
 (define-constant DEBT-OFFSET u64)
 (define-constant ITER-UINT-64 (list u0 u1 u2 u3 u4 u5 u6 u7 u8 u9 u10 u11 u12 u13 u14 u15 u16 u17 u18 u19 u20 u21 u22 u23 u24 u25 u26 u27 u28 u29 u30 u31 u32 u33 u34 u35 u36 u37 u38 u39 u40 u41 u42 u43 u44 u45 u46 u47 u48 u49 u50 u51 u52 u53 u54 u55 u56 u57 u58 u59 u60 u61 u62 u63))
 
-;; -- Liquidation
 (define-constant MAX-LIQUIDATION-AMOUNT u340282366920938463463374607431768211455)
 (define-constant GLOBAL-LIQUIDATION-GRACE-ID u100)
 
-;; -- Contract references
 (define-constant ZEST-STX-WRAPPER-CONTRACT .wstx)
 
-;; ============================================================================
-;; ERRORS (400xxx prefix for market)
-;; ============================================================================
 (define-constant ERR-AUTH (err u400001))
 (define-constant ERR-AMOUNT-ZERO (err u400002))
 (define-constant ERR-COLLATERAL-DISABLED (err u400003))
@@ -91,10 +63,9 @@
 (define-constant ERR-ORACLE-TYPE (err u400010))
 (define-constant ERR-ORACLE-CALLCODE (err u400011))
 (define-constant ERR-ORACLE-PYTH (err u400012))
+(define-constant ERR-ORACLE-STBTC-RATIO (err u400020))
 (define-constant ERR-ORACLE-DIA (err u400013))
 (define-constant ERR-ORACLE-INVARIANT (err u400014))
-(define-constant ERR-ORACLE-MOCK (err u400019))  ;; Mock oracle call failed
-(define-constant ERR-ORACLE-STBTC-RATIO (err u400020))  ;; stBTC ratio outside sanity band
 (define-constant ERR-ORACLE-MULTI (err u400015))
 (define-constant ERR-LIQUIDATION-PAUSED (err u400016))
 (define-constant ERR-PRICE-CONFIDENCE-LOW (err u400017))
@@ -107,64 +78,21 @@
 (define-constant ERR-LIQUIDATION-BORROW-SAME-BLOCK (err u400024))
 (define-constant ERR-AUTHORIZATION (err u400025))
 
-;; ============================================================================
-;; DATA VARS
-;; ============================================================================
-
-;; -- Pausability
 (define-data-var pause-liquidation bool false)
 
-;; -- Oracle configuration
-;; Confidence ratio: 10% default (1000 = 10% of 10000 BPS)
-;; This means confidence interval must be <= 10% of price
 (define-data-var max-confidence-ratio uint u1000)
-
-;; stBTC oracle (resolve-stbtc / call-stbtc-ratio)
-;; Simnet stand-in for data-stbtc-v1.get-sbtc-per-stbtc (x1e8). On mainnet,
-;; call-stbtc-ratio reads the live data-stbtc-v1 (see the @mainnet line there)
-;; and this var is unused.
-(define-data-var mock-stbtc-ratio uint u100000000)
-;; deployer-only test hook (simnet ratio control).
-(define-public (set-mock-stbtc-ratio (ratio uint))
-  (begin
-    (asserts! (is-eq tx-sender DEPLOYER) ERR-AUTH)
-    (ok (var-set mock-stbtc-ratio ratio))))
-;; DAO-set haircut (bps) applied to the stBTC ratio in resolve-stbtc. 0 = no haircut.
 (define-data-var stbtc-haircut-bps uint u0)
 
-;; ============================================================================
-;; MAPS
-;; ============================================================================
-
-;; -- Liquidation
 (define-map liquidation-grace-periods uint uint)
 
-;; -- Index cache (for accrual)
 (define-map index-cache
   { timestamp: uint, aid: uint }
   { index: uint, lindex: uint })
 
-;; -- Oracle timestamp tracking
 (define-map last-update
   { type: (buff 1), ident: (buff 32) }
   uint)
 
-;; ============================================================================
-;; PRIVATE FUNCTIONS
-;; ============================================================================
-
-;; -- Price feed inline-verify helpers ---------------------------------------
-;; Each market call may carry up to 3 signed Lazer update buffers in `price-feeds`.
-;; `load-price-feeds` verifies exactly one via `.pyth-lazer-oracle verify-price-feeds`
-;; (inline: decodes + checks signature/trusted-signer, returns feeds WITHOUT writing
-;; storage) and folds the decoded feeds into a compact `pyth-context`. Downstream
-;; `resolve-pyth` reads prices from this in-tx context, not from `pyth-lazer-storage`.
-
-;; Fold one decoded feed into the compact context. Enforces the fields required for
-;; resolution (price/exponent/confidence/publisher-count). Publisher-count >= 3.
-;; The per-feed timestamp defaults to the update envelope timestamp when the feed does
-;; not carry its own feed-update-timestamp (decoder-v1 does not populate it); when
-;; present, it must not exceed the envelope timestamp (no future feed in an old envelope).
 (define-private (collect-lazer-feed
   (feed {
     feed-id: uint,
@@ -183,53 +111,42 @@
     feed-update-timestamp: (optional uint) })
   (acc (response {
     envelope-timestamp: uint,
-    feeds: (list 8 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+    feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
   } uint)))
   (let ((state (try! acc))
         (feed-id (get feed-id feed)))
-    (if (is-some (find-compact-feed feed-id (get feeds state)))
-      ;; Duplicate feed in one update: reject (a malformed/replayed payload).
-      ERR-ORACLE-PYTH
-      (let ((price (unwrap! (get price feed) ERR-ORACLE-PYTH))
-            (exponent (unwrap! (get exponent feed) ERR-ORACLE-PYTH))
-            ;; Confidence is optional in the payload (decoder returns none when absent
-            ;; or zero). Default to 0: a zero confidence always passes check-confidence,
-            ;; so an absent field is treated as "perfectly confident", matching storage
-            ;; reads where confidence was optional.
-            (confidence (default-to u0 (get confidence feed)))
-            (publisher-count (unwrap! (get publisher-count feed) ERR-ORACLE-PYTH))
-            ;; Prefer the per-feed timestamp; fall back to the envelope timestamp
-            ;; (decoder-v1 leaves feed-update-timestamp as none).
-            (timestamp (default-to (get envelope-timestamp state) (get feed-update-timestamp feed))))
-        (asserts! (>= publisher-count u3) ERR-ORACLE-PYTH)
-        (asserts! (<= timestamp (get envelope-timestamp state)) ERR-ORACLE-PYTH)
-        (ok (merge state {
-          feeds: (unwrap! (as-max-len? (append (get feeds state) {
-            feed-id: feed-id,
-            price: price,
-            exponent: exponent,
-            confidence: confidence,
-            timestamp: timestamp
-          }) u8) ERR-ORACLE-PYTH)
-        }))))))
+    (if (or (is-eq feed-id u1) (is-eq feed-id u7) (is-eq feed-id u45))
+        (let ((price (unwrap! (get price feed) ERR-ORACLE-PYTH))
+              (exponent (unwrap! (get exponent feed) ERR-ORACLE-PYTH))
+              (confidence (unwrap! (get confidence feed) ERR-ORACLE-PYTH))
+              (publisher-count (unwrap! (get publisher-count feed) ERR-ORACLE-PYTH))
+              (timestamp (unwrap! (get feed-update-timestamp feed) ERR-ORACLE-PYTH)))
+          (asserts! (>= publisher-count u3) ERR-ORACLE-PYTH)
+          (asserts! (<= timestamp (get envelope-timestamp state)) ERR-ORACLE-PYTH)
+          (asserts! (is-none (find-compact-feed feed-id (get feeds state))) ERR-ORACLE-PYTH)
+          (ok (merge state {
+            feeds: (unwrap! (as-max-len? (append (get feeds state) {
+              feed-id: feed-id,
+              price: price,
+              exponent: exponent,
+              confidence: confidence,
+              timestamp: timestamp
+            }) u3) ERR-ORACLE-PYTH)
+          })))
+        (ok state))))
 
-;; Verify one signed Lazer update inline (no storage write) and fold its feeds into
-;; the compact context. Enforces channel u3 (Lazer fixed-rate 200ms feed channel).
 (define-private (verify-lazer-update (update (buff 8192)))
   (let ((decoded (unwrap!
           (contract-call? .pyth-lazer-oracle verify-price-feeds
             update .pyth-lazer-decoder-v1 none)
           ERR-PRICE-FEED-UPDATE-FAILED))
         (channel (get channel decoded)))
-    (asserts! (is-eq channel u3) ERR-ORACLE-PYTH)
+    (asserts! (or (is-eq channel u3) (is-eq channel u4)) ERR-ORACLE-PYTH)
     (let ((collected (try! (fold collect-lazer-feed
       (get price-feeds decoded)
       (ok { envelope-timestamp: (get timestamp decoded), feeds: (list) })))))
       (ok { feeds: (get feeds collected) }))))
 
-;; Process the optional price-feeds list. Exactly one signed update is accepted
-;; (the market resolves every asset from that single update's feeds); none -> empty
-;; context (relies on whatever the caller can resolve without a fresh push).
 (define-private (load-price-feeds (updates (optional (list 3 (buff 8192)))))
   (match updates
     entries
@@ -239,9 +156,7 @@
           (unwrap! (element-at? entries u0) ERR-PRICE-FEED-UPDATE-FAILED)))
     (ok { feeds: (list) })))
 
-;; -- Math utilities ---------------------------------------------------------
-
-(define-private (min (a uint) (b uint)) 
+(define-private (min (a uint) (b uint))
   (if (< a b) a b))
 
 (define-private (mul-div-down (x uint) (y uint) (z uint))
@@ -262,91 +177,82 @@
 (define-private (div-bps-down (x uint) (y uint))
   (/ (* x BPS) y))
 
-;; -- ZToken helpers ---------------------------------------------------------
-
 (define-private (is-ztoken (aid uint))
   (is-some (index-of? ztokens aid)))
-
-;; -- Auth helpers -----------------------------------------------------------
 
 (define-private (check-dao-auth)
   (ok (asserts! (is-eq tx-sender .dao-executor) ERR-AUTH)))
 
-;; -- Vault routing ----------------------------------------------------------
-
 (define-private (vault-accrue (aid uint))
-  (if (is-eq aid STX) (contract-call? .vault-stx accrue)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc accrue)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx accrue)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc accrue)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh accrue)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc accrue)
-  (if (is-eq aid stBTC) (contract-call? .vault-stbtc accrue)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx accrue)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc accrue)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx accrue)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc accrue)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh accrue)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc accrue)
+  (if (is-eq aid stBTC) (contract-call? .v0-vault-stbtc accrue)
   ERR-UNKNOWN-VAULT))))))))
 
 (define-private (vault-system-borrow (aid uint) (amount uint) (receiver principal))
-  (if (is-eq aid STX) (contract-call? .vault-stx system-borrow amount receiver)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc system-borrow amount receiver)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx system-borrow amount receiver)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc system-borrow amount receiver)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh system-borrow amount receiver)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc system-borrow amount receiver)
-  (if (is-eq aid stBTC) (contract-call? .vault-stbtc system-borrow amount receiver)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx system-borrow amount receiver)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc system-borrow amount receiver)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx system-borrow amount receiver)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc system-borrow amount receiver)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh system-borrow amount receiver)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc system-borrow amount receiver)
+  (if (is-eq aid stBTC) (contract-call? .v0-vault-stbtc system-borrow amount receiver)
   ERR-UNKNOWN-VAULT))))))))
 
 (define-private (vault-system-repay (aid uint) (amount uint) (ft <ft-trait>) (ft-address principal))
-  (if (is-eq aid STX) (contract-call? .vault-stx system-repay amount)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc system-repay amount)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx system-repay amount)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc system-repay amount)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh system-repay amount)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc system-repay amount)
-  (if (is-eq aid stBTC) (contract-call? .vault-stbtc system-repay amount)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx system-repay amount)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc system-repay amount)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx system-repay amount)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc system-repay amount)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh system-repay amount)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc system-repay amount)
+  (if (is-eq aid stBTC) (contract-call? .v0-vault-stbtc system-repay amount)
   ERR-UNKNOWN-VAULT))))))))
 
 (define-private (vault-socialize-debt (aid uint) (amount uint))
-  (if (is-eq aid STX) (contract-call? .vault-stx socialize-debt amount)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc socialize-debt amount)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx socialize-debt amount)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc socialize-debt amount)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh socialize-debt amount)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc socialize-debt amount)
-  (if (is-eq aid stBTC) (contract-call? .vault-stbtc socialize-debt amount)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx socialize-debt amount)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc socialize-debt amount)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx socialize-debt amount)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc socialize-debt amount)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh socialize-debt amount)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc socialize-debt amount)
+  (if (is-eq aid stBTC) (contract-call? .v0-vault-stbtc socialize-debt amount)
   ERR-UNKNOWN-VAULT))))))))
 
 (define-private (vault-deposit (aid uint) (amount uint) (min-out uint) (recipient principal))
-  (if (is-eq aid STX) (contract-call? .vault-stx deposit amount min-out recipient)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc deposit amount min-out recipient)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx deposit amount min-out recipient)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc deposit amount min-out recipient)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh deposit amount min-out recipient)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc deposit amount min-out recipient)
-  (if (is-eq aid stBTC) (contract-call? .vault-stbtc deposit amount min-out recipient)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx deposit amount min-out recipient)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc deposit amount min-out recipient)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx deposit amount min-out recipient)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc deposit amount min-out recipient)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh deposit amount min-out recipient)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc deposit amount min-out recipient)
+  (if (is-eq aid stBTC) (contract-call? .v0-vault-stbtc deposit amount min-out recipient)
   ERR-UNKNOWN-VAULT))))))))
 
 (define-private (vault-redeem (aid uint) (amount uint) (min-out uint) (recipient principal))
-  (if (is-eq aid STX) (contract-call? .vault-stx redeem amount min-out recipient)
-  (if (is-eq aid sBTC) (contract-call? .vault-sbtc redeem amount min-out recipient)
-  (if (is-eq aid stSTX) (contract-call? .vault-ststx redeem amount min-out recipient)
-  (if (is-eq aid USDC) (contract-call? .vault-usdc redeem amount min-out recipient)
-  (if (is-eq aid USDH) (contract-call? .vault-usdh redeem amount min-out recipient)
-  (if (is-eq aid stSTXbtc) (contract-call? .vault-ststxbtc redeem amount min-out recipient)
-  (if (is-eq aid stBTC) (contract-call? .vault-stbtc redeem amount min-out recipient)
+  (if (is-eq aid STX) (contract-call? .v0-vault-stx redeem amount min-out recipient)
+  (if (is-eq aid sBTC) (contract-call? .v0-vault-sbtc redeem amount min-out recipient)
+  (if (is-eq aid stSTX) (contract-call? .v0-vault-ststx redeem amount min-out recipient)
+  (if (is-eq aid USDC) (contract-call? .v0-vault-usdc redeem amount min-out recipient)
+  (if (is-eq aid USDH) (contract-call? .v0-vault-usdh redeem amount min-out recipient)
+  (if (is-eq aid stSTXbtc) (contract-call? .v0-vault-ststxbtc redeem amount min-out recipient)
+  (if (is-eq aid stBTC) (contract-call? .v0-vault-stbtc redeem amount min-out recipient)
   ERR-UNKNOWN-VAULT))))))))
-
-;; -- Accrual & caching ------------------------------------------------------
 
 (define-private (accrue-and-cache (aid uint))
   (let ((cache-key { timestamp: stacks-block-time, aid: aid })
         (cached? (map-get? index-cache cache-key)))
 
     (match cached?
-      ;; cache HIT: return cached value (1 read only)
+
       cached-indexes (ok cached-indexes)
 
-      ;; cache MISS: accrue and cache (vault-accrue now returns indexes)
       (let ((indexes (try! (vault-accrue aid))))
-        ;; store in cache
+
         (map-set index-cache cache-key indexes)
         (ok indexes)))))
 
@@ -357,7 +263,7 @@
   (debt-entry { aid: uint, scaled: uint })
   (acc { success: bool }))
   (begin
-    ;; this will use cache if available, accrue if not
+
     (unwrap-panic (accrue-and-cache (get aid debt-entry)))
     acc))
 
@@ -368,10 +274,9 @@
   (coll-entry { aid: uint, amount: uint })
   (acc { success: bool }))
   (let ((aid (get aid coll-entry)))
-    ;; Only accrue if asset is a registered ztoken
+
     (if (is-ztoken aid)
-        ;; ZToken: map to underlying vault routing ID and accrue
-        ;; zSTX(1)->STX(0), zsBTC(3)->sBTC(2), zstSTX(5)->stSTX(4), zUSDC(7)->USDC(6), zUSDH(9)->USDH(8), zstSTXbtc(11)->stSTXbtc(10), zstBTC(13)->stBTC(12)
+
         (let ((vault-id (if (is-eq aid zSTX) STX
                         (if (is-eq aid zsBTC) sBTC
                         (if (is-eq aid zstSTX) stSTX
@@ -379,33 +284,30 @@
                         (if (is-eq aid zUSDH) USDH
                         (if (is-eq aid zstSTXbtc) stSTXbtc
                         (if (is-eq aid zstBTC) stBTC
-                        ;; Should never reach here if is-ztoken is correct
-                        ;; but if reached will cause ERR-UNKNOWN-VAULT with any value over 64
+
                         u100)))))))))
           (begin
             (unwrap-panic (accrue-and-cache vault-id))
             acc))
-        ;; Non-ztoken: skip accrual (no liquidity index needed)
+
         acc)))
 
-;; -- Oracle: external price feeds -------------------------------------------
-
 (define-private (normalize-pyth (p int) (expo int))
-  (let ((adj (+ expo 8))
-        (inkind? (asserts! (not (is-eq adj 0)) (to-uint p)))
-        (res (if (> adj 0)
-                (* p (pow 10 adj))
-                (/ p (pow 10 (- adj))))))
-    (to-uint res)))
+  (let ((adj (+ expo 8)))
+    (asserts! (> p 0) ERR-ORACLE-PYTH)
+    (asserts! (and (>= adj MIN-PYTH-EXPONENT-ADJUSTMENT)
+                   (<= adj MAX-PYTH-EXPONENT-ADJUSTMENT)) ERR-ORACLE-PYTH)
+    (let ((res (if (> adj 0)
+                   (* p (pow 10 adj))
+                   (if (< adj 0) (/ p (pow 10 (- adj))) p))))
+      (ok (to-uint res)))))
 
 (define-private (check-confidence (price int) (confidence uint))
   (ok (asserts! (<= confidence (/ (* (to-uint price) (var-get max-confidence-ratio)) BPS)) ERR-PRICE-CONFIDENCE-LOW)))
 
-;; Look up a feed in the in-tx context by feed-id. Returns none if the feed was not
-;; carried in this update (caller decides whether that is fatal).
 (define-private (find-compact-feed
   (feed-id uint)
-  (feeds (list 8 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })))
+  (feeds (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })))
   (get result (fold find-compact-feed-iter feeds { target: feed-id, result: none })))
 
 (define-private (find-compact-feed-iter
@@ -417,23 +319,22 @@
           (merge acc { result: (some feed) })
           acc)))
 
-;; Resolve a Pyth (Lazer) price from the in-tx context. The Lazer feed-id is carried
-;; in the low 16 bytes of the asset's 32-byte `ident` (matches the cutover proposal's
-;; ident encoding and the test helper's `lazerFeedIdToIdent`).
 (define-private (resolve-pyth
   (ident (buff 32))
   (context {
-    feeds: (list 8 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+    feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
   }))
-  (let ((feed-id (buff-to-uint-be (unwrap! (as-max-len? (unwrap! (slice? ident u16 u32) ERR-ORACLE-PYTH) u16) ERR-ORACLE-PYTH)))
-        (response (unwrap! (find-compact-feed feed-id (get feeds context)) ERR-ORACLE-PYTH))
+  (let ((lazer-id (unwrap!
+          (if (is-eq ident 0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43) (some u1)
+          (if (is-eq ident 0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a) (some u7)
+          (if (is-eq ident 0xec7a775f46379b5e943c3526b1c8d54cd49749176b0b98e02dde68d1bd335c17) (some u45)
+          none))) ERR-ORACLE-PYTH))
+        (response (unwrap! (find-compact-feed lazer-id (get feeds context)) ERR-ORACLE-PYTH))
         (price (get price response))
         (expo (get exponent response))
         (conf (get confidence response))
-        (final-price (normalize-pyth price expo))
+        (final-price (try! (normalize-pyth price expo)))
         (timestamp (get timestamp response)))
-    ;; Confidence is mandatory in the inline-verify path: collect-lazer-feed already
-    ;; enforced its presence, and a wide confidence must reject the price.
     (try! (check-confidence price conf))
     (ok { value: final-price, timestamp: timestamp })))
 
@@ -443,52 +344,29 @@
 
 (define-private (resolve-dia (ident (buff 32)))
   (let ((key (unwrap-panic (from-consensus-buff? (string-ascii 32) ident)))
-        (res (try! (call-dia key))))
-    ;; DIA returns timestamp in milliseconds; normalize to microseconds so the
-    ;; micros-based oracle-timestamp-fresh comparison is consistent across oracles.
-    (ok { value: (get value res), timestamp: (* (get timestamp res) u1000) })))
-
-;; Mock oracle for testing bad debt socialization
-(define-private (call-mock (key (string-ascii 32)))
-  (let ((res (unwrap! (contract-call? .mock-oracle get-value key) ERR-ORACLE-MOCK)))
-    (ok res)))
-
-(define-private (resolve-mock (ident (buff 32)))
-  (let ((key (unwrap-panic (from-consensus-buff? (string-ascii 32) ident)))
-        (res (try! (call-mock key))))
-    ;; Mock oracle returns timestamp in seconds; normalize to micros so the
-    ;; micros-based oracle-timestamp-fresh comparison is consistent.
-    (ok { value: (get value res), timestamp: (* (get timestamp res) MICROS-PER-SECOND) })))
+        (res (try! (call-dia key)))
+        (timestamp (/ (get timestamp res) u1000)))
+    (asserts! (<= timestamp (+ stacks-block-time MAX-ORACLE-FUTURE-SKEW)) ERR-ORACLE-INVARIANT)
+    (ok { value: (get value res), timestamp: (* timestamp MICROS-PER-SECOND) })))
 
 (define-private (resolve-price-feed
   (type (buff 1))
   (ident (buff 32))
   (pyth-context {
-    feeds: (list 8 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+    feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
   }))
   (if (is-eq type TYPE-PYTH) (resolve-pyth ident pyth-context)
   (if (is-eq type TYPE-DIA) (resolve-dia ident)
-  (if (is-eq type TYPE-MOCK) (resolve-mock ident)
-  ERR-ORACLE-TYPE))))
-
-;; -- Oracle: callcode transformations ---------------------------------------
+  ERR-ORACLE-TYPE)))
 
 (define-private (resolve-ststx (p uint))
   (let ((ratio (unwrap! (call-ststx-ratio) ERR-ORACLE-CALLCODE)))
     (ok (mul-div-down p ratio STSTX-RATIO-DECIMALS))))
 
-;; stBTC is priced as sBTC_price x ratio / 1e8. This assumes stBTC/sBTC
-;; divergence stays bounded by StackingDAO's withdraw fee, which holds while
-;; StackingDAO's idle reserve can service withdraw-idle. The DAO-set
-;; stbtc-haircut-bps (below) and the ratio sanity band price that impairment
-;; on-chain; a ratio outside the sanity band is rejected rather than priced.
 (define-private (resolve-stbtc (p uint))
   (let ((ratio (unwrap! (call-stbtc-ratio) ERR-ORACLE-CALLCODE)))
-    ;; Reject corrupted/hung ratio reads. oracle-price-legal only checks
-    ;; > u0 downstream, which a ratio of 1 wei would pass.
     (asserts! (and (>= ratio STBTC-RATIO-MIN) (<= ratio STBTC-RATIO-MAX))
               ERR-ORACLE-STBTC-RATIO)
-    ;; DAO-set haircut (bps) on the ratio.
     (ok (mul-div-down p
           (/ (* ratio (- BPS (var-get stbtc-haircut-bps))) BPS)
           STBTC-RATIO-DECIMALS))))
@@ -511,16 +389,13 @@
     (if (is-eq cc CALLCODE-STBTC) (resolve-stbtc p)
     ERR-ORACLE-CALLCODE))))))))))
 
-;; -- Oracle: price resolution -----------------------------------------------
-
 (define-private (oracle-price-legal (p uint))
   (> p u0))
 
-;; Timestamp freshness in MICROSECONDS. Lazer inline feeds carry micros timestamps;
-;; DIA/mock resolvers scale their seconds/millis to micros before reaching here.
-;; `prev` is the last-seen micros timestamp for this oracle key. The
-;; not-too-far-ahead check caps how far a feed may run ahead of the chain clock.
-(define-private (oracle-timestamp-fresh (ts uint) (prev uint) (max-staleness uint))
+(define-private (oracle-timestamp-fresh
+  (ts uint)
+  (prev uint)
+  (max-staleness uint))
   (let ((now (* stacks-block-time MICROS-PER-SECOND))
         (not-too-far-ahead (<= ts (+ now (* MAX-ORACLE-FUTURE-SKEW MICROS-PER-SECOND))))
         (delta (if (> ts now) u0 (- now ts))))
@@ -532,7 +407,7 @@
 (define-private (price-resolve
   (data { type: (buff 1), ident: (buff 32), callcode: (optional (buff 1)), max-staleness: uint })
   (pyth-context {
-    feeds: (list 8 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+    feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
   }))
   (let ((type (get type data))
         (ident (get ident data))
@@ -541,15 +416,14 @@
         (price (get value resolution))
         (callcode (get callcode data))
         (final-price (try! (resolve-callcode price callcode)))
-        (last-update-time (oracle-last-update key))
         (timestamp (get timestamp resolution))
+        (last-update-time (oracle-last-update-micros key))
         (max-staleness (get max-staleness data)))
 
-    ;; validate price and timestamp using max-staleness from oracle data
-    (asserts! (and (oracle-price-legal final-price) (oracle-timestamp-fresh timestamp last-update-time max-staleness))
+    (asserts! (and (oracle-price-legal final-price)
+                   (oracle-timestamp-fresh timestamp last-update-time max-staleness))
               ERR-ORACLE-INVARIANT)
 
-    ;; update timestamp if newer
     (if (> timestamp last-update-time)
         (map-set last-update key timestamp)
         false)
@@ -560,7 +434,7 @@
   (data (list 64 { type: (buff 1), ident: (buff 32), callcode: (optional (buff 1)), max-staleness: uint }))
   (aids (list 64 uint))
   (pyth-context {
-    feeds: (list 8 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+    feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
   }))
   (let ((init { output: (list), valid: true, aids: aids, idx: u0, pyth-context: pyth-context })
         (response (fold iter-price-multi data init)))
@@ -572,23 +446,21 @@
   (acc {
     output: (list 64 uint), valid: bool, aids: (list 64 uint), idx: uint,
     pyth-context: {
-      feeds: (list 8 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+      feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
     }
   }))
   (let ((valid (get valid acc))
         (skip? (asserts! valid acc))
         (asset-ids (get aids acc))
         (idx (get idx acc))
-        ;; resolve price - will use cache for ztokens
+
         (price (unwrap! (price-resolve oracle-data (get pyth-context acc)) (merge acc { valid: false })))
         (next (unwrap-panic (as-max-len? (append (get output acc) price) u64))))
-    { output: next,
+    (merge acc {
+      output: next,
       valid: true,
       aids: asset-ids,
-      idx: (+ idx u1),
-      pyth-context: (get pyth-context acc) }))
-
-;; -- Pack utilities ---------------------------------------------------------
+      idx: (+ idx u1) })))
 
 (define-private (mask-shift-combine (mask uint))
   (let ((slot1 (bit-and mask DEBT-MASK))
@@ -620,51 +492,47 @@
 (define-private (mask-to-list-collateral (mask uint))
   (mask-to-list-internal mask u0 ITER-UINT-64))
 
-;; -- Registry wrappers ------------------------------------------------------
-
 (define-private (get-enabled-bitmap)
-  (contract-call? .assets get-bitmap))
+  (contract-call? .v0-assets get-bitmap))
 
 (define-private (get-status-multi (ids (list 64 uint)))
-  (contract-call? .assets status-multi ids))
+  (contract-call? .v0-assets status-multi ids))
 
 (define-private (get-egroup (mask uint))
-  (contract-call? .egroup resolve mask))
+  (contract-call? .v0-egroup resolve mask))
 
 (define-private (get-account-scaled-debt (account principal) (asset-id uint))
-  (contract-call? .market-vault get-account-scaled-debt account asset-id))
+  (contract-call? .v0-market-vault get-account-scaled-debt account asset-id))
 
-(define-private (get-position (account principal)) ;; enabled only
+(define-private (get-position (account principal))
   (let ((mask (get-enabled-bitmap)))
-    (contract-call? .market-vault get-position account mask)))
+    (contract-call? .v0-market-vault get-position account mask)))
 
-(define-private (get-full-position (account principal)) ;; all collaterals
-  (contract-call? .market-vault get-position account MAX-U64))
+(define-private (get-full-position (account principal))
+  (contract-call? .v0-market-vault get-position account MAX-U64))
 
-(define-private (get-liquidation-position (account principal)) ;; liquidation specific (enabled collateral + all debt)
+(define-private (get-liquidation-position (account principal))
   (let ((mask (get-enabled-bitmap)))
-    (contract-call? .market-vault get-position account mask)))
-
-;; -- Context & asset helpers ------------------------------------------------
+    (contract-call? .v0-market-vault get-position account mask)))
 
 (define-private (get-asset (asset principal))
-  (contract-call? .assets get-asset-status asset))
+  (contract-call? .v0-assets get-asset-status asset))
 
 (define-private (get-assets
   (mask-user uint)
   (pyth-context {
-    feeds: (list 8 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+    feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
   }))
   (let ((mask-enabled (get-enabled-bitmap))
         (safe-mask (user-safe-mask mask-user mask-enabled))
         (iter (mask-to-list-collateral safe-mask))
         (assets-list (get-status-multi iter))
         (oracles-list (map get-oracle assets-list))
-        ;; Extract asset-ids for price resolution
+
         (asset-ids (map get-asset-id assets-list))
-        ;; Use internal price resolution
-        (prices-list (unwrap-panic (price-multi-resolve oracles-list asset-ids pyth-context))))
-    (map merge-price assets-list prices-list)))
+
+        (prices-list (try! (price-multi-resolve oracles-list asset-ids pyth-context))))
+    (ok (map merge-price assets-list prices-list))))
 
 (define-private (get-asset-id (asset-entry
   { id: uint, addr: principal, decimals: uint,
@@ -684,8 +552,6 @@
     collateral: bool, debt: bool }) (price uint))
   (merge asset-entry { price: price }))
 
-;; -- Notional evaluation ----------------------------------------------------
-
 (define-private (get-notional-evaluation (context
       {
         position: {
@@ -697,7 +563,7 @@
           collateral: (list 64 { aid: uint, amount: uint }),
           debt: (list 64 { aid: uint, scaled: uint }),
         },
-        assets: (list 64 { 
+        assets: (list 64 {
           id: uint, addr: principal, decimals: uint,
           oracle: { type: (buff 1), ident: (buff 32), callcode: (optional (buff 1)), max-staleness: uint },
           collateral: bool, debt: bool, price: uint })
@@ -736,7 +602,7 @@
                            u0))
 
         (debt-scaled   (find-debt-scaled debt-list asset-id))
-        (debt-notional (if (> debt-scaled u0) ;; use cache instead here
+        (debt-notional (if (> debt-scaled u0)
                            (let ((cached (unwrap-panic (accrue-and-cache asset-id)))
                                  (ib (get index cached))
                                  (actual (mul-div-up debt-scaled ib INDEX-PRECISION)))
@@ -754,11 +620,9 @@
       (div-up value decimal-factor)
       (div-down value decimal-factor))))
 
-;; -- Asset/collateral/debt finders ------------------------------------------
-
 (define-private (find-asset
                 (target uint)
-                (assets (list 64 { 
+                (assets (list 64 {
                       id: uint, addr: principal, decimals: uint,
                       oracle: { type: (buff 1), ident: (buff 32), callcode: (optional (buff 1)), max-staleness: uint },
                       collateral: bool, debt: bool, price: uint })))
@@ -769,7 +633,7 @@
       oracle: { type: (buff 1), ident: (buff 32), callcode: (optional (buff 1)), max-staleness: uint },
       collateral: bool, debt: bool, price: uint })
 
-    (acc { target: uint, result: (optional 
+    (acc { target: uint, result: (optional
       { id: uint, addr: principal, decimals: uint,
         oracle: { type: (buff 1), ident: (buff 32), callcode: (optional (buff 1)), max-staleness: uint },
         collateral: bool, debt: bool, price: uint }) }))
@@ -818,30 +682,24 @@
       { result: (unwrap-panic (as-max-len? (append (get result acc) item) u64)),
         target-asset-id: (get target-asset-id acc) }))
 
-;; -- Debt conversion --------------------------------------------------------
-
 (define-private (convert-to-scaled-debt (asset-id uint) (amount uint) (round-up bool))
   (let ((borrow-index (get index (unwrap-panic (get-cached-indexes asset-id)))))
   (if round-up
     (mul-div-up amount INDEX-PRECISION borrow-index)
     (mul-div-down amount INDEX-PRECISION borrow-index))))
 
-;; -- Health check helpers ---------------------------------------------------
-
 (define-private (is-healthy (collateral-usd uint) (debt-usd uint) (ltv uint))
   (if (is-eq debt-usd u0)
       true
       (<= (* debt-usd BPS) (* collateral-usd ltv))))
 
-;; Check health using a custom mask's egroup rules
-;; Returns true if position is healthy under the specified mask's LTV requirements
 (define-private (is-healthy-with-mask (collateral-usd uint) (debt-usd uint) (mask uint))
   (let ((group (try! (get-egroup mask)))
         (ltvb (buff-to-uint-be (get LTV-BORROW group))))
     (ok (is-healthy collateral-usd debt-usd ltvb))))
 
 (define-private (find-and-resolve-asset-value
-                  (assets (list 64 
+                  (assets (list 64
                     { id: uint, addr: principal, decimals: uint,
                     oracle: { type: (buff 1), ident: (buff 32), callcode: (optional (buff 1)), max-staleness: uint },
                     collateral: bool, debt: bool, price: uint }))
@@ -850,21 +708,18 @@
     asset (normalize (* amount (get price asset)) (get decimals asset) round-up)
     u0))
 
-;; find-and-resolve-asset-value has "price" already pre-calculated, get-asset-value does not
 (define-private (get-asset-value
                   (asset { id: uint, addr: principal, decimals: uint,
                           oracle: { type: (buff 1), ident: (buff 32), callcode: (optional (buff 1)), max-staleness: uint },
                           collateral: bool, debt: bool})
                   (amount uint) (round-up bool)
                   (pyth-context {
-                    feeds: (list 8 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+                    feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
                   }))
     (let ((oracle-data (get oracle asset))
           (price (try! (price-resolve oracle-data pyth-context)))
           (decimals (get decimals asset)))
       (ok (normalize (* amount price) decimals round-up))))
-
-;; -- Liquidation: pause check -----------------------------------------------
 
 (define-private (is-liquidation-paused (asset-id uint))
   (let ((manual-pause (var-get pause-liquidation))
@@ -874,46 +729,28 @@
         (asset-grace-active (< stacks-block-time asset-grace-end)))
     (or manual-pause global-grace-active asset-grace-active)))
 
-;; -- Liquidation: math helpers ----------------------------------------------
-
-;; Calculate liquidation factor: ((ltv-curr - ltv-liq-partial) * BPS) / (ltv-liq-full - ltv-liq-partial)
-;; Capped at BPS (100%) to prevent over-liquidation
 (define-private (calc-liq-factor (ltv-curr uint) (ltv-liq-partial uint) (ltv-liq-full uint))
   (min BPS (div-bps-down (- ltv-curr ltv-liq-partial) (- ltv-liq-full ltv-liq-partial))))
 
-;; Apply curve exponent for graduated liquidation
-;; liq-factor = liq-factor^alpha
 (define-private (calc-liq-factor-exp (factor uint) (exp uint))
-  (if (is-eq exp BPS) 
+  (if (is-eq exp BPS)
     factor
-    (if (> exp BPS) 
+    (if (> exp BPS)
         (/ (pow factor (/ exp BPS)) (pow BPS (- (/ exp BPS) u1)))
-        (sqrti (* factor BPS))))) ;; assume factor^0.5
+        (sqrti (* factor BPS)))))
 
-;; Scale penalty between min and max using liquidation factor
-;; liq-penalty = liq-penalty-min + (liq-factor * (liq-penalty-max - liq-penalty-min) / BPS)
-;; Capped at bound-max to handle cases where liq-factor > BPS
 (define-private (calc-liq-factor-bound (liq-factor uint) (bound-min uint) (bound-max uint))
   (min bound-max (+ bound-min (mul-bps-down liq-factor (- bound-max bound-min)))))
 
-;; Calculate debt to repay based on liquidation factor
-;; debt-repay = liq-factor * debt / BPS
-(define-private (calc-liq-debt-repay (debt uint) (liq-factor uint)) 
+(define-private (calc-liq-debt-repay (debt uint) (liq-factor uint))
   (mul-bps-down liq-factor debt))
 
-;; Calculate collateral to seize (includes liquidator bonus)
-;; collateral-repay = debt-repay * (BPS + liq-penalty) / BPS
-(define-private (calc-liq-collateral-repay (debt-repay uint) (liq-penalty uint)) 
+(define-private (calc-liq-collateral-repay (debt-repay uint) (liq-penalty uint))
   (mul-bps-down debt-repay (+ BPS liq-penalty)))
 
-;; Calculate actual debt repayment when collateral is capped
-;; debt-repay-real = (collateral-amount-usd * BPS) / (BPS + liq-penalty)
-(define-private (calc-liq-debt-repay-real (collateral-amount-usd uint) (liq-penalty uint)) 
+(define-private (calc-liq-debt-repay-real (collateral-amount-usd uint) (liq-penalty uint))
   (div-bps-down collateral-amount-usd (+ BPS liq-penalty)))
 
-;; Graduated liquidation parameter calculation
-;; Combines the 4-step liquidation factor calculation into a single helper
-;; Returns: { liq-pct-scaled: uint, liq-penalty: uint, max-debt-usd: uint }
 (define-private (calc-liquidation-params
   (current-ltv uint)
   (ltv-liq-partial uint)
@@ -922,7 +759,7 @@
   (liq-penalty-max uint)
   (curve-exponent uint)
   (total-debt-usd uint))
-  
+
   (let ((liq-pct-linear (calc-liq-factor current-ltv ltv-liq-partial ltv-liq-full))
         (liq-pct-scaled (calc-liq-factor-exp liq-pct-linear curve-exponent))
         (liq-penalty (calc-liq-factor-bound liq-pct-scaled liq-penalty-min liq-penalty-max))
@@ -933,9 +770,6 @@
       max-debt-usd: max-debt-usd
     }))
 
-;; Process debt asset for liquidation
-;; Finds asset info, converts to USD, caps at max liquidatable, converts back to token amount
-;; Returns: { debt-actual-usd: uint, debt-actual: uint, debt-price: uint, debt-decimals: uint }
 (define-private (process-debt-asset
   (debt-amount uint)
   (debt-aid uint)
@@ -949,9 +783,9 @@
         (debt-price (get price debt-asset-info))
         (debt-decimals (get decimals debt-asset-info))
         (debt-usd (normalize (* debt-amount debt-price) debt-decimals false))
-        ;; cap debt at maximum liquidatable amount
+
         (debt-actual-usd (if (> debt-usd max-debt-usd) max-debt-usd debt-usd))
-        ;; convert capped USD amount back to token amount
+
         (debt-actual (mul-div-down debt-actual-usd (pow u10 debt-decimals) debt-price)))
     {
       debt-actual-usd: debt-actual-usd,
@@ -960,10 +794,6 @@
       debt-decimals: debt-decimals
     }))
 
-;; Process collateral asset for liquidation
-;; Handles both enabled and disabled collateral assets
-;; Calculates expected collateral, caps at user balance
-;; Returns: { coll-actual: uint, coll-expected: uint, coll-price: uint, coll-decimals: uint }
 (define-private (process-collateral-asset
   (coll-aid uint)
   (debt-actual-usd uint)
@@ -980,38 +810,33 @@
     collateral: bool, debt: bool
   })
   (pyth-context {
-    feeds: (list 8 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+    feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
   }))
 
-  (let (;; Calculate expected collateral in USD (with penalty bonus for liquidator)
+  (let (
         (coll-usd-expected (calc-liq-collateral-repay debt-actual-usd liq-penalty))
 
-        ;; Handle disabled collaterals by resolving price if not in enabled assets
         (coll-asset-info (match (find-asset coll-aid assets)
-                           ;; Found in enabled list: use it (already has price)
+
                            found found
-                           ;; Not found (disabled): resolve price on demand
+
                            (let ((oracle-data (get oracle coll-asset))
-                                 (price (unwrap-panic (price-resolve oracle-data pyth-context))))
+                                 (price (try! (price-resolve oracle-data pyth-context))))
                              (merge coll-asset { price: price }))))
         (coll-price (get price coll-asset-info))
         (coll-decimals (get decimals coll-asset-info))
         (coll-expected (mul-div-down coll-usd-expected (pow u10 coll-decimals) coll-price))
 
-        ;; cap at available collateral (user may not have enough)
         (coll-actual (if (> coll-expected user-coll-balance)
                          user-coll-balance
                          coll-expected)))
-    {
+    (ok {
       coll-actual: coll-actual,
       coll-expected: coll-expected,
       coll-price: coll-price,
       coll-decimals: coll-decimals
-      }))
+    })))
 
-;; Calculate final liquidation amounts with proportional adjustments
-;; If collateral was capped, recalculates debt proportionally
-;; Returns: { debt-final-usd: uint, debt-final: uint }
 (define-private (calc-final-liquidation-amounts
   (debt-actual-usd uint)
   (coll-actual uint)
@@ -1021,9 +846,9 @@
   (debt-price uint)
   (debt-decimals uint)
   (liq-penalty uint))
-  
+
   (let ((coll-actual-usd (normalize (* coll-actual coll-price) coll-decimals false))
-        ;; If collateral was capped, recalculate debt proportionally
+
         (debt-final-usd (if (< coll-actual coll-expected)
                            (calc-liq-debt-repay-real coll-actual-usd liq-penalty)
                            debt-actual-usd))
@@ -1033,21 +858,18 @@
       debt-final: debt-final
     }))
 
-;; Scale debt for storage and calculate final execution amounts
-;; Converts to scaled units, caps at current debt, calculates final collateral
-;; Returns: { scaled-to-remove: uint, debt-to-repay: uint, coll-final: uint }
 (define-private (scale-debt-for-liquidation
   (debt-final uint)
   (coll-actual uint)
   (curr-scaled uint)
   (asset-id uint))
-  (let (;; convert debt amount to scaled units for storage
+  (let (
         (borrow-index (get index (unwrap-panic (get-cached-indexes asset-id))))
         (scaled-debt (mul-div-down debt-final INDEX-PRECISION borrow-index))
-        ;; cap at current debt (prevent over-repayment)
+
         (scaled-to-remove (if (> scaled-debt curr-scaled) curr-scaled scaled-debt))
         (debt-to-repay (mul-div-up scaled-to-remove borrow-index INDEX-PRECISION))
-        ;; If debt was capped, scale collateral proportionally
+
         (coll-final (if (< scaled-to-remove scaled-debt)
                         (mul-div-down coll-actual scaled-to-remove scaled-debt)
                         coll-actual)))
@@ -1060,7 +882,7 @@
 (define-private (socialize-debt-asset
                 (debt-entry { aid: uint, scaled: uint })
                 (acc { borrower: principal, success: bool }))
-  ;; Early return if previous socialization failed
+
   (if (not (get success acc))
       acc
       (let ((borrower (get borrower acc))
@@ -1068,14 +890,13 @@
             (asset-id (get aid debt-entry))
             (scaled-debt (get scaled debt-entry)))
 
-            ;; Socialize in vault - pass scaled directly to avoid rounding
             (unwrap! (vault-socialize-debt asset-id scaled-debt) failed-status)
-            ;; Refresh cache with new indexes post-write-down (lindex decreased)
+
             (map-set index-cache
                      { timestamp: stacks-block-time, aid: asset-id }
                      (unwrap! (vault-accrue asset-id) failed-status))
-            ;; Remove from obligation
-            (unwrap! (contract-call? .market-vault
+
+            (unwrap! (contract-call? .v0-market-vault
                                       debt-remove-scaled
                                       borrower
                                       scaled-debt
@@ -1083,64 +904,76 @@
           acc)
         ))
 
-;; -- Liquidation: batch helper ----------------------------------------------
+(define-private (call-liquidate-with-context
+  (position { borrower: principal,
+              collateral-ft: <ft-trait>,
+              debt-ft: <ft-trait>,
+              debt-amount: uint,
+              min-collateral-expected: uint })
+  (acc (response {
+    results: (list 8 (response { debt: uint, collateral: uint } uint)),
+    pyth-context: {
+      feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+    }
+  } uint)))
+  (let ((state (try! acc))
+        (result (try! (liquidate-internal
+          (get borrower position)
+          (get collateral-ft position)
+          (get debt-ft position)
+          (get debt-amount position)
+          (get min-collateral-expected position)
+          none
+          (get pyth-context state))))
+        (next (unwrap-panic (as-max-len?
+          (append (get results state) (ok result)) u8))))
+    (ok (merge state { results: next }))))
 
-(define-private (call-liquidate (position { borrower: principal,
-                                            collateral-ft: <ft-trait>,
-                                            debt-ft: <ft-trait>,
-                                            debt-amount: uint,
-                                            min-collateral-expected: uint }))
-  (liquidate (get borrower position)
-             (get collateral-ft position)
-             (get debt-ft position)
-             (get debt-amount position)
-             (get min-collateral-expected position)
-             none   ;; collateral-receiver defaults to liquidator
-             none)) ;; price-feeds not supported in batch - update prices separately
-
-;; ============================================================================
-;; READ-ONLY FUNCTIONS
-;; ============================================================================
-
-;; -- Pausability getters ----------------------------------------------------
+(define-private (liquidate-batch
+  (positions (list 8 { borrower: principal,
+                        collateral-ft: <ft-trait>,
+                        debt-ft: <ft-trait>,
+                        debt-amount: uint,
+                        min-collateral-expected: uint }))
+  (pyth-context {
+    feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+  }))
+  (let ((state (try! (fold call-liquidate-with-context positions (ok {
+    results: (list),
+    pyth-context: pyth-context
+  })))))
+    (ok (get results state))))
 
 (define-read-only (get-pause-liquidation) (ok (var-get pause-liquidation)))
 
-(define-read-only (get-liquidation-grace-end) 
+(define-read-only (get-liquidation-grace-end)
   (ok (default-to u0 (map-get? liquidation-grace-periods GLOBAL-LIQUIDATION-GRACE-ID))))
 
-(define-read-only (get-liquidation-grace-period-asset (id uint)) 
+(define-read-only (get-liquidation-grace-period-asset (id uint))
   (ok (default-to u0 (map-get? liquidation-grace-periods id))))
-
-;; -- Oracle getters ---------------------------------------------------------
 
 (define-read-only (get-max-confidence-ratio)
   (ok (var-get max-confidence-ratio)))
 
-(define-read-only (oracle-last-update (f {type: (buff 1), ident: (buff 32)}))
+(define-read-only (oracle-last-update-micros (f {type: (buff 1), ident: (buff 32)}))
   (default-to u0 (map-get? last-update f)))
 
-;; -- Index cache getters ----------------------------------------------------
+(define-read-only (oracle-last-update (f {type: (buff 1), ident: (buff 32)}))
+  (/ (oracle-last-update-micros f) MICROS-PER-SECOND))
 
 (define-read-only (get-cached-indexes (aid uint))
   (map-get? index-cache { timestamp: stacks-block-time, aid: aid }))
-
-;; ============================================================================
-;; PUBLIC FUNCTIONS
-;; ============================================================================
-
-;; -- DAO configuration ------------------------------------------------------
 
 (define-public (set-pause-liquidation (paused bool) (grace-period uint))
   (begin
     (try! (check-dao-auth))
     (let ((was-paused (var-get pause-liquidation)))
       (var-set pause-liquidation paused)
-      ;; Only set grace period if liquidations were paused AND now unpausing
+
       (if (and was-paused (not paused))
           (map-set liquidation-grace-periods GLOBAL-LIQUIDATION-GRACE-ID (+ stacks-block-time grace-period))
           false)
-      
+
       (print {
         action: "market-set-pause-liquidation",
         caller: tx-sender,
@@ -1153,14 +986,14 @@
                          u0)
         }
       })
-      
+
       (ok true))))
 
 (define-public (set-liquidation-grace-period (id uint) (grace-period uint))
   (begin
     (try! (check-dao-auth))
     (map-set liquidation-grace-periods id (+ stacks-block-time grace-period))
-    
+
     (print {
       action: "market-set-liquidation-grace-period",
       caller: tx-sender,
@@ -1170,14 +1003,14 @@
         grace-end: (+ stacks-block-time grace-period)
       }
     })
-    
+
     (ok true)))
 
 (define-public (set-max-confidence-ratio (ratio uint))
   (begin
     (try! (check-dao-auth))
     (asserts! (<= ratio BPS) ERR-ORACLE-INVARIANT)
-    
+
     (print {
       action: "market-set-max-confidence-ratio",
       caller: tx-sender,
@@ -1186,48 +1019,25 @@
         new-value: ratio
       }
     })
-    
+
     (var-set max-confidence-ratio ratio)
     (ok true)))
 
-;; -- Oracle (public call for ststx ratio) -----------------------------------
-
-;; ststx ratio transformation
 (define-public (call-ststx-ratio)
-  ;; @mainnet: (contract-call? 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.block-info-nakamoto-ststx-ratio-v2 get-ststx-ratio-v3))
-  (ok STSTX-RATIO-DECIMALS))
+  (ok (contract-call? 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.data-stx-v2 get-stx-per-ststx)))
 
-;; stBTC ratio transformation (StackingDAO sBTC per stBTC, x1e8).
-;; Mainnet reads the FLOOR variant (get-sbtc-per-stbtc) - collateral valuation
-;; must use the conservative rounding. The ratio is computed from live reserve
-;; and supply state on every read, so it carries no timestamp and freshness is
-;; intrinsic; it is also NOT strictly monotonic (the 1% withdraw-idle fee dips
-;; it), which is why resolve-stbtc enforces a sanity band plus a DAO-set
-;; haircut rather than a monotonicity assert.
 (define-public (call-stbtc-ratio)
-  ;; @mainnet: (ok (contract-call? 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.data-stbtc-v1 get-sbtc-per-stbtc))
-  (ok (var-get mock-stbtc-ratio)))
+  (ok (contract-call? 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.data-stbtc-v1 get-sbtc-per-stbtc)))
 
-;; DAO-set haircut applied to the stBTC ratio in resolve-stbtc. Reject > 50%:
-;; beyond that the stBTC integration should be disabled, not priced.
 (define-public (set-stbtc-haircut-bps (haircut uint))
   (begin
     (try! (check-dao-auth))
     (asserts! (<= haircut u5000) ERR-ORACLE-STBTC-RATIO)
-    (print {
-      action: "market-set-stbtc-haircut-bps",
-      data: {
-        old-value: (var-get stbtc-haircut-bps),
-        new-value: haircut
-      }
-    })
     (var-set stbtc-haircut-bps haircut)
     (ok true)))
 
 (define-read-only (get-stbtc-haircut-bps)
   (var-get stbtc-haircut-bps))
-
-;; -- Collateral operations --------------------------------------------------
 
 (define-public (collateral-add (ft <ft-trait>) (amount uint) (price-feeds (optional (list 3 (buff 8192)))))
   (let ((ft-address (contract-of ft))
@@ -1237,71 +1047,61 @@
 
     (asserts! (get collateral asset) ERR-COLLATERAL-DISABLED)
     (asserts! (is-eq contract-caller tx-sender) ERR-AUTHORIZATION)
-    ;; Validate future mask has valid egroup AND check health if user has debt
-    
-    (match (contract-call? .market-vault resolve-safe account)
+
+    (match (contract-call? .v0-market-vault resolve-safe account)
       user-registry-data
-        ;; User has existing position - check if adding NEW collateral asset
+
         (let ((current-raw-mask (get mask user-registry-data))
               (future-raw-mask (bit-or current-raw-mask (pow u2 asset-id)))
               (is-new-collateral (not (is-eq future-raw-mask current-raw-mask))))
 
-          ;; If adding new collateral, validate egroup and check capacity
           (if is-new-collateral
               (let ((position (try! (get-position account)))
                     (current-mask (get mask position))
                     (future-mask (bit-or current-mask (pow u2 asset-id)))
                     (future-group (try! (get-egroup future-mask)))
-                    ;; Accrue positions (required for price resolution)
-                    (u-debt (accrue-user-debts (get debt position)))
-                    (u-coll (accrue-user-collateral (get collateral position)))
+                    (has-debt (> (len (get debt position)) u0)))
 
-                    ;; Get current egroup and notional values
-                    (current-group (try! (get-egroup current-mask)))
-                    (current-ltv (buff-to-uint-be (get LTV-BORROW current-group)))
-                    (verified-feeds (try! (load-price-feeds price-feeds)))
-                    (current-assets (get-assets current-mask verified-feeds))
-                    (current-notional (get-notional-evaluation { position: position, assets: current-assets }))
-                    (current-debt-usd (get debt current-notional)))
-
-                ;; ONLY check capacity if user has debt
-                (if (> current-debt-usd u0)
-                    ;; Calculate future mask and validate egroup exists
-                    (let ((current-coll-usd (get collateral current-notional))
+                (if has-debt
+                    (let ((u-debt (accrue-user-debts (get debt position)))
+                          (u-coll (accrue-user-collateral (get collateral position)))
+                          (current-group (try! (get-egroup current-mask)))
+                          (current-ltv (buff-to-uint-be (get LTV-BORROW current-group)))
+                          (verified-feeds (try! (load-price-feeds price-feeds)))
+                          (current-assets (try! (get-assets current-mask verified-feeds)))
+                          (current-notional (get-notional-evaluation {
+                            position: position, assets: current-assets }))
+                          (current-coll-usd (get collateral current-notional))
                           (current-capacity (* current-coll-usd current-ltv))
-                          ;; Prime cache for new zToken collateral underlying if not already cached
                           (cache-primed (if (is-ztoken asset-id)
-                                            (let ((vault-id (if (is-eq asset-id zSTX) STX
-                                                            (if (is-eq asset-id zsBTC) sBTC
-                                                            (if (is-eq asset-id zstSTX) stSTX
-                                                            (if (is-eq asset-id zUSDC) USDC
-                                                            (if (is-eq asset-id zUSDH) USDH
-                                                            (if (is-eq asset-id zstSTXbtc) stSTXbtc
-                                                            (if (is-eq asset-id zstBTC) stBTC
-                                                            u100)))))))))
-                                              (try! (accrue-and-cache vault-id)))
-                                            { index: u0, lindex: u0 }))
-                          (added-collateral-value (try! (get-asset-value asset amount false verified-feeds)))
+                            (let ((vault-id (if (is-eq asset-id zSTX) STX
+                                            (if (is-eq asset-id zsBTC) sBTC
+                                            (if (is-eq asset-id zstSTX) stSTX
+                                            (if (is-eq asset-id zUSDC) USDC
+                                            (if (is-eq asset-id zUSDH) USDH
+                                            (if (is-eq asset-id zstSTXbtc) stSTXbtc
+                                            (if (is-eq asset-id zstBTC) stBTC
+                                            u100)))))))))
+                              (try! (accrue-and-cache vault-id)))
+                            { index: u0, lindex: u0 }))
+                          (added-collateral-value
+                            (try! (get-asset-value asset amount false verified-feeds)))
                           (future-ltv (buff-to-uint-be (get LTV-BORROW future-group)))
                           (future-coll-usd (+ current-coll-usd added-collateral-value))
                           (future-capacity (* future-coll-usd future-ltv)))
-                      ;; CRITICAL CHECK: Future capacity must not decrease
                       (asserts! (>= future-capacity current-capacity) ERR-UNHEALTHY))
-                    ;; No debt - skip capacity check
                     true))
-              
-              ;; Not new collateral - skip all checks (safe to add more)
+
               true))
-      
+
       new-user-error-code
-        ;; New user - validate that the new future mask is in a valid egroup
+
         (begin
           (try! (get-egroup (pow u2 asset-id)))
           true))
 
-    ;; Execute collateral add (existing logic)
-    (let ((result (try! (contract-call? .market-vault collateral-add account amount ft asset-id))))
-      
+    (let ((result (try! (contract-call? .v0-market-vault collateral-add account amount ft asset-id))))
+
       (print {
         action: "collateral-add",
         caller: contract-caller,
@@ -1313,9 +1113,8 @@
           updated-collateral-amount: result
         }
       })
-      
-      (ok result))))
 
+      (ok result))))
 
 (define-public (collateral-remove (ft <ft-trait>) (amount uint) (receiver (optional principal)) (price-feeds (optional (list 3 (buff 8192)))))
   (let ((ft-address (contract-of ft))
@@ -1329,14 +1128,14 @@
     (asserts! (> amount u0) ERR-AMOUNT-ZERO)
 
     (if has-debt
-        ;; HAS DEBT: Full flow with price resolution and health checks
+
         (let ((is-collateral-enabled (get collateral asset))
               (verified-feeds (try! (load-price-feeds price-feeds)))
               (position-mask (get mask position))
               (pos-full (if is-collateral-enabled position (try! (get-full-position account))))
               (u-debt (accrue-user-debts (get debt pos-full)))
               (u-coll (accrue-user-collateral (get collateral pos-full)))
-              (assets (get-assets position-mask verified-feeds))
+              (assets (try! (get-assets position-mask verified-feeds)))
               (curr-coll-aid (find-collateral-amount (get collateral position) asset-id))
               (removing-all (is-eq amount curr-coll-aid))
               (current-group (try! (get-egroup position-mask)))
@@ -1366,61 +1165,49 @@
                   (is-healthy (- total-collateral-value removal-notional) debt-value current-ltvb)))
             ERR-UNHEALTHY)
 
-          (let ((result (try! (contract-call? .market-vault collateral-remove account amount ft asset-id collateral-receiver))))
+          (let ((result (try! (contract-call? .v0-market-vault collateral-remove account amount ft asset-id collateral-receiver))))
             (print { action: "collateral-remove", caller: contract-caller,
                      data: { account: account, receiver: collateral-receiver, asset-id: asset-id,
                              asset-addr: ft-address, amount: amount, updated-collateral-amount: result,
                              position-collateral-usd: collateral-value, position-debt-usd: debt-value }})
             (ok result)))
 
-        ;; NO DEBT: Skip price resolution entirely
-        (let ((result (try! (contract-call? .market-vault collateral-remove account amount ft asset-id collateral-receiver))))
+        (let ((result (try! (contract-call? .v0-market-vault collateral-remove account amount ft asset-id collateral-receiver))))
           (print { action: "collateral-remove", caller: contract-caller,
                    data: { account: account, receiver: collateral-receiver, asset-id: asset-id,
                            asset-addr: ft-address, amount: amount, updated-collateral-amount: result,
                            position-collateral-usd: u0, position-debt-usd: u0 }})
           (ok result)))))
 
-;; -- Supply and collateral-add for topping up ztoken collateral
-;; Deposits underlying token (STX, sBTC, USDC, etc.) to a vault, receives zTokens,
-;; and adds those zTokens as collateral - all in one transaction.
-
 (define-public (supply-collateral-add (ft <ft-trait>) (amount uint) (min-shares uint) (price-feeds (optional (list 3 (buff 8192)))))
   (let ((ft-address (contract-of ft))
         (asset (try! (get-asset ft-address)))
         (asset-id (get id asset))
         (account contract-caller))
-    
-    ;; Preconditions
+
     (asserts! (> amount u0) ERR-AMOUNT-ZERO)
     (asserts! (is-eq contract-caller tx-sender) ERR-AUTHORIZATION)
-    
-    ;; Step 1: Transfer underlying tokens from user to this contract (market)
+
     (try! (contract-call? ft transfer amount account current-contract none))
-    
-    ;; Step 2: Deposit to vault to get zTokens (minted to user)
-    ;; Now the market has the underlying tokens and can call vault-deposit
-    (let ((shares-minted 
+
+    (let ((shares-minted
             (try! (if (is-eq ft-address ZEST-STX-WRAPPER-CONTRACT)
-              ;; For wSTX: use as-contract with-stx pattern
+
               (as-contract? ((with-stx amount))
                 (try! (vault-deposit asset-id amount min-shares account)))
-              ;; For other tokens: use as-contract with-ft pattern
+
               (as-contract? ((with-ft ft-address "*" amount))
                 (try! (vault-deposit asset-id amount min-shares account)))))))
-      
-      ;; Step 3: Add the minted zTokens as collateral
-      (if (is-eq asset-id STX) (collateral-add .vault-stx shares-minted price-feeds)
-      (if (is-eq asset-id sBTC) (collateral-add .vault-sbtc shares-minted price-feeds)
-      (if (is-eq asset-id stSTX) (collateral-add .vault-ststx shares-minted price-feeds)
-      (if (is-eq asset-id USDC) (collateral-add .vault-usdc shares-minted price-feeds)
-      (if (is-eq asset-id USDH) (collateral-add .vault-usdh shares-minted price-feeds)
-      (if (is-eq asset-id stSTXbtc) (collateral-add .vault-ststxbtc shares-minted price-feeds)
-      (if (is-eq asset-id stBTC) (collateral-add .vault-stbtc shares-minted price-feeds)
+
+      (if (is-eq asset-id STX) (collateral-add .v0-vault-stx shares-minted price-feeds)
+      (if (is-eq asset-id sBTC) (collateral-add .v0-vault-sbtc shares-minted price-feeds)
+      (if (is-eq asset-id stSTX) (collateral-add .v0-vault-ststx shares-minted price-feeds)
+      (if (is-eq asset-id USDC) (collateral-add .v0-vault-usdc shares-minted price-feeds)
+      (if (is-eq asset-id USDH) (collateral-add .v0-vault-usdh shares-minted price-feeds)
+      (if (is-eq asset-id stSTXbtc) (collateral-add .v0-vault-ststxbtc shares-minted price-feeds)
+      (if (is-eq asset-id stBTC) (collateral-add .v0-vault-stbtc shares-minted price-feeds)
       ERR-UNKNOWN-VAULT)))))))))
 )
-
-;; -- Collateral-remove and redeem for withdrawing underlying from ztoken collateral
 
 (define-public (collateral-remove-redeem (ft <ft-trait>) (amount uint) (min-underlying uint) (receiver (optional principal)) (price-feeds (optional (list 3 (buff 8192)))))
   (let ((ft-address (contract-of ft))
@@ -1433,22 +1220,14 @@
                        (if (is-eq ztoken-id zUSDH) USDH
                        (if (is-eq ztoken-id zstSTXbtc) stSTXbtc
                        (if (is-eq ztoken-id zstBTC) stBTC
-                       u100))))))))  ;; invalid sentinel for non-ztoken
+                       u100))))))))
         (funds-receiver (match receiver recv recv contract-caller)))
 
     (asserts! (<= underlying-id stBTC) ERR-UNKNOWN-VAULT)
-    
-    ;; Step 1: Remove collateral - sends zTokens to THIS contract (market)
-    ;; receiver=current-contract so market holds the zTokens
-    (try! (collateral-remove ft amount (some current-contract) price-feeds))
-    
-    ;; Step 2: Redeem zTokens for underlying
-    ;; vault-redeem calls vault.redeem which burns shares from contract-caller (market)
-    ;; Since market now holds the zTokens, this succeeds
-    ;; Underlying tokens are sent to the specified receiver
-    (vault-redeem underlying-id amount min-underlying funds-receiver)))
 
-;; -- Debt operations --------------------------------------------------------
+    (try! (collateral-remove ft amount (some current-contract) price-feeds))
+
+    (vault-redeem underlying-id amount min-underlying funds-receiver)))
 
 (define-public (borrow (ft <ft-trait>) (amount uint) (receiver (optional principal)) (price-feeds (optional (list 3 (buff 8192)))))
   (let ((address (contract-of ft))
@@ -1458,58 +1237,47 @@
         (funds-receiver (match receiver recv recv contract-caller))
         (verified-feeds (try! (load-price-feeds price-feeds)))
 
-        ;; Step 1: Get position WITHOUT resolving prices
         (position (try! (get-position account)))
         (mask (get mask position))
 
-        ;; Step 2: Accrue user's positions (populates cache for ztokens)
         (u-debt (accrue-user-debts (get debt position)))
         (u-coll (accrue-user-collateral (get collateral position)))
 
-        ;; Step 3: Accrue the asset being borrowed (needed for index access)
         (unused (accrue-and-cache asset-id))
 
-        ;; Step 4: NOW safe to resolve prices (cache is populated)
-        (assets (get-assets mask verified-feeds))
+        (assets (try! (get-assets mask verified-feeds)))
 
-        ;; Calculate current health with current mask
         (current-group (try! (get-egroup mask)))
         (current-ltvb (buff-to-uint-be (get LTV-BORROW current-group)))
 
-        ;; LTV
         (notional-valued-assets (get-notional-evaluation { position: position, assets: assets }))
         (collateral-value (get collateral notional-valued-assets))
         (debt-value (get debt notional-valued-assets)))
 
-    ;; preconditions
     (asserts! (> amount u0) ERR-AMOUNT-ZERO)
     (asserts! (get debt asset) ERR-BORROW-DISABLED)
     (asserts! (is-healthy collateral-value debt-value current-ltvb) ERR-UNHEALTHY)
 
-    ;; Calculate FUTURE debt (after adding this debt)
-    ;; For debt: bit position = asset-id + 64 (DEBT-OFFSET)
     (let ((future-mask (bit-or mask (pow u2 (+ asset-id DEBT-OFFSET))))
           (future-group (try! (get-egroup future-mask)))
-          ;; Per-egroup borrow disable check (uses FUTURE egroup, not current)
-          ;; Each bit in BORROW-DISABLED-MASK corresponds to a debt asset ID (NOT offset by 64)
+
           (disabled-borrow-mask (get BORROW-DISABLED-MASK future-group))
           (debt-increase (try! (get-asset-value asset amount true verified-feeds)))
           (debt-post-increased (+ debt-value debt-increase)))
 
-    ;; Check if this specific asset is disabled for borrowing in the FUTURE egroup
     (asserts! (is-eq (bit-and disabled-borrow-mask (pow u2 asset-id)) u0) ERR-EGROUP-ASSET-BORROW-DISABLED)
-    ;; postconditions
+
     (asserts! (try! (is-healthy-with-mask collateral-value debt-post-increased future-mask)) ERR-UNHEALTHY)
 
     (try! (vault-system-borrow asset-id amount funds-receiver))
     (let ((scaled-debt-added (convert-to-scaled-debt asset-id amount true))
           (borrow-index (get index (unwrap-panic (get-cached-indexes asset-id)))))
-      (try! (contract-call? .market-vault
+      (try! (contract-call? .v0-market-vault
                             debt-add-scaled
                             account
                             scaled-debt-added
                             asset-id))
-      
+
       (print {
         action: "borrow",
         caller: contract-caller,
@@ -1525,56 +1293,48 @@
           position-debt-usd: debt-post-increased
         }
       })
-      
+
       (ok true)))))
 
 (define-public (repay (ft <ft-trait>) (amount uint) (on-behalf-of (optional principal)))
   (let ((address (contract-of ft))
         (asset (try! (get-asset address)))
         (asset-id (get id asset))
-        ;; defaults to payer (contract-caller) if not specified
+
         (account (match on-behalf-of behalf behalf contract-caller))
-        
-        ;; Step 1: Get position WITHOUT resolving prices
+
         (position (try! (get-position account)))
         (mask (get mask position))
-        
-        ;; Step 2: Accrue user's positions (populates cache for ztokens)
+
         (u-debt (accrue-user-debts (get debt position)))
-        
+
         (borrow-index (get index (unwrap-panic (get-cached-indexes asset-id))))
-        
-        ;; Step 3: Get account debt FIRST to enable safe amount capping
+
         (account-scaled-debt (get-account-scaled-debt account asset-id))
-        
-        ;; Step 4: Calculate max repayable amount (actual debt in token), mul-div-up for safe upper bound
+
         (max-repay-tokens (mul-div-up account-scaled-debt borrow-index INDEX-PRECISION))
-        
-        ;; Step 5: Cap input amount at actual debt - prevents overflow in scaled calculation
+
         (safe-amount (min amount max-repay-tokens))
-        
-        ;; Step 6: Convert to scaled debt (amount is bounded)
+
         (scaled-debt-repayment (mul-div-down safe-amount INDEX-PRECISION borrow-index))
 
         (repaid-scaled-debt (min account-scaled-debt scaled-debt-repayment))
         (amount-to-repay (mul-div-up repaid-scaled-debt borrow-index INDEX-PRECISION))
-        
-        ;; Check if repaying ALL debt for this asset
+
         (repaying-all (is-eq repaid-scaled-debt account-scaled-debt)))
 
-    ;; preconditions
     (asserts! (is-eq contract-caller tx-sender) ERR-AUTHORIZATION)
     (asserts! (> amount u0) ERR-AMOUNT-ZERO)
     (asserts! (> repaid-scaled-debt u0) ERR-INSUFFICIENT-SCALED-DEBT)
 
     (try! (vault-system-repay asset-id amount-to-repay ft address))
-    ;; update
-    (try! (contract-call? .market-vault
+
+    (try! (contract-call? .v0-market-vault
                             debt-remove-scaled
                             account
                             repaid-scaled-debt
                             asset-id))
-    
+
     (print {
       action: "repay",
       caller: contract-caller,
@@ -1589,21 +1349,20 @@
         borrow-index: borrow-index
       }
     })
-    
+
     (ok amount-to-repay)))
 
-;; -- Liquidation operations -------------------------------------------------
-
-(define-public (liquidate
+(define-private (liquidate-internal
                 (borrower principal)
                 (collateral-ft <ft-trait>)
                 (debt-ft <ft-trait>)
                 (debt-amount uint)
                 (min-collateral-expected uint)
                 (collateral-receiver (optional principal))
-                (price-feeds (optional (list 3 (buff 8192)))))
+                (verified-feeds {
+                  feeds: (list 3 { feed-id: uint, price: int, exponent: int, confidence: uint, timestamp: uint })
+                }))
   (let (
-    (verified-feeds (try! (load-price-feeds price-feeds)))
     (liquidator contract-caller)
     (position (try! (get-liquidation-position borrower)))
     (pos-full (try! (get-full-position borrower)))
@@ -1617,64 +1376,51 @@
     (coll-aid (get id coll-asset))
     (debt-aid (get id debt-asset))
 
-    ;; accrue FIRST - populates cache for zToken price resolution
     (u-debt (accrue-user-debts (get debt pos-full)))
     (u-coll (accrue-user-collateral (get collateral pos-full)))
 
-    ;; NOW safe to resolve prices (cache is populated)
-    (assets (get-assets mask verified-feeds))
+    (assets (try! (get-assets mask verified-feeds)))
     (notional-valued-assets (get-notional-evaluation { position: position, assets: assets }))
     (total-collateral-usd (get collateral notional-valued-assets))
     (total-debt-usd (get debt notional-valued-assets))
 
-    ;; LTC thresholds, liq params, health
     (ltv-liq-partial (buff-to-uint-be (get LTV-LIQ-PARTIAL group)))
     (ltv-liq-full (buff-to-uint-be (get LTV-LIQ-FULL group)))
     (liq-penalty-min (buff-to-uint-be (get LIQ-PENALTY-MIN group)))
     (liq-penalty-max (buff-to-uint-be (get LIQ-PENALTY-MAX group)))
     (curve-exponent (buff-to-uint-be (get LIQ-CURVE-EXP group)))
 
-    ;; LTV = (debt x 10,000) / collateral
-    ;; handle edge case: If collateral = 0, return max LTV (BPS) or 0 if debt also 0
     (current-ltv   (if (is-eq total-collateral-usd u0)
                        (if (is-eq total-debt-usd u0) u0 BPS)
                        (mul-div-down total-debt-usd BPS total-collateral-usd)))
-    
-    ;; Oracle frontrunning protection: prevent same-block liquidation
-    ;; This blocks flash-loan based attacks where user borrows + gets liquidated in same block
+
     (last-borrow-block (get last-borrow-block position))
     (same-block-check (asserts! (not (is-eq last-borrow-block stacks-block-height)) ERR-LIQUIDATION-BORROW-SAME-BLOCK))
 
-    ;; health check (FAIL-FAST) 
-    ;; Check position is liquidatable BEFORE calling calc-liq-factor
     (health-check  (asserts! (>= current-ltv ltv-liq-partial) ERR-HEALTHY))
 
-    ;; liquidation parameters (graduated liquidation calculation)
-    (liq-params (calc-liquidation-params 
+    (liq-params (calc-liquidation-params
                   current-ltv ltv-liq-partial ltv-liq-full
-                  liq-penalty-min liq-penalty-max 
+                  liq-penalty-min liq-penalty-max
                   curve-exponent total-debt-usd))
     (liq-pct-scaled (get liq-pct-scaled liq-params))
     (liq-penalty (get liq-penalty liq-params))
     (max-debt-usd (get max-debt-usd liq-params))
 
-    ;; debt processing
     (debt-info (process-debt-asset debt-amount debt-aid max-debt-usd assets))
     (debt-actual-usd (get debt-actual-usd debt-info))
     (debt-actual (get debt-actual debt-info))
     (debt-price (get debt-price debt-info))
     (debt-decimals (get debt-decimals debt-info))
 
-    ;; collateral processing
     (user-coll-balance (find-collateral-amount (get collateral pos-full) coll-aid))
-    (coll-info (process-collateral-asset coll-aid debt-actual-usd liq-penalty
-                                         user-coll-balance assets coll-asset verified-feeds))
+    (coll-info (try! (process-collateral-asset coll-aid debt-actual-usd liq-penalty
+                                         user-coll-balance assets coll-asset verified-feeds)))
     (coll-actual (get coll-actual coll-info))
     (coll-expected (get coll-expected coll-info))
     (coll-price (get coll-price coll-info))
     (coll-decimals (get coll-decimals coll-info))
 
-    ;; final liquidation amounts (with proportional adjustment if needed)
     (final-amounts (calc-final-liquidation-amounts
                      debt-actual-usd coll-actual coll-expected
                      coll-price coll-decimals
@@ -1682,7 +1428,6 @@
     (debt-final-usd (get debt-final-usd final-amounts))
     (debt-final (get debt-final final-amounts))
 
-    ;; debt scaling for storage
     (curr-scaled (get-account-scaled-debt borrower debt-aid))
     (scaled-info (scale-debt-for-liquidation debt-final coll-actual curr-scaled debt-aid))
     (scaled-to-remove (get scaled-to-remove scaled-info))
@@ -1707,18 +1452,16 @@
     (asserts! (> coll-final u0) ERR-ZERO-LIQUIDATION-AMOUNTS)
     (asserts! (>= coll-final min-collateral-expected) ERR-SLIPPAGE)
 
-    ;; execute liquidation
     (try! (vault-system-repay debt-aid debt-to-repay debt-ft debt-address))
 
-    ;; update obligations and socialize bad debt
-    (let ((debt-updated (try! (contract-call? .market-vault
+    (let ((debt-updated (try! (contract-call? .v0-market-vault
                               debt-remove-scaled
                               borrower
                               scaled-to-remove
                               debt-aid)))
-          ;; Collateral receiver defaults to liquidator if not specified
+
           (actual-receiver (match collateral-receiver recv recv liquidator))
-          (coll-removed (try! (contract-call? .market-vault
+          (coll-removed (try! (contract-call? .v0-market-vault
                               collateral-remove
                               borrower
                               coll-final
@@ -1746,8 +1489,7 @@
                                     (is-eq (len (get collateral pos-full)) (len (get collateral position)))
                                     (is-eq other-debt-repayable u0))))))
 
-      ;; Handle bad debt socialization if no collateral left
-      (let ((bad-debt-socialized 
+      (let ((bad-debt-socialized
               (if no-collateral-left
                   (let ((stripped-debt-list (filter-out-debt-asset (get debt pos-full) debt-aid))
                         (fresh-debt-list (if (is-eq debt-updated u0)
@@ -1756,12 +1498,12 @@
                                                (append stripped-debt-list
                                                        { aid: debt-aid, scaled: debt-updated })
                                                u64)))))
-                    (if (> (len fresh-debt-list) u0) ;; if still has debt
-                      (let ((socialization-result (fold socialize-debt-asset 
-                                                        fresh-debt-list 
+                    (if (> (len fresh-debt-list) u0)
+                      (let ((socialization-result (fold socialize-debt-asset
+                                                        fresh-debt-list
                                                         { borrower: borrower, success: true })))
                         (asserts! (get success socialization-result) ERR-BAD-DEBT-SOCIALIZATION-FAILED)
-                        ;; emit bad-debt-socialized event
+
                         (print {
                           action: "bad-debt-socialized",
                           caller: contract-caller,
@@ -1773,8 +1515,7 @@
                         true)
                       false))
                   false)))
-        
-        ;; emit main liquidate event
+
         (print {
           action: "liquidate",
           caller: contract-caller,
@@ -1796,26 +1537,31 @@
             bad-debt-socialized: bad-debt-socialized
           }
         })
-        
+
         (ok { debt: debt-to-repay, collateral: coll-final })))))
 
-;; Liquidates multiple positions atomically
-;; Each position can have different: borrower, collateral asset, debt asset, and debt amount
-;; Prevents front-running attacks that prevent bad debt socialization
-;; Note: price-feeds not supported in batch - update prices separately or use individual liquidate()
-;; Returns list of responses - one per position (ok/err)
-;; Failed liquidations return error codes but don't revert entire batch
-(define-public (liquidate-multi
-                (positions (list 64 { borrower: principal,
+(define-public (liquidate
+                (borrower principal)
+                (collateral-ft <ft-trait>)
+                (debt-ft <ft-trait>)
+                (debt-amount uint)
+                (min-collateral-expected uint)
+                (collateral-receiver (optional principal))
+                (price-feeds (optional (list 3 (buff 8192)))))
+  (liquidate-internal borrower collateral-ft debt-ft debt-amount
+    min-collateral-expected collateral-receiver
+    (try! (load-price-feeds price-feeds))))
+
+(define-public (liquidate-multi-with-feeds
+                (positions (list 8 { borrower: principal,
                                       collateral-ft: <ft-trait>,
                                       debt-ft: <ft-trait>,
                                       debt-amount: uint,
-                                      min-collateral-expected: uint })))
-  (ok (map call-liquidate positions)))
+                                      min-collateral-expected: uint }))
+                (price-feed (buff 8192)))
+  (liquidate-batch positions
+    (try! (verify-lazer-update price-feed))))
 
-;; Liquidates a position and automatically redeems zToken collateral for underlying
-;; ONLY for zToken collateral - for non-zToken collateral, use regular liquidate()
-;; Flow: liquidate -> receive zTokens to market -> redeem zTokens -> send underlying to receiver
 (define-public (liquidate-redeem
                 (borrower principal)
                 (collateral-ft <ft-trait>)
@@ -1828,7 +1574,7 @@
   (let ((coll-address (contract-of collateral-ft))
         (coll-asset (try! (get-asset coll-address)))
         (ztoken-id (get id coll-asset))
-        ;; Map zToken to underlying vault ID for redemption
+
         (underlying-id (if (is-eq ztoken-id zSTX) STX
                        (if (is-eq ztoken-id zsBTC) sBTC
                        (if (is-eq ztoken-id zstSTX) stSTX
@@ -1836,30 +1582,26 @@
                        (if (is-eq ztoken-id zUSDH) USDH
                        (if (is-eq ztoken-id zstSTXbtc) stSTXbtc
                        (if (is-eq ztoken-id zstBTC) stBTC
-                       u100))))))))  ;; invalid sentinel for non-ztoken
+                       u100))))))))
         (funds-receiver (match receiver recv recv contract-caller)))
-    
-    ;; Validate collateral is a zToken
+
     (asserts! (is-ztoken ztoken-id) ERR-UNKNOWN-VAULT)
-    
-    ;; Step 1: Liquidate with market as receiver (market receives zTokens)
+
     (let ((liq-result (try! (liquidate borrower
                                        collateral-ft
                                        debt-ft
                                        debt-amount
                                        min-collateral-expected
-                                       (some current-contract)  ;; zTokens go to market
+                                       (some current-contract)
                                        price-feeds)))
           (collateral-seized (get collateral liq-result))
           (debt-repaid (get debt liq-result)))
-      
-      ;; Step 2: Redeem zTokens for underlying
-      ;; Market now holds zTokens, vault-redeem burns them and sends underlying to receiver
-      (let ((underlying-amount (try! (vault-redeem underlying-id 
-                                                   collateral-seized 
-                                                   min-underlying 
+
+      (let ((underlying-amount (try! (vault-redeem underlying-id
+                                                   collateral-seized
+                                                   min-underlying
                                                    funds-receiver))))
-        
+
         (print {
           action: "liquidate-redeem",
           caller: contract-caller,
@@ -1873,5 +1615,5 @@
             underlying-received: underlying-amount
           }
         })
-        
+
         (ok { debt: debt-repaid, underlying: underlying-amount })))))

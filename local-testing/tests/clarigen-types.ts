@@ -375,7 +375,7 @@ export const contracts = {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'assets',
   },
 daoExecutor: {
@@ -438,7 +438,7 @@ daoExecutor: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'dao-executor',
   },
 daoMultisig: {
@@ -662,7 +662,7 @@ daoMultisig: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'dao-multisig',
   },
 daoTraits: {
@@ -679,7 +679,7 @@ daoTraits: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'dao-traits',
   },
 daoTreasury: {
@@ -717,7 +717,7 @@ daoTreasury: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'dao-treasury',
   },
 diaOracle: {
@@ -1234,7 +1234,7 @@ egroup: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'egroup',
   },
 ftTrait: {
@@ -1251,7 +1251,7 @@ ftTrait: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'ft-trait',
   },
 market: {
@@ -1357,17 +1357,42 @@ market: {
   "timestamp": bigint;
   "value": bigint;
 }, bigint>>,
-    callPyth: {"name":"call-pyth","access":"private","args":[{"name":"ident","type":{"buffer":{"length":32}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"publish-time","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[ident: TypedAbiArg<Uint8Array, "ident">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "publishTime": bigint;
-}, bigint>>,
     checkConfidence: {"name":"check-confidence","access":"private","args":[{"name":"price","type":"int128"},{"name":"confidence","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[price: TypedAbiArg<number | bigint, "price">, confidence: TypedAbiArg<number | bigint, "confidence">], Response<boolean, bigint>>,
     checkDaoAuth: {"name":"check-dao-auth","access":"private","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>,
+    collectLazerFeed: {"name":"collect-lazer-feed","access":"private","args":[{"name":"feed","type":{"tuple":[{"name":"best-ask","type":{"optional":"int128"}},{"name":"best-bid","type":{"optional":"int128"}},{"name":"confidence","type":{"optional":"uint128"}},{"name":"ema-confidence","type":{"optional":"uint128"}},{"name":"ema-price","type":{"optional":"int128"}},{"name":"exponent","type":{"optional":"int128"}},{"name":"feed-id","type":"uint128"},{"name":"feed-update-timestamp","type":{"optional":"uint128"}},{"name":"funding-rate","type":{"optional":"int128"}},{"name":"funding-rate-interval","type":{"optional":"uint128"}},{"name":"funding-timestamp","type":{"optional":"uint128"}},{"name":"market-session","type":{"optional":"uint128"}},{"name":"price","type":{"optional":"int128"}},{"name":"publisher-count","type":{"optional":"uint128"}}]}},{"name":"acc","type":{"response":{"ok":{"tuple":[{"name":"envelope-timestamp","type":"uint128"},{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]},"error":"uint128"}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"envelope-timestamp","type":"uint128"},{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]},"error":"uint128"}}}} as TypedAbiFunction<[feed: TypedAbiArg<{
+  "bestAsk": number | bigint | null;
+  "bestBid": number | bigint | null;
+  "confidence": number | bigint | null;
+  "emaConfidence": number | bigint | null;
+  "emaPrice": number | bigint | null;
+  "exponent": number | bigint | null;
+  "feedId": number | bigint;
+  "feedUpdateTimestamp": number | bigint | null;
+  "fundingRate": number | bigint | null;
+  "fundingRateInterval": number | bigint | null;
+  "fundingTimestamp": number | bigint | null;
+  "marketSession": number | bigint | null;
+  "price": number | bigint | null;
+  "publisherCount": number | bigint | null;
+}, "feed">, acc: TypedAbiArg<Response<{
+  "envelopeTimestamp": number | bigint;
+  "feeds": {
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+}[];
+}, number | bigint>, "acc">], Response<{
+  "envelopeTimestamp": bigint;
+  "feeds": {
+  "confidence": bigint;
+  "exponent": bigint;
+  "feedId": bigint;
+  "price": bigint;
+  "timestamp": bigint;
+}[];
+}, bigint>>,
     convertToScaledDebt: {"name":"convert-to-scaled-debt","access":"private","args":[{"name":"asset-id","type":"uint128"},{"name":"amount","type":"uint128"},{"name":"round-up","type":"bool"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[assetId: TypedAbiArg<number | bigint, "assetId">, amount: TypedAbiArg<number | bigint, "amount">, roundUp: TypedAbiArg<boolean, "roundUp">], bigint>,
     divBpsDown: {"name":"div-bps-down","access":"private","args":[{"name":"x","type":"uint128"},{"name":"y","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[x: TypedAbiArg<number | bigint, "x">, y: TypedAbiArg<number | bigint, "y">], bigint>,
     divDown: {"name":"div-down","access":"private","args":[{"name":"x","type":"uint128"},{"name":"y","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[x: TypedAbiArg<number | bigint, "x">, y: TypedAbiArg<number | bigint, "y">], bigint>,
@@ -1424,6 +1449,44 @@ market: {
   "aid": number | bigint;
   "amount": number | bigint;
 }[], "collateralList">, targetAssetId: TypedAbiArg<number | bigint, "targetAssetId">], bigint>,
+    findCompactFeed: {"name":"find-compact-feed","access":"private","args":[{"name":"feed-id","type":"uint128"},{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}],"outputs":{"type":{"optional":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]}}}} as TypedAbiFunction<[feedId: TypedAbiArg<number | bigint, "feedId">, feeds: TypedAbiArg<{
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+}[], "feeds">], {
+  "confidence": bigint;
+  "exponent": bigint;
+  "feedId": bigint;
+  "price": bigint;
+  "timestamp": bigint;
+} | null>,
+    findCompactFeedIter: {"name":"find-compact-feed-iter","access":"private","args":[{"name":"feed","type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]}},{"name":"acc","type":{"tuple":[{"name":"result","type":{"optional":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]}}},{"name":"target","type":"uint128"}]}}],"outputs":{"type":{"tuple":[{"name":"result","type":{"optional":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]}}},{"name":"target","type":"uint128"}]}}} as TypedAbiFunction<[feed: TypedAbiArg<{
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+}, "feed">, acc: TypedAbiArg<{
+  "result": {
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+} | null;
+  "target": number | bigint;
+}, "acc">], {
+  "result": {
+  "confidence": bigint;
+  "exponent": bigint;
+  "feedId": bigint;
+  "price": bigint;
+  "timestamp": bigint;
+} | null;
+  "target": bigint;
+}>,
     findDebtScaled: {"name":"find-debt-scaled","access":"private","args":[{"name":"debt-list","type":{"list":{"type":{"tuple":[{"name":"aid","type":"uint128"},{"name":"scaled","type":"uint128"}]},"length":64}}},{"name":"target-asset-id","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[debtList: TypedAbiArg<{
   "aid": number | bigint;
   "scaled": number | bigint;
@@ -1455,7 +1518,7 @@ market: {
   "type": Uint8Array;
 };
 }, "assetEntry">], bigint>,
-    getAssetValue: {"name":"get-asset-value","access":"private","args":[{"name":"asset","type":{"tuple":[{"name":"addr","type":"principal"},{"name":"collateral","type":"bool"},{"name":"debt","type":"bool"},{"name":"decimals","type":"uint128"},{"name":"id","type":"uint128"},{"name":"oracle","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}}]}},{"name":"amount","type":"uint128"},{"name":"round-up","type":"bool"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[asset: TypedAbiArg<{
+    getAssetValue: {"name":"get-asset-value","access":"private","args":[{"name":"asset","type":{"tuple":[{"name":"addr","type":"principal"},{"name":"collateral","type":"bool"},{"name":"debt","type":"bool"},{"name":"decimals","type":"uint128"},{"name":"id","type":"uint128"},{"name":"oracle","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}}]}},{"name":"amount","type":"uint128"},{"name":"round-up","type":"bool"},{"name":"pyth-context","type":{"tuple":[{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[asset: TypedAbiArg<{
   "addr": string;
   "collateral": boolean;
   "debt": boolean;
@@ -1467,8 +1530,24 @@ market: {
   "maxStaleness": number | bigint;
   "type": Uint8Array;
 };
-}, "asset">, amount: TypedAbiArg<number | bigint, "amount">, roundUp: TypedAbiArg<boolean, "roundUp">], Response<bigint, bigint>>,
-    getAssets: {"name":"get-assets","access":"private","args":[{"name":"mask-user","type":"uint128"}],"outputs":{"type":{"list":{"type":{"tuple":[{"name":"addr","type":"principal"},{"name":"collateral","type":"bool"},{"name":"debt","type":"bool"},{"name":"decimals","type":"uint128"},{"name":"id","type":"uint128"},{"name":"oracle","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}},{"name":"price","type":"uint128"}]},"length":64}}}} as TypedAbiFunction<[maskUser: TypedAbiArg<number | bigint, "maskUser">], {
+}, "asset">, amount: TypedAbiArg<number | bigint, "amount">, roundUp: TypedAbiArg<boolean, "roundUp">, pythContext: TypedAbiArg<{
+  "feeds": {
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+}[];
+}, "pythContext">], Response<bigint, bigint>>,
+    getAssets: {"name":"get-assets","access":"private","args":[{"name":"mask-user","type":"uint128"},{"name":"pyth-context","type":{"tuple":[{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]}}],"outputs":{"type":{"list":{"type":{"tuple":[{"name":"addr","type":"principal"},{"name":"collateral","type":"bool"},{"name":"debt","type":"bool"},{"name":"decimals","type":"uint128"},{"name":"id","type":"uint128"},{"name":"oracle","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}},{"name":"price","type":"uint128"}]},"length":64}}}} as TypedAbiFunction<[maskUser: TypedAbiArg<number | bigint, "maskUser">, pythContext: TypedAbiArg<{
+  "feeds": {
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+}[];
+}, "pythContext">], {
   "addr": string;
   "collateral": boolean;
   "debt": boolean;
@@ -1674,7 +1753,7 @@ market: {
   "scaled": bigint;
   "target": bigint;
 }>,
-    iterPriceMulti: {"name":"iter-price-multi","access":"private","args":[{"name":"oracle-data","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}},{"name":"acc","type":{"tuple":[{"name":"aids","type":{"list":{"type":"uint128","length":64}}},{"name":"idx","type":"uint128"},{"name":"output","type":{"list":{"type":"uint128","length":64}}},{"name":"valid","type":"bool"}]}}],"outputs":{"type":{"tuple":[{"name":"aids","type":{"list":{"type":"uint128","length":64}}},{"name":"idx","type":"uint128"},{"name":"output","type":{"list":{"type":"uint128","length":64}}},{"name":"valid","type":"bool"}]}}} as TypedAbiFunction<[oracleData: TypedAbiArg<{
+    iterPriceMulti: {"name":"iter-price-multi","access":"private","args":[{"name":"oracle-data","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}},{"name":"acc","type":{"tuple":[{"name":"aids","type":{"list":{"type":"uint128","length":64}}},{"name":"idx","type":"uint128"},{"name":"output","type":{"list":{"type":"uint128","length":64}}},{"name":"pyth-context","type":{"tuple":[{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]}},{"name":"valid","type":"bool"}]}}],"outputs":{"type":{"tuple":[{"name":"aids","type":{"list":{"type":"uint128","length":64}}},{"name":"idx","type":"uint128"},{"name":"output","type":{"list":{"type":"uint128","length":64}}},{"name":"pyth-context","type":{"tuple":[{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]}},{"name":"valid","type":"bool"}]}}} as TypedAbiFunction<[oracleData: TypedAbiArg<{
   "callcode": Uint8Array | null;
   "ident": Uint8Array;
   "maxStaleness": number | bigint;
@@ -1683,13 +1762,40 @@ market: {
   "aids": number | bigint[];
   "idx": number | bigint;
   "output": number | bigint[];
+  "pythContext": {
+  "feeds": {
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+}[];
+};
   "valid": boolean;
 }, "acc">], {
   "aids": bigint[];
   "idx": bigint;
   "output": bigint[];
+  "pythContext": {
+  "feeds": {
+  "confidence": bigint;
+  "exponent": bigint;
+  "feedId": bigint;
+  "price": bigint;
+  "timestamp": bigint;
+}[];
+};
   "valid": boolean;
 }>,
+    loadPriceFeeds: {"name":"load-price-feeds","access":"private","args":[{"name":"updates","type":{"optional":{"list":{"type":{"buffer":{"length":8192}},"length":3}}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]},"error":"uint128"}}}} as TypedAbiFunction<[updates: TypedAbiArg<Uint8Array[] | null, "updates">], Response<{
+  "feeds": {
+  "confidence": bigint;
+  "exponent": bigint;
+  "feedId": bigint;
+  "price": bigint;
+  "timestamp": bigint;
+}[];
+}, bigint>>,
     maskShiftCombine: {"name":"mask-shift-combine","access":"private","args":[{"name":"mask","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[mask: TypedAbiArg<number | bigint, "mask">], bigint>,
     maskToListCollateral: {"name":"mask-to-list-collateral","access":"private","args":[{"name":"mask","type":"uint128"}],"outputs":{"type":{"list":{"type":"uint128","length":64}}}} as TypedAbiFunction<[mask: TypedAbiArg<number | bigint, "mask">], bigint[]>,
     maskToListInternal: {"name":"mask-to-list-internal","access":"private","args":[{"name":"mask","type":"uint128"},{"name":"offset","type":"uint128"},{"name":"iter-list","type":{"list":{"type":"uint128","length":64}}}],"outputs":{"type":{"list":{"type":"uint128","length":64}}}} as TypedAbiFunction<[mask: TypedAbiArg<number | bigint, "mask">, offset: TypedAbiArg<number | bigint, "offset">, iterList: TypedAbiArg<number | bigint[], "iterList">], bigint[]>,
@@ -1736,19 +1842,35 @@ market: {
     normalizePyth: {"name":"normalize-pyth","access":"private","args":[{"name":"p","type":"int128"},{"name":"expo","type":"int128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[p: TypedAbiArg<number | bigint, "p">, expo: TypedAbiArg<number | bigint, "expo">], bigint>,
     oraclePriceLegal: {"name":"oracle-price-legal","access":"private","args":[{"name":"p","type":"uint128"}],"outputs":{"type":"bool"}} as TypedAbiFunction<[p: TypedAbiArg<number | bigint, "p">], boolean>,
     oracleTimestampFresh: {"name":"oracle-timestamp-fresh","access":"private","args":[{"name":"ts","type":"uint128"},{"name":"prev","type":"uint128"},{"name":"max-staleness","type":"uint128"}],"outputs":{"type":"bool"}} as TypedAbiFunction<[ts: TypedAbiArg<number | bigint, "ts">, prev: TypedAbiArg<number | bigint, "prev">, maxStaleness: TypedAbiArg<number | bigint, "maxStaleness">], boolean>,
-    priceMultiResolve: {"name":"price-multi-resolve","access":"private","args":[{"name":"data","type":{"list":{"type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]},"length":64}}},{"name":"aids","type":{"list":{"type":"uint128","length":64}}}],"outputs":{"type":{"response":{"ok":{"list":{"type":"uint128","length":64}},"error":"uint128"}}}} as TypedAbiFunction<[data: TypedAbiArg<{
+    priceMultiResolve: {"name":"price-multi-resolve","access":"private","args":[{"name":"data","type":{"list":{"type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]},"length":64}}},{"name":"aids","type":{"list":{"type":"uint128","length":64}}},{"name":"pyth-context","type":{"tuple":[{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]}}],"outputs":{"type":{"response":{"ok":{"list":{"type":"uint128","length":64}},"error":"uint128"}}}} as TypedAbiFunction<[data: TypedAbiArg<{
   "callcode": Uint8Array | null;
   "ident": Uint8Array;
   "maxStaleness": number | bigint;
   "type": Uint8Array;
-}[], "data">, aids: TypedAbiArg<number | bigint[], "aids">], Response<bigint[], bigint>>,
-    priceResolve: {"name":"price-resolve","access":"private","args":[{"name":"data","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[data: TypedAbiArg<{
+}[], "data">, aids: TypedAbiArg<number | bigint[], "aids">, pythContext: TypedAbiArg<{
+  "feeds": {
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+}[];
+}, "pythContext">], Response<bigint[], bigint>>,
+    priceResolve: {"name":"price-resolve","access":"private","args":[{"name":"data","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}},{"name":"pyth-context","type":{"tuple":[{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[data: TypedAbiArg<{
   "callcode": Uint8Array | null;
   "ident": Uint8Array;
   "maxStaleness": number | bigint;
   "type": Uint8Array;
-}, "data">], Response<bigint, bigint>>,
-    processCollateralAsset: {"name":"process-collateral-asset","access":"private","args":[{"name":"coll-aid","type":"uint128"},{"name":"debt-actual-usd","type":"uint128"},{"name":"liq-penalty","type":"uint128"},{"name":"user-coll-balance","type":"uint128"},{"name":"assets","type":{"list":{"type":{"tuple":[{"name":"addr","type":"principal"},{"name":"collateral","type":"bool"},{"name":"debt","type":"bool"},{"name":"decimals","type":"uint128"},{"name":"id","type":"uint128"},{"name":"oracle","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}},{"name":"price","type":"uint128"}]},"length":64}}},{"name":"coll-asset","type":{"tuple":[{"name":"addr","type":"principal"},{"name":"collateral","type":"bool"},{"name":"debt","type":"bool"},{"name":"decimals","type":"uint128"},{"name":"id","type":"uint128"},{"name":"oracle","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}}]}}],"outputs":{"type":{"tuple":[{"name":"coll-actual","type":"uint128"},{"name":"coll-decimals","type":"uint128"},{"name":"coll-expected","type":"uint128"},{"name":"coll-price","type":"uint128"}]}}} as TypedAbiFunction<[collAid: TypedAbiArg<number | bigint, "collAid">, debtActualUsd: TypedAbiArg<number | bigint, "debtActualUsd">, liqPenalty: TypedAbiArg<number | bigint, "liqPenalty">, userCollBalance: TypedAbiArg<number | bigint, "userCollBalance">, assets: TypedAbiArg<{
+}, "data">, pythContext: TypedAbiArg<{
+  "feeds": {
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+}[];
+}, "pythContext">], Response<bigint, bigint>>,
+    processCollateralAsset: {"name":"process-collateral-asset","access":"private","args":[{"name":"coll-aid","type":"uint128"},{"name":"debt-actual-usd","type":"uint128"},{"name":"liq-penalty","type":"uint128"},{"name":"user-coll-balance","type":"uint128"},{"name":"assets","type":{"list":{"type":{"tuple":[{"name":"addr","type":"principal"},{"name":"collateral","type":"bool"},{"name":"debt","type":"bool"},{"name":"decimals","type":"uint128"},{"name":"id","type":"uint128"},{"name":"oracle","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}},{"name":"price","type":"uint128"}]},"length":64}}},{"name":"coll-asset","type":{"tuple":[{"name":"addr","type":"principal"},{"name":"collateral","type":"bool"},{"name":"debt","type":"bool"},{"name":"decimals","type":"uint128"},{"name":"id","type":"uint128"},{"name":"oracle","type":{"tuple":[{"name":"callcode","type":{"optional":{"buffer":{"length":1}}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"max-staleness","type":"uint128"},{"name":"type","type":{"buffer":{"length":1}}}]}}]}},{"name":"pyth-context","type":{"tuple":[{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]}}],"outputs":{"type":{"tuple":[{"name":"coll-actual","type":"uint128"},{"name":"coll-decimals","type":"uint128"},{"name":"coll-expected","type":"uint128"},{"name":"coll-price","type":"uint128"}]}}} as TypedAbiFunction<[collAid: TypedAbiArg<number | bigint, "collAid">, debtActualUsd: TypedAbiArg<number | bigint, "debtActualUsd">, liqPenalty: TypedAbiArg<number | bigint, "liqPenalty">, userCollBalance: TypedAbiArg<number | bigint, "userCollBalance">, assets: TypedAbiArg<{
   "addr": string;
   "collateral": boolean;
   "debt": boolean;
@@ -1773,7 +1895,15 @@ market: {
   "maxStaleness": number | bigint;
   "type": Uint8Array;
 };
-}, "collAsset">], {
+}, "collAsset">, pythContext: TypedAbiArg<{
+  "feeds": {
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+}[];
+}, "pythContext">], {
   "collActual": bigint;
   "collDecimals": bigint;
   "collExpected": bigint;
@@ -1823,14 +1953,31 @@ market: {
   "timestamp": bigint;
   "value": bigint;
 }, bigint>>,
-    resolvePriceFeed: {"name":"resolve-price-feed","access":"private","args":[{"name":"type","type":{"buffer":{"length":1}}},{"name":"ident","type":{"buffer":{"length":32}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"timestamp","type":"uint128"},{"name":"value","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[type: TypedAbiArg<Uint8Array, "type">, ident: TypedAbiArg<Uint8Array, "ident">], Response<{
+    resolvePriceFeed: {"name":"resolve-price-feed","access":"private","args":[{"name":"type","type":{"buffer":{"length":1}}},{"name":"ident","type":{"buffer":{"length":32}}},{"name":"pyth-context","type":{"tuple":[{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"timestamp","type":"uint128"},{"name":"value","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[type: TypedAbiArg<Uint8Array, "type">, ident: TypedAbiArg<Uint8Array, "ident">, pythContext: TypedAbiArg<{
+  "feeds": {
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+}[];
+}, "pythContext">], Response<{
   "timestamp": bigint;
   "value": bigint;
 }, bigint>>,
-    resolvePyth: {"name":"resolve-pyth","access":"private","args":[{"name":"ident","type":{"buffer":{"length":32}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"timestamp","type":"uint128"},{"name":"value","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[ident: TypedAbiArg<Uint8Array, "ident">], Response<{
+    resolvePyth: {"name":"resolve-pyth","access":"private","args":[{"name":"ident","type":{"buffer":{"length":32}}},{"name":"context","type":{"tuple":[{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"timestamp","type":"uint128"},{"name":"value","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[ident: TypedAbiArg<Uint8Array, "ident">, context: TypedAbiArg<{
+  "feeds": {
+  "confidence": number | bigint;
+  "exponent": number | bigint;
+  "feedId": number | bigint;
+  "price": number | bigint;
+  "timestamp": number | bigint;
+}[];
+}, "context">], Response<{
   "timestamp": bigint;
   "value": bigint;
 }, bigint>>,
+    resolveStbtc: {"name":"resolve-stbtc","access":"private","args":[{"name":"p","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[p: TypedAbiArg<number | bigint, "p">], Response<bigint, bigint>>,
     resolveStstx: {"name":"resolve-ststx","access":"private","args":[{"name":"p","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[p: TypedAbiArg<number | bigint, "p">], Response<bigint, bigint>>,
     resolveZtoken: {"name":"resolve-ztoken","access":"private","args":[{"name":"p","type":"uint128"},{"name":"aid","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[p: TypedAbiArg<number | bigint, "p">, aid: TypedAbiArg<number | bigint, "aid">], Response<bigint, bigint>>,
     scaleDebtForLiquidation: {"name":"scale-debt-for-liquidation","access":"private","args":[{"name":"debt-final","type":"uint128"},{"name":"coll-actual","type":"uint128"},{"name":"curr-scaled","type":"uint128"},{"name":"asset-id","type":"uint128"}],"outputs":{"type":{"tuple":[{"name":"coll-final","type":"uint128"},{"name":"debt-to-repay","type":"uint128"},{"name":"scaled-to-remove","type":"uint128"}]}}} as TypedAbiFunction<[debtFinal: TypedAbiArg<number | bigint, "debtFinal">, collActual: TypedAbiArg<number | bigint, "collActual">, currScaled: TypedAbiArg<number | bigint, "currScaled">, assetId: TypedAbiArg<number | bigint, "assetId">], {
@@ -1858,9 +2005,17 @@ market: {
     vaultSocializeDebt: {"name":"vault-socialize-debt","access":"private","args":[{"name":"aid","type":"uint128"},{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[aid: TypedAbiArg<number | bigint, "aid">, amount: TypedAbiArg<number | bigint, "amount">], Response<boolean, bigint>>,
     vaultSystemBorrow: {"name":"vault-system-borrow","access":"private","args":[{"name":"aid","type":"uint128"},{"name":"amount","type":"uint128"},{"name":"receiver","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[aid: TypedAbiArg<number | bigint, "aid">, amount: TypedAbiArg<number | bigint, "amount">, receiver: TypedAbiArg<string, "receiver">], Response<boolean, bigint>>,
     vaultSystemRepay: {"name":"vault-system-repay","access":"private","args":[{"name":"aid","type":"uint128"},{"name":"amount","type":"uint128"},{"name":"ft","type":"trait_reference"},{"name":"ft-address","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[aid: TypedAbiArg<number | bigint, "aid">, amount: TypedAbiArg<number | bigint, "amount">, ft: TypedAbiArg<string, "ft">, ftAddress: TypedAbiArg<string, "ftAddress">], Response<boolean, bigint>>,
-    writeFeed: {"name":"write-feed","access":"private","args":[{"name":"feed","type":{"buffer":{"length":8192}}},{"name":"status","type":{"response":{"ok":"bool","error":"uint128"}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[feed: TypedAbiArg<Uint8Array, "feed">, status: TypedAbiArg<Response<boolean, number | bigint>, "status">], Response<boolean, bigint>>,
-    writeFeeds: {"name":"write-feeds","access":"private","args":[{"name":"feeds","type":{"optional":{"list":{"type":{"buffer":{"length":8192}},"length":3}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[feeds: TypedAbiArg<Uint8Array[] | null, "feeds">], Response<boolean, bigint>>,
+    verifyLazerUpdate: {"name":"verify-lazer-update","access":"private","args":[{"name":"update","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"confidence","type":"uint128"},{"name":"exponent","type":"int128"},{"name":"feed-id","type":"uint128"},{"name":"price","type":"int128"},{"name":"timestamp","type":"uint128"}]},"length":8}}}]},"error":"uint128"}}}} as TypedAbiFunction<[update: TypedAbiArg<Uint8Array, "update">], Response<{
+  "feeds": {
+  "confidence": bigint;
+  "exponent": bigint;
+  "feedId": bigint;
+  "price": bigint;
+  "timestamp": bigint;
+}[];
+}, bigint>>,
     borrow: {"name":"borrow","access":"public","args":[{"name":"ft","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"receiver","type":{"optional":"principal"}},{"name":"price-feeds","type":{"optional":{"list":{"type":{"buffer":{"length":8192}},"length":3}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[ft: TypedAbiArg<string, "ft">, amount: TypedAbiArg<number | bigint, "amount">, receiver: TypedAbiArg<string | null, "receiver">, priceFeeds: TypedAbiArg<Uint8Array[] | null, "priceFeeds">], Response<boolean, bigint>>,
+    callStbtcRatio: {"name":"call-stbtc-ratio","access":"public","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
     callStstxRatio: {"name":"call-ststx-ratio","access":"public","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
     collateralAdd: {"name":"collateral-add","access":"public","args":[{"name":"ft","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"price-feeds","type":{"optional":{"list":{"type":{"buffer":{"length":8192}},"length":3}}}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[ft: TypedAbiArg<string, "ft">, amount: TypedAbiArg<number | bigint, "amount">, priceFeeds: TypedAbiArg<Uint8Array[] | null, "priceFeeds">], Response<bigint, bigint>>,
     collateralRemove: {"name":"collateral-remove","access":"public","args":[{"name":"ft","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"receiver","type":{"optional":"principal"}},{"name":"price-feeds","type":{"optional":{"list":{"type":{"buffer":{"length":8192}},"length":3}}}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[ft: TypedAbiArg<string, "ft">, amount: TypedAbiArg<number | bigint, "amount">, receiver: TypedAbiArg<string | null, "receiver">, priceFeeds: TypedAbiArg<Uint8Array[] | null, "priceFeeds">], Response<bigint, bigint>>,
@@ -1886,7 +2041,9 @@ market: {
     repay: {"name":"repay","access":"public","args":[{"name":"ft","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"on-behalf-of","type":{"optional":"principal"}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[ft: TypedAbiArg<string, "ft">, amount: TypedAbiArg<number | bigint, "amount">, onBehalfOf: TypedAbiArg<string | null, "onBehalfOf">], Response<bigint, bigint>>,
     setLiquidationGracePeriod: {"name":"set-liquidation-grace-period","access":"public","args":[{"name":"id","type":"uint128"},{"name":"grace-period","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[id: TypedAbiArg<number | bigint, "id">, gracePeriod: TypedAbiArg<number | bigint, "gracePeriod">], Response<boolean, bigint>>,
     setMaxConfidenceRatio: {"name":"set-max-confidence-ratio","access":"public","args":[{"name":"ratio","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[ratio: TypedAbiArg<number | bigint, "ratio">], Response<boolean, bigint>>,
+    setMockStbtcRatio: {"name":"set-mock-stbtc-ratio","access":"public","args":[{"name":"ratio","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[ratio: TypedAbiArg<number | bigint, "ratio">], Response<boolean, bigint>>,
     setPauseLiquidation: {"name":"set-pause-liquidation","access":"public","args":[{"name":"paused","type":"bool"},{"name":"grace-period","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[paused: TypedAbiArg<boolean, "paused">, gracePeriod: TypedAbiArg<number | bigint, "gracePeriod">], Response<boolean, bigint>>,
+    setStbtcHaircutBps: {"name":"set-stbtc-haircut-bps","access":"public","args":[{"name":"haircut","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[haircut: TypedAbiArg<number | bigint, "haircut">], Response<boolean, bigint>>,
     supplyCollateralAdd: {"name":"supply-collateral-add","access":"public","args":[{"name":"ft","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"min-shares","type":"uint128"},{"name":"price-feeds","type":{"optional":{"list":{"type":{"buffer":{"length":8192}},"length":3}}}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[ft: TypedAbiArg<string, "ft">, amount: TypedAbiArg<number | bigint, "amount">, minShares: TypedAbiArg<number | bigint, "minShares">, priceFeeds: TypedAbiArg<Uint8Array[] | null, "priceFeeds">], Response<bigint, bigint>>,
     getCachedIndexes: {"name":"get-cached-indexes","access":"read_only","args":[{"name":"aid","type":"uint128"}],"outputs":{"type":{"optional":{"tuple":[{"name":"index","type":"uint128"},{"name":"lindex","type":"uint128"}]}}}} as TypedAbiFunction<[aid: TypedAbiArg<number | bigint, "aid">], {
   "index": bigint;
@@ -1896,6 +2053,7 @@ market: {
     getLiquidationGracePeriodAsset: {"name":"get-liquidation-grace-period-asset","access":"read_only","args":[{"name":"id","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[id: TypedAbiArg<number | bigint, "id">], Response<bigint, null>>,
     getMaxConfidenceRatio: {"name":"get-max-confidence-ratio","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
     getPauseLiquidation: {"name":"get-pause-liquidation","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"none"}}}} as TypedAbiFunction<[], Response<boolean, null>>,
+    getStbtcHaircutBps: {"name":"get-stbtc-haircut-bps","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
     oracleLastUpdate: {"name":"oracle-last-update","access":"read_only","args":[{"name":"f","type":{"tuple":[{"name":"ident","type":{"buffer":{"length":32}}},{"name":"type","type":{"buffer":{"length":1}}}]}}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[f: TypedAbiArg<{
   "ident": Uint8Array;
   "type": Uint8Array;
@@ -1921,6 +2079,15 @@ market: {
   type: 'uint128',
   access: 'constant'
 } as TypedAbiVariable<bigint>,
+    CALLCODE_STBTC: {
+  name: 'CALLCODE-STBTC',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
     CALLCODE_STSTX: {
   name: 'CALLCODE-STSTX',
   type: {
@@ -1994,6 +2161,11 @@ market: {
   type: 'uint128',
   access: 'constant'
 } as TypedAbiVariable<bigint>,
+    DEPLOYER: {
+  name: 'DEPLOYER',
+  type: 'principal',
+  access: 'constant'
+} as TypedAbiVariable<string>,
     ERR_AMOUNT_ZERO: {
   name: 'ERR-AMOUNT-ZERO',
   type: {
@@ -2184,6 +2356,16 @@ market: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
+    ERR_ORACLE_STBTC_RATIO: {
+  name: 'ERR-ORACLE-STBTC-RATIO',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
     ERR_ORACLE_TYPE: {
   name: 'ERR-ORACLE-TYPE',
   type: {
@@ -2279,8 +2461,33 @@ market: {
   type: 'uint128',
   access: 'constant'
 } as TypedAbiVariable<bigint>,
+    MAX_ORACLE_FUTURE_SKEW: {
+  name: 'MAX-ORACLE-FUTURE-SKEW',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
     mAXU64: {
   name: 'MAX-U64',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MICROS_PER_SECOND: {
+  name: 'MICROS-PER-SECOND',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    STBTC_RATIO_DECIMALS: {
+  name: 'STBTC-RATIO-DECIMALS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    STBTC_RATIO_MAX: {
+  name: 'STBTC-RATIO-MAX',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    STBTC_RATIO_MIN: {
+  name: 'STBTC-RATIO-MIN',
   type: 'uint128',
   access: 'constant'
 } as TypedAbiVariable<bigint>,
@@ -2341,6 +2548,11 @@ market: {
   type: 'uint128',
   access: 'constant'
 } as TypedAbiVariable<bigint>,
+    stBTC: {
+  name: 'stBTC',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
     stSTX: {
   name: 'stSTX',
   type: 'uint128',
@@ -2371,6 +2583,11 @@ market: {
   type: 'uint128',
   access: 'constant'
 } as TypedAbiVariable<bigint>,
+    zstBTC: {
+  name: 'zstBTC',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
     zstSTX: {
   name: 'zstSTX',
   type: 'uint128',
@@ -2386,7 +2603,7 @@ market: {
   type: {
     list: {
       type: 'uint128',
-      length: 6
+      length: 7
     }
   },
   access: 'constant'
@@ -2396,14 +2613,25 @@ market: {
   type: 'uint128',
   access: 'variable'
 } as TypedAbiVariable<bigint>,
+    mockStbtcRatio: {
+  name: 'mock-stbtc-ratio',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
     pauseLiquidation: {
   name: 'pause-liquidation',
   type: 'bool',
   access: 'variable'
-} as TypedAbiVariable<boolean>
+} as TypedAbiVariable<boolean>,
+    stbtcHaircutBps: {
+  name: 'stbtc-haircut-bps',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>
   },
   constants: {
   BPS: 10_000n,
+  cALLCODESTBTC: Uint8Array.from([7]),
   cALLCODESTSTX: Uint8Array.from([0]),
   cALLCODEZSBTC: Uint8Array.from([2]),
   cALLCODEZSTSTX: Uint8Array.from([3]),
@@ -2413,6 +2641,7 @@ market: {
   cALLCODEZUSDH: Uint8Array.from([5]),
   dEBTMASK: 340_282_366_920_938_463_444_927_863_358_058_659_840n,
   dEBTOFFSET: 64n,
+  DEPLOYER: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
   eRRAMOUNTZERO: {
     isOk: false,
     value: 400_002n
@@ -2488,6 +2717,10 @@ market: {
   eRRORACLEPYTH: {
     isOk: false,
     value: 400_012n
+  },
+  eRRORACLESTBTCRATIO: {
+    isOk: false,
+    value: 400_020n
   },
   eRRORACLETYPE: {
     isOk: false,
@@ -2586,7 +2819,12 @@ market: {
     63n
   ],
   mAXLIQUIDATIONAMOUNT: 340_282_366_920_938_463_463_374_607_431_768_211_455n,
+  mAXORACLEFUTURESKEW: 60n,
   mAXU64: 18_446_744_073_709_551_615n,
+  mICROSPERSECOND: 1_000_000n,
+  sTBTCRATIODECIMALS: 100_000_000n,
+  sTBTCRATIOMAX: 200_000_000n,
+  sTBTCRATIOMIN: 50_000_000n,
   sTSTXRATIODECIMALS: 1_000_000n,
   STX: 0n,
   tYPEDIA: Uint8Array.from([1]),
@@ -2596,14 +2834,18 @@ market: {
   USDH: 8n,
   zESTSTXWRAPPERCONTRACT: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx',
   maxConfidenceRatio: 1_000n,
+  mockStbtcRatio: 100_000_000n,
   pauseLiquidation: false,
   sBTC: 2n,
+  stBTC: 12n,
   stSTX: 4n,
   stSTXbtc: 10n,
+  stbtcHaircutBps: 0n,
   zSTX: 1n,
   zUSDC: 7n,
   zUSDH: 9n,
   zsBTC: 3n,
+  zstBTC: 13n,
   zstSTX: 5n,
   zstSTXbtc: 11n,
   ztokens: [
@@ -2612,13 +2854,14 @@ market: {
     5n,
     7n,
     9n,
-    11n
+    11n,
+    13n
   ]
 },
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'market',
   },
 marketTrait: {
@@ -2635,7 +2878,7 @@ marketTrait: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'market-trait',
   },
 marketVault: {
@@ -3144,7 +3387,7 @@ marketVault: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'market-vault',
   },
 mockOracle: {
@@ -3204,7 +3447,7 @@ mockOracle: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'mock-oracle',
   },
 proposalCreateEgroupSbtcUsdc: {
@@ -3221,7 +3464,7 @@ proposalCreateEgroupSbtcUsdc: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'proposal-create-egroup-sbtc-usdc',
   },
 proposalCreateMultipleEgroups: {
@@ -3238,7 +3481,7 @@ proposalCreateMultipleEgroups: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'proposal-create-multiple-egroups',
   },
 proposalInitAssets: {
@@ -3365,7 +3608,7 @@ proposalInitAssets: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'proposal-init-assets',
   },
 proposalInitMarketVault: {
@@ -3382,7 +3625,7 @@ proposalInitMarketVault: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'proposal-init-market-vault',
   },
 proposalInitVaults: {
@@ -3405,8 +3648,151 @@ proposalInitVaults: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'proposal-init-vaults',
+  },
+proposalLazerRepoint: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    CALLCODE_STSTX: {
+  name: 'CALLCODE-STSTX',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZSBTC: {
+  name: 'CALLCODE-ZSBTC',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZSTSTX: {
+  name: 'CALLCODE-ZSTSTX',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZSTSTXBTC: {
+  name: 'CALLCODE-ZSTSTXBTC',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZSTX: {
+  name: 'CALLCODE-ZSTX',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZUSDC: {
+  name: 'CALLCODE-ZUSDC',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZUSDH: {
+  name: 'CALLCODE-ZUSDH',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    LAZER_BTC: {
+  name: 'LAZER-BTC',
+  type: {
+    buffer: {
+      length: 32
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    LAZER_STX: {
+  name: 'LAZER-STX',
+  type: {
+    buffer: {
+      length: 32
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    LAZER_USDC: {
+  name: 'LAZER-USDC',
+  type: {
+    buffer: {
+      length: 32
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    LAZER_USDH: {
+  name: 'LAZER-USDH',
+  type: {
+    buffer: {
+      length: 32
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    MAX_STALENESS: {
+  name: 'MAX-STALENESS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    TYPE_PYTH: {
+  name: 'TYPE-PYTH',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>
+  },
+  constants: {
+  cALLCODESTSTX: Uint8Array.from([0]),
+  cALLCODEZSBTC: Uint8Array.from([2]),
+  cALLCODEZSTSTX: Uint8Array.from([3]),
+  cALLCODEZSTSTXBTC: Uint8Array.from([6]),
+  cALLCODEZSTX: Uint8Array.from([1]),
+  cALLCODEZUSDC: Uint8Array.from([4]),
+  cALLCODEZUSDH: Uint8Array.from([5]),
+  lAZERBTC: Uint8Array.from([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]),
+  lAZERSTX: Uint8Array.from([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3]),
+  lAZERUSDC: Uint8Array.from([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5]),
+  lAZERUSDH: Uint8Array.from([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6]),
+  mAXSTALENESS: 100_000_000n,
+  tYPEPYTH: Uint8Array.from([0])
+},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'proposal-lazer-repoint',
   },
 proposalProtocolInit: {
   "functions": {
@@ -3906,8 +4292,151 @@ proposalProtocolInit: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'proposal-protocol-init',
+  },
+proposalSetMarketV1: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    CALLCODE_STBTC: {
+  name: 'CALLCODE-STBTC',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_STSTX: {
+  name: 'CALLCODE-STSTX',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZSBTC: {
+  name: 'CALLCODE-ZSBTC',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZSTSTX: {
+  name: 'CALLCODE-ZSTSTX',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZSTSTXBTC: {
+  name: 'CALLCODE-ZSTSTXBTC',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZSTX: {
+  name: 'CALLCODE-ZSTX',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZUSDC: {
+  name: 'CALLCODE-ZUSDC',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    CALLCODE_ZUSDH: {
+  name: 'CALLCODE-ZUSDH',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    LAZER_BTC: {
+  name: 'LAZER-BTC',
+  type: {
+    buffer: {
+      length: 32
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    LAZER_STX: {
+  name: 'LAZER-STX',
+  type: {
+    buffer: {
+      length: 32
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    LAZER_USDC: {
+  name: 'LAZER-USDC',
+  type: {
+    buffer: {
+      length: 32
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    MAX_STALENESS: {
+  name: 'MAX-STALENESS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    TYPE_PYTH: {
+  name: 'TYPE-PYTH',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>
+  },
+  constants: {
+  cALLCODESTBTC: Uint8Array.from([7]),
+  cALLCODESTSTX: Uint8Array.from([0]),
+  cALLCODEZSBTC: Uint8Array.from([2]),
+  cALLCODEZSTSTX: Uint8Array.from([3]),
+  cALLCODEZSTSTXBTC: Uint8Array.from([6]),
+  cALLCODEZSTX: Uint8Array.from([1]),
+  cALLCODEZUSDC: Uint8Array.from([4]),
+  cALLCODEZUSDH: Uint8Array.from([5]),
+  lAZERBTC: Uint8Array.from([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]),
+  lAZERSTX: Uint8Array.from([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3]),
+  lAZERUSDC: Uint8Array.from([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5]),
+  mAXSTALENESS: 100_000_000n,
+  tYPEPYTH: Uint8Array.from([0])
+},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'proposal-set-market-v1',
   },
 proposalSetPriceStaleness: {
   "functions": {
@@ -3923,7 +4452,7 @@ proposalSetPriceStaleness: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'proposal-set-price-staleness',
   },
 proposalSetSbtcInterestRates: {
@@ -3986,7 +4515,7 @@ proposalSetSbtcInterestRates: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'proposal-set-sbtc-interest-rates',
   },
 proposalSetStxInterestRates: {
@@ -4049,7 +4578,7 @@ proposalSetStxInterestRates: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'proposal-set-stx-interest-rates',
   },
 proposalSetUsdcInterestRates: {
@@ -4112,8 +4641,59 @@ proposalSetUsdcInterestRates: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'proposal-set-usdc-interest-rates',
+  },
+proposalTestZvClaimOwnership: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'proposal-test-zv-claim-ownership',
+  },
+proposalTestZvOwnerConfig: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'proposal-test-zv-owner-config',
+  },
+proposalTestZvSetMetadata: {
+  "functions": {
+    execute: {"name":"execute","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'proposal-test-zv-set-metadata',
   },
 protocolData: {
   "functions": {
@@ -4167,7 +4747,7 @@ protocolData: {
 }>,
     getAssetPrice: {"name":"get-asset-price","access":"private","args":[{"name":"aid","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[aid: TypedAbiArg<number | bigint, "aid">], bigint>,
     getDiaPrice: {"name":"get-dia-price","access":"private","args":[{"name":"key","type":{"string-ascii":{"length":32}}}],"outputs":{"type":{"optional":"uint128"}}} as TypedAbiFunction<[key: TypedAbiArg<string, "key">], bigint | null>,
-    getPythPrice: {"name":"get-pyth-price","access":"private","args":[{"name":"feed-id","type":{"buffer":{"length":32}}}],"outputs":{"type":{"optional":"uint128"}}} as TypedAbiFunction<[feedId: TypedAbiArg<Uint8Array, "feedId">], bigint | null>,
+    getPythPrice: {"name":"get-pyth-price","access":"private","args":[{"name":"feed-id","type":{"buffer":{"length":32}}}],"outputs":{"type":{"optional":"none"}}} as TypedAbiFunction<[feedId: TypedAbiArg<Uint8Array, "feedId">], null | null>,
     getStstxRatio: {"name":"get-ststx-ratio","access":"private","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
     getVaultAvailableLiquidity: {"name":"get-vault-available-liquidity","access":"private","args":[{"name":"vid","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[vid: TypedAbiArg<number | bigint, "vid">], bigint>,
     getVaultBorrowIndex: {"name":"get-vault-borrow-index","access":"private","args":[{"name":"vid","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[vid: TypedAbiArg<number | bigint, "vid">], bigint>,
@@ -4243,6 +4823,7 @@ protocolData: {
     mulBpsDown: {"name":"mul-bps-down","access":"private","args":[{"name":"x","type":"uint128"},{"name":"y","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[x: TypedAbiArg<number | bigint, "x">, y: TypedAbiArg<number | bigint, "y">], bigint>,
     mulDivDown: {"name":"mul-div-down","access":"private","args":[{"name":"x","type":"uint128"},{"name":"y","type":"uint128"},{"name":"z","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[x: TypedAbiArg<number | bigint, "x">, y: TypedAbiArg<number | bigint, "y">, z: TypedAbiArg<number | bigint, "z">], bigint>,
     normalizePyth: {"name":"normalize-pyth","access":"private","args":[{"name":"price","type":"int128"},{"name":"expo","type":"int128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[price: TypedAbiArg<number | bigint, "price">, expo: TypedAbiArg<number | bigint, "expo">], bigint>,
+    pythFeedIdToLazer: {"name":"pyth-feed-id-to-lazer","access":"private","args":[{"name":"feed-id","type":{"buffer":{"length":32}}}],"outputs":{"type":{"optional":"uint128"}}} as TypedAbiFunction<[feedId: TypedAbiArg<Uint8Array, "feedId">], bigint | null>,
     sumCollateralUsd: {"name":"sum-collateral-usd","access":"private","args":[{"name":"entry","type":{"tuple":[{"name":"aid","type":"uint128"},{"name":"amount","type":"uint128"}]}},{"name":"acc","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[entry: TypedAbiArg<{
   "aid": number | bigint;
   "amount": number | bigint;
@@ -4989,761 +5570,221 @@ protocolData: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'protocol-data',
   },
-pythGovernanceV3: {
+pythLazerDecoderV1: {
   "functions": {
-    checkUpdateSource: {"name":"check-update-source","access":"private","args":[{"name":"emitter-chain","type":"uint128"},{"name":"emitter-address","type":{"buffer":{"length":32}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[emitterChain: TypedAbiArg<number | bigint, "emitterChain">, emitterAddress: TypedAbiArg<Uint8Array, "emitterAddress">], Response<boolean, bigint>>,
-    expectActiveDecoderContract: {"name":"expect-active-decoder-contract","access":"private","args":[{"name":"decoder-contract","type":"trait_reference"},{"name":"expected-plan","type":{"tuple":[{"name":"pyth-decoder-contract","type":"principal"},{"name":"pyth-oracle-contract","type":"principal"},{"name":"pyth-storage-contract","type":"principal"},{"name":"wormhole-core-contract","type":"principal"}]}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[decoderContract: TypedAbiArg<string, "decoderContract">, expectedPlan: TypedAbiArg<{
-  "pythDecoderContract": string;
-  "pythOracleContract": string;
-  "pythStorageContract": string;
-  "wormholeCoreContract": string;
-}, "expectedPlan">], Response<boolean, bigint>>,
-    expectActiveStorageContract: {"name":"expect-active-storage-contract","access":"private","args":[{"name":"storage-contract","type":"trait_reference"},{"name":"expected-plan","type":{"tuple":[{"name":"pyth-decoder-contract","type":"principal"},{"name":"pyth-oracle-contract","type":"principal"},{"name":"pyth-storage-contract","type":"principal"},{"name":"wormhole-core-contract","type":"principal"}]}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[storageContract: TypedAbiArg<string, "storageContract">, expectedPlan: TypedAbiArg<{
-  "pythDecoderContract": string;
-  "pythOracleContract": string;
-  "pythStorageContract": string;
-  "wormholeCoreContract": string;
-}, "expectedPlan">], Response<boolean, bigint>>,
-    expectActiveWormholeContract: {"name":"expect-active-wormhole-contract","access":"private","args":[{"name":"wormhole-contract","type":"trait_reference"},{"name":"expected-plan","type":{"tuple":[{"name":"pyth-decoder-contract","type":"principal"},{"name":"pyth-oracle-contract","type":"principal"},{"name":"pyth-storage-contract","type":"principal"},{"name":"wormhole-core-contract","type":"principal"}]}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[wormholeContract: TypedAbiArg<string, "wormholeContract">, expectedPlan: TypedAbiArg<{
-  "pythDecoderContract": string;
-  "pythOracleContract": string;
-  "pythStorageContract": string;
-  "wormholeCoreContract": string;
-}, "expectedPlan">], Response<boolean, bigint>>,
-    expectContractCallPerformedByExpectedOracleContract: {"name":"expect-contract-call-performed-by-expected-oracle-contract","access":"private","args":[{"name":"former-contract-caller","type":"principal"},{"name":"expected-plan","type":{"tuple":[{"name":"pyth-decoder-contract","type":"principal"},{"name":"pyth-oracle-contract","type":"principal"},{"name":"pyth-storage-contract","type":"principal"},{"name":"wormhole-core-contract","type":"principal"}]}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[formerContractCaller: TypedAbiArg<string, "formerContractCaller">, expectedPlan: TypedAbiArg<{
-  "pythDecoderContract": string;
-  "pythOracleContract": string;
-  "pythStorageContract": string;
-  "wormholeCoreContract": string;
-}, "expectedPlan">], Response<boolean, bigint>>,
-    parseAndVerifyFeeValue: {"name":"parse-and-verify-fee-value","access":"private","args":[{"name":"ptgm-body","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"exponent","type":"uint128"},{"name":"mantissa","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[ptgmBody: TypedAbiArg<Uint8Array, "ptgmBody">], Response<{
-  "exponent": bigint;
-  "mantissa": bigint;
-}, bigint>>,
-    parseAndVerifyGovernanceDataSource: {"name":"parse-and-verify-governance-data-source","access":"private","args":[{"name":"ptgm-body","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"emitter-address","type":{"buffer":{"length":32}}},{"name":"emitter-chain","type":"uint128"},{"name":"emitter-sequence","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[ptgmBody: TypedAbiArg<Uint8Array, "ptgmBody">], Response<{
-  "emitterAddress": Uint8Array;
-  "emitterChain": bigint;
-  "emitterSequence": bigint;
-}, bigint>>,
-    parseAndVerifyPricesDataSources: {"name":"parse-and-verify-prices-data-sources","access":"private","args":[{"name":"ptgm-body","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"list":{"type":{"tuple":[{"name":"emitter-address","type":{"buffer":{"length":32}}},{"name":"emitter-chain","type":"uint128"}]},"length":255}},"error":"uint128"}}}} as TypedAbiFunction<[ptgmBody: TypedAbiArg<Uint8Array, "ptgmBody">], Response<{
-  "emitterAddress": Uint8Array;
-  "emitterChain": bigint;
-}[], bigint>>,
-    parseAndVerifyPtgm: {"name":"parse-and-verify-ptgm","access":"private","args":[{"name":"ptgm-bytes","type":{"buffer":{"length":8192}}},{"name":"sequence","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"action","type":{"buffer":{"length":1}}},{"name":"body","type":{"buffer":{"length":8192}}}]},"error":"uint128"}}}} as TypedAbiFunction<[ptgmBytes: TypedAbiArg<Uint8Array, "ptgmBytes">, sequence: TypedAbiArg<number | bigint, "sequence">], Response<{
-  "action": Uint8Array;
-  "body": Uint8Array;
-}, bigint>>,
-    parseAndVerifyStalePriceThreshold: {"name":"parse-and-verify-stale-price-threshold","access":"private","args":[{"name":"ptgm-body","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[ptgmBody: TypedAbiArg<Uint8Array, "ptgmBody">], Response<bigint, bigint>>,
-    parseDataSource: {"name":"parse-data-source","access":"private","args":[{"name":"entry","type":{"buffer":{"length":1}}},{"name":"acc","type":{"tuple":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"cursor","type":{"tuple":[{"name":"index","type":"uint128"},{"name":"next-update-index","type":"uint128"}]}},{"name":"limit","type":"uint128"},{"name":"result","type":{"list":{"type":{"tuple":[{"name":"emitter-address","type":{"buffer":{"length":32}}},{"name":"emitter-chain","type":"uint128"}]},"length":255}}}]}}],"outputs":{"type":{"tuple":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"cursor","type":{"tuple":[{"name":"index","type":"uint128"},{"name":"next-update-index","type":"uint128"}]}},{"name":"limit","type":"uint128"},{"name":"result","type":{"list":{"type":{"tuple":[{"name":"emitter-address","type":{"buffer":{"length":32}}},{"name":"emitter-chain","type":"uint128"}]},"length":255}}}]}}} as TypedAbiFunction<[entry: TypedAbiArg<Uint8Array, "entry">, acc: TypedAbiArg<{
-  "bytes": Uint8Array;
-  "cursor": {
-  "index": number | bigint;
-  "nextUpdateIndex": number | bigint;
-};
-  "limit": number | bigint;
-  "result": {
-  "emitterAddress": Uint8Array;
-  "emitterChain": number | bigint;
-}[];
-}, "acc">], {
-  "bytes": Uint8Array;
-  "cursor": {
-  "index": bigint;
-  "nextUpdateIndex": bigint;
-};
-  "limit": bigint;
-  "result": {
-  "emitterAddress": Uint8Array;
-  "emitterChain": bigint;
-}[];
-}>,
-    parsePrincipal: {"name":"parse-principal","access":"private","args":[{"name":"ptgm-body","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":"principal","error":"uint128"}}}} as TypedAbiFunction<[ptgmBody: TypedAbiArg<Uint8Array, "ptgmBody">], Response<string, bigint>>,
-    readBuff: {"name":"read-buff","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"},{"name":"length","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":8192}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">, length: TypedAbiArg<number | bigint, "length">], Response<Uint8Array, bigint>>,
-    readBuff1: {"name":"read-buff-1","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":1}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<Uint8Array, bigint>>,
-    readBuff2: {"name":"read-buff-2","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":2}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<Uint8Array, bigint>>,
-    readBuff32: {"name":"read-buff-32","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":32}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<Uint8Array, bigint>>,
-    readBuff4: {"name":"read-buff-4","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":4}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<Uint8Array, bigint>>,
-    readUint16: {"name":"read-uint-16","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    readUint64: {"name":"read-uint-64","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    readUint8: {"name":"read-uint-8","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    slice: {"name":"slice","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"},{"name":"size","type":{"optional":"uint128"}}],"outputs":{"type":{"buffer":{"length":8192}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">, size: TypedAbiArg<number | bigint | null, "size">], Uint8Array>,
-    updateFeeRecipientAddress: {"name":"update-fee-recipient-address","access":"public","args":[{"name":"vaa-bytes","type":{"buffer":{"length":8192}}},{"name":"wormhole-core-contract","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":"principal","error":"uint128"}}}} as TypedAbiFunction<[vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">, wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">], Response<string, bigint>>,
-    updateFeeValue: {"name":"update-fee-value","access":"public","args":[{"name":"vaa-bytes","type":{"buffer":{"length":8192}}},{"name":"wormhole-core-contract","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"exponent","type":"uint128"},{"name":"mantissa","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">, wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">], Response<{
-  "exponent": bigint;
-  "mantissa": bigint;
-}, bigint>>,
-    updateGovernanceDataSource: {"name":"update-governance-data-source","access":"public","args":[{"name":"vaa-bytes","type":{"buffer":{"length":8192}}},{"name":"wormhole-core-contract","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"emitter-address","type":{"buffer":{"length":32}}},{"name":"emitter-chain","type":"uint128"},{"name":"emitter-sequence","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">, wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">], Response<{
-  "emitterAddress": Uint8Array;
-  "emitterChain": bigint;
-  "emitterSequence": bigint;
-}, bigint>>,
-    updatePricesDataSources: {"name":"update-prices-data-sources","access":"public","args":[{"name":"vaa-bytes","type":{"buffer":{"length":8192}}},{"name":"wormhole-core-contract","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":{"list":{"type":{"tuple":[{"name":"emitter-address","type":{"buffer":{"length":32}}},{"name":"emitter-chain","type":"uint128"}]},"length":255}},"error":"uint128"}}}} as TypedAbiFunction<[vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">, wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">], Response<{
-  "emitterAddress": Uint8Array;
-  "emitterChain": bigint;
-}[], bigint>>,
-    updatePythDecoderContract: {"name":"update-pyth-decoder-contract","access":"public","args":[{"name":"vaa-bytes","type":{"buffer":{"length":8192}}},{"name":"wormhole-core-contract","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":"principal","error":"uint128"}}}} as TypedAbiFunction<[vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">, wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">], Response<string, bigint>>,
-    updatePythOracleContract: {"name":"update-pyth-oracle-contract","access":"public","args":[{"name":"vaa-bytes","type":{"buffer":{"length":8192}}},{"name":"wormhole-core-contract","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":"principal","error":"uint128"}}}} as TypedAbiFunction<[vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">, wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">], Response<string, bigint>>,
-    updatePythStorageContract: {"name":"update-pyth-storage-contract","access":"public","args":[{"name":"vaa-bytes","type":{"buffer":{"length":8192}}},{"name":"wormhole-core-contract","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":"principal","error":"uint128"}}}} as TypedAbiFunction<[vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">, wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">], Response<string, bigint>>,
-    updateStalePriceThreshold: {"name":"update-stale-price-threshold","access":"public","args":[{"name":"vaa-bytes","type":{"buffer":{"length":8192}}},{"name":"wormhole-core-contract","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">, wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">], Response<bigint, bigint>>,
-    updateWormholeCoreContract: {"name":"update-wormhole-core-contract","access":"public","args":[{"name":"vaa-bytes","type":{"buffer":{"length":8192}}},{"name":"wormhole-core-contract","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":"principal","error":"uint128"}}}} as TypedAbiFunction<[vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">, wormholeCoreContract: TypedAbiArg<string, "wormholeCoreContract">], Response<string, bigint>>,
-    checkExecutionFlow: {"name":"check-execution-flow","access":"read_only","args":[{"name":"former-contract-caller","type":"principal"},{"name":"execution-plan-opt","type":{"optional":{"tuple":[{"name":"pyth-decoder-contract","type":"trait_reference"},{"name":"pyth-storage-contract","type":"trait_reference"},{"name":"wormhole-core-contract","type":"trait_reference"}]}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[formerContractCaller: TypedAbiArg<string, "formerContractCaller">, executionPlanOpt: TypedAbiArg<{
-  "pythDecoderContract": string;
-  "pythStorageContract": string;
-  "wormholeCoreContract": string;
-} | null, "executionPlanOpt">], Response<boolean, bigint>>,
-    checkStorageContract: {"name":"check-storage-contract","access":"read_only","args":[{"name":"storage-contract","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[storageContract: TypedAbiArg<string, "storageContract">], Response<boolean, bigint>>,
-    getAuthorizedPricesDataSources: {"name":"get-authorized-prices-data-sources","access":"read_only","args":[],"outputs":{"type":{"list":{"type":{"tuple":[{"name":"emitter-address","type":{"buffer":{"length":32}}},{"name":"emitter-chain","type":"uint128"}]},"length":255}}}} as TypedAbiFunction<[], {
-  "emitterAddress": Uint8Array;
-  "emitterChain": bigint;
-}[]>,
-    getCurrentExecutionPlan: {"name":"get-current-execution-plan","access":"read_only","args":[],"outputs":{"type":{"tuple":[{"name":"pyth-decoder-contract","type":"principal"},{"name":"pyth-oracle-contract","type":"principal"},{"name":"pyth-storage-contract","type":"principal"},{"name":"wormhole-core-contract","type":"principal"}]}}} as TypedAbiFunction<[], {
-  "pythDecoderContract": string;
-  "pythOracleContract": string;
-  "pythStorageContract": string;
-  "wormholeCoreContract": string;
-}>,
-    getFeeInfo: {"name":"get-fee-info","access":"read_only","args":[],"outputs":{"type":{"tuple":[{"name":"address","type":"principal"},{"name":"exponent","type":"uint128"},{"name":"mantissa","type":"uint128"}]}}} as TypedAbiFunction<[], {
-  "address": string;
-  "exponent": bigint;
-  "mantissa": bigint;
-}>,
-    getStalePriceThreshold: {"name":"get-stale-price-threshold","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>
-  },
-  "maps": {
-    
-  },
-  "variables": {
-    ERR_INVALID_ACTION_PAYLOAD: {
-  name: 'ERR_INVALID_ACTION_PAYLOAD',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_INVALID_PRICE_DATA_SOURCES: {
-  name: 'ERR_INVALID_PRICE_DATA_SOURCES',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_INVALID_PTGM: {
-  name: 'ERR_INVALID_PTGM',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_NOT_STANDARD_PRINCIPAL: {
-  name: 'ERR_NOT_STANDARD_PRINCIPAL',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_OUTDATED: {
-  name: 'ERR_OUTDATED',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_PTGM_CHECK_OVERLAY: {
-  name: 'ERR_PTGM_CHECK_OVERLAY',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_UNAUTHORIZED_ACCESS: {
-  name: 'ERR_UNAUTHORIZED_ACCESS',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_UNAUTHORIZED_UPDATE: {
-  name: 'ERR_UNAUTHORIZED_UPDATE',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_UNEXPECTED_ACTION: {
-  name: 'ERR_UNEXPECTED_ACTION',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    EXPECTED_CHAIN_ID: {
-  name: 'EXPECTED_CHAIN_ID',
-  type: {
-    buffer: {
-      length: 2
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    EXPECTED_MODULE: {
-  name: 'EXPECTED_MODULE',
-  type: {
-    buffer: {
-      length: 1
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    PTGM_MAGIC: {
-  name: 'PTGM_MAGIC',
-  type: {
-    buffer: {
-      length: 4
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    PTGM_STALE_PRICE_THRESHOLD: {
-  name: 'PTGM_STALE_PRICE_THRESHOLD',
-  type: {
-    buffer: {
-      length: 1
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    PTGM_UPDATE_FEE: {
-  name: 'PTGM_UPDATE_FEE',
-  type: {
-    buffer: {
-      length: 1
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    PTGM_UPDATE_GOVERNANCE_DATA_SOURCE: {
-  name: 'PTGM_UPDATE_GOVERNANCE_DATA_SOURCE',
-  type: {
-    buffer: {
-      length: 1
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    PTGM_UPDATE_PRICES_DATA_SOURCES: {
-  name: 'PTGM_UPDATE_PRICES_DATA_SOURCES',
-  type: {
-    buffer: {
-      length: 1
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    PTGM_UPDATE_PYTH_DECODER_ADDRESS: {
-  name: 'PTGM_UPDATE_PYTH_DECODER_ADDRESS',
-  type: {
-    buffer: {
-      length: 1
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    PTGM_UPDATE_PYTH_ORACLE_ADDRESS: {
-  name: 'PTGM_UPDATE_PYTH_ORACLE_ADDRESS',
-  type: {
-    buffer: {
-      length: 1
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    PTGM_UPDATE_PYTH_STORAGE_ADDRESS: {
-  name: 'PTGM_UPDATE_PYTH_STORAGE_ADDRESS',
-  type: {
-    buffer: {
-      length: 1
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    PTGM_UPDATE_RECIPIENT_ADDRESS: {
-  name: 'PTGM_UPDATE_RECIPIENT_ADDRESS',
-  type: {
-    buffer: {
-      length: 1
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    PTGM_UPDATE_WORMHOLE_CORE_ADDRESS: {
-  name: 'PTGM_UPDATE_WORMHOLE_CORE_ADDRESS',
-  type: {
-    buffer: {
-      length: 1
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    SIZE_OF_EMITTER_DATA: {
-  name: 'SIZE_OF_EMITTER_DATA',
-  type: 'uint128',
-  access: 'constant'
-} as TypedAbiVariable<bigint>,
-    currentExecutionPlan: {
-  name: 'current-execution-plan',
-  type: {
-    tuple: [
-      {
-        name: 'pyth-decoder-contract',
-        type: 'principal'
-      },
-      {
-        name: 'pyth-oracle-contract',
-        type: 'principal'
-      },
-      {
-        name: 'pyth-storage-contract',
-        type: 'principal'
-      },
-      {
-        name: 'wormhole-core-contract',
-        type: 'principal'
-      }
-    ]
-  },
-  access: 'variable'
-} as TypedAbiVariable<{
-  "pythDecoderContract": string;
-  "pythOracleContract": string;
-  "pythStorageContract": string;
-  "wormholeCoreContract": string;
-}>,
-    feeRecipientAddress: {
-  name: 'fee-recipient-address',
-  type: 'principal',
-  access: 'variable'
-} as TypedAbiVariable<string>,
-    feeValue: {
-  name: 'fee-value',
-  type: {
-    tuple: [
-      {
-        name: 'exponent',
-        type: 'uint128'
-      },
-      {
-        name: 'mantissa',
-        type: 'uint128'
-      }
-    ]
-  },
-  access: 'variable'
-} as TypedAbiVariable<{
-  "exponent": bigint;
-  "mantissa": bigint;
-}>,
-    governanceDataSource: {
-  name: 'governance-data-source',
-  type: {
-    tuple: [
-      {
-        name: 'emitter-address',
-        type: {
-          buffer: {
-            length: 32
-          }
-        }
-      },
-      {
-        name: 'emitter-chain',
-        type: 'uint128'
-      }
-    ]
-  },
-  access: 'variable'
-} as TypedAbiVariable<{
-  "emitterAddress": Uint8Array;
-  "emitterChain": bigint;
-}>,
-    lastSequenceProcessed: {
-  name: 'last-sequence-processed',
-  type: 'uint128',
-  access: 'variable'
-} as TypedAbiVariable<bigint>,
-    pricesDataSources: {
-  name: 'prices-data-sources',
-  type: {
-    list: {
-      type: {
-        tuple: [
-          {
-            name: 'emitter-address',
-            type: {
-              buffer: {
-                length: 32
-              }
-            }
-          },
-          {
-            name: 'emitter-chain',
-            type: 'uint128'
-          }
-        ]
-      },
-      length: 255
-    }
-  },
-  access: 'variable'
-} as TypedAbiVariable<{
-  "emitterAddress": Uint8Array;
-  "emitterChain": bigint;
-}[]>,
-    stalePriceThreshold: {
-  name: 'stale-price-threshold',
-  type: 'uint128',
-  access: 'variable'
-} as TypedAbiVariable<bigint>
-  },
-  constants: {
-  ERR_INVALID_ACTION_PAYLOAD: {
-    isOk: false,
-    value: 4_002n
-  },
-  ERR_INVALID_PRICE_DATA_SOURCES: {
-    isOk: false,
-    value: 4_009n
-  },
-  ERR_INVALID_PTGM: {
-    isOk: false,
-    value: 4_006n
-  },
-  ERR_NOT_STANDARD_PRINCIPAL: {
-    isOk: false,
-    value: 4_007n
-  },
-  ERR_OUTDATED: {
-    isOk: false,
-    value: 4_004n
-  },
-  ERR_PTGM_CHECK_OVERLAY: {
-    isOk: false,
-    value: 4_008n
-  },
-  ERR_UNAUTHORIZED_ACCESS: {
-    isOk: false,
-    value: 4_003n
-  },
-  ERR_UNAUTHORIZED_UPDATE: {
-    isOk: false,
-    value: 4_005n
-  },
-  ERR_UNEXPECTED_ACTION: {
-    isOk: false,
-    value: 4_001n
-  },
-  EXPECTED_CHAIN_ID: Uint8Array.from([195,119]),
-  EXPECTED_MODULE: Uint8Array.from([3]),
-  PTGM_MAGIC: Uint8Array.from([80,84,71,77]),
-  PTGM_STALE_PRICE_THRESHOLD: Uint8Array.from([4]),
-  PTGM_UPDATE_FEE: Uint8Array.from([3]),
-  PTGM_UPDATE_GOVERNANCE_DATA_SOURCE: Uint8Array.from([1]),
-  PTGM_UPDATE_PRICES_DATA_SOURCES: Uint8Array.from([2]),
-  PTGM_UPDATE_PYTH_DECODER_ADDRESS: Uint8Array.from([162]),
-  PTGM_UPDATE_PYTH_ORACLE_ADDRESS: Uint8Array.from([0]),
-  PTGM_UPDATE_PYTH_STORAGE_ADDRESS: Uint8Array.from([161]),
-  PTGM_UPDATE_RECIPIENT_ADDRESS: Uint8Array.from([160]),
-  PTGM_UPDATE_WORMHOLE_CORE_ADDRESS: Uint8Array.from([6]),
-  SIZE_OF_EMITTER_DATA: 34n,
-  currentExecutionPlan: {
-    pythDecoderContract: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-pnau-decoder-v3',
-    pythOracleContract: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-oracle-v4',
-    pythStorageContract: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-storage-v4',
-    wormholeCoreContract: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-core-v4'
-  },
-  feeRecipientAddress: 'ST3CRXBDXQ2N5P7E25Q39MEX1HSMRDSEAP1JST19D',
-  feeValue: {
-    exponent: 0n,
-    mantissa: 1n
-  },
-  governanceDataSource: {
-    emitterAddress: Uint8Array.from([86,53,151,154,34,28,52,147,30,50,98,11,146,147,164,99,6,85,85,234,113,254,151,205,98,55,173,232,117,177,46,158]),
-    emitterChain: 1n
-  },
-  lastSequenceProcessed: 0n,
-  pricesDataSources: [
-    {
-      emitterAddress: Uint8Array.from([107,177,69,9,166,18,240,31,187,196,207,254,235,212,187,251,73,42,134,223,113,126,190,146,235,109,244,50,163,240,10,37]),
-      emitterChain: 1n
-    },
-    {
-      emitterAddress: Uint8Array.from([248,205,35,194,171,145,35,119,48,119,11,190,160,141,97,0,92,221,160,152,67,72,243,246,238,203,85,150,56,192,187,160]),
-      emitterChain: 26n
-    },
-    {
-      emitterAddress: Uint8Array.from([225,1,250,237,172,88,81,227,43,155,35,181,249,65,26,140,43,172,74,174,62,212,221,123,129,29,209,167,46,164,170,113]),
-      emitterChain: 26n
-    }
-  ],
-  stalePriceThreshold: 157_680_000n
-},
-  "non_fungible_tokens": [
-    
-  ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
-  contractName: 'pyth-governance-v3',
-  },
-pythOracleV4: {
-  "functions": {
-    decodePriceFeeds: {"name":"decode-price-feeds","access":"public","args":[{"name":"price-feed-bytes","type":{"buffer":{"length":8192}}},{"name":"execution-plan","type":{"tuple":[{"name":"pyth-decoder-contract","type":"trait_reference"},{"name":"pyth-storage-contract","type":"trait_reference"},{"name":"wormhole-core-contract","type":"trait_reference"}]}}],"outputs":{"type":{"response":{"ok":{"list":{"type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]},"length":64}},"error":"uint128"}}}} as TypedAbiFunction<[priceFeedBytes: TypedAbiArg<Uint8Array, "priceFeedBytes">, executionPlan: TypedAbiArg<{
-  "pythDecoderContract": string;
-  "pythStorageContract": string;
-  "wormholeCoreContract": string;
-}, "executionPlan">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": bigint;
-}[], bigint>>,
-    getPrice: {"name":"get-price","access":"public","args":[{"name":"price-feed-id","type":{"buffer":{"length":32}}},{"name":"pyth-storage-address","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"publish-time","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[priceFeedId: TypedAbiArg<Uint8Array, "priceFeedId">, pythStorageAddress: TypedAbiArg<string, "pythStorageAddress">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "publishTime": bigint;
-}, bigint>>,
-    readPriceFeed: {"name":"read-price-feed","access":"public","args":[{"name":"price-feed-id","type":{"buffer":{"length":32}}},{"name":"pyth-storage-address","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"publish-time","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[priceFeedId: TypedAbiArg<Uint8Array, "priceFeedId">, pythStorageAddress: TypedAbiArg<string, "pythStorageAddress">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "publishTime": bigint;
-}, bigint>>,
-    verifyAndUpdatePriceFeeds: {"name":"verify-and-update-price-feeds","access":"public","args":[{"name":"price-feed-bytes","type":{"buffer":{"length":8192}}},{"name":"execution-plan","type":{"tuple":[{"name":"pyth-decoder-contract","type":"trait_reference"},{"name":"pyth-storage-contract","type":"trait_reference"},{"name":"wormhole-core-contract","type":"trait_reference"}]}}],"outputs":{"type":{"response":{"ok":{"list":{"type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]},"length":64}},"error":"uint128"}}}} as TypedAbiFunction<[priceFeedBytes: TypedAbiArg<Uint8Array, "priceFeedBytes">, executionPlan: TypedAbiArg<{
-  "pythDecoderContract": string;
-  "pythStorageContract": string;
-  "wormholeCoreContract": string;
-}, "executionPlan">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": bigint;
-}[], bigint>>
-  },
-  "maps": {
-    
-  },
-  "variables": {
-    ERR_BALANCE_INSUFFICIENT: {
-  name: 'ERR_BALANCE_INSUFFICIENT',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>
-  },
-  constants: {
-  ERR_BALANCE_INSUFFICIENT: {
-    isOk: false,
-    value: 3_001n
-  }
-},
-  "non_fungible_tokens": [
-    
-  ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
-  contractName: 'pyth-oracle-v4',
-  },
-pythPnauDecoderV3: {
-  "functions": {
-    buff20ToUint: {"name":"buff-20-to-uint","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":20}}}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">], bigint>,
-    castDecodedPrice: {"name":"cast-decoded-price","access":"private","args":[{"name":"entry","type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"leaf-bytes","type":{"buffer":{"length":255}}},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"proof","type":{"list":{"type":{"buffer":{"length":20}},"length":128}}},{"name":"publish-time","type":"uint128"},{"name":"update-size","type":"uint128"}]}}],"outputs":{"type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]}}} as TypedAbiFunction<[entry: TypedAbiArg<{
-  "conf": number | bigint;
-  "emaConf": number | bigint;
-  "emaPrice": number | bigint;
-  "expo": number | bigint;
-  "leafBytes": Uint8Array;
-  "prevPublishTime": number | bigint;
-  "price": number | bigint;
-  "priceIdentifier": Uint8Array;
-  "proof": Uint8Array[];
-  "publishTime": number | bigint;
-  "updateSize": number | bigint;
-}, "entry">], {
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": bigint;
-}>,
-    checkMerkleProof: {"name":"check-merkle-proof","access":"private","args":[{"name":"entry","type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"leaf-bytes","type":{"buffer":{"length":255}}},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"proof","type":{"list":{"type":{"buffer":{"length":20}},"length":128}}},{"name":"publish-time","type":"uint128"},{"name":"update-size","type":"uint128"}]}},{"name":"acc","type":{"tuple":[{"name":"merkle-root-hash","type":{"buffer":{"length":20}}},{"name":"result","type":"bool"}]}}],"outputs":{"type":{"tuple":[{"name":"merkle-root-hash","type":{"buffer":{"length":20}}},{"name":"result","type":"bool"}]}}} as TypedAbiFunction<[entry: TypedAbiArg<{
-  "conf": number | bigint;
-  "emaConf": number | bigint;
-  "emaPrice": number | bigint;
-  "expo": number | bigint;
-  "leafBytes": Uint8Array;
-  "prevPublishTime": number | bigint;
-  "price": number | bigint;
-  "priceIdentifier": Uint8Array;
-  "proof": Uint8Array[];
-  "publishTime": number | bigint;
-  "updateSize": number | bigint;
+    checkTrustedSigner: {"name":"check-trusted-signer","access":"private","args":[{"name":"entry","type":{"tuple":[{"name":"expires-at","type":"uint128"},{"name":"pubkey","type":{"buffer":{"length":33}}}]}},{"name":"acc","type":{"tuple":[{"name":"now","type":"uint128"},{"name":"target","type":{"buffer":{"length":33}}},{"name":"trusted","type":"bool"}]}}],"outputs":{"type":{"tuple":[{"name":"now","type":"uint128"},{"name":"target","type":{"buffer":{"length":33}}},{"name":"trusted","type":"bool"}]}}} as TypedAbiFunction<[entry: TypedAbiArg<{
+  "expiresAt": number | bigint;
+  "pubkey": Uint8Array;
 }, "entry">, acc: TypedAbiArg<{
-  "merkleRootHash": Uint8Array;
-  "result": boolean;
+  "now": number | bigint;
+  "target": Uint8Array;
+  "trusted": boolean;
 }, "acc">], {
-  "merkleRootHash": Uint8Array;
-  "result": boolean;
+  "now": bigint;
+  "target": Uint8Array;
+  "trusted": boolean;
 }>,
-    checkProof: {"name":"check-proof","access":"private","args":[{"name":"root-hash","type":{"buffer":{"length":20}}},{"name":"leaf","type":{"buffer":{"length":255}}},{"name":"path","type":{"list":{"type":{"buffer":{"length":20}},"length":255}}}],"outputs":{"type":"bool"}} as TypedAbiFunction<[rootHash: TypedAbiArg<Uint8Array, "rootHash">, leaf: TypedAbiArg<Uint8Array, "leaf">, path: TypedAbiArg<Uint8Array[], "path">], boolean>,
-    hashLeaf: {"name":"hash-leaf","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":255}}}],"outputs":{"type":{"buffer":{"length":20}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">], Uint8Array>,
-    hashNodes: {"name":"hash-nodes","access":"private","args":[{"name":"node-1","type":{"buffer":{"length":20}}},{"name":"node-2","type":{"buffer":{"length":20}}}],"outputs":{"type":{"buffer":{"length":20}}}} as TypedAbiFunction<[node1: TypedAbiArg<Uint8Array, "node1">, node2: TypedAbiArg<Uint8Array, "node2">], Uint8Array>,
-    hashPath: {"name":"hash-path","access":"private","args":[{"name":"entry","type":{"buffer":{"length":20}}},{"name":"acc","type":{"buffer":{"length":20}}}],"outputs":{"type":{"buffer":{"length":20}}}} as TypedAbiFunction<[entry: TypedAbiArg<Uint8Array, "entry">, acc: TypedAbiArg<Uint8Array, "acc">], Uint8Array>,
-    keccak160: {"name":"keccak160","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":1024}}}],"outputs":{"type":{"buffer":{"length":20}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">], Uint8Array>,
-    parseAndVerifyPricesUpdates: {"name":"parse-and-verify-prices-updates","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"merkle-root-hash","type":{"buffer":{"length":20}}}],"outputs":{"type":{"response":{"ok":{"list":{"type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"leaf-bytes","type":{"buffer":{"length":255}}},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"proof","type":{"list":{"type":{"buffer":{"length":20}},"length":128}}},{"name":"publish-time","type":"uint128"},{"name":"update-size","type":"uint128"}]},"length":6}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, merkleRootHash: TypedAbiArg<Uint8Array, "merkleRootHash">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "leafBytes": Uint8Array;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "priceIdentifier": Uint8Array;
-  "proof": Uint8Array[];
-  "publishTime": bigint;
-  "updateSize": bigint;
-}[], bigint>>,
-    parseMerkleRootDataFromVaaPayload: {"name":"parse-merkle-root-data-from-vaa-payload","access":"private","args":[{"name":"payload-vaa-bytes","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":20}},"error":"uint128"}}}} as TypedAbiFunction<[payloadVaaBytes: TypedAbiArg<Uint8Array, "payloadVaaBytes">], Response<Uint8Array, bigint>>,
-    parsePnauHeader: {"name":"parse-pnau-header","access":"private","args":[{"name":"pf-bytes","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[pfBytes: TypedAbiArg<Uint8Array, "pfBytes">], Response<bigint, bigint>>,
-    parsePriceInfoAndProof: {"name":"parse-price-info-and-proof","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"entries","type":{"list":{"type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"leaf-bytes","type":{"buffer":{"length":255}}},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"proof","type":{"list":{"type":{"buffer":{"length":20}},"length":128}}},{"name":"publish-time","type":"uint128"},{"name":"update-size","type":"uint128"}]},"length":6}}},{"name":"offset","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">], Response<{
-  "entries": {
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "leafBytes": Uint8Array;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "priceIdentifier": Uint8Array;
-  "proof": Uint8Array[];
-  "publishTime": bigint;
-  "updateSize": bigint;
+    isSignerTrusted: {"name":"is-signer-trusted","access":"private","args":[{"name":"signer","type":{"buffer":{"length":33}}}],"outputs":{"type":"bool"}} as TypedAbiFunction<[signer: TypedAbiArg<Uint8Array, "signer">], boolean>,
+    parseFeedSlot: {"name":"parse-feed-slot","access":"private","args":[{"name":"slot_","type":"uint128"},{"name":"acc","type":{"response":{"ok":{"tuple":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"best-ask","type":{"optional":"int128"}},{"name":"best-bid","type":{"optional":"int128"}},{"name":"confidence","type":{"optional":"uint128"}},{"name":"ema-confidence","type":{"optional":"uint128"}},{"name":"ema-price","type":{"optional":"int128"}},{"name":"exponent","type":{"optional":"int128"}},{"name":"feed-id","type":"uint128"},{"name":"feed-update-timestamp","type":{"optional":"uint128"}},{"name":"funding-rate","type":{"optional":"int128"}},{"name":"funding-rate-interval","type":{"optional":"uint128"}},{"name":"funding-timestamp","type":{"optional":"uint128"}},{"name":"market-session","type":{"optional":"uint128"}},{"name":"price","type":{"optional":"int128"}},{"name":"publisher-count","type":{"optional":"uint128"}}]},"length":75}}},{"name":"offset","type":"uint128"},{"name":"remaining","type":"uint128"}]},"error":"uint128"}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"feeds","type":{"list":{"type":{"tuple":[{"name":"best-ask","type":{"optional":"int128"}},{"name":"best-bid","type":{"optional":"int128"}},{"name":"confidence","type":{"optional":"uint128"}},{"name":"ema-confidence","type":{"optional":"uint128"}},{"name":"ema-price","type":{"optional":"int128"}},{"name":"exponent","type":{"optional":"int128"}},{"name":"feed-id","type":"uint128"},{"name":"feed-update-timestamp","type":{"optional":"uint128"}},{"name":"funding-rate","type":{"optional":"int128"}},{"name":"funding-rate-interval","type":{"optional":"uint128"}},{"name":"funding-timestamp","type":{"optional":"uint128"}},{"name":"market-session","type":{"optional":"uint128"}},{"name":"price","type":{"optional":"int128"}},{"name":"publisher-count","type":{"optional":"uint128"}}]},"length":75}}},{"name":"offset","type":"uint128"},{"name":"remaining","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[slot_: TypedAbiArg<number | bigint, "slot_">, acc: TypedAbiArg<Response<{
+  "bytes": Uint8Array;
+  "feeds": {
+  "bestAsk": number | bigint | null;
+  "bestBid": number | bigint | null;
+  "confidence": number | bigint | null;
+  "emaConfidence": number | bigint | null;
+  "emaPrice": number | bigint | null;
+  "exponent": number | bigint | null;
+  "feedId": number | bigint;
+  "feedUpdateTimestamp": number | bigint | null;
+  "fundingRate": number | bigint | null;
+  "fundingRateInterval": number | bigint | null;
+  "fundingTimestamp": number | bigint | null;
+  "marketSession": number | bigint | null;
+  "price": number | bigint | null;
+  "publisherCount": number | bigint | null;
+}[];
+  "offset": number | bigint;
+  "remaining": number | bigint;
+}, number | bigint>, "acc">], Response<{
+  "bytes": Uint8Array;
+  "feeds": {
+  "bestAsk": bigint | null;
+  "bestBid": bigint | null;
+  "confidence": bigint | null;
+  "emaConfidence": bigint | null;
+  "emaPrice": bigint | null;
+  "exponent": bigint | null;
+  "feedId": bigint;
+  "feedUpdateTimestamp": bigint | null;
+  "fundingRate": bigint | null;
+  "fundingRateInterval": bigint | null;
+  "fundingTimestamp": bigint | null;
+  "marketSession": bigint | null;
+  "price": bigint | null;
+  "publisherCount": bigint | null;
 }[];
   "offset": bigint;
+  "remaining": bigint;
 }, bigint>>,
-    parseProof: {"name":"parse-proof","access":"private","args":[{"name":"entry","type":{"buffer":{"length":1}}},{"name":"acc","type":{"tuple":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"cursor","type":{"tuple":[{"name":"index","type":"uint128"},{"name":"next-update-index","type":"uint128"}]}},{"name":"limit","type":"uint128"},{"name":"result","type":{"list":{"type":{"buffer":{"length":20}},"length":128}}}]}}],"outputs":{"type":{"tuple":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"cursor","type":{"tuple":[{"name":"index","type":"uint128"},{"name":"next-update-index","type":"uint128"}]}},{"name":"limit","type":"uint128"},{"name":"result","type":{"list":{"type":{"buffer":{"length":20}},"length":128}}}]}}} as TypedAbiFunction<[entry: TypedAbiArg<Uint8Array, "entry">, acc: TypedAbiArg<{
-  "bytes": Uint8Array;
-  "cursor": {
-  "index": number | bigint;
-  "nextUpdateIndex": number | bigint;
+    parseOneFeed: {"name":"parse-one-feed","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"offset","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"feed","type":{"tuple":[{"name":"best-ask","type":{"optional":"int128"}},{"name":"best-bid","type":{"optional":"int128"}},{"name":"confidence","type":{"optional":"uint128"}},{"name":"ema-confidence","type":{"optional":"uint128"}},{"name":"ema-price","type":{"optional":"int128"}},{"name":"exponent","type":{"optional":"int128"}},{"name":"feed-id","type":"uint128"},{"name":"feed-update-timestamp","type":{"optional":"uint128"}},{"name":"funding-rate","type":{"optional":"int128"}},{"name":"funding-rate-interval","type":{"optional":"uint128"}},{"name":"funding-timestamp","type":{"optional":"uint128"}},{"name":"market-session","type":{"optional":"uint128"}},{"name":"price","type":{"optional":"int128"}},{"name":"publisher-count","type":{"optional":"uint128"}}]}},{"name":"offset","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, offset: TypedAbiArg<number | bigint, "offset">], Response<{
+  "feed": {
+  "bestAsk": bigint | null;
+  "bestBid": bigint | null;
+  "confidence": bigint | null;
+  "emaConfidence": bigint | null;
+  "emaPrice": bigint | null;
+  "exponent": bigint | null;
+  "feedId": bigint;
+  "feedUpdateTimestamp": bigint | null;
+  "fundingRate": bigint | null;
+  "fundingRateInterval": bigint | null;
+  "fundingTimestamp": bigint | null;
+  "marketSession": bigint | null;
+  "price": bigint | null;
+  "publisherCount": bigint | null;
 };
-  "limit": number | bigint;
-  "result": Uint8Array[];
-}, "acc">], {
-  "bytes": Uint8Array;
-  "cursor": {
-  "index": bigint;
-  "nextUpdateIndex": bigint;
-};
-  "limit": bigint;
-  "result": Uint8Array[];
-}>,
-    readAndVerifyUpdate: {"name":"read-and-verify-update","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"offset","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"leaf-bytes","type":{"buffer":{"length":255}}},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"proof","type":{"list":{"type":{"buffer":{"length":20}},"length":128}}},{"name":"publish-time","type":"uint128"},{"name":"update-size","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, offset: TypedAbiArg<number | bigint, "offset">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "leafBytes": Uint8Array;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "priceIdentifier": Uint8Array;
-  "proof": Uint8Array[];
-  "publishTime": bigint;
-  "updateSize": bigint;
+  "offset": bigint;
 }, bigint>>,
-    readBuff: {"name":"read-buff","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"},{"name":"length","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":8192}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">, length: TypedAbiArg<number | bigint, "length">], Response<Uint8Array, bigint>>,
-    readBuff20: {"name":"read-buff-20","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":20}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<Uint8Array, bigint>>,
-    readBuff32: {"name":"read-buff-32","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":32}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<Uint8Array, bigint>>,
-    readBuff4: {"name":"read-buff-4","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":4}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<Uint8Array, bigint>>,
-    readInt32: {"name":"read-int-32","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"int128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    readInt64: {"name":"read-int-64","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"int128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    readUint16: {"name":"read-uint-16","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    readUint32: {"name":"read-uint-32","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    readUint64: {"name":"read-uint-64","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    readUint8: {"name":"read-uint-8","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    decodeAndVerifyPriceFeeds: {"name":"decode-and-verify-price-feeds","access":"public","args":[{"name":"pnau-bytes","type":{"buffer":{"length":8192}}},{"name":"wormhole-core-address","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":{"list":{"type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]},"length":6}},"error":"uint128"}}}} as TypedAbiFunction<[pnauBytes: TypedAbiArg<Uint8Array, "pnauBytes">, wormholeCoreAddress: TypedAbiArg<string, "wormholeCoreAddress">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": bigint;
-}[], bigint>>
+    parseProperty: {"name":"parse-property","access":"private","args":[{"name":"slot_","type":"uint128"},{"name":"acc","type":{"response":{"ok":{"tuple":[{"name":"best-ask","type":{"optional":"int128"}},{"name":"best-bid","type":{"optional":"int128"}},{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"confidence","type":{"optional":"uint128"}},{"name":"ema-confidence","type":{"optional":"uint128"}},{"name":"ema-price","type":{"optional":"int128"}},{"name":"exponent","type":{"optional":"int128"}},{"name":"feed-update-timestamp","type":{"optional":"uint128"}},{"name":"funding-rate","type":{"optional":"int128"}},{"name":"funding-rate-interval","type":{"optional":"uint128"}},{"name":"funding-timestamp","type":{"optional":"uint128"}},{"name":"market-session","type":{"optional":"uint128"}},{"name":"offset","type":"uint128"},{"name":"price","type":{"optional":"int128"}},{"name":"publisher-count","type":{"optional":"uint128"}},{"name":"remaining","type":"uint128"}]},"error":"uint128"}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"best-ask","type":{"optional":"int128"}},{"name":"best-bid","type":{"optional":"int128"}},{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"confidence","type":{"optional":"uint128"}},{"name":"ema-confidence","type":{"optional":"uint128"}},{"name":"ema-price","type":{"optional":"int128"}},{"name":"exponent","type":{"optional":"int128"}},{"name":"feed-update-timestamp","type":{"optional":"uint128"}},{"name":"funding-rate","type":{"optional":"int128"}},{"name":"funding-rate-interval","type":{"optional":"uint128"}},{"name":"funding-timestamp","type":{"optional":"uint128"}},{"name":"market-session","type":{"optional":"uint128"}},{"name":"offset","type":"uint128"},{"name":"price","type":{"optional":"int128"}},{"name":"publisher-count","type":{"optional":"uint128"}},{"name":"remaining","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[slot_: TypedAbiArg<number | bigint, "slot_">, acc: TypedAbiArg<Response<{
+  "bestAsk": number | bigint | null;
+  "bestBid": number | bigint | null;
+  "bytes": Uint8Array;
+  "confidence": number | bigint | null;
+  "emaConfidence": number | bigint | null;
+  "emaPrice": number | bigint | null;
+  "exponent": number | bigint | null;
+  "feedUpdateTimestamp": number | bigint | null;
+  "fundingRate": number | bigint | null;
+  "fundingRateInterval": number | bigint | null;
+  "fundingTimestamp": number | bigint | null;
+  "marketSession": number | bigint | null;
+  "offset": number | bigint;
+  "price": number | bigint | null;
+  "publisherCount": number | bigint | null;
+  "remaining": number | bigint;
+}, number | bigint>, "acc">], Response<{
+  "bestAsk": bigint | null;
+  "bestBid": bigint | null;
+  "bytes": Uint8Array;
+  "confidence": bigint | null;
+  "emaConfidence": bigint | null;
+  "emaPrice": bigint | null;
+  "exponent": bigint | null;
+  "feedUpdateTimestamp": bigint | null;
+  "fundingRate": bigint | null;
+  "fundingRateInterval": bigint | null;
+  "fundingTimestamp": bigint | null;
+  "marketSession": bigint | null;
+  "offset": bigint;
+  "price": bigint | null;
+  "publisherCount": bigint | null;
+  "remaining": bigint;
+}, bigint>>,
+    readIntBe_q: {"name":"read-int-be?","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"},{"name":"size","type":"uint128"}],"outputs":{"type":{"optional":"int128"}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">, size: TypedAbiArg<number | bigint, "size">], bigint | null>,
+    readOptInt64: {"name":"read-opt-int64","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"voffset","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"next","type":"uint128"},{"name":"value","type":{"optional":"int128"}}]},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, voffset: TypedAbiArg<number | bigint, "voffset">], Response<{
+  "next": bigint;
+  "value": bigint | null;
+}, bigint>>,
+    readOptUint64: {"name":"read-opt-uint64","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"voffset","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"next","type":"uint128"},{"name":"value","type":{"optional":"uint128"}}]},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, voffset: TypedAbiArg<number | bigint, "voffset">], Response<{
+  "next": bigint;
+  "value": bigint | null;
+}, bigint>>,
+    readUintBe_q: {"name":"read-uint-be?","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"},{"name":"size","type":"uint128"}],"outputs":{"type":{"optional":"uint128"}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">, size: TypedAbiArg<number | bigint, "size">], bigint | null>,
+    setPropertyField: {"name":"set-property-field","access":"private","args":[{"name":"ptype","type":"uint128"},{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"voffset","type":"uint128"},{"name":"state","type":{"tuple":[{"name":"best-ask","type":{"optional":"int128"}},{"name":"best-bid","type":{"optional":"int128"}},{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"confidence","type":{"optional":"uint128"}},{"name":"ema-confidence","type":{"optional":"uint128"}},{"name":"ema-price","type":{"optional":"int128"}},{"name":"exponent","type":{"optional":"int128"}},{"name":"feed-update-timestamp","type":{"optional":"uint128"}},{"name":"funding-rate","type":{"optional":"int128"}},{"name":"funding-rate-interval","type":{"optional":"uint128"}},{"name":"funding-timestamp","type":{"optional":"uint128"}},{"name":"market-session","type":{"optional":"uint128"}},{"name":"offset","type":"uint128"},{"name":"price","type":{"optional":"int128"}},{"name":"publisher-count","type":{"optional":"uint128"}},{"name":"remaining","type":"uint128"}]}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"best-ask","type":{"optional":"int128"}},{"name":"best-bid","type":{"optional":"int128"}},{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"confidence","type":{"optional":"uint128"}},{"name":"ema-confidence","type":{"optional":"uint128"}},{"name":"ema-price","type":{"optional":"int128"}},{"name":"exponent","type":{"optional":"int128"}},{"name":"feed-update-timestamp","type":{"optional":"uint128"}},{"name":"funding-rate","type":{"optional":"int128"}},{"name":"funding-rate-interval","type":{"optional":"uint128"}},{"name":"funding-timestamp","type":{"optional":"uint128"}},{"name":"market-session","type":{"optional":"uint128"}},{"name":"offset","type":"uint128"},{"name":"price","type":{"optional":"int128"}},{"name":"publisher-count","type":{"optional":"uint128"}},{"name":"remaining","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[ptype: TypedAbiArg<number | bigint, "ptype">, bytes: TypedAbiArg<Uint8Array, "bytes">, voffset: TypedAbiArg<number | bigint, "voffset">, state: TypedAbiArg<{
+  "bestAsk": number | bigint | null;
+  "bestBid": number | bigint | null;
+  "bytes": Uint8Array;
+  "confidence": number | bigint | null;
+  "emaConfidence": number | bigint | null;
+  "emaPrice": number | bigint | null;
+  "exponent": number | bigint | null;
+  "feedUpdateTimestamp": number | bigint | null;
+  "fundingRate": number | bigint | null;
+  "fundingRateInterval": number | bigint | null;
+  "fundingTimestamp": number | bigint | null;
+  "marketSession": number | bigint | null;
+  "offset": number | bigint;
+  "price": number | bigint | null;
+  "publisherCount": number | bigint | null;
+  "remaining": number | bigint;
+}, "state">], Response<{
+  "bestAsk": bigint | null;
+  "bestBid": bigint | null;
+  "bytes": Uint8Array;
+  "confidence": bigint | null;
+  "emaConfidence": bigint | null;
+  "emaPrice": bigint | null;
+  "exponent": bigint | null;
+  "feedUpdateTimestamp": bigint | null;
+  "fundingRate": bigint | null;
+  "fundingRateInterval": bigint | null;
+  "fundingTimestamp": bigint | null;
+  "marketSession": bigint | null;
+  "offset": bigint;
+  "price": bigint | null;
+  "publisherCount": bigint | null;
+  "remaining": bigint;
+}, bigint>>,
+    someIfNonzeroInt: {"name":"some-if-nonzero-int","access":"private","args":[{"name":"v","type":"int128"}],"outputs":{"type":{"optional":"int128"}}} as TypedAbiFunction<[v: TypedAbiArg<number | bigint, "v">], bigint | null>,
+    someIfNonzeroUint: {"name":"some-if-nonzero-uint","access":"private","args":[{"name":"v","type":"uint128"}],"outputs":{"type":{"optional":"uint128"}}} as TypedAbiFunction<[v: TypedAbiArg<number | bigint, "v">], bigint | null>,
+    decodeAndVerifyPriceFeeds: {"name":"decode-and-verify-price-feeds","access":"read_only","args":[{"name":"update","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"channel","type":"uint128"},{"name":"price-feeds","type":{"list":{"type":{"tuple":[{"name":"best-ask","type":{"optional":"int128"}},{"name":"best-bid","type":{"optional":"int128"}},{"name":"confidence","type":{"optional":"uint128"}},{"name":"ema-confidence","type":{"optional":"uint128"}},{"name":"ema-price","type":{"optional":"int128"}},{"name":"exponent","type":{"optional":"int128"}},{"name":"feed-id","type":"uint128"},{"name":"feed-update-timestamp","type":{"optional":"uint128"}},{"name":"funding-rate","type":{"optional":"int128"}},{"name":"funding-rate-interval","type":{"optional":"uint128"}},{"name":"funding-timestamp","type":{"optional":"uint128"}},{"name":"market-session","type":{"optional":"uint128"}},{"name":"price","type":{"optional":"int128"}},{"name":"publisher-count","type":{"optional":"uint128"}}]},"length":75}}},{"name":"timestamp","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[update: TypedAbiArg<Uint8Array, "update">], Response<{
+  "channel": bigint;
+  "priceFeeds": {
+  "bestAsk": bigint | null;
+  "bestBid": bigint | null;
+  "confidence": bigint | null;
+  "emaConfidence": bigint | null;
+  "emaPrice": bigint | null;
+  "exponent": bigint | null;
+  "feedId": bigint;
+  "feedUpdateTimestamp": bigint | null;
+  "fundingRate": bigint | null;
+  "fundingRateInterval": bigint | null;
+  "fundingTimestamp": bigint | null;
+  "marketSession": bigint | null;
+  "price": bigint | null;
+  "publisherCount": bigint | null;
+}[];
+  "timestamp": bigint;
+}, bigint>>,
+    decodeLazerPayload: {"name":"decode-lazer-payload","access":"read_only","args":[{"name":"payload","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"channel","type":"uint128"},{"name":"price-feeds","type":{"list":{"type":{"tuple":[{"name":"best-ask","type":{"optional":"int128"}},{"name":"best-bid","type":{"optional":"int128"}},{"name":"confidence","type":{"optional":"uint128"}},{"name":"ema-confidence","type":{"optional":"uint128"}},{"name":"ema-price","type":{"optional":"int128"}},{"name":"exponent","type":{"optional":"int128"}},{"name":"feed-id","type":"uint128"},{"name":"feed-update-timestamp","type":{"optional":"uint128"}},{"name":"funding-rate","type":{"optional":"int128"}},{"name":"funding-rate-interval","type":{"optional":"uint128"}},{"name":"funding-timestamp","type":{"optional":"uint128"}},{"name":"market-session","type":{"optional":"uint128"}},{"name":"price","type":{"optional":"int128"}},{"name":"publisher-count","type":{"optional":"uint128"}}]},"length":75}}},{"name":"timestamp","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[payload: TypedAbiArg<Uint8Array, "payload">], Response<{
+  "channel": bigint;
+  "priceFeeds": {
+  "bestAsk": bigint | null;
+  "bestBid": bigint | null;
+  "confidence": bigint | null;
+  "emaConfidence": bigint | null;
+  "emaPrice": bigint | null;
+  "exponent": bigint | null;
+  "feedId": bigint;
+  "feedUpdateTimestamp": bigint | null;
+  "fundingRate": bigint | null;
+  "fundingRateInterval": bigint | null;
+  "fundingTimestamp": bigint | null;
+  "marketSession": bigint | null;
+  "price": bigint | null;
+  "publisherCount": bigint | null;
+}[];
+  "timestamp": bigint;
+}, bigint>>,
+    recoverSigner: {"name":"recover-signer","access":"read_only","args":[{"name":"update","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"payload","type":{"buffer":{"length":8192}}},{"name":"signer","type":{"buffer":{"length":33}}}]},"error":"uint128"}}}} as TypedAbiFunction<[update: TypedAbiArg<Uint8Array, "update">], Response<{
+  "payload": Uint8Array;
+  "signer": Uint8Array;
+}, bigint>>,
+    verifyUpdate: {"name":"verify-update","access":"read_only","args":[{"name":"update","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"payload","type":{"buffer":{"length":8192}}},{"name":"signer","type":{"buffer":{"length":33}}}]},"error":"uint128"}}}} as TypedAbiFunction<[update: TypedAbiArg<Uint8Array, "update">], Response<{
+  "payload": Uint8Array;
+  "signer": Uint8Array;
+}, bigint>>
   },
   "maps": {
     
   },
   "variables": {
-    AUWV_MAGIC: {
-  name: 'AUWV_MAGIC',
-  type: {
-    buffer: {
-      length: 4
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    ERR_HEADER_TRAILING_SIZE: {
-  name: 'ERR_HEADER_TRAILING_SIZE',
+    ERR_HIGH_S_SIGNATURE: {
+  name: 'ERR_HIGH_S_SIGNATURE',
   type: {
     response: {
       ok: 'none',
@@ -5752,8 +5793,8 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_INCORRECT_AUWV_PAYLOAD: {
-  name: 'ERR_INCORRECT_AUWV_PAYLOAD',
+    ERR_INPUT_TOO_SHORT: {
+  name: 'ERR_INPUT_TOO_SHORT',
   type: {
     response: {
       ok: 'none',
@@ -5762,8 +5803,8 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_INVALID_AUWV: {
-  name: 'ERR_INVALID_AUWV',
+    ERR_INVALID_EVM_MAGIC: {
+  name: 'ERR_INVALID_EVM_MAGIC',
   type: {
     response: {
       ok: 'none',
@@ -5772,8 +5813,8 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_INVALID_PNAU_BYTES: {
-  name: 'ERR_INVALID_PNAU_BYTES',
+    ERR_INVALID_FEED_DATA: {
+  name: 'ERR_INVALID_FEED_DATA',
   type: {
     response: {
       ok: 'none',
@@ -5782,8 +5823,8 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_MAGIC_BYTES: {
-  name: 'ERR_MAGIC_BYTES',
+    ERR_INVALID_MARKET_SESSION: {
+  name: 'ERR_INVALID_MARKET_SESSION',
   type: {
     response: {
       ok: 'none',
@@ -5792,8 +5833,8 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_MAXIMUM_UPDATES: {
-  name: 'ERR_MAXIMUM_UPDATES',
+    ERR_INVALID_PAYLOAD_MAGIC: {
+  name: 'ERR_INVALID_PAYLOAD_MAGIC',
   type: {
     response: {
       ok: 'none',
@@ -5802,8 +5843,8 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_MERKLE_ROOT_MISMATCH: {
-  name: 'ERR_MERKLE_ROOT_MISMATCH',
+    ERR_INVALID_SIGNATURE: {
+  name: 'ERR_INVALID_SIGNATURE',
   type: {
     response: {
       ok: 'none',
@@ -5822,8 +5863,8 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_PROOF_TYPE: {
-  name: 'ERR_PROOF_TYPE',
+    ERR_PAYLOAD_OVERLAY: {
+  name: 'ERR_PAYLOAD_OVERLAY',
   type: {
     response: {
       ok: 'none',
@@ -5832,8 +5873,8 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_UNAUTHORIZED_PRICE_UPDATE: {
-  name: 'ERR_UNAUTHORIZED_PRICE_UPDATE',
+    ERR_TOO_MANY_FEEDS: {
+  name: 'ERR_TOO_MANY_FEEDS',
   type: {
     response: {
       ok: 'none',
@@ -5842,8 +5883,8 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_UPDATE_TYPE: {
-  name: 'ERR_UPDATE_TYPE',
+    ERR_TOO_MANY_PROPS: {
+  name: 'ERR_TOO_MANY_PROPS',
   type: {
     response: {
       ok: 'none',
@@ -5852,8 +5893,8 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VERSION_MAJ: {
-  name: 'ERR_VERSION_MAJ',
+    ERR_UNAUTHORIZED_CALLER: {
+  name: 'ERR_UNAUTHORIZED_CALLER',
   type: {
     response: {
       ok: 'none',
@@ -5862,8 +5903,8 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VERSION_MIN: {
-  name: 'ERR_VERSION_MIN',
+    ERR_UNKNOWN_PROPERTY: {
+  name: 'ERR_UNKNOWN_PROPERTY',
   type: {
     response: {
       ok: 'none',
@@ -5872,246 +5913,388 @@ pythPnauDecoderV3: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    MAXIMUM_UPDATES: {
-  name: 'MAXIMUM_UPDATES',
-  type: 'uint128',
-  access: 'constant'
-} as TypedAbiVariable<bigint>,
-    MERKLE_PROOF_HASH_SIZE: {
-  name: 'MERKLE_PROOF_HASH_SIZE',
-  type: 'uint128',
-  access: 'constant'
-} as TypedAbiVariable<bigint>,
-    MESSAGE_TYPE_PRICE_FEED: {
-  name: 'MESSAGE_TYPE_PRICE_FEED',
-  type: 'uint128',
-  access: 'constant'
-} as TypedAbiVariable<bigint>,
-    PNAU_MAGIC: {
-  name: 'PNAU_MAGIC',
+    ERR_UNTRUSTED_SIGNER: {
+  name: 'ERR_UNTRUSTED_SIGNER',
   type: {
-    buffer: {
-      length: 4
+    response: {
+      ok: 'none',
+      error: 'uint128'
     }
   },
   access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    PYTHNET_MAJOR_VERSION: {
-  name: 'PYTHNET_MAJOR_VERSION',
+} as TypedAbiVariable<Response<null, bigint>>,
+    EVM_FORMAT_MAGIC: {
+  name: 'EVM_FORMAT_MAGIC',
   type: 'uint128',
   access: 'constant'
 } as TypedAbiVariable<bigint>,
-    PYTHNET_MINOR_VERSION: {
-  name: 'PYTHNET_MINOR_VERSION',
+    FEEDS_OFFSET: {
+  name: 'FEEDS_OFFSET',
   type: 'uint128',
   access: 'constant'
 } as TypedAbiVariable<bigint>,
-    UPDATE_TYPE_WORMHOLE_MERKLE: {
-  name: 'UPDATE_TYPE_WORMHOLE_MERKLE',
+    FEED_SLOTS: {
+  name: 'FEED_SLOTS',
+  type: {
+    list: {
+      type: 'uint128',
+      length: 75
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<bigint[]>,
+    FORMAT_MAGIC: {
+  name: 'FORMAT_MAGIC',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    LEN_OFFSET: {
+  name: 'LEN_OFFSET',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MAX_FEEDS: {
+  name: 'MAX_FEEDS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PAYLOAD_CHANNEL_OFFSET: {
+  name: 'PAYLOAD_CHANNEL_OFFSET',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PAYLOAD_FEEDS_LEN_OFFSET: {
+  name: 'PAYLOAD_FEEDS_LEN_OFFSET',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PAYLOAD_OFFSET: {
+  name: 'PAYLOAD_OFFSET',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PAYLOAD_TIMESTAMP_OFFSET: {
+  name: 'PAYLOAD_TIMESTAMP_OFFSET',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROPERTY_SLOTS: {
+  name: 'PROPERTY_SLOTS',
+  type: {
+    list: {
+      type: 'uint128',
+      length: 13
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<bigint[]>,
+    PROP_BEST_ASK: {
+  name: 'PROP_BEST_ASK',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_BEST_BID: {
+  name: 'PROP_BEST_BID',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_CONFIDENCE: {
+  name: 'PROP_CONFIDENCE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_EMA_CONFIDENCE: {
+  name: 'PROP_EMA_CONFIDENCE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_EMA_PRICE: {
+  name: 'PROP_EMA_PRICE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_EXPONENT: {
+  name: 'PROP_EXPONENT',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_FEED_UPDATE_TIMESTAMP: {
+  name: 'PROP_FEED_UPDATE_TIMESTAMP',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_FUNDING_RATE: {
+  name: 'PROP_FUNDING_RATE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_FUNDING_RATE_INTERVAL: {
+  name: 'PROP_FUNDING_RATE_INTERVAL',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_FUNDING_TIMESTAMP: {
+  name: 'PROP_FUNDING_TIMESTAMP',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_MARKET_SESSION: {
+  name: 'PROP_MARKET_SESSION',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_PRICE: {
+  name: 'PROP_PRICE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PROP_PUBLISHER_COUNT: {
+  name: 'PROP_PUBLISHER_COUNT',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    SIG_OFFSET: {
+  name: 'SIG_OFFSET',
   type: 'uint128',
   access: 'constant'
 } as TypedAbiVariable<bigint>
   },
   constants: {
-  AUWV_MAGIC: Uint8Array.from([65,85,87,86]),
-  ERR_HEADER_TRAILING_SIZE: {
+  ERR_HIGH_S_SIGNATURE: {
     isOk: false,
-    value: 2_004n
+    value: 2_107n
   },
-  ERR_INCORRECT_AUWV_PAYLOAD: {
+  ERR_INPUT_TOO_SHORT: {
     isOk: false,
-    value: 2_009n
+    value: 2_101n
   },
-  ERR_INVALID_AUWV: {
+  ERR_INVALID_EVM_MAGIC: {
     isOk: false,
-    value: 2_007n
+    value: 2_102n
   },
-  ERR_INVALID_PNAU_BYTES: {
+  ERR_INVALID_FEED_DATA: {
     isOk: false,
-    value: 2_404n
+    value: 2_203n
   },
-  ERR_MAGIC_BYTES: {
+  ERR_INVALID_MARKET_SESSION: {
     isOk: false,
-    value: 2_001n
+    value: 2_207n
   },
-  ERR_MAXIMUM_UPDATES: {
+  ERR_INVALID_PAYLOAD_MAGIC: {
     isOk: false,
-    value: 2_403n
+    value: 2_201n
   },
-  ERR_MERKLE_ROOT_MISMATCH: {
+  ERR_INVALID_SIGNATURE: {
     isOk: false,
-    value: 2_008n
+    value: 2_104n
   },
   ERR_OVERLAY_PRESENT: {
     isOk: false,
-    value: 2_402n
+    value: 2_103n
   },
-  ERR_PROOF_TYPE: {
+  ERR_PAYLOAD_OVERLAY: {
     isOk: false,
-    value: 2_005n
+    value: 2_204n
   },
-  ERR_UNAUTHORIZED_PRICE_UPDATE: {
+  ERR_TOO_MANY_FEEDS: {
     isOk: false,
-    value: 2_401n
+    value: 2_202n
   },
-  ERR_UPDATE_TYPE: {
+  ERR_TOO_MANY_PROPS: {
     isOk: false,
-    value: 2_006n
+    value: 2_206n
   },
-  ERR_VERSION_MAJ: {
+  ERR_UNAUTHORIZED_CALLER: {
     isOk: false,
-    value: 2_002n
+    value: 2_106n
   },
-  ERR_VERSION_MIN: {
+  ERR_UNKNOWN_PROPERTY: {
     isOk: false,
-    value: 2_003n
+    value: 2_205n
   },
-  MAXIMUM_UPDATES: 6n,
-  MERKLE_PROOF_HASH_SIZE: 20n,
-  MESSAGE_TYPE_PRICE_FEED: 0n,
-  PNAU_MAGIC: Uint8Array.from([80,78,65,85]),
-  PYTHNET_MAJOR_VERSION: 1n,
-  PYTHNET_MINOR_VERSION: 0n,
-  UPDATE_TYPE_WORMHOLE_MERKLE: 0n
+  ERR_UNTRUSTED_SIGNER: {
+    isOk: false,
+    value: 2_105n
+  },
+  EVM_FORMAT_MAGIC: 706_910_618n,
+  FEEDS_OFFSET: 14n,
+  FEED_SLOTS: [
+    0n,
+    1n,
+    2n,
+    3n,
+    4n,
+    5n,
+    6n,
+    7n,
+    8n,
+    9n,
+    10n,
+    11n,
+    12n,
+    13n,
+    14n,
+    15n,
+    16n,
+    17n,
+    18n,
+    19n,
+    20n,
+    21n,
+    22n,
+    23n,
+    24n,
+    25n,
+    26n,
+    27n,
+    28n,
+    29n,
+    30n,
+    31n,
+    32n,
+    33n,
+    34n,
+    35n,
+    36n,
+    37n,
+    38n,
+    39n,
+    40n,
+    41n,
+    42n,
+    43n,
+    44n,
+    45n,
+    46n,
+    47n,
+    48n,
+    49n,
+    50n,
+    51n,
+    52n,
+    53n,
+    54n,
+    55n,
+    56n,
+    57n,
+    58n,
+    59n,
+    60n,
+    61n,
+    62n,
+    63n,
+    64n,
+    65n,
+    66n,
+    67n,
+    68n,
+    69n,
+    70n,
+    71n,
+    72n,
+    73n,
+    74n
+  ],
+  FORMAT_MAGIC: 2_479_346_549n,
+  LEN_OFFSET: 69n,
+  MAX_FEEDS: 75n,
+  PAYLOAD_CHANNEL_OFFSET: 12n,
+  PAYLOAD_FEEDS_LEN_OFFSET: 13n,
+  PAYLOAD_OFFSET: 71n,
+  PAYLOAD_TIMESTAMP_OFFSET: 4n,
+  PROPERTY_SLOTS: [
+    0n,
+    1n,
+    2n,
+    3n,
+    4n,
+    5n,
+    6n,
+    7n,
+    8n,
+    9n,
+    10n,
+    11n,
+    12n
+  ],
+  PROP_BEST_ASK: 2n,
+  PROP_BEST_BID: 1n,
+  PROP_CONFIDENCE: 5n,
+  PROP_EMA_CONFIDENCE: 11n,
+  PROP_EMA_PRICE: 10n,
+  PROP_EXPONENT: 4n,
+  PROP_FEED_UPDATE_TIMESTAMP: 12n,
+  PROP_FUNDING_RATE: 6n,
+  PROP_FUNDING_RATE_INTERVAL: 8n,
+  PROP_FUNDING_TIMESTAMP: 7n,
+  PROP_MARKET_SESSION: 9n,
+  PROP_PRICE: 0n,
+  PROP_PUBLISHER_COUNT: 3n,
+  SIG_OFFSET: 4n
 },
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
-  contractName: 'pyth-pnau-decoder-v3',
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'pyth-lazer-decoder-v1',
   },
-pythStorageV4: {
+pythLazerOracle: {
   "functions": {
-    isPriceUpdateMoreRecent: {"name":"is-price-update-more-recent","access":"private","args":[{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}],"outputs":{"type":"bool"}} as TypedAbiFunction<[priceIdentifier: TypedAbiArg<Uint8Array, "priceIdentifier">, publishTime: TypedAbiArg<number | bigint, "publishTime">], boolean>,
-    onlyOkEntry: {"name":"only-ok-entry","access":"private","args":[{"name":"entry","type":{"response":{"ok":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]},"error":"uint128"}}}],"outputs":{"type":"bool"}} as TypedAbiFunction<[entry: TypedAbiArg<Response<{
-  "conf": number | bigint;
-  "emaConf": number | bigint;
-  "emaPrice": number | bigint;
-  "expo": number | bigint;
-  "prevPublishTime": number | bigint;
-  "price": number | bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": number | bigint;
-}, number | bigint>, "entry">], boolean>,
-    unwrappedEntry: {"name":"unwrapped-entry","access":"private","args":[{"name":"entry","type":{"response":{"ok":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]},"error":"uint128"}}}],"outputs":{"type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]}}} as TypedAbiFunction<[entry: TypedAbiArg<Response<{
-  "conf": number | bigint;
-  "emaConf": number | bigint;
-  "emaPrice": number | bigint;
-  "expo": number | bigint;
-  "prevPublishTime": number | bigint;
-  "price": number | bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": number | bigint;
-}, number | bigint>, "entry">], {
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": bigint;
-}>,
-    writeBatchEntry: {"name":"write-batch-entry","access":"private","args":[{"name":"entry","type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[entry: TypedAbiArg<{
-  "conf": number | bigint;
-  "emaConf": number | bigint;
-  "emaPrice": number | bigint;
-  "expo": number | bigint;
-  "prevPublishTime": number | bigint;
-  "price": number | bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": number | bigint;
-}, "entry">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": bigint;
+    chargeFee: {"name":"charge-fee","access":"private","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>,
+    pause: {"name":"pause","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>,
+    setDecoder: {"name":"set-decoder","access":"public","args":[{"name":"new-decoder","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newDecoder: TypedAbiArg<string, "newDecoder">], Response<boolean, bigint>>,
+    setFee: {"name":"set-fee","access":"public","args":[{"name":"new-fee","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newFee: TypedAbiArg<number | bigint, "newFee">], Response<boolean, bigint>>,
+    setFeeRecipient: {"name":"set-fee-recipient","access":"public","args":[{"name":"new-recipient","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newRecipient: TypedAbiArg<string, "newRecipient">], Response<boolean, bigint>>,
+    setRole: {"name":"set-role","access":"public","args":[{"name":"who","type":"principal"},{"name":"role","type":{"buffer":{"length":1}}},{"name":"enabled","type":"bool"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[who: TypedAbiArg<string, "who">, role: TypedAbiArg<Uint8Array, "role">, enabled: TypedAbiArg<boolean, "enabled">], Response<boolean, bigint>>,
+    setStalePriceThreshold: {"name":"set-stale-price-threshold","access":"public","args":[{"name":"seconds","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[seconds: TypedAbiArg<number | bigint, "seconds">], Response<boolean, bigint>>,
+    setTrustedSigners: {"name":"set-trusted-signers","access":"public","args":[{"name":"signers","type":{"list":{"type":{"tuple":[{"name":"expires-at","type":"uint128"},{"name":"pubkey","type":{"buffer":{"length":33}}}]},"length":100}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[signers: TypedAbiArg<{
+  "expiresAt": number | bigint;
+  "pubkey": Uint8Array;
+}[], "signers">], Response<boolean, bigint>>,
+    unpause: {"name":"unpause","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>,
+    verifyPriceFeeds: {"name":"verify-price-feeds","access":"public","args":[{"name":"update","type":{"buffer":{"length":8192}}},{"name":"decoder-contract","type":"trait_reference"},{"name":"max-age","type":{"optional":"uint128"}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"channel","type":"uint128"},{"name":"price-feeds","type":{"list":{"type":{"tuple":[{"name":"best-ask","type":{"optional":"int128"}},{"name":"best-bid","type":{"optional":"int128"}},{"name":"confidence","type":{"optional":"uint128"}},{"name":"ema-confidence","type":{"optional":"uint128"}},{"name":"ema-price","type":{"optional":"int128"}},{"name":"exponent","type":{"optional":"int128"}},{"name":"feed-id","type":"uint128"},{"name":"feed-update-timestamp","type":{"optional":"uint128"}},{"name":"funding-rate","type":{"optional":"int128"}},{"name":"funding-rate-interval","type":{"optional":"uint128"}},{"name":"funding-timestamp","type":{"optional":"uint128"}},{"name":"market-session","type":{"optional":"uint128"}},{"name":"price","type":{"optional":"int128"}},{"name":"publisher-count","type":{"optional":"uint128"}}]},"length":75}}},{"name":"timestamp","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[update: TypedAbiArg<Uint8Array, "update">, decoderContract: TypedAbiArg<string, "decoderContract">, maxAge: TypedAbiArg<number | bigint | null, "maxAge">], Response<{
+  "channel": bigint;
+  "priceFeeds": {
+  "bestAsk": bigint | null;
+  "bestBid": bigint | null;
+  "confidence": bigint | null;
+  "emaConfidence": bigint | null;
+  "emaPrice": bigint | null;
+  "exponent": bigint | null;
+  "feedId": bigint;
+  "feedUpdateTimestamp": bigint | null;
+  "fundingRate": bigint | null;
+  "fundingRateInterval": bigint | null;
+  "fundingTimestamp": bigint | null;
+  "marketSession": bigint | null;
+  "price": bigint | null;
+  "publisherCount": bigint | null;
+}[];
+  "timestamp": bigint;
 }, bigint>>,
-    read: {"name":"read","access":"public","args":[{"name":"price-identifier","type":{"buffer":{"length":32}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"publish-time","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[priceIdentifier: TypedAbiArg<Uint8Array, "priceIdentifier">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "publishTime": bigint;
-}, bigint>>,
-    setPriceTestnet: {"name":"set-price-testnet","access":"public","args":[{"name":"data","type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]}}],"outputs":{"type":{"response":{"ok":{"response":{"ok":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]},"error":"uint128"}},"error":"uint128"}}}} as TypedAbiFunction<[data: TypedAbiArg<{
-  "conf": number | bigint;
-  "emaConf": number | bigint;
-  "emaPrice": number | bigint;
-  "expo": number | bigint;
-  "prevPublishTime": number | bigint;
-  "price": number | bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": number | bigint;
-}, "data">], Response<Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": bigint;
-}, bigint>, bigint>>,
-    write: {"name":"write","access":"public","args":[{"name":"batch-updates","type":{"list":{"type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]},"length":64}}}],"outputs":{"type":{"response":{"ok":{"list":{"type":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"price-identifier","type":{"buffer":{"length":32}}},{"name":"publish-time","type":"uint128"}]},"length":64}},"error":"uint128"}}}} as TypedAbiFunction<[batchUpdates: TypedAbiArg<{
-  "conf": number | bigint;
-  "emaConf": number | bigint;
-  "emaPrice": number | bigint;
-  "expo": number | bigint;
-  "prevPublishTime": number | bigint;
-  "price": number | bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": number | bigint;
-}[], "batchUpdates">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "priceIdentifier": Uint8Array;
-  "publishTime": bigint;
-}[], bigint>>,
-    getPrice: {"name":"get-price","access":"read_only","args":[{"name":"price-identifier","type":{"buffer":{"length":32}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"publish-time","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[priceIdentifier: TypedAbiArg<Uint8Array, "priceIdentifier">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "publishTime": bigint;
-}, bigint>>,
-    readPriceWithStalenessCheck: {"name":"read-price-with-staleness-check","access":"read_only","args":[{"name":"price-identifier","type":{"buffer":{"length":32}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"publish-time","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[priceIdentifier: TypedAbiArg<Uint8Array, "priceIdentifier">], Response<{
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "publishTime": bigint;
-}, bigint>>
+    assertActive: {"name":"assert-active","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>,
+    assertGovernance: {"name":"assert-governance","access":"read_only","args":[{"name":"who","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[who: TypedAbiArg<string, "who">], Response<boolean, bigint>>,
+    assertRole: {"name":"assert-role","access":"read_only","args":[{"name":"who","type":"principal"},{"name":"role","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[who: TypedAbiArg<string, "who">, role: TypedAbiArg<Uint8Array, "role">], Response<boolean, bigint>>,
+    getDecoder: {"name":"get-decoder","access":"read_only","args":[],"outputs":{"type":"principal"}} as TypedAbiFunction<[], string>,
+    getFee: {"name":"get-fee","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    getFeeRecipient: {"name":"get-fee-recipient","access":"read_only","args":[],"outputs":{"type":"principal"}} as TypedAbiFunction<[], string>,
+    getStalePriceThreshold: {"name":"get-stale-price-threshold","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    getTrustedSigners: {"name":"get-trusted-signers","access":"read_only","args":[],"outputs":{"type":{"list":{"type":{"tuple":[{"name":"expires-at","type":"uint128"},{"name":"pubkey","type":{"buffer":{"length":33}}}]},"length":100}}}} as TypedAbiFunction<[], {
+  "expiresAt": bigint;
+  "pubkey": Uint8Array;
+}[]>,
+    hasRole: {"name":"has-role","access":"read_only","args":[{"name":"who","type":"principal"},{"name":"role","type":{"buffer":{"length":1}}}],"outputs":{"type":"bool"}} as TypedAbiFunction<[who: TypedAbiArg<string, "who">, role: TypedAbiArg<Uint8Array, "role">], boolean>,
+    isPaused: {"name":"is-paused","access":"read_only","args":[],"outputs":{"type":"bool"}} as TypedAbiFunction<[], boolean>
   },
   "maps": {
-    prices: {"name":"prices","key":{"buffer":{"length":32}},"value":{"tuple":[{"name":"conf","type":"uint128"},{"name":"ema-conf","type":"uint128"},{"name":"ema-price","type":"int128"},{"name":"expo","type":"int128"},{"name":"prev-publish-time","type":"uint128"},{"name":"price","type":"int128"},{"name":"publish-time","type":"uint128"}]}} as TypedAbiMap<Uint8Array, {
-  "conf": bigint;
-  "emaConf": bigint;
-  "emaPrice": bigint;
-  "expo": bigint;
-  "prevPublishTime": bigint;
-  "price": bigint;
-  "publishTime": bigint;
-}>,
-    timestamps: {"name":"timestamps","key":{"buffer":{"length":32}},"value":"uint128"} as TypedAbiMap<Uint8Array, bigint>
+    roles: {"name":"roles","key":{"tuple":[{"name":"role","type":{"buffer":{"length":1}}},{"name":"who","type":"principal"}]},"value":"bool"} as TypedAbiMap<{
+  "role": Uint8Array;
+  "who": string;
+}, boolean>
   },
   "variables": {
-    ERR_NEWER_PRICE_AVAILABLE: {
-  name: 'ERR_NEWER_PRICE_AVAILABLE',
+    ERR_CANNOT_CHANGE_OWN_GOVERNANCE: {
+  name: 'ERR_CANNOT_CHANGE_OWN_GOVERNANCE',
   type: {
     response: {
       ok: 'none',
@@ -6120,8 +6303,8 @@ pythStorageV4: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_PRICE_FEED_NOT_FOUND: {
-  name: 'ERR_PRICE_FEED_NOT_FOUND',
+    ERR_INVALID_DECODER: {
+  name: 'ERR_INVALID_DECODER',
   type: {
     response: {
       ok: 'none',
@@ -6130,8 +6313,8 @@ pythStorageV4: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    ERR_RESTRICTED_TO_TESTNET: {
-  name: 'ERR_RESTRICTED_TO_TESTNET',
+    ERR_PAUSED: {
+  name: 'ERR_PAUSED',
   type: {
     response: {
       ok: 'none',
@@ -6150,38 +6333,131 @@ pythStorageV4: {
   },
   access: 'constant'
 } as TypedAbiVariable<Response<null, bigint>>,
-    STACKS_BLOCK_TIME: {
-  name: 'STACKS_BLOCK_TIME',
+    ERR_UNAUTHORIZED: {
+  name: 'ERR_UNAUTHORIZED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    MICROS_PER_SECOND: {
+  name: 'MICROS_PER_SECOND',
   type: 'uint128',
   access: 'constant'
-} as TypedAbiVariable<bigint>
+} as TypedAbiVariable<bigint>,
+    ROLE_GOVERNANCE: {
+  name: 'ROLE_GOVERNANCE',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    ROLE_PAUSE: {
+  name: 'ROLE_PAUSE',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    decoder: {
+  name: 'decoder',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    fee: {
+  name: 'fee',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    feeRecipient: {
+  name: 'fee-recipient',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    paused: {
+  name: 'paused',
+  type: 'bool',
+  access: 'variable'
+} as TypedAbiVariable<boolean>,
+    stalePriceThreshold: {
+  name: 'stale-price-threshold',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    trustedSigners: {
+  name: 'trusted-signers',
+  type: {
+    list: {
+      type: {
+        tuple: [
+          {
+            name: 'expires-at',
+            type: 'uint128'
+          },
+          {
+            name: 'pubkey',
+            type: {
+              buffer: {
+                length: 33
+              }
+            }
+          }
+        ]
+      },
+      length: 100
+    }
+  },
+  access: 'variable'
+} as TypedAbiVariable<{
+  "expiresAt": bigint;
+  "pubkey": Uint8Array;
+}[]>
   },
   constants: {
-  ERR_NEWER_PRICE_AVAILABLE: {
+  ERR_CANNOT_CHANGE_OWN_GOVERNANCE: {
     isOk: false,
-    value: 5_001n
+    value: 4_005n
   },
-  ERR_PRICE_FEED_NOT_FOUND: {
+  ERR_INVALID_DECODER: {
     isOk: false,
-    value: 5_004n
+    value: 1_001n
   },
-  ERR_RESTRICTED_TO_TESTNET: {
+  ERR_PAUSED: {
     isOk: false,
-    value: 5_003n
+    value: 4_004n
   },
   ERR_STALE_PRICE: {
     isOk: false,
-    value: 5_002n
+    value: 1_002n
   },
-  STACKS_BLOCK_TIME: 5n
+  ERR_UNAUTHORIZED: {
+    isOk: false,
+    value: 4_003n
+  },
+  MICROS_PER_SECOND: 1_000_000n,
+  ROLE_GOVERNANCE: Uint8Array.from([0]),
+  ROLE_PAUSE: Uint8Array.from([1]),
+  decoder: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-lazer-decoder-v1',
+  fee: 0n,
+  feeRecipient: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+  paused: false,
+  stalePriceThreshold: 157_680_000n,
+  trustedSigners: []
 },
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
-  contractName: 'pyth-storage-v4',
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'pyth-lazer-oracle',
   },
-pythTraitsV2: {
+pythLazerTraits: {
   "functions": {
     
   },
@@ -6195,8 +6471,8 @@ pythTraitsV2: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
-  contractName: 'pyth-traits-v2',
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'pyth-lazer-traits',
   },
 sbtc: {
   "functions": {
@@ -6292,8 +6568,540 @@ sbtc: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[{"name":"sBTC-locked"},{"name":"sbtc"}],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[{"name":"sBTC-locked"},{"name":"sbtc"}],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'sbtc',
+  },
+sbtcRegistry: {
+  "functions": {
+    incrementLastWithdrawalRequestId: {"name":"increment-last-withdrawal-request-id","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    completeDeposit: {"name":"complete-deposit","access":"public","args":[{"name":"txid","type":{"buffer":{"length":32}}},{"name":"vout-index","type":"uint128"},{"name":"amount","type":"uint128"},{"name":"recipient","type":"principal"},{"name":"burn-hash","type":{"buffer":{"length":32}}},{"name":"burn-height","type":"uint128"},{"name":"sweep-txid","type":{"buffer":{"length":32}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[txid: TypedAbiArg<Uint8Array, "txid">, voutIndex: TypedAbiArg<number | bigint, "voutIndex">, amount: TypedAbiArg<number | bigint, "amount">, recipient: TypedAbiArg<string, "recipient">, burnHash: TypedAbiArg<Uint8Array, "burnHash">, burnHeight: TypedAbiArg<number | bigint, "burnHeight">, sweepTxid: TypedAbiArg<Uint8Array, "sweepTxid">], Response<boolean, bigint>>,
+    completeWithdrawalAccept: {"name":"complete-withdrawal-accept","access":"public","args":[{"name":"request-id","type":"uint128"},{"name":"bitcoin-txid","type":{"buffer":{"length":32}}},{"name":"output-index","type":"uint128"},{"name":"signer-bitmap","type":"uint128"},{"name":"fee","type":"uint128"},{"name":"burn-hash","type":{"buffer":{"length":32}}},{"name":"burn-height","type":"uint128"},{"name":"sweep-txid","type":{"buffer":{"length":32}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[requestId: TypedAbiArg<number | bigint, "requestId">, bitcoinTxid: TypedAbiArg<Uint8Array, "bitcoinTxid">, outputIndex: TypedAbiArg<number | bigint, "outputIndex">, signerBitmap: TypedAbiArg<number | bigint, "signerBitmap">, fee: TypedAbiArg<number | bigint, "fee">, burnHash: TypedAbiArg<Uint8Array, "burnHash">, burnHeight: TypedAbiArg<number | bigint, "burnHeight">, sweepTxid: TypedAbiArg<Uint8Array, "sweepTxid">], Response<boolean, bigint>>,
+    completeWithdrawalReject: {"name":"complete-withdrawal-reject","access":"public","args":[{"name":"request-id","type":"uint128"},{"name":"signer-bitmap","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[requestId: TypedAbiArg<number | bigint, "requestId">, signerBitmap: TypedAbiArg<number | bigint, "signerBitmap">], Response<boolean, bigint>>,
+    createWithdrawalRequest: {"name":"create-withdrawal-request","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"max-fee","type":"uint128"},{"name":"sender","type":"principal"},{"name":"recipient","type":{"tuple":[{"name":"hashbytes","type":{"buffer":{"length":32}}},{"name":"version","type":{"buffer":{"length":1}}}]}},{"name":"height","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, maxFee: TypedAbiArg<number | bigint, "maxFee">, sender: TypedAbiArg<string, "sender">, recipient: TypedAbiArg<{
+  "hashbytes": Uint8Array;
+  "version": Uint8Array;
+}, "recipient">, height: TypedAbiArg<number | bigint, "height">], Response<bigint, bigint>>,
+    rotateKeys: {"name":"rotate-keys","access":"public","args":[{"name":"new-keys","type":{"list":{"type":{"buffer":{"length":33}},"length":128}}},{"name":"new-address","type":"principal"},{"name":"new-aggregate-pubkey","type":{"buffer":{"length":33}}},{"name":"new-signature-threshold","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newKeys: TypedAbiArg<Uint8Array[], "newKeys">, newAddress: TypedAbiArg<string, "newAddress">, newAggregatePubkey: TypedAbiArg<Uint8Array, "newAggregatePubkey">, newSignatureThreshold: TypedAbiArg<number | bigint, "newSignatureThreshold">], Response<boolean, bigint>>,
+    updateProtocolContract: {"name":"update-protocol-contract","access":"public","args":[{"name":"contract-type","type":{"buffer":{"length":1}}},{"name":"new-contract","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[contractType: TypedAbiArg<Uint8Array, "contractType">, newContract: TypedAbiArg<string, "newContract">], Response<boolean, bigint>>,
+    getActiveProtocol: {"name":"get-active-protocol","access":"read_only","args":[{"name":"contract-flag","type":{"buffer":{"length":1}}}],"outputs":{"type":{"optional":"principal"}}} as TypedAbiFunction<[contractFlag: TypedAbiArg<Uint8Array, "contractFlag">], string | null>,
+    getCompletedDeposit: {"name":"get-completed-deposit","access":"read_only","args":[{"name":"txid","type":{"buffer":{"length":32}}},{"name":"vout-index","type":"uint128"}],"outputs":{"type":{"optional":{"tuple":[{"name":"amount","type":"uint128"},{"name":"recipient","type":"principal"},{"name":"sweep-burn-hash","type":{"buffer":{"length":32}}},{"name":"sweep-burn-height","type":"uint128"},{"name":"sweep-txid","type":{"buffer":{"length":32}}}]}}}} as TypedAbiFunction<[txid: TypedAbiArg<Uint8Array, "txid">, voutIndex: TypedAbiArg<number | bigint, "voutIndex">], {
+  "amount": bigint;
+  "recipient": string;
+  "sweepBurnHash": Uint8Array;
+  "sweepBurnHeight": bigint;
+  "sweepTxid": Uint8Array;
+} | null>,
+    getCompletedWithdrawalSweepData: {"name":"get-completed-withdrawal-sweep-data","access":"read_only","args":[{"name":"id","type":"uint128"}],"outputs":{"type":{"optional":{"tuple":[{"name":"sweep-burn-hash","type":{"buffer":{"length":32}}},{"name":"sweep-burn-height","type":"uint128"},{"name":"sweep-txid","type":{"buffer":{"length":32}}}]}}}} as TypedAbiFunction<[id: TypedAbiArg<number | bigint, "id">], {
+  "sweepBurnHash": Uint8Array;
+  "sweepBurnHeight": bigint;
+  "sweepTxid": Uint8Array;
+} | null>,
+    getCurrentAggregatePubkey: {"name":"get-current-aggregate-pubkey","access":"read_only","args":[],"outputs":{"type":{"buffer":{"length":33}}}} as TypedAbiFunction<[], Uint8Array>,
+    getCurrentSignerData: {"name":"get-current-signer-data","access":"read_only","args":[],"outputs":{"type":{"tuple":[{"name":"current-aggregate-pubkey","type":{"buffer":{"length":33}}},{"name":"current-signature-threshold","type":"uint128"},{"name":"current-signer-principal","type":"principal"},{"name":"current-signer-set","type":{"list":{"type":{"buffer":{"length":33}},"length":128}}}]}}} as TypedAbiFunction<[], {
+  "currentAggregatePubkey": Uint8Array;
+  "currentSignatureThreshold": bigint;
+  "currentSignerPrincipal": string;
+  "currentSignerSet": Uint8Array[];
+}>,
+    getCurrentSignerPrincipal: {"name":"get-current-signer-principal","access":"read_only","args":[],"outputs":{"type":"principal"}} as TypedAbiFunction<[], string>,
+    getCurrentSignerSet: {"name":"get-current-signer-set","access":"read_only","args":[],"outputs":{"type":{"list":{"type":{"buffer":{"length":33}},"length":128}}}} as TypedAbiFunction<[], Uint8Array[]>,
+    getDepositStatus: {"name":"get-deposit-status","access":"read_only","args":[{"name":"txid","type":{"buffer":{"length":32}}},{"name":"vout-index","type":"uint128"}],"outputs":{"type":{"optional":"bool"}}} as TypedAbiFunction<[txid: TypedAbiArg<Uint8Array, "txid">, voutIndex: TypedAbiArg<number | bigint, "voutIndex">], boolean | null>,
+    getWithdrawalRequest: {"name":"get-withdrawal-request","access":"read_only","args":[{"name":"id","type":"uint128"}],"outputs":{"type":{"optional":{"tuple":[{"name":"amount","type":"uint128"},{"name":"block-height","type":"uint128"},{"name":"max-fee","type":"uint128"},{"name":"recipient","type":{"tuple":[{"name":"hashbytes","type":{"buffer":{"length":32}}},{"name":"version","type":{"buffer":{"length":1}}}]}},{"name":"sender","type":"principal"},{"name":"status","type":{"optional":"bool"}}]}}}} as TypedAbiFunction<[id: TypedAbiArg<number | bigint, "id">], {
+  "amount": bigint;
+  "blockHeight": bigint;
+  "maxFee": bigint;
+  "recipient": {
+  "hashbytes": Uint8Array;
+  "version": Uint8Array;
+};
+  "sender": string;
+  "status": boolean | null;
+} | null>,
+    isProtocolCaller: {"name":"is-protocol-caller","access":"read_only","args":[{"name":"contract-flag","type":{"buffer":{"length":1}}},{"name":"contract","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[contractFlag: TypedAbiArg<Uint8Array, "contractFlag">, contract: TypedAbiArg<string, "contract">], Response<boolean, bigint>>
+  },
+  "maps": {
+    activeProtocolContracts: {"name":"active-protocol-contracts","key":{"buffer":{"length":1}},"value":"principal"} as TypedAbiMap<Uint8Array, string>,
+    activeProtocolRoles: {"name":"active-protocol-roles","key":"principal","value":{"buffer":{"length":1}}} as TypedAbiMap<string, Uint8Array>,
+    aggregatePubkeys: {"name":"aggregate-pubkeys","key":{"buffer":{"length":33}},"value":"bool"} as TypedAbiMap<Uint8Array, boolean>,
+    completedDeposits: {"name":"completed-deposits","key":{"tuple":[{"name":"txid","type":{"buffer":{"length":32}}},{"name":"vout-index","type":"uint128"}]},"value":{"tuple":[{"name":"amount","type":"uint128"},{"name":"recipient","type":"principal"},{"name":"sweep-burn-hash","type":{"buffer":{"length":32}}},{"name":"sweep-burn-height","type":"uint128"},{"name":"sweep-txid","type":{"buffer":{"length":32}}}]}} as TypedAbiMap<{
+  "txid": Uint8Array;
+  "voutIndex": number | bigint;
+}, {
+  "amount": bigint;
+  "recipient": string;
+  "sweepBurnHash": Uint8Array;
+  "sweepBurnHeight": bigint;
+  "sweepTxid": Uint8Array;
+}>,
+    completedWithdrawalSweep: {"name":"completed-withdrawal-sweep","key":"uint128","value":{"tuple":[{"name":"sweep-burn-hash","type":{"buffer":{"length":32}}},{"name":"sweep-burn-height","type":"uint128"},{"name":"sweep-txid","type":{"buffer":{"length":32}}}]}} as TypedAbiMap<number | bigint, {
+  "sweepBurnHash": Uint8Array;
+  "sweepBurnHeight": bigint;
+  "sweepTxid": Uint8Array;
+}>,
+    depositStatus: {"name":"deposit-status","key":{"tuple":[{"name":"txid","type":{"buffer":{"length":32}}},{"name":"vout-index","type":"uint128"}]},"value":"bool"} as TypedAbiMap<{
+  "txid": Uint8Array;
+  "voutIndex": number | bigint;
+}, boolean>,
+    withdrawalRequests: {"name":"withdrawal-requests","key":"uint128","value":{"tuple":[{"name":"amount","type":"uint128"},{"name":"block-height","type":"uint128"},{"name":"max-fee","type":"uint128"},{"name":"recipient","type":{"tuple":[{"name":"hashbytes","type":{"buffer":{"length":32}}},{"name":"version","type":{"buffer":{"length":1}}}]}},{"name":"sender","type":"principal"}]}} as TypedAbiMap<number | bigint, {
+  "amount": bigint;
+  "blockHeight": bigint;
+  "maxFee": bigint;
+  "recipient": {
+  "hashbytes": Uint8Array;
+  "version": Uint8Array;
+};
+  "sender": string;
+}>,
+    withdrawalStatus: {"name":"withdrawal-status","key":"uint128","value":"bool"} as TypedAbiMap<number | bigint, boolean>
+  },
+  "variables": {
+    ERR_AGG_PUBKEY_REPLAY: {
+  name: 'ERR_AGG_PUBKEY_REPLAY',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_INVALID_REQUEST_ID: {
+  name: 'ERR_INVALID_REQUEST_ID',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_UNAUTHORIZED: {
+  name: 'ERR_UNAUTHORIZED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    depositRole: {
+  name: 'deposit-role',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    governanceRole: {
+  name: 'governance-role',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    withdrawalRole: {
+  name: 'withdrawal-role',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    currentAggregatePubkey: {
+  name: 'current-aggregate-pubkey',
+  type: {
+    buffer: {
+      length: 33
+    }
+  },
+  access: 'variable'
+} as TypedAbiVariable<Uint8Array>,
+    currentSignatureThreshold: {
+  name: 'current-signature-threshold',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    currentSignerPrincipal: {
+  name: 'current-signer-principal',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    currentSignerSet: {
+  name: 'current-signer-set',
+  type: {
+    list: {
+      type: {
+        buffer: {
+          length: 33
+        }
+      },
+      length: 128
+    }
+  },
+  access: 'variable'
+} as TypedAbiVariable<Uint8Array[]>,
+    lastWithdrawalRequestId: {
+  name: 'last-withdrawal-request-id',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch30","clarity_version":"Clarity3",
+  contractName: 'sbtc-registry',
+  },
+sbtcToken: {
+  "functions": {
+    protocolMintManyIter: {"name":"protocol-mint-many-iter","access":"private","args":[{"name":"item","type":{"tuple":[{"name":"amount","type":"uint128"},{"name":"recipient","type":"principal"}]}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[item: TypedAbiArg<{
+  "amount": number | bigint;
+  "recipient": string;
+}, "item">], Response<boolean, bigint>>,
+    transferManyIter: {"name":"transfer-many-iter","access":"private","args":[{"name":"individual-transfer","type":{"tuple":[{"name":"amount","type":"uint128"},{"name":"memo","type":{"optional":{"buffer":{"length":34}}}},{"name":"sender","type":"principal"},{"name":"to","type":"principal"}]}},{"name":"result","type":{"response":{"ok":"uint128","error":"uint128"}}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[individualTransfer: TypedAbiArg<{
+  "amount": number | bigint;
+  "memo": Uint8Array | null;
+  "sender": string;
+  "to": string;
+}, "individualTransfer">, result: TypedAbiArg<Response<number | bigint, number | bigint>, "result">], Response<bigint, bigint>>,
+    protocolBurn: {"name":"protocol-burn","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"owner","type":"principal"},{"name":"contract-flag","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, owner: TypedAbiArg<string, "owner">, contractFlag: TypedAbiArg<Uint8Array, "contractFlag">], Response<boolean, bigint>>,
+    protocolBurnLocked: {"name":"protocol-burn-locked","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"owner","type":"principal"},{"name":"contract-flag","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, owner: TypedAbiArg<string, "owner">, contractFlag: TypedAbiArg<Uint8Array, "contractFlag">], Response<boolean, bigint>>,
+    protocolLock: {"name":"protocol-lock","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"owner","type":"principal"},{"name":"contract-flag","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, owner: TypedAbiArg<string, "owner">, contractFlag: TypedAbiArg<Uint8Array, "contractFlag">], Response<boolean, bigint>>,
+    protocolMint: {"name":"protocol-mint","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"recipient","type":"principal"},{"name":"contract-flag","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, recipient: TypedAbiArg<string, "recipient">, contractFlag: TypedAbiArg<Uint8Array, "contractFlag">], Response<boolean, bigint>>,
+    protocolMintMany: {"name":"protocol-mint-many","access":"public","args":[{"name":"recipients","type":{"list":{"type":{"tuple":[{"name":"amount","type":"uint128"},{"name":"recipient","type":"principal"}]},"length":200}}},{"name":"contract-flag","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":{"list":{"type":{"response":{"ok":"bool","error":"uint128"}},"length":200}},"error":"uint128"}}}} as TypedAbiFunction<[recipients: TypedAbiArg<{
+  "amount": number | bigint;
+  "recipient": string;
+}[], "recipients">, contractFlag: TypedAbiArg<Uint8Array, "contractFlag">], Response<Response<boolean, bigint>[], bigint>>,
+    protocolSetName: {"name":"protocol-set-name","access":"public","args":[{"name":"new-name","type":{"string-ascii":{"length":32}}},{"name":"contract-flag","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newName: TypedAbiArg<string, "newName">, contractFlag: TypedAbiArg<Uint8Array, "contractFlag">], Response<boolean, bigint>>,
+    protocolSetSymbol: {"name":"protocol-set-symbol","access":"public","args":[{"name":"new-symbol","type":{"string-ascii":{"length":10}}},{"name":"contract-flag","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newSymbol: TypedAbiArg<string, "newSymbol">, contractFlag: TypedAbiArg<Uint8Array, "contractFlag">], Response<boolean, bigint>>,
+    protocolSetTokenUri: {"name":"protocol-set-token-uri","access":"public","args":[{"name":"new-uri","type":{"optional":{"string-utf8":{"length":256}}}},{"name":"contract-flag","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newUri: TypedAbiArg<string | null, "newUri">, contractFlag: TypedAbiArg<Uint8Array, "contractFlag">], Response<boolean, bigint>>,
+    protocolUnlock: {"name":"protocol-unlock","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"owner","type":"principal"},{"name":"contract-flag","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, owner: TypedAbiArg<string, "owner">, contractFlag: TypedAbiArg<Uint8Array, "contractFlag">], Response<boolean, bigint>>,
+    transfer: {"name":"transfer","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"sender","type":"principal"},{"name":"recipient","type":"principal"},{"name":"memo","type":{"optional":{"buffer":{"length":34}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, sender: TypedAbiArg<string, "sender">, recipient: TypedAbiArg<string, "recipient">, memo: TypedAbiArg<Uint8Array | null, "memo">], Response<boolean, bigint>>,
+    transferMany: {"name":"transfer-many","access":"public","args":[{"name":"recipients","type":{"list":{"type":{"tuple":[{"name":"amount","type":"uint128"},{"name":"memo","type":{"optional":{"buffer":{"length":34}}}},{"name":"sender","type":"principal"},{"name":"to","type":"principal"}]},"length":200}}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[recipients: TypedAbiArg<{
+  "amount": number | bigint;
+  "memo": Uint8Array | null;
+  "sender": string;
+  "to": string;
+}[], "recipients">], Response<bigint, bigint>>,
+    getBalance: {"name":"get-balance","access":"read_only","args":[{"name":"who","type":"principal"}],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[who: TypedAbiArg<string, "who">], Response<bigint, null>>,
+    getBalanceAvailable: {"name":"get-balance-available","access":"read_only","args":[{"name":"who","type":"principal"}],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[who: TypedAbiArg<string, "who">], Response<bigint, null>>,
+    getBalanceLocked: {"name":"get-balance-locked","access":"read_only","args":[{"name":"who","type":"principal"}],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[who: TypedAbiArg<string, "who">], Response<bigint, null>>,
+    getDecimals: {"name":"get-decimals","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getName: {"name":"get-name","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"string-ascii":{"length":32}},"error":"none"}}}} as TypedAbiFunction<[], Response<string, null>>,
+    getSymbol: {"name":"get-symbol","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"string-ascii":{"length":10}},"error":"none"}}}} as TypedAbiFunction<[], Response<string, null>>,
+    getTokenUri: {"name":"get-token-uri","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"optional":{"string-utf8":{"length":256}}},"error":"none"}}}} as TypedAbiFunction<[], Response<string | null, null>>,
+    getTotalSupply: {"name":"get-total-supply","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    ERR_NOT_OWNER: {
+  name: 'ERR_NOT_OWNER',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_TRANSFER_INDEX_PREFIX: {
+  name: 'ERR_TRANSFER_INDEX_PREFIX',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    tokenDecimals: {
+  name: 'token-decimals',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    tokenName: {
+  name: 'token-name',
+  type: {
+    'string-ascii': {
+      length: 32
+    }
+  },
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    tokenSymbol: {
+  name: 'token-symbol',
+  type: {
+    'string-ascii': {
+      length: 10
+    }
+  },
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    tokenUri: {
+  name: 'token-uri',
+  type: {
+    optional: {
+      'string-utf8': {
+        length: 256
+      }
+    }
+  },
+  access: 'variable'
+} as TypedAbiVariable<string | null>
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[{"name":"sbtc-token"},{"name":"sbtc-token-locked"}],"epoch":"Epoch30","clarity_version":"Clarity3",
+  contractName: 'sbtc-token',
+  },
+stackingDaoMock: {
+  "functions": {
+    deposit: {"name":"deposit","access":"public","args":[{"name":"sbtc-amount","type":"uint128"},{"name":"min-shares-out","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[sbtcAmount: TypedAbiArg<number | bigint, "sbtcAmount">, minSharesOut: TypedAbiArg<number | bigint, "minSharesOut">], Response<bigint, bigint>>,
+    setDepositsEnabled: {"name":"set-deposits-enabled","access":"public","args":[{"name":"enabled","type":"bool"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[enabled: TypedAbiArg<boolean, "enabled">], Response<boolean, bigint>>,
+    setRatio: {"name":"set-ratio","access":"public","args":[{"name":"new-ratio","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newRatio: TypedAbiArg<number | bigint, "newRatio">], Response<boolean, bigint>>,
+    withdrawIdle: {"name":"withdraw-idle","access":"public","args":[{"name":"stbtc-amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"sbtc-fee","type":"uint128"},{"name":"sbtc-user","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[stbtcAmount: TypedAbiArg<number | bigint, "stbtcAmount">], Response<{
+  "sbtcFee": bigint;
+  "sbtcUser": bigint;
+}, bigint>>,
+    getReserveBalance: {"name":"get-reserve-balance","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    getSbtcPerStbtc: {"name":"get-sbtc-per-stbtc","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    getSbtcPerStbtcUp: {"name":"get-sbtc-per-stbtc-up","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    getTotalSbtc: {"name":"get-total-sbtc","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    DEAD_SHARES: {
+  name: 'DEAD_SHARES',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    dENOMINATOR_8: {
+  name: 'DENOMINATOR_8',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    ERR_AMOUNT_ZERO: {
+  name: 'ERR-AMOUNT-ZERO',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_DEPOSITS_DISABLED: {
+  name: 'ERR-DEPOSITS-DISABLED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_INSUFFICIENT_IDLE: {
+  name: 'ERR-INSUFFICIENT-IDLE',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_MIN_SHARES: {
+  name: 'ERR-MIN-SHARES',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NOT_AUTHORIZED: {
+  name: 'ERR-NOT-AUTHORIZED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    depositsEnabled: {
+  name: 'deposits-enabled',
+  type: 'bool',
+  access: 'variable'
+} as TypedAbiVariable<boolean>,
+    owner: {
+  name: 'owner',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    ratio: {
+  name: 'ratio',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    reserveBalance: {
+  name: 'reserve-balance',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>
+  },
+  constants: {
+  DEAD_SHARES: 1_000n,
+  dENOMINATOR_8: 100_000_000n,
+  eRRAMOUNTZERO: {
+    isOk: false,
+    value: 900_004n
+  },
+  eRRDEPOSITSDISABLED: {
+    isOk: false,
+    value: 900_005n
+  },
+  eRRINSUFFICIENTIDLE: {
+    isOk: false,
+    value: 900_001n
+  },
+  eRRMINSHARES: {
+    isOk: false,
+    value: 900_002n
+  },
+  eRRNOTAUTHORIZED: {
+    isOk: false,
+    value: 900_003n
+  },
+  depositsEnabled: true,
+  owner: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+  ratio: 100_000_000n,
+  reserveBalance: 0n
+},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'stacking-dao-mock',
+  },
+stbtcToken: {
+  "functions": {
+    burn: {"name":"burn","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"owner","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, owner: TypedAbiArg<string, "owner">], Response<boolean, bigint>>,
+    burnForProtocol: {"name":"burn-for-protocol","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"owner","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, owner: TypedAbiArg<string, "owner">], Response<boolean, bigint>>,
+    mint: {"name":"mint","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"recipient","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, recipient: TypedAbiArg<string, "recipient">], Response<boolean, bigint>>,
+    setAuthorizedContract: {"name":"set-authorized-contract","access":"public","args":[{"name":"contract","type":"principal"},{"name":"authorized","type":"bool"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[contract: TypedAbiArg<string, "contract">, authorized: TypedAbiArg<boolean, "authorized">], Response<boolean, bigint>>,
+    setContractOwner: {"name":"set-contract-owner","access":"public","args":[{"name":"new-owner","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newOwner: TypedAbiArg<string, "newOwner">], Response<boolean, bigint>>,
+    setTokenUri: {"name":"set-token-uri","access":"public","args":[{"name":"new-uri","type":{"optional":{"string-utf8":{"length":256}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newUri: TypedAbiArg<string | null, "newUri">], Response<boolean, bigint>>,
+    transfer: {"name":"transfer","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"sender","type":"principal"},{"name":"recipient","type":"principal"},{"name":"memo","type":{"optional":{"buffer":{"length":34}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, sender: TypedAbiArg<string, "sender">, recipient: TypedAbiArg<string, "recipient">, memo: TypedAbiArg<Uint8Array | null, "memo">], Response<boolean, bigint>>,
+    getBalance: {"name":"get-balance","access":"read_only","args":[{"name":"account","type":"principal"}],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[account: TypedAbiArg<string, "account">], Response<bigint, null>>,
+    getDecimals: {"name":"get-decimals","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getName: {"name":"get-name","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"string-ascii":{"length":16}},"error":"none"}}}} as TypedAbiFunction<[], Response<string, null>>,
+    getSymbol: {"name":"get-symbol","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"string-ascii":{"length":5}},"error":"none"}}}} as TypedAbiFunction<[], Response<string, null>>,
+    getTokenUri: {"name":"get-token-uri","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"optional":{"string-utf8":{"length":256}}},"error":"none"}}}} as TypedAbiFunction<[], Response<string | null, null>>,
+    getTotalSupply: {"name":"get-total-supply","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>
+  },
+  "maps": {
+    authorizedContracts: {"name":"authorized-contracts","key":"principal","value":"bool"} as TypedAbiMap<string, boolean>
+  },
+  "variables": {
+    DECIMALS: {
+  name: 'DECIMALS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    ERR_NOT_AUTHORIZED: {
+  name: 'ERR-NOT-AUTHORIZED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NOT_TOKEN_OWNER: {
+  name: 'ERR-NOT-TOKEN-OWNER',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    NAME: {
+  name: 'NAME',
+  type: {
+    'string-ascii': {
+      length: 16
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    SYMBOL: {
+  name: 'SYMBOL',
+  type: {
+    'string-ascii': {
+      length: 5
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    TOKEN_URI: {
+  name: 'TOKEN-URI',
+  type: {
+    'string-utf8': {
+      length: 44
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    contractOwner: {
+  name: 'contract-owner',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    tokenUri: {
+  name: 'token-uri',
+  type: {
+    optional: {
+      'string-utf8': {
+        length: 256
+      }
+    }
+  },
+  access: 'variable'
+} as TypedAbiVariable<string | null>
+  },
+  constants: {
+  DECIMALS: 8n,
+  eRRNOTAUTHORIZED: {
+    isOk: false,
+    value: 401n
+  },
+  eRRNOTTOKENOWNER: {
+    isOk: false,
+    value: 4n
+  },
+  NAME: 'Stacking DAO BTC',
+  SYMBOL: 'stBTC',
+  tOKENURI: 'https://app.stackingdao.com/stbtc-token.json',
+  contractOwner: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+  tokenUri: 'https://app.stackingdao.com/stbtc-token.json'
+},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[{"name":"stbtc"}],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'stbtc-token',
   },
 ststx: {
   "functions": {
@@ -6389,7 +7197,7 @@ ststx: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[{"name":"ststx"}],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[{"name":"ststx"}],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'ststx',
   },
 ststxbtc: {
@@ -6486,7 +7294,7 @@ ststxbtc: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[{"name":"ststxbtc"}],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[{"name":"ststxbtc"}],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'ststxbtc',
   },
 traitDiaOracle: {
@@ -6600,7 +7408,7 @@ usdc: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[{"name":"usdc"}],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[{"name":"usdc"}],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'usdc',
   },
 usdh: {
@@ -6697,7 +7505,7 @@ usdh: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[{"name":"usdh"}],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[{"name":"usdh"}],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'usdh',
   },
 vaultSbtc: {
@@ -7488,7 +8296,7 @@ vaultSbtc: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_313_915n,
+  lastUpdate: 1_788_354_749n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -7509,8 +8317,834 @@ vaultSbtc: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'vault-sbtc',
+  },
+vaultStbtc: {
+  "functions": {
+    calcCumulativeDebt: {"name":"calc-cumulative-debt","access":"private","args":[{"name":"principal-amount","type":"uint128"},{"name":"idx","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[principalAmount: TypedAbiArg<number | bigint, "principalAmount">, idx: TypedAbiArg<number | bigint, "idx">], bigint>,
+    calcIndexNext: {"name":"calc-index-next","access":"private","args":[{"name":"index-curr","type":"uint128"},{"name":"multiplier","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[indexCurr: TypedAbiArg<number | bigint, "indexCurr">, multiplier: TypedAbiArg<number | bigint, "multiplier">], bigint>,
+    calcLiquidityRate: {"name":"calc-liquidity-rate","access":"private","args":[{"name":"var-borrow-rate","type":"uint128"},{"name":"util-pct","type":"uint128"},{"name":"reserve-factor-bps","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[varBorrowRate: TypedAbiArg<number | bigint, "varBorrowRate">, utilPct: TypedAbiArg<number | bigint, "utilPct">, reserveFactorBps: TypedAbiArg<number | bigint, "reserveFactorBps">], bigint>,
+    calcMultiplierDelta: {"name":"calc-multiplier-delta","access":"private","args":[{"name":"rate","type":"uint128"},{"name":"time-delta","type":"uint128"},{"name":"round-up","type":"bool"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[rate: TypedAbiArg<number | bigint, "rate">, timeDelta: TypedAbiArg<number | bigint, "timeDelta">, roundUp: TypedAbiArg<boolean, "roundUp">], bigint>,
+    calcPrincipalRatioReduction: {"name":"calc-principal-ratio-reduction","access":"private","args":[{"name":"amount","type":"uint128"},{"name":"scaled-principal","type":"uint128"},{"name":"debt-amount","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, scaledPrincipal: TypedAbiArg<number | bigint, "scaledPrincipal">, debtAmount: TypedAbiArg<number | bigint, "debtAmount">], bigint>,
+    calcTreasuryLpPreview: {"name":"calc-treasury-lp-preview","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    calcUtilization: {"name":"calc-utilization","access":"private","args":[{"name":"available-liquidity","type":"uint128"},{"name":"debt-amount","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[availableLiquidity: TypedAbiArg<number | bigint, "availableLiquidity">, debtAmount: TypedAbiArg<number | bigint, "debtAmount">], bigint>,
+    checkCallerAuth: {"name":"check-caller-auth","access":"private","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>,
+    checkDaoAuth: {"name":"check-dao-auth","access":"private","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>,
+    combineElements: {"name":"combine-elements","access":"private","args":[{"name":"iter","type":"uint128"},{"name":"util","type":"uint128"},{"name":"rate","type":"uint128"}],"outputs":{"type":{"tuple":[{"name":"rate","type":"uint128"},{"name":"util","type":"uint128"}]}}} as TypedAbiFunction<[iter: TypedAbiArg<number | bigint, "iter">, util: TypedAbiArg<number | bigint, "util">, rate: TypedAbiArg<number | bigint, "rate">], {
+  "rate": bigint;
+  "util": bigint;
+}>,
+    convertToAssetsPreview: {"name":"convert-to-assets-preview","access":"private","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], bigint>,
+    convertToSharesPreview: {"name":"convert-to-shares-preview","access":"private","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], bigint>,
+    debtPreview: {"name":"debt-preview","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    getBalanceInternal: {"name":"get-balance-internal","access":"private","args":[{"name":"acc","type":"principal"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[acc: TypedAbiArg<string, "acc">], bigint>,
+    interestRate: {"name":"interest-rate","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    interpolateRate: {"name":"interpolate-rate","access":"private","args":[{"name":"util","type":"uint128"},{"name":"points-util","type":{"list":{"type":"uint128","length":8}}},{"name":"points-rate","type":{"list":{"type":"uint128","length":8}}}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[util: TypedAbiArg<number | bigint, "util">, pointsUtil: TypedAbiArg<number | bigint[], "pointsUtil">, pointsRate: TypedAbiArg<number | bigint[], "pointsRate">], bigint>,
+    iterPackU16: {"name":"iter-pack-u16","access":"private","args":[{"name":"i","type":"uint128"},{"name":"acc","type":{"tuple":[{"name":"fields","type":{"list":{"type":"uint128","length":8}}},{"name":"max","type":"uint128"},{"name":"valid","type":"bool"},{"name":"word","type":"uint128"}]}}],"outputs":{"type":{"tuple":[{"name":"fields","type":{"list":{"type":"uint128","length":8}}},{"name":"max","type":"uint128"},{"name":"valid","type":"bool"},{"name":"word","type":"uint128"}]}}} as TypedAbiFunction<[i: TypedAbiArg<number | bigint, "i">, acc: TypedAbiArg<{
+  "fields": number | bigint[];
+  "max": number | bigint;
+  "valid": boolean;
+  "word": number | bigint;
+}, "acc">], {
+  "fields": bigint[];
+  "max": bigint;
+  "valid": boolean;
+  "word": bigint;
+}>,
+    iterUnpackU16: {"name":"iter-unpack-u16","access":"private","args":[{"name":"pos","type":"uint128"},{"name":"acc","type":{"tuple":[{"name":"fields","type":{"list":{"type":"uint128","length":8}}},{"name":"word","type":"uint128"}]}}],"outputs":{"type":{"tuple":[{"name":"fields","type":{"list":{"type":"uint128","length":8}}},{"name":"word","type":"uint128"}]}}} as TypedAbiFunction<[pos: TypedAbiArg<number | bigint, "pos">, acc: TypedAbiArg<{
+  "fields": number | bigint[];
+  "word": number | bigint;
+}, "acc">], {
+  "fields": bigint[];
+  "word": bigint;
+}>,
+    linearInterpolate: {"name":"linear-interpolate","access":"private","args":[{"name":"x","type":"uint128"},{"name":"x1","type":"uint128"},{"name":"y1","type":"uint128"},{"name":"x2","type":"uint128"},{"name":"y2","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[x: TypedAbiArg<number | bigint, "x">, x1: TypedAbiArg<number | bigint, "x1">, y1: TypedAbiArg<number | bigint, "y1">, x2: TypedAbiArg<number | bigint, "x2">, y2: TypedAbiArg<number | bigint, "y2">], bigint>,
+    max: {"name":"max","access":"private","args":[{"name":"a","type":"uint128"},{"name":"b","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[a: TypedAbiArg<number | bigint, "a">, b: TypedAbiArg<number | bigint, "b">], bigint>,
+    min: {"name":"min","access":"private","args":[{"name":"a","type":"uint128"},{"name":"b","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[a: TypedAbiArg<number | bigint, "a">, b: TypedAbiArg<number | bigint, "b">], bigint>,
+    mulBpsDown: {"name":"mul-bps-down","access":"private","args":[{"name":"x","type":"uint128"},{"name":"y","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[x: TypedAbiArg<number | bigint, "x">, y: TypedAbiArg<number | bigint, "y">], bigint>,
+    mulDivDown: {"name":"mul-div-down","access":"private","args":[{"name":"x","type":"uint128"},{"name":"y","type":"uint128"},{"name":"z","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[x: TypedAbiArg<number | bigint, "x">, y: TypedAbiArg<number | bigint, "y">, z: TypedAbiArg<number | bigint, "z">], bigint>,
+    mulDivUp: {"name":"mul-div-up","access":"private","args":[{"name":"x","type":"uint128"},{"name":"y","type":"uint128"},{"name":"z","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[x: TypedAbiArg<number | bigint, "x">, y: TypedAbiArg<number | bigint, "y">, z: TypedAbiArg<number | bigint, "z">], bigint>,
+    nextIndex: {"name":"next-index","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    nextLiquidityIndex: {"name":"next-liquidity-index","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    packU16: {"name":"pack-u16","access":"private","args":[{"name":"fields","type":{"list":{"type":"uint128","length":8}}},{"name":"upper","type":{"optional":"uint128"}}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[fields: TypedAbiArg<number | bigint[], "fields">, upper: TypedAbiArg<number | bigint | null, "upper">], Response<bigint, bigint>>,
+    principalRatioReduction: {"name":"principal-ratio-reduction","access":"private","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], bigint>,
+    receiveUnderlying: {"name":"receive-underlying","access":"private","args":[{"name":"amount","type":"uint128"},{"name":"account","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, account: TypedAbiArg<string, "account">], Response<boolean, bigint>>,
+    resolveAndInterpolate: {"name":"resolve-and-interpolate","access":"private","args":[{"name":"target","type":"uint128"},{"name":"utils","type":{"list":{"type":"uint128","length":8}}},{"name":"rates","type":{"list":{"type":"uint128","length":8}}}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[target: TypedAbiArg<number | bigint, "target">, utils: TypedAbiArg<number | bigint[], "utils">, rates: TypedAbiArg<number | bigint[], "rates">], bigint>,
+    resolveInterpolationPoints: {"name":"resolve-interpolation-points","access":"private","args":[{"name":"point","type":{"tuple":[{"name":"rate","type":"uint128"},{"name":"util","type":"uint128"}]}},{"name":"acc","type":{"tuple":[{"name":"found","type":"bool"},{"name":"prev","type":{"tuple":[{"name":"rate","type":"uint128"},{"name":"util","type":"uint128"}]}},{"name":"result","type":"uint128"},{"name":"target","type":"uint128"}]}}],"outputs":{"type":{"tuple":[{"name":"found","type":"bool"},{"name":"prev","type":{"tuple":[{"name":"rate","type":"uint128"},{"name":"util","type":"uint128"}]}},{"name":"result","type":"uint128"},{"name":"target","type":"uint128"}]}}} as TypedAbiFunction<[point: TypedAbiArg<{
+  "rate": number | bigint;
+  "util": number | bigint;
+}, "point">, acc: TypedAbiArg<{
+  "found": boolean;
+  "prev": {
+  "rate": number | bigint;
+  "util": number | bigint;
+};
+  "result": number | bigint;
+  "target": number | bigint;
+}, "acc">], {
+  "found": boolean;
+  "prev": {
+  "rate": bigint;
+  "util": bigint;
+};
+  "result": bigint;
+  "target": bigint;
+}>,
+    sendUnderlying: {"name":"send-underlying","access":"private","args":[{"name":"amount","type":"uint128"},{"name":"account","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, account: TypedAbiArg<string, "account">], Response<boolean, bigint>>,
+    setPermissionSingle: {"name":"set-permission-single","access":"private","args":[{"name":"update","type":{"tuple":[{"name":"account","type":"principal"},{"name":"can-flashloan","type":"bool"},{"name":"fee-exempt","type":"bool"}]}}],"outputs":{"type":"bool"}} as TypedAbiFunction<[update: TypedAbiArg<{
+  "account": string;
+  "canFlashloan": boolean;
+  "feeExempt": boolean;
+}, "update">], boolean>,
+    totalAssets: {"name":"total-assets","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    totalAssetsPreview: {"name":"total-assets-preview","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    totalDebt: {"name":"total-debt","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    totalSupply: {"name":"total-supply","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    totalSupplyPreview: {"name":"total-supply-preview","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    ubalance: {"name":"ubalance","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    unpackU16: {"name":"unpack-u16","access":"private","args":[{"name":"word","type":"uint128"}],"outputs":{"type":{"list":{"type":"uint128","length":8}}}} as TypedAbiFunction<[word: TypedAbiArg<number | bigint, "word">], bigint[]>,
+    unpackU16At: {"name":"unpack-u16-at","access":"private","args":[{"name":"word","type":"uint128"},{"name":"pos","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[word: TypedAbiArg<number | bigint, "word">, pos: TypedAbiArg<number | bigint, "pos">], bigint>,
+    utilization: {"name":"utilization","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    zip: {"name":"zip","access":"private","args":[{"name":"util","type":{"list":{"type":"uint128","length":8}}},{"name":"rate","type":{"list":{"type":"uint128","length":8}}}],"outputs":{"type":{"list":{"type":{"tuple":[{"name":"rate","type":"uint128"},{"name":"util","type":"uint128"}]},"length":8}}}} as TypedAbiFunction<[util: TypedAbiArg<number | bigint[], "util">, rate: TypedAbiArg<number | bigint[], "rate">], {
+  "rate": bigint;
+  "util": bigint;
+}[]>,
+    accrue: {"name":"accrue","access":"public","args":[],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"index","type":"uint128"},{"name":"lindex","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[], Response<{
+  "index": bigint;
+  "lindex": bigint;
+}, bigint>>,
+    deposit: {"name":"deposit","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"min-out","type":"uint128"},{"name":"recipient","type":"principal"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, minOut: TypedAbiArg<number | bigint, "minOut">, recipient: TypedAbiArg<string, "recipient">], Response<bigint, bigint>>,
+    flashloan: {"name":"flashloan","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"funds-receiver","type":{"optional":"principal"}},{"name":"fc","type":"trait_reference"},{"name":"data","type":{"optional":{"buffer":{"length":4096}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, fundsReceiver: TypedAbiArg<string | null, "fundsReceiver">, fc: TypedAbiArg<string, "fc">, data: TypedAbiArg<Uint8Array | null, "data">], Response<boolean, bigint>>,
+    initialize: {"name":"initialize","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>,
+    redeem: {"name":"redeem","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"min-out","type":"uint128"},{"name":"recipient","type":"principal"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, minOut: TypedAbiArg<number | bigint, "minOut">, recipient: TypedAbiArg<string, "recipient">], Response<bigint, bigint>>,
+    setAuthorizedContract: {"name":"set-authorized-contract","access":"public","args":[{"name":"contract","type":"principal"},{"name":"authorized","type":"bool"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[contract: TypedAbiArg<string, "contract">, authorized: TypedAbiArg<boolean, "authorized">], Response<boolean, bigint>>,
+    setCapDebt: {"name":"set-cap-debt","access":"public","args":[{"name":"val","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[val: TypedAbiArg<number | bigint, "val">], Response<boolean, bigint>>,
+    setCapSupply: {"name":"set-cap-supply","access":"public","args":[{"name":"val","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[val: TypedAbiArg<number | bigint, "val">], Response<boolean, bigint>>,
+    setDefaultFlashloanPermissions: {"name":"set-default-flashloan-permissions","access":"public","args":[{"name":"can-flashloan","type":"bool"},{"name":"fee-exempt","type":"bool"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[canFlashloan: TypedAbiArg<boolean, "canFlashloan">, feeExempt: TypedAbiArg<boolean, "feeExempt">], Response<boolean, bigint>>,
+    setFeeFlash: {"name":"set-fee-flash","access":"public","args":[{"name":"val","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[val: TypedAbiArg<number | bigint, "val">], Response<boolean, bigint>>,
+    setFeeReserve: {"name":"set-fee-reserve","access":"public","args":[{"name":"val","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[val: TypedAbiArg<number | bigint, "val">], Response<boolean, bigint>>,
+    setFlashloanPermissions: {"name":"set-flashloan-permissions","access":"public","args":[{"name":"account","type":"principal"},{"name":"can-flashloan","type":"bool"},{"name":"fee-exempt","type":"bool"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[account: TypedAbiArg<string, "account">, canFlashloan: TypedAbiArg<boolean, "canFlashloan">, feeExempt: TypedAbiArg<boolean, "feeExempt">], Response<boolean, bigint>>,
+    setFlashloanPermissionsMany: {"name":"set-flashloan-permissions-many","access":"public","args":[{"name":"updates","type":{"list":{"type":{"tuple":[{"name":"account","type":"principal"},{"name":"can-flashloan","type":"bool"},{"name":"fee-exempt","type":"bool"}]},"length":20}}}],"outputs":{"type":{"response":{"ok":{"list":{"type":"bool","length":20}},"error":"uint128"}}}} as TypedAbiFunction<[updates: TypedAbiArg<{
+  "account": string;
+  "canFlashloan": boolean;
+  "feeExempt": boolean;
+}[], "updates">], Response<boolean[], bigint>>,
+    setPauseStates: {"name":"set-pause-states","access":"public","args":[{"name":"states","type":{"tuple":[{"name":"accrue","type":"bool"},{"name":"borrow","type":"bool"},{"name":"deposit","type":"bool"},{"name":"flashloan","type":"bool"},{"name":"redeem","type":"bool"},{"name":"repay","type":"bool"}]}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[states: TypedAbiArg<{
+  "accrue": boolean;
+  "borrow": boolean;
+  "deposit": boolean;
+  "flashloan": boolean;
+  "redeem": boolean;
+  "repay": boolean;
+}, "states">], Response<boolean, bigint>>,
+    setPointsRate: {"name":"set-points-rate","access":"public","args":[{"name":"points","type":{"list":{"type":"uint128","length":8}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[points: TypedAbiArg<number | bigint[], "points">], Response<boolean, bigint>>,
+    setPointsUtil: {"name":"set-points-util","access":"public","args":[{"name":"points","type":{"list":{"type":"uint128","length":8}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[points: TypedAbiArg<number | bigint[], "points">], Response<boolean, bigint>>,
+    setTokenUri: {"name":"set-token-uri","access":"public","args":[{"name":"new-uri","type":{"optional":{"string-utf8":{"length":256}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newUri: TypedAbiArg<string | null, "newUri">], Response<boolean, bigint>>,
+    socializeDebt: {"name":"socialize-debt","access":"public","args":[{"name":"scaled-amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[scaledAmount: TypedAbiArg<number | bigint, "scaledAmount">], Response<boolean, bigint>>,
+    systemBorrow: {"name":"system-borrow","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"receiver","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, receiver: TypedAbiArg<string, "receiver">], Response<boolean, bigint>>,
+    systemRepay: {"name":"system-repay","access":"public","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], Response<boolean, bigint>>,
+    transfer: {"name":"transfer","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"from","type":"principal"},{"name":"to","type":"principal"},{"name":"memo","type":{"optional":{"buffer":{"length":34}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, from: TypedAbiArg<string, "from">, to: TypedAbiArg<string, "to">, memo: TypedAbiArg<Uint8Array | null, "memo">], Response<boolean, bigint>>,
+    convertToAssets: {"name":"convert-to-assets","access":"read_only","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], Response<bigint, null>>,
+    convertToShares: {"name":"convert-to-shares","access":"read_only","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], Response<bigint, null>>,
+    getAssets: {"name":"get-assets","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getAvailableAssets: {"name":"get-available-assets","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    getBalance: {"name":"get-balance","access":"read_only","args":[{"name":"account","type":"principal"}],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[account: TypedAbiArg<string, "account">], Response<bigint, null>>,
+    getCapDebt: {"name":"get-cap-debt","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getCapSupply: {"name":"get-cap-supply","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getDebt: {"name":"get-debt","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getDecimals: {"name":"get-decimals","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getDefaultFlashloanPermissions: {"name":"get-default-flashloan-permissions","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"can-flashloan","type":"bool"},{"name":"fee-exempt","type":"bool"}]},"error":"none"}}}} as TypedAbiFunction<[], Response<{
+  "canFlashloan": boolean;
+  "feeExempt": boolean;
+}, null>>,
+    getFeeFlash: {"name":"get-fee-flash","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getFeeReserve: {"name":"get-fee-reserve","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getFlashloanPermissions: {"name":"get-flashloan-permissions","access":"read_only","args":[{"name":"account","type":"principal"}],"outputs":{"type":{"tuple":[{"name":"can-flashloan","type":"bool"},{"name":"fee-exempt","type":"bool"}]}}} as TypedAbiFunction<[account: TypedAbiArg<string, "account">], {
+  "canFlashloan": boolean;
+  "feeExempt": boolean;
+}>,
+    getIndex: {"name":"get-index","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getInterestRate: {"name":"get-interest-rate","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getLastUpdate: {"name":"get-last-update","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getLiquidityIndex: {"name":"get-liquidity-index","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getName: {"name":"get-name","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"string-ascii":{"length":10}},"error":"none"}}}} as TypedAbiFunction<[], Response<string, null>>,
+    getNextIndex: {"name":"get-next-index","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getPauseStates: {"name":"get-pause-states","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"accrue","type":"bool"},{"name":"borrow","type":"bool"},{"name":"deposit","type":"bool"},{"name":"flashloan","type":"bool"},{"name":"redeem","type":"bool"},{"name":"repay","type":"bool"}]},"error":"none"}}}} as TypedAbiFunction<[], Response<{
+  "accrue": boolean;
+  "borrow": boolean;
+  "deposit": boolean;
+  "flashloan": boolean;
+  "redeem": boolean;
+  "repay": boolean;
+}, null>>,
+    getPointsRate: {"name":"get-points-rate","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"list":{"type":"uint128","length":8}},"error":"none"}}}} as TypedAbiFunction<[], Response<bigint[], null>>,
+    getPointsUtil: {"name":"get-points-util","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"list":{"type":"uint128","length":8}},"error":"none"}}}} as TypedAbiFunction<[], Response<bigint[], null>>,
+    getPrincipalRatioReduction: {"name":"get-principal-ratio-reduction","access":"read_only","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], Response<bigint, null>>,
+    getPrincipalScaled: {"name":"get-principal-scaled","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getSymbol: {"name":"get-symbol","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"string-ascii":{"length":6}},"error":"none"}}}} as TypedAbiFunction<[], Response<string, null>>,
+    getTokenUri: {"name":"get-token-uri","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"optional":{"string-utf8":{"length":256}}},"error":"none"}}}} as TypedAbiFunction<[], Response<string | null, null>>,
+    getTotalAssets: {"name":"get-total-assets","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getTotalSupply: {"name":"get-total-supply","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getUnderlying: {"name":"get-underlying","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"principal","error":"none"}}}} as TypedAbiFunction<[], Response<string, null>>,
+    getUtilization: {"name":"get-utilization","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    isAuthorizedContract: {"name":"is-authorized-contract","access":"read_only","args":[{"name":"contract","type":"principal"}],"outputs":{"type":"bool"}} as TypedAbiFunction<[contract: TypedAbiArg<string, "contract">], boolean>
+  },
+  "maps": {
+    authorizedContracts: {"name":"authorized-contracts","key":"principal","value":"bool"} as TypedAbiMap<string, boolean>,
+    flashloanPermissions: {"name":"flashloan-permissions","key":"principal","value":{"tuple":[{"name":"can-flashloan","type":"bool"},{"name":"fee-exempt","type":"bool"}]}} as TypedAbiMap<string, {
+  "canFlashloan": boolean;
+  "feeExempt": boolean;
+}>
+  },
+  "variables": {
+    bITU16: {
+  name: 'BIT-U16',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    BPS: {
+  name: 'BPS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    DECIMALS: {
+  name: 'DECIMALS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    ERR_ALREADY_INITIALIZED: {
+  name: 'ERR-ALREADY-INITIALIZED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_AMOUNT_ZERO: {
+  name: 'ERR-AMOUNT-ZERO',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_AUTH: {
+  name: 'ERR-AUTH',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_DEBT_CAP_EXCEEDED: {
+  name: 'ERR-DEBT-CAP-EXCEEDED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_FLASHLOAN_UNAUTHORIZED: {
+  name: 'ERR-FLASHLOAN-UNAUTHORIZED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_INIT: {
+  name: 'ERR-INIT',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_INSUFFICIENT_ASSETS: {
+  name: 'ERR-INSUFFICIENT-ASSETS',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_INSUFFICIENT_BALANCE: {
+  name: 'ERR-INSUFFICIENT-BALANCE',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_INSUFFICIENT_FLASHLOAN_LIQUIDITY: {
+  name: 'ERR-INSUFFICIENT-FLASHLOAN-LIQUIDITY',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_INSUFFICIENT_LIQUIDITY: {
+  name: 'ERR-INSUFFICIENT-LIQUIDITY',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_INSUFFICIENT_VAULT_LIQUIDITY: {
+  name: 'ERR-INSUFFICIENT-VAULT-LIQUIDITY',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_INVALID_ADDRESS: {
+  name: 'ERR-INVALID-ADDRESS',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    eRRINVALIDU16: {
+  name: 'ERR-INVALID-U16',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_LENDING_POSTCONDITIONS: {
+  name: 'ERR-LENDING-POSTCONDITIONS',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_LENDING_PRECONDITIONS: {
+  name: 'ERR-LENDING-PRECONDITIONS',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NO_DEBT: {
+  name: 'ERR-NO-DEBT',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NO_RESERVES: {
+  name: 'ERR-NO-RESERVES',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_OUTPUT_ZERO: {
+  name: 'ERR-OUTPUT-ZERO',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_PAUSED: {
+  name: 'ERR-PAUSED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_REENTRANCY: {
+  name: 'ERR-REENTRANCY',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_RESERVE_VALIDATION: {
+  name: 'ERR-RESERVE-VALIDATION',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_SLIPPAGE: {
+  name: 'ERR-SLIPPAGE',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_SUPPLY_CAP_EXCEEDED: {
+  name: 'ERR-SUPPLY-CAP-EXCEEDED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_TOKENIZED_VAULT_POSTCONDITIONS: {
+  name: 'ERR-TOKENIZED-VAULT-POSTCONDITIONS',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_TOKENIZED_VAULT_PRECONDITIONS: {
+  name: 'ERR-TOKENIZED-VAULT-PRECONDITIONS',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    INDEX_PRECISION: {
+  name: 'INDEX-PRECISION',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    iTERUINT8: {
+  name: 'ITER-UINT-8',
+  type: {
+    list: {
+      type: 'uint128',
+      length: 8
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<bigint[]>,
+    mASKU16: {
+  name: 'MASK-U16',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    mAXU128: {
+  name: 'MAX-U128',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    mAXU16: {
+  name: 'MAX-U16',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MINIMUM_LIQUIDITY: {
+  name: 'MINIMUM-LIQUIDITY',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    NAME: {
+  name: 'NAME',
+  type: {
+    'string-ascii': {
+      length: 10
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    NULL_ADDRESS: {
+  name: 'NULL-ADDRESS',
+  type: 'principal',
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    PRECISION: {
+  name: 'PRECISION',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    SECONDS_PER_YEAR_BPS: {
+  name: 'SECONDS-PER-YEAR-BPS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    SYMBOL: {
+  name: 'SYMBOL',
+  type: {
+    'string-ascii': {
+      length: 6
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    UNDERLYING: {
+  name: 'UNDERLYING',
+  type: 'principal',
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    assets: {
+  name: 'assets',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    capDebt: {
+  name: 'cap-debt',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    capSupply: {
+  name: 'cap-supply',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    defaultFlashloanPermissions: {
+  name: 'default-flashloan-permissions',
+  type: {
+    tuple: [
+      {
+        name: 'can-flashloan',
+        type: 'bool'
+      },
+      {
+        name: 'fee-exempt',
+        type: 'bool'
+      }
+    ]
+  },
+  access: 'variable'
+} as TypedAbiVariable<{
+  "canFlashloan": boolean;
+  "feeExempt": boolean;
+}>,
+    feeFlash: {
+  name: 'fee-flash',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    feeReserve: {
+  name: 'fee-reserve',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    inFlashloan: {
+  name: 'in-flashloan',
+  type: 'bool',
+  access: 'variable'
+} as TypedAbiVariable<boolean>,
+    index: {
+  name: 'index',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    initialized: {
+  name: 'initialized',
+  type: 'bool',
+  access: 'variable'
+} as TypedAbiVariable<boolean>,
+    lastUpdate: {
+  name: 'last-update',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    lindex: {
+  name: 'lindex',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    pauseStates: {
+  name: 'pause-states',
+  type: {
+    tuple: [
+      {
+        name: 'accrue',
+        type: 'bool'
+      },
+      {
+        name: 'borrow',
+        type: 'bool'
+      },
+      {
+        name: 'deposit',
+        type: 'bool'
+      },
+      {
+        name: 'flashloan',
+        type: 'bool'
+      },
+      {
+        name: 'redeem',
+        type: 'bool'
+      },
+      {
+        name: 'repay',
+        type: 'bool'
+      }
+    ]
+  },
+  access: 'variable'
+} as TypedAbiVariable<{
+  "accrue": boolean;
+  "borrow": boolean;
+  "deposit": boolean;
+  "flashloan": boolean;
+  "redeem": boolean;
+  "repay": boolean;
+}>,
+    pointsIr: {
+  name: 'points-ir',
+  type: {
+    tuple: [
+      {
+        name: 'rate',
+        type: 'uint128'
+      },
+      {
+        name: 'util',
+        type: 'uint128'
+      }
+    ]
+  },
+  access: 'variable'
+} as TypedAbiVariable<{
+  "rate": bigint;
+  "util": bigint;
+}>,
+    principalScaled: {
+  name: 'principal-scaled',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    tokenUri: {
+  name: 'token-uri',
+  type: {
+    optional: {
+      'string-utf8': {
+        length: 256
+      }
+    }
+  },
+  access: 'variable'
+} as TypedAbiVariable<string | null>,
+    totalBorrowed: {
+  name: 'total-borrowed',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>
+  },
+  constants: {
+  bITU16: 16n,
+  BPS: 10_000n,
+  DECIMALS: 8n,
+  eRRALREADYINITIALIZED: {
+    isOk: false,
+    value: 802_003n
+  },
+  eRRAMOUNTZERO: {
+    isOk: false,
+    value: 802_009n
+  },
+  eRRAUTH: {
+    isOk: false,
+    value: 802_001n
+  },
+  eRRDEBTCAPEXCEEDED: {
+    isOk: false,
+    value: 802_019n
+  },
+  eRRFLASHLOANUNAUTHORIZED: {
+    isOk: false,
+    value: 802_023n
+  },
+  eRRINIT: {
+    isOk: false,
+    value: 802_002n
+  },
+  eRRINSUFFICIENTASSETS: {
+    isOk: false,
+    value: 802_020n
+  },
+  eRRINSUFFICIENTBALANCE: {
+    isOk: false,
+    value: 802_013n
+  },
+  eRRINSUFFICIENTFLASHLOANLIQUIDITY: {
+    isOk: false,
+    value: 802_022n
+  },
+  eRRINSUFFICIENTLIQUIDITY: {
+    isOk: false,
+    value: 802_014n
+  },
+  eRRINSUFFICIENTVAULTLIQUIDITY: {
+    isOk: false,
+    value: 802_018n
+  },
+  eRRINVALIDADDRESS: {
+    isOk: false,
+    value: 802_021n
+  },
+  eRRINVALIDU16: {
+    isOk: false,
+    value: 700_001n
+  },
+  eRRLENDINGPOSTCONDITIONS: {
+    isOk: false,
+    value: 802_016n
+  },
+  eRRLENDINGPRECONDITIONS: {
+    isOk: false,
+    value: 802_015n
+  },
+  eRRNODEBT: {
+    isOk: false,
+    value: 802_024n
+  },
+  eRRNORESERVES: {
+    isOk: false,
+    value: 802_017n
+  },
+  eRROUTPUTZERO: {
+    isOk: false,
+    value: 802_012n
+  },
+  eRRPAUSED: {
+    isOk: false,
+    value: 802_006n
+  },
+  eRRREENTRANCY: {
+    isOk: false,
+    value: 802_004n
+  },
+  eRRRESERVEVALIDATION: {
+    isOk: false,
+    value: 802_005n
+  },
+  eRRSLIPPAGE: {
+    isOk: false,
+    value: 802_010n
+  },
+  eRRSUPPLYCAPEXCEEDED: {
+    isOk: false,
+    value: 802_011n
+  },
+  eRRTOKENIZEDVAULTPOSTCONDITIONS: {
+    isOk: false,
+    value: 802_008n
+  },
+  eRRTOKENIZEDVAULTPRECONDITIONS: {
+    isOk: false,
+    value: 802_007n
+  },
+  iNDEXPRECISION: 1_000_000_000_000n,
+  iTERUINT8: [
+    0n,
+    1n,
+    2n,
+    3n,
+    4n,
+    5n,
+    6n,
+    7n
+  ],
+  mASKU16: 65_536n,
+  mAXU128: 340_282_366_920_938_463_463_374_607_431_768_211_455n,
+  mAXU16: 65_535n,
+  mINIMUMLIQUIDITY: 1_000n,
+  NAME: 'Zest stBTC',
+  nULLADDRESS: 'ST000000000000000000002AMW42H',
+  PRECISION: 100_000_000n,
+  sECONDSPERYEARBPS: 315_360_000_000n,
+  SYMBOL: 'zstBTC',
+  UNDERLYING: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.stbtc-token',
+  assets: 0n,
+  capDebt: 0n,
+  capSupply: 0n,
+  defaultFlashloanPermissions: {
+    canFlashloan: false,
+    feeExempt: false
+  },
+  feeFlash: 0n,
+  feeReserve: 0n,
+  inFlashloan: false,
+  index: 1_000_000_000_000n,
+  initialized: false,
+  lastUpdate: 1_788_355_079n,
+  lindex: 1_000_000_000_000n,
+  pauseStates: {
+    accrue: false,
+    borrow: false,
+    deposit: false,
+    flashloan: false,
+    redeem: false,
+    repay: false
+  },
+  pointsIr: {
+    rate: 0n,
+    util: 0n
+  },
+  principalScaled: 0n,
+  tokenUri: null,
+  totalBorrowed: 0n
+},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'vault-stbtc',
   },
 vaultStstx: {
   "functions": {
@@ -8300,7 +9934,7 @@ vaultStstx: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_313_935n,
+  lastUpdate: 1_788_355_019n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -8321,7 +9955,7 @@ vaultStstx: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'vault-ststx',
   },
 vaultStstxbtc: {
@@ -9112,7 +10746,7 @@ vaultStstxbtc: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_313_855n,
+  lastUpdate: 1_788_355_039n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -9133,7 +10767,7 @@ vaultStstxbtc: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'vault-ststxbtc',
   },
 vaultStx: {
@@ -9924,7 +11558,7 @@ vaultStx: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_313_905n,
+  lastUpdate: 1_788_354_739n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -9945,7 +11579,7 @@ vaultStx: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'vault-stx',
   },
 vaultTraits: {
@@ -9962,7 +11596,7 @@ vaultTraits: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'vault-traits',
   },
 vaultUsdc: {
@@ -10753,7 +12387,7 @@ vaultUsdc: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_313_885n,
+  lastUpdate: 1_788_354_809n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -10774,7 +12408,7 @@ vaultUsdc: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'vault-usdc',
   },
 vaultUsdh: {
@@ -11565,7 +13199,7 @@ vaultUsdh: {
   inFlashloan: false,
   index: 1_000_000_000_000n,
   initialized: false,
-  lastUpdate: 1_768_314_075n,
+  lastUpdate: 1_788_354_889n,
   lindex: 1_000_000_000_000n,
   pauseStates: {
     accrue: false,
@@ -11586,725 +13220,8 @@ vaultUsdh: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[{"name":"zft"}],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'vault-usdh',
-  },
-wormholeCoreV4: {
-  "functions": {
-    batchCheckActivePublicKeys: {"name":"batch-check-active-public-keys","access":"private","args":[{"name":"entry","type":{"tuple":[{"name":"guardian-id","type":"uint128"},{"name":"recovered-compressed-public-key","type":{"buffer":{"length":33}}}]}},{"name":"acc","type":{"tuple":[{"name":"active-guardians","type":{"list":{"type":{"tuple":[{"name":"compressed-public-key","type":{"buffer":{"length":33}}},{"name":"uncompressed-public-key","type":{"buffer":{"length":64}}}]},"length":19}}},{"name":"result","type":{"list":{"type":{"buffer":{"length":33}},"length":19}}}]}}],"outputs":{"type":{"tuple":[{"name":"active-guardians","type":{"list":{"type":{"tuple":[{"name":"compressed-public-key","type":{"buffer":{"length":33}}},{"name":"uncompressed-public-key","type":{"buffer":{"length":64}}}]},"length":19}}},{"name":"result","type":{"list":{"type":{"buffer":{"length":33}},"length":19}}}]}}} as TypedAbiFunction<[entry: TypedAbiArg<{
-  "guardianId": number | bigint;
-  "recoveredCompressedPublicKey": Uint8Array;
-}, "entry">, acc: TypedAbiArg<{
-  "activeGuardians": {
-  "compressedPublicKey": Uint8Array;
-  "uncompressedPublicKey": Uint8Array;
-}[];
-  "result": Uint8Array[];
-}, "acc">], {
-  "activeGuardians": {
-  "compressedPublicKey": Uint8Array;
-  "uncompressedPublicKey": Uint8Array;
-}[];
-  "result": Uint8Array[];
-}>,
-    checkAndConsolidatePublicKeys: {"name":"check-and-consolidate-public-keys","access":"private","args":[{"name":"uncompressed-public-key","type":{"buffer":{"length":64}}},{"name":"acc","type":{"tuple":[{"name":"cursor","type":"uint128"},{"name":"eth-addresses","type":{"list":{"type":{"buffer":{"length":20}},"length":19}}},{"name":"result","type":{"list":{"type":{"tuple":[{"name":"compressed-public-key","type":{"buffer":{"length":33}}},{"name":"uncompressed-public-key","type":{"buffer":{"length":64}}}]},"length":19}}}]}}],"outputs":{"type":{"tuple":[{"name":"cursor","type":"uint128"},{"name":"eth-addresses","type":{"list":{"type":{"buffer":{"length":20}},"length":19}}},{"name":"result","type":{"list":{"type":{"tuple":[{"name":"compressed-public-key","type":{"buffer":{"length":33}}},{"name":"uncompressed-public-key","type":{"buffer":{"length":64}}}]},"length":19}}}]}}} as TypedAbiFunction<[uncompressedPublicKey: TypedAbiArg<Uint8Array, "uncompressedPublicKey">, acc: TypedAbiArg<{
-  "cursor": number | bigint;
-  "ethAddresses": Uint8Array[];
-  "result": {
-  "compressedPublicKey": Uint8Array;
-  "uncompressedPublicKey": Uint8Array;
-}[];
-}, "acc">], {
-  "cursor": bigint;
-  "ethAddresses": Uint8Array[];
-  "result": {
-  "compressedPublicKey": Uint8Array;
-  "uncompressedPublicKey": Uint8Array;
-}[];
-}>,
-    compressPublicKey: {"name":"compress-public-key","access":"private","args":[{"name":"uncompressed-public-key","type":{"buffer":{"length":64}}}],"outputs":{"type":{"buffer":{"length":33}}}} as TypedAbiFunction<[uncompressedPublicKey: TypedAbiArg<Uint8Array, "uncompressedPublicKey">], Uint8Array>,
-    emptyKey: {"name":"empty-key","access":"private","args":[{"name":"entry","type":{"tuple":[{"name":"guardian-id","type":"uint128"},{"name":"recovered-compressed-public-key","type":{"buffer":{"length":33}}}]}}],"outputs":{"type":"bool"}} as TypedAbiFunction<[entry: TypedAbiArg<{
-  "guardianId": number | bigint;
-  "recoveredCompressedPublicKey": Uint8Array;
-}, "entry">], boolean>,
-    getQuorum: {"name":"get-quorum","access":"private","args":[{"name":"guardian-set-size","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[guardianSetSize: TypedAbiArg<number | bigint, "guardianSetSize">], bigint>,
-    isEthAddressMatchingPublicKey: {"name":"is-eth-address-matching-public-key","access":"private","args":[{"name":"uncompressed-public-key","type":{"buffer":{"length":64}}},{"name":"eth-address","type":{"buffer":{"length":20}}}],"outputs":{"type":"bool"}} as TypedAbiFunction<[uncompressedPublicKey: TypedAbiArg<Uint8Array, "uncompressedPublicKey">, ethAddress: TypedAbiArg<Uint8Array, "ethAddress">], boolean>,
-    isGuardianCue: {"name":"is-guardian-cue","access":"private","args":[{"name":"byte","type":{"buffer":{"length":1}}},{"name":"acc","type":{"tuple":[{"name":"cursor","type":"uint128"},{"name":"result","type":{"list":{"type":"uint128","length":19}}}]}}],"outputs":{"type":{"tuple":[{"name":"cursor","type":"uint128"},{"name":"result","type":{"list":{"type":"uint128","length":19}}}]}}} as TypedAbiFunction<[byte: TypedAbiArg<Uint8Array, "byte">, acc: TypedAbiArg<{
-  "cursor": number | bigint;
-  "result": number | bigint[];
-}, "acc">], {
-  "cursor": bigint;
-  "result": bigint[];
-}>,
-    isValidGuardianEntry: {"name":"is-valid-guardian-entry","access":"private","args":[{"name":"entry","type":{"tuple":[{"name":"compressed-public-key","type":{"buffer":{"length":33}}},{"name":"uncompressed-public-key","type":{"buffer":{"length":64}}}]}},{"name":"prev-res","type":{"response":{"ok":"bool","error":"uint128"}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[entry: TypedAbiArg<{
-  "compressedPublicKey": Uint8Array;
-  "uncompressedPublicKey": Uint8Array;
-}, "entry">, prevRes: TypedAbiArg<Response<boolean, number | bigint>, "prevRes">], Response<boolean, bigint>>,
-    isValidGuardianSet: {"name":"is-valid-guardian-set","access":"private","args":[{"name":"set-id","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[setId: TypedAbiArg<number | bigint, "setId">], Response<boolean, bigint>>,
-    parseAndVerifyGuardiansSet: {"name":"parse-and-verify-guardians-set","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"action","type":"uint128"},{"name":"chain","type":"uint128"},{"name":"guardians-eth-addresses","type":{"list":{"type":{"buffer":{"length":20}},"length":19}}},{"name":"module","type":{"buffer":{"length":32}}},{"name":"new-index","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">], Response<{
-  "action": bigint;
-  "chain": bigint;
-  "guardiansEthAddresses": Uint8Array[];
-  "module": Uint8Array;
-  "newIndex": bigint;
-}, bigint>>,
-    parseGuardian: {"name":"parse-guardian","access":"private","args":[{"name":"cue-position","type":"uint128"},{"name":"acc","type":{"tuple":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"result","type":{"list":{"type":{"buffer":{"length":20}},"length":19}}}]}}],"outputs":{"type":{"tuple":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"result","type":{"list":{"type":{"buffer":{"length":20}},"length":19}}}]}}} as TypedAbiFunction<[cuePosition: TypedAbiArg<number | bigint, "cuePosition">, acc: TypedAbiArg<{
-  "bytes": Uint8Array;
-  "result": Uint8Array[];
-}, "acc">], {
-  "bytes": Uint8Array;
-  "result": Uint8Array[];
-}>,
-    readBuff: {"name":"read-buff","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"},{"name":"length","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":8192}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">, length: TypedAbiArg<number | bigint, "length">], Response<Uint8Array, bigint>>,
-    readBuff20: {"name":"read-buff-20","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":20}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<Uint8Array, bigint>>,
-    readBuff32: {"name":"read-buff-32","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":{"buffer":{"length":32}},"error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<Uint8Array, bigint>>,
-    readOneSignature: {"name":"read-one-signature","access":"private","args":[{"name":"input","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"tuple":[{"name":"guardian-id","type":"uint128"},{"name":"signature","type":{"buffer":{"length":65}}}]}}} as TypedAbiFunction<[input: TypedAbiArg<Uint8Array, "input">], {
-  "guardianId": bigint;
-  "signature": Uint8Array;
-}>,
-    readUint16: {"name":"read-uint-16","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    readUint32: {"name":"read-uint-32","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    readUint64: {"name":"read-uint-64","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    readUint8: {"name":"read-uint-8","access":"private","args":[{"name":"bytes","type":{"buffer":{"length":8192}}},{"name":"pos","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[bytes: TypedAbiArg<Uint8Array, "bytes">, pos: TypedAbiArg<number | bigint, "pos">], Response<bigint, bigint>>,
-    recoverPublicKey: {"name":"recover-public-key","access":"private","args":[{"name":"entry","type":{"tuple":[{"name":"guardian-id","type":"uint128"},{"name":"signature","type":{"buffer":{"length":65}}}]}},{"name":"message-hash","type":{"buffer":{"length":32}}}],"outputs":{"type":{"tuple":[{"name":"guardian-id","type":"uint128"},{"name":"recovered-compressed-public-key","type":{"buffer":{"length":33}}}]}}} as TypedAbiFunction<[entry: TypedAbiArg<{
-  "guardianId": number | bigint;
-  "signature": Uint8Array;
-}, "entry">, messageHash: TypedAbiArg<Uint8Array, "messageHash">], {
-  "guardianId": bigint;
-  "recoveredCompressedPublicKey": Uint8Array;
-}>,
-    setNewGuardianSetId: {"name":"set-new-guardian-set-id","access":"private","args":[{"name":"new-set-id","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newSetId: TypedAbiArg<number | bigint, "newSetId">], Response<boolean, bigint>>,
-    updateGuardiansSet: {"name":"update-guardians-set","access":"public","args":[{"name":"guardian-set-vaa","type":{"buffer":{"length":2048}}},{"name":"uncompressed-public-keys","type":{"list":{"type":{"buffer":{"length":64}},"length":19}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"result","type":{"tuple":[{"name":"guardians-eth-addresses","type":{"list":{"type":{"buffer":{"length":20}},"length":19}}},{"name":"guardians-public-keys","type":{"list":{"type":{"buffer":{"length":64}},"length":19}}}]}},{"name":"vaa","type":{"tuple":[{"name":"emitter-address","type":{"buffer":{"length":32}}},{"name":"emitter-chain","type":"uint128"},{"name":"guardian-set-id","type":"uint128"},{"name":"payload","type":{"buffer":{"length":8192}}},{"name":"sequence","type":"uint128"},{"name":"version","type":"uint128"}]}}]},"error":"uint128"}}}} as TypedAbiFunction<[guardianSetVaa: TypedAbiArg<Uint8Array, "guardianSetVaa">, uncompressedPublicKeys: TypedAbiArg<Uint8Array[], "uncompressedPublicKeys">], Response<{
-  "result": {
-  "guardiansEthAddresses": Uint8Array[];
-  "guardiansPublicKeys": Uint8Array[];
-};
-  "vaa": {
-  "emitterAddress": Uint8Array;
-  "emitterChain": bigint;
-  "guardianSetId": bigint;
-  "payload": Uint8Array;
-  "sequence": bigint;
-  "version": bigint;
-};
-}, bigint>>,
-    getActiveGuardianSet: {"name":"get-active-guardian-set","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"guardians","type":{"list":{"type":{"tuple":[{"name":"compressed-public-key","type":{"buffer":{"length":33}}},{"name":"uncompressed-public-key","type":{"buffer":{"length":64}}}]},"length":19}}},{"name":"set-id","type":"uint128"}]},"error":"none"}}}} as TypedAbiFunction<[], Response<{
-  "guardians": {
-  "compressedPublicKey": Uint8Array;
-  "uncompressedPublicKey": Uint8Array;
-}[];
-  "setId": bigint;
-}, null>>,
-    parseAndVerifyVaa: {"name":"parse-and-verify-vaa","access":"read_only","args":[{"name":"vaa-bytes","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"emitter-address","type":{"buffer":{"length":32}}},{"name":"emitter-chain","type":"uint128"},{"name":"guardian-set-id","type":"uint128"},{"name":"payload","type":{"buffer":{"length":8192}}},{"name":"sequence","type":"uint128"},{"name":"version","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">], Response<{
-  "emitterAddress": Uint8Array;
-  "emitterChain": bigint;
-  "guardianSetId": bigint;
-  "payload": Uint8Array;
-  "sequence": bigint;
-  "version": bigint;
-}, bigint>>,
-    parseVaa: {"name":"parse-vaa","access":"read_only","args":[{"name":"vaa-bytes","type":{"buffer":{"length":8192}}}],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"recovered-public-keys","type":{"list":{"type":{"tuple":[{"name":"guardian-id","type":"uint128"},{"name":"recovered-compressed-public-key","type":{"buffer":{"length":33}}}]},"length":19}}},{"name":"vaa","type":{"tuple":[{"name":"emitter-address","type":{"buffer":{"length":32}}},{"name":"emitter-chain","type":"uint128"},{"name":"guardian-set-id","type":"uint128"},{"name":"payload","type":{"buffer":{"length":8192}}},{"name":"sequence","type":"uint128"},{"name":"version","type":"uint128"}]}}]},"error":"uint128"}}}} as TypedAbiFunction<[vaaBytes: TypedAbiArg<Uint8Array, "vaaBytes">], Response<{
-  "recoveredPublicKeys": {
-  "guardianId": bigint;
-  "recoveredCompressedPublicKey": Uint8Array;
-}[];
-  "vaa": {
-  "emitterAddress": Uint8Array;
-  "emitterChain": bigint;
-  "guardianSetId": bigint;
-  "payload": Uint8Array;
-  "sequence": bigint;
-  "version": bigint;
-};
-}, bigint>>
-  },
-  "maps": {
-    guardianSets: {"name":"guardian-sets","key":"uint128","value":{"list":{"type":{"tuple":[{"name":"compressed-public-key","type":{"buffer":{"length":33}}},{"name":"uncompressed-public-key","type":{"buffer":{"length":64}}}]},"length":19}}} as TypedAbiMap<number | bigint, {
-  "compressedPublicKey": Uint8Array;
-  "uncompressedPublicKey": Uint8Array;
-}[]>
-  },
-  "variables": {
-    ACTION_GUARDIAN_SET_UPDATE: {
-  name: 'ACTION_GUARDIAN_SET_UPDATE',
-  type: 'uint128',
-  access: 'constant'
-} as TypedAbiVariable<bigint>,
-    CORE_CHAIN_ID: {
-  name: 'CORE_CHAIN_ID',
-  type: 'uint128',
-  access: 'constant'
-} as TypedAbiVariable<bigint>,
-    CORE_STRING_MODULE: {
-  name: 'CORE_STRING_MODULE',
-  type: {
-    buffer: {
-      length: 32
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    ERR_DUPLICATED_GUARDIAN_ADDRESSES: {
-  name: 'ERR_DUPLICATED_GUARDIAN_ADDRESSES',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_EMPTY_GUARDIAN_SET: {
-  name: 'ERR_EMPTY_GUARDIAN_SET',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_CHECK_ACTION: {
-  name: 'ERR_GSU_CHECK_ACTION',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_CHECK_CHAIN: {
-  name: 'ERR_GSU_CHECK_CHAIN',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_CHECK_EMITTER: {
-  name: 'ERR_GSU_CHECK_EMITTER',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_CHECK_INDEX: {
-  name: 'ERR_GSU_CHECK_INDEX',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_CHECK_MODULE: {
-  name: 'ERR_GSU_CHECK_MODULE',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_CHECK_OVERLAY: {
-  name: 'ERR_GSU_CHECK_OVERLAY',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_PARSING_ACTION: {
-  name: 'ERR_GSU_PARSING_ACTION',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_PARSING_CHAIN: {
-  name: 'ERR_GSU_PARSING_CHAIN',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_PARSING_GUARDIANS_BYTES: {
-  name: 'ERR_GSU_PARSING_GUARDIANS_BYTES',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_PARSING_GUARDIAN_LEN: {
-  name: 'ERR_GSU_PARSING_GUARDIAN_LEN',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_PARSING_INDEX: {
-  name: 'ERR_GSU_PARSING_INDEX',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_PARSING_MODULE: {
-  name: 'ERR_GSU_PARSING_MODULE',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_GSU_UNCOMPRESSED_PUBLIC_KEYS: {
-  name: 'ERR_GSU_UNCOMPRESSED_PUBLIC_KEYS',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_NOT_DEPLOYER: {
-  name: 'ERR_NOT_DEPLOYER',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_STACKS_TIMESTAMP: {
-  name: 'ERR_STACKS_TIMESTAMP',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_CHECKS_GUARDIAN_SET_CONSISTENCY: {
-  name: 'ERR_VAA_CHECKS_GUARDIAN_SET_CONSISTENCY',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_CHECKS_THRESHOLD_SIGNATURE: {
-  name: 'ERR_VAA_CHECKS_THRESHOLD_SIGNATURE',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_CHECKS_VERSION_UNSUPPORTED: {
-  name: 'ERR_VAA_CHECKS_VERSION_UNSUPPORTED',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_HASHING_BODY: {
-  name: 'ERR_VAA_HASHING_BODY',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_PARSING_CONSISTENCY_LEVEL: {
-  name: 'ERR_VAA_PARSING_CONSISTENCY_LEVEL',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_PARSING_EMITTER_ADDRESS: {
-  name: 'ERR_VAA_PARSING_EMITTER_ADDRESS',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_PARSING_EMITTER_CHAIN: {
-  name: 'ERR_VAA_PARSING_EMITTER_CHAIN',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_PARSING_GUARDIAN_SET: {
-  name: 'ERR_VAA_PARSING_GUARDIAN_SET',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_PARSING_NONCE: {
-  name: 'ERR_VAA_PARSING_NONCE',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_PARSING_PAYLOAD: {
-  name: 'ERR_VAA_PARSING_PAYLOAD',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_PARSING_SEQUENCE: {
-  name: 'ERR_VAA_PARSING_SEQUENCE',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_PARSING_SIGNATURES: {
-  name: 'ERR_VAA_PARSING_SIGNATURES',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_PARSING_SIGNATURES_LEN: {
-  name: 'ERR_VAA_PARSING_SIGNATURES_LEN',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_PARSING_TIMESTAMP: {
-  name: 'ERR_VAA_PARSING_TIMESTAMP',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    ERR_VAA_PARSING_VERSION: {
-  name: 'ERR_VAA_PARSING_VERSION',
-  type: {
-    response: {
-      ok: 'none',
-      error: 'uint128'
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Response<null, bigint>>,
-    EXPECTED_CHAIN_ID: {
-  name: 'EXPECTED_CHAIN_ID',
-  type: {
-    buffer: {
-      length: 2
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    GSU_EMITTING_ADDRESS: {
-  name: 'GSU-EMITTING-ADDRESS',
-  type: {
-    buffer: {
-      length: 32
-    }
-  },
-  access: 'constant'
-} as TypedAbiVariable<Uint8Array>,
-    GSU_EMITTING_CHAIN: {
-  name: 'GSU-EMITTING-CHAIN',
-  type: 'uint128',
-  access: 'constant'
-} as TypedAbiVariable<bigint>,
-    GUARDIAN_ETH_ADDRESS_SIZE: {
-  name: 'GUARDIAN_ETH_ADDRESS_SIZE',
-  type: 'uint128',
-  access: 'constant'
-} as TypedAbiVariable<bigint>,
-    SIGNATURE_DATA_SIZE: {
-  name: 'SIGNATURE_DATA_SIZE',
-  type: 'uint128',
-  access: 'constant'
-} as TypedAbiVariable<bigint>,
-    TWENTY_FOUR_HOURS: {
-  name: 'TWENTY_FOUR_HOURS',
-  type: 'uint128',
-  access: 'constant'
-} as TypedAbiVariable<bigint>,
-    deployer: {
-  name: 'deployer',
-  type: 'principal',
-  access: 'constant'
-} as TypedAbiVariable<string>,
-    activeGuardianSetId: {
-  name: 'active-guardian-set-id',
-  type: 'uint128',
-  access: 'variable'
-} as TypedAbiVariable<bigint>,
-    guardianSetInitialized: {
-  name: 'guardian-set-initialized',
-  type: 'bool',
-  access: 'variable'
-} as TypedAbiVariable<boolean>,
-    previousGuardianSet: {
-  name: 'previous-guardian-set',
-  type: {
-    tuple: [
-      {
-        name: 'expires-at',
-        type: 'uint128'
-      },
-      {
-        name: 'set-id',
-        type: 'uint128'
-      }
-    ]
-  },
-  access: 'variable'
-} as TypedAbiVariable<{
-  "expiresAt": bigint;
-  "setId": bigint;
-}>
-  },
-  constants: {
-  ACTION_GUARDIAN_SET_UPDATE: 2n,
-  CORE_CHAIN_ID: 0n,
-  CORE_STRING_MODULE: Uint8Array.from([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,67,111,114,101]),
-  ERR_DUPLICATED_GUARDIAN_ADDRESSES: {
-    isOk: false,
-    value: 1_309n
-  },
-  ERR_EMPTY_GUARDIAN_SET: {
-    isOk: false,
-    value: 1_308n
-  },
-  ERR_GSU_CHECK_ACTION: {
-    isOk: false,
-    value: 1_302n
-  },
-  ERR_GSU_CHECK_CHAIN: {
-    isOk: false,
-    value: 1_303n
-  },
-  ERR_GSU_CHECK_EMITTER: {
-    isOk: false,
-    value: 1_305n
-  },
-  ERR_GSU_CHECK_INDEX: {
-    isOk: false,
-    value: 1_304n
-  },
-  ERR_GSU_CHECK_MODULE: {
-    isOk: false,
-    value: 1_301n
-  },
-  ERR_GSU_CHECK_OVERLAY: {
-    isOk: false,
-    value: 1_307n
-  },
-  ERR_GSU_PARSING_ACTION: {
-    isOk: false,
-    value: 1_202n
-  },
-  ERR_GSU_PARSING_CHAIN: {
-    isOk: false,
-    value: 1_203n
-  },
-  ERR_GSU_PARSING_GUARDIANS_BYTES: {
-    isOk: false,
-    value: 1_206n
-  },
-  ERR_GSU_PARSING_GUARDIAN_LEN: {
-    isOk: false,
-    value: 1_205n
-  },
-  ERR_GSU_PARSING_INDEX: {
-    isOk: false,
-    value: 1_204n
-  },
-  ERR_GSU_PARSING_MODULE: {
-    isOk: false,
-    value: 1_201n
-  },
-  ERR_GSU_UNCOMPRESSED_PUBLIC_KEYS: {
-    isOk: false,
-    value: 1_207n
-  },
-  ERR_NOT_DEPLOYER: {
-    isOk: false,
-    value: 1_306n
-  },
-  ERR_STACKS_TIMESTAMP: {
-    isOk: false,
-    value: 1_310n
-  },
-  ERR_VAA_CHECKS_GUARDIAN_SET_CONSISTENCY: {
-    isOk: false,
-    value: 1_103n
-  },
-  ERR_VAA_CHECKS_THRESHOLD_SIGNATURE: {
-    isOk: false,
-    value: 1_102n
-  },
-  ERR_VAA_CHECKS_VERSION_UNSUPPORTED: {
-    isOk: false,
-    value: 1_101n
-  },
-  ERR_VAA_HASHING_BODY: {
-    isOk: false,
-    value: 1_012n
-  },
-  ERR_VAA_PARSING_CONSISTENCY_LEVEL: {
-    isOk: false,
-    value: 1_010n
-  },
-  ERR_VAA_PARSING_EMITTER_ADDRESS: {
-    isOk: false,
-    value: 1_008n
-  },
-  ERR_VAA_PARSING_EMITTER_CHAIN: {
-    isOk: false,
-    value: 1_007n
-  },
-  ERR_VAA_PARSING_GUARDIAN_SET: {
-    isOk: false,
-    value: 1_002n
-  },
-  ERR_VAA_PARSING_NONCE: {
-    isOk: false,
-    value: 1_006n
-  },
-  ERR_VAA_PARSING_PAYLOAD: {
-    isOk: false,
-    value: 1_011n
-  },
-  ERR_VAA_PARSING_SEQUENCE: {
-    isOk: false,
-    value: 1_009n
-  },
-  ERR_VAA_PARSING_SIGNATURES: {
-    isOk: false,
-    value: 1_004n
-  },
-  ERR_VAA_PARSING_SIGNATURES_LEN: {
-    isOk: false,
-    value: 1_003n
-  },
-  ERR_VAA_PARSING_TIMESTAMP: {
-    isOk: false,
-    value: 1_005n
-  },
-  ERR_VAA_PARSING_VERSION: {
-    isOk: false,
-    value: 1_001n
-  },
-  EXPECTED_CHAIN_ID: Uint8Array.from([195,119]),
-  gSUEMITTINGADDRESS: Uint8Array.from([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4]),
-  gSUEMITTINGCHAIN: 1n,
-  GUARDIAN_ETH_ADDRESS_SIZE: 20n,
-  SIGNATURE_DATA_SIZE: 66n,
-  TWENTY_FOUR_HOURS: 86_400n,
-  activeGuardianSetId: 0n,
-  deployer: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
-  guardianSetInitialized: false,
-  previousGuardianSet: {
-    expiresAt: 0n,
-    setId: 0n
-  }
-},
-  "non_fungible_tokens": [
-    
-  ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
-  contractName: 'wormhole-core-v4',
-  },
-wormholeTraitsV2: {
-  "functions": {
-    
-  },
-  "maps": {
-    
-  },
-  "variables": {
-    
-  },
-  constants: {},
-  "non_fungible_tokens": [
-    
-  ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
-  contractName: 'wormhole-traits-v2',
   },
 wstx: {
   "functions": {
@@ -12360,14 +13277,1265 @@ wstx: {
   "non_fungible_tokens": [
     
   ],
-  "fungible_tokens":[],"epoch":"Epoch33","clarity_version":"Clarity4",
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
   contractName: 'wstx',
+  },
+zvEngineStbtc0: {
+  "functions": {
+    collFold: {"name":"coll-fold","access":"private","args":[{"name":"e","type":{"tuple":[{"name":"aid","type":"uint128"},{"name":"amount","type":"uint128"}]}},{"name":"acc","type":{"tuple":[{"name":"id","type":"uint128"},{"name":"ok","type":"bool"},{"name":"sum","type":"uint128"}]}}],"outputs":{"type":{"tuple":[{"name":"id","type":"uint128"},{"name":"ok","type":"bool"},{"name":"sum","type":"uint128"}]}}} as TypedAbiFunction<[e: TypedAbiArg<{
+  "aid": number | bigint;
+  "amount": number | bigint;
+}, "e">, acc: TypedAbiArg<{
+  "id": number | bigint;
+  "ok": boolean;
+  "sum": number | bigint;
+}, "acc">], {
+  "id": bigint;
+  "ok": boolean;
+  "sum": bigint;
+}>,
+    computeGrossNav: {"name":"compute-gross-nav","access":"private","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[], Response<bigint, bigint>>,
+    findDebt: {"name":"find-debt","access":"private","args":[{"name":"e","type":{"tuple":[{"name":"aid","type":"uint128"},{"name":"scaled","type":"uint128"}]}},{"name":"acc","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[e: TypedAbiArg<{
+  "aid": number | bigint;
+  "scaled": number | bigint;
+}, "e">, acc: TypedAbiArg<number | bigint, "acc">], bigint>,
+    livePrice: {"name":"live-price","access":"private","args":[{"name":"gross","type":"uint128"},{"name":"supply","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[gross: TypedAbiArg<number | bigint, "gross">, supply: TypedAbiArg<number | bigint, "supply">], bigint>,
+    mulDivUp: {"name":"mul-div-up","access":"private","args":[{"name":"a","type":"uint128"},{"name":"b","type":"uint128"},{"name":"d","type":"uint128"}],"outputs":{"type":"uint128"}} as TypedAbiFunction<[a: TypedAbiArg<number | bigint, "a">, b: TypedAbiArg<number | bigint, "b">, d: TypedAbiArg<number | bigint, "d">], bigint>,
+    cancelRedeem: {"name":"cancel-redeem","access":"public","args":[{"name":"claim-id","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[claimId: TypedAbiArg<number | bigint, "claimId">], Response<bigint, bigint>>,
+    crystallizeFees: {"name":"crystallize-fees","access":"public","args":[],"outputs":{"type":{"response":{"ok":{"tuple":[{"name":"fee-shares","type":"uint128"},{"name":"mgmt","type":"uint128"},{"name":"perf","type":"uint128"}]},"error":"uint128"}}}} as TypedAbiFunction<[], Response<{
+  "feeShares": bigint;
+  "mgmt": bigint;
+  "perf": bigint;
+}, bigint>>,
+    deposit: {"name":"deposit","access":"public","args":[{"name":"token","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"min-shares-out","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[token: TypedAbiArg<string, "token">, amount: TypedAbiArg<number | bigint, "amount">, minSharesOut: TypedAbiArg<number | bigint, "minSharesOut">], Response<bigint, bigint>>,
+    depositSbtc: {"name":"deposit-sbtc","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"min-shares-out","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, minSharesOut: TypedAbiArg<number | bigint, "minSharesOut">], Response<bigint, bigint>>,
+    fundClaim: {"name":"fund-claim","access":"public","args":[{"name":"claim-id","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[claimId: TypedAbiArg<number | bigint, "claimId">], Response<bigint, bigint>>,
+    initialize: {"name":"initialize","access":"public","args":[{"name":"token","type":"trait_reference"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[token: TypedAbiArg<string, "token">], Response<boolean, bigint>>,
+    redeem: {"name":"redeem","access":"public","args":[{"name":"token","type":"trait_reference"},{"name":"claim-id","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[token: TypedAbiArg<string, "token">, claimId: TypedAbiArg<number | bigint, "claimId">], Response<bigint, bigint>>,
+    requestRedeem: {"name":"request-redeem","access":"public","args":[{"name":"assets","type":"uint128"},{"name":"is-express","type":"bool"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[assets: TypedAbiArg<number | bigint, "assets">, isExpress: TypedAbiArg<boolean, "isExpress">], Response<bigint, bigint>>,
+    convertToAssets: {"name":"convert-to-assets","access":"read_only","args":[{"name":"shares","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[shares: TypedAbiArg<number | bigint, "shares">], Response<bigint, bigint>>,
+    convertToShares: {"name":"convert-to-shares","access":"read_only","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], Response<bigint, bigint>>,
+    getNetAssets: {"name":"get-net-assets","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[], Response<bigint, bigint>>,
+    getSharePrice: {"name":"get-share-price","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[], Response<bigint, bigint>>,
+    previewDeposit: {"name":"preview-deposit","access":"read_only","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], Response<bigint, bigint>>,
+    previewRedeem: {"name":"preview-redeem","access":"read_only","args":[{"name":"shares","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[shares: TypedAbiArg<number | bigint, "shares">], Response<bigint, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    BPS_BASE: {
+  name: 'BPS-BASE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    DEAD_SHARES: {
+  name: 'DEAD-SHARES',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    ERR_ALREADY_FUNDED: {
+  name: 'ERR-ALREADY-FUNDED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_ALREADY_INIT: {
+  name: 'ERR-ALREADY-INIT',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_BELOW_MIN: {
+  name: 'ERR-BELOW-MIN',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_CANCEL_EXPRESS: {
+  name: 'ERR-CANCEL-EXPRESS',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_CAP_EXCEEDED: {
+  name: 'ERR-CAP-EXCEEDED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_EXPRESS_DISABLED: {
+  name: 'ERR-EXPRESS-DISABLED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NO_CLAIM: {
+  name: 'ERR-NO-CLAIM',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NOT_AUTHORIZED: {
+  name: 'ERR-NOT-AUTHORIZED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NOT_COOLED_DOWN: {
+  name: 'ERR-NOT-COOLED-DOWN',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NOT_FUNDED: {
+  name: 'ERR-NOT-FUNDED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_PAUSED: {
+  name: 'ERR-PAUSED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_RATIO_OOB: {
+  name: 'ERR-RATIO-OOB',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_SLIPPAGE: {
+  name: 'ERR-SLIPPAGE',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_UNEXPECTED_COLLATERAL: {
+  name: 'ERR-UNEXPECTED-COLLATERAL',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_ZERO_SHARES: {
+  name: 'ERR-ZERO-SHARES',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    INDEX_PRECISION: {
+  name: 'INDEX-PRECISION',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MAX_RATIO: {
+  name: 'MAX-RATIO',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    mAXU128: {
+  name: 'MAX-U128',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MIN_RATIO: {
+  name: 'MIN-RATIO',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    NULL_ADDRESS: {
+  name: 'NULL-ADDRESS',
+  type: 'principal',
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    SBTC_AID: {
+  name: 'SBTC-AID',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    SECONDS_PER_YEAR: {
+  name: 'SECONDS-PER-YEAR',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    SHARE_BASE: {
+  name: 'SHARE-BASE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>
+  },
+  constants: {
+  bPSBASE: 10_000n,
+  dEADSHARES: 1_000n,
+  eRRALREADYFUNDED: {
+    isOk: false,
+    value: 870_006n
+  },
+  eRRALREADYINIT: {
+    isOk: false,
+    value: 870_019n
+  },
+  eRRBELOWMIN: {
+    isOk: false,
+    value: 870_003n
+  },
+  eRRCANCELEXPRESS: {
+    isOk: false,
+    value: 870_009n
+  },
+  eRRCAPEXCEEDED: {
+    isOk: false,
+    value: 870_002n
+  },
+  eRREXPRESSDISABLED: {
+    isOk: false,
+    value: 870_015n
+  },
+  eRRNOCLAIM: {
+    isOk: false,
+    value: 870_004n
+  },
+  eRRNOTAUTHORIZED: {
+    isOk: false,
+    value: 870_008n
+  },
+  eRRNOTCOOLEDDOWN: {
+    isOk: false,
+    value: 870_005n
+  },
+  eRRNOTFUNDED: {
+    isOk: false,
+    value: 870_007n
+  },
+  eRRPAUSED: {
+    isOk: false,
+    value: 870_001n
+  },
+  eRRRATIOOOB: {
+    isOk: false,
+    value: 870_018n
+  },
+  eRRSLIPPAGE: {
+    isOk: false,
+    value: 870_016n
+  },
+  eRRUNEXPECTEDCOLLATERAL: {
+    isOk: false,
+    value: 870_020n
+  },
+  eRRZEROSHARES: {
+    isOk: false,
+    value: 870_014n
+  },
+  iNDEXPRECISION: 1_000_000_000_000n,
+  mAXRATIO: 200_000_000n,
+  mAXU128: 340_282_366_920_938_463_463_374_607_431_768_211_455n,
+  mINRATIO: 50_000_000n,
+  nULLADDRESS: 'ST000000000000000000002AMW42H',
+  sBTCAID: 2n,
+  sECONDSPERYEAR: 31_536_000n,
+  sHAREBASE: 100_000_000n
+},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'zv-engine-stbtc-0',
+  },
+zvOpsStbtc0: {
+  "functions": {
+    currentDebtActual: {"name":"current-debt-actual","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    currentDebtScaled: {"name":"current-debt-scaled","access":"private","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    sweepSbtcResidual: {"name":"sweep-sbtc-residual","access":"private","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>,
+    addCollateral: {"name":"add-collateral","access":"public","args":[{"name":"collateral-ft","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"price-feeds","type":{"optional":{"list":{"type":{"buffer":{"length":8192}},"length":3}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[collateralFt: TypedAbiArg<string, "collateralFt">, amount: TypedAbiArg<number | bigint, "amount">, priceFeeds: TypedAbiArg<Uint8Array[] | null, "priceFeeds">], Response<boolean, bigint>>,
+    borrowMore: {"name":"borrow-more","access":"public","args":[{"name":"borrow-ft","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"price-feeds","type":{"optional":{"list":{"type":{"buffer":{"length":8192}},"length":3}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[borrowFt: TypedAbiArg<string, "borrowFt">, amount: TypedAbiArg<number | bigint, "amount">, priceFeeds: TypedAbiArg<Uint8Array[] | null, "priceFeeds">], Response<boolean, bigint>>,
+    closePosition: {"name":"close-position","access":"public","args":[{"name":"borrow-ft","type":"trait_reference"},{"name":"vault-ft","type":"trait_reference"},{"name":"repay-amount","type":"uint128"},{"name":"collateral-amount","type":"uint128"},{"name":"price-feeds","type":{"optional":{"list":{"type":{"buffer":{"length":8192}},"length":3}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[borrowFt: TypedAbiArg<string, "borrowFt">, vaultFt: TypedAbiArg<string, "vaultFt">, repayAmount: TypedAbiArg<number | bigint, "repayAmount">, collateralAmount: TypedAbiArg<number | bigint, "collateralAmount">, priceFeeds: TypedAbiArg<Uint8Array[] | null, "priceFeeds">], Response<boolean, bigint>>,
+    depositYield: {"name":"deposit-yield","access":"public","args":[{"name":"collateral-ft","type":"trait_reference"},{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[collateralFt: TypedAbiArg<string, "collateralFt">, amount: TypedAbiArg<number | bigint, "amount">], Response<boolean, bigint>>,
+    openPosition: {"name":"open-position","access":"public","args":[{"name":"collateral-ft","type":"trait_reference"},{"name":"borrow-ft","type":"trait_reference"},{"name":"collateral-amount","type":"uint128"},{"name":"borrow-amount","type":"uint128"},{"name":"price-feeds","type":{"optional":{"list":{"type":{"buffer":{"length":8192}},"length":3}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[collateralFt: TypedAbiArg<string, "collateralFt">, borrowFt: TypedAbiArg<string, "borrowFt">, collateralAmount: TypedAbiArg<number | bigint, "collateralAmount">, borrowAmount: TypedAbiArg<number | bigint, "borrowAmount">, priceFeeds: TypedAbiArg<Uint8Array[] | null, "priceFeeds">], Response<boolean, bigint>>,
+    removeCollateral: {"name":"remove-collateral","access":"public","args":[{"name":"vault-ft","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"price-feeds","type":{"optional":{"list":{"type":{"buffer":{"length":8192}},"length":3}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[vaultFt: TypedAbiArg<string, "vaultFt">, amount: TypedAbiArg<number | bigint, "amount">, priceFeeds: TypedAbiArg<Uint8Array[] | null, "priceFeeds">], Response<boolean, bigint>>,
+    repayOnly: {"name":"repay-only","access":"public","args":[{"name":"borrow-ft","type":"trait_reference"},{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[borrowFt: TypedAbiArg<string, "borrowFt">, amount: TypedAbiArg<number | bigint, "amount">], Response<boolean, bigint>>,
+    restackOpsSbtc: {"name":"restack-ops-sbtc","access":"public","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[], Response<bigint, bigint>>,
+    stackSbtcToState: {"name":"stack-sbtc-to-state","access":"public","args":[{"name":"sbtc-amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[sbtcAmount: TypedAbiArg<number | bigint, "sbtcAmount">], Response<bigint, bigint>>,
+    sweepOpsStbtc: {"name":"sweep-ops-stbtc","access":"public","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[], Response<bigint, bigint>>,
+    unstackAndRepay: {"name":"unstack-and-repay","access":"public","args":[{"name":"borrow-ft","type":"trait_reference"},{"name":"stbtc-amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[borrowFt: TypedAbiArg<string, "borrowFt">, stbtcAmount: TypedAbiArg<number | bigint, "stbtcAmount">], Response<bigint, bigint>>,
+    unstackToState: {"name":"unstack-to-state","access":"public","args":[{"name":"stbtc-amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[stbtcAmount: TypedAbiArg<number | bigint, "stbtcAmount">], Response<bigint, bigint>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    BORROW_TOKEN: {
+  name: 'BORROW-TOKEN',
+  type: 'principal',
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    BPS: {
+  name: 'BPS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    COLLATERAL_TOKEN: {
+  name: 'COLLATERAL-TOKEN',
+  type: 'principal',
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    COLLATERAL_VAULT: {
+  name: 'COLLATERAL-VAULT',
+  type: 'principal',
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    ERR_BAD_CONVERSION: {
+  name: 'ERR-BAD-CONVERSION',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_DEBT_REMAINS: {
+  name: 'ERR-DEBT-REMAINS',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NOT_AUTHORIZED: {
+  name: 'ERR-NOT-AUTHORIZED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NOTHING_TO_SWEEP: {
+  name: 'ERR-NOTHING-TO-SWEEP',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_OVER_UNSTACK: {
+  name: 'ERR-OVER-UNSTACK',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_PAUSED: {
+  name: 'ERR-PAUSED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_TRANSFER_FAILED: {
+  name: 'ERR-TRANSFER-FAILED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_WRONG_TOKEN: {
+  name: 'ERR-WRONG-TOKEN',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    INDEX_PRECISION: {
+  name: 'INDEX-PRECISION',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MAX_CLOSE_OVERSHOOT_BPS: {
+  name: 'MAX-CLOSE-OVERSHOOT-BPS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MIN_UNWIND_RATE_BPS: {
+  name: 'MIN-UNWIND-RATE-BPS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    SBTC_ASSET_ID: {
+  name: 'SBTC-ASSET-ID',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    STACKING_DAO_CORE: {
+  name: 'STACKING-DAO-CORE',
+  type: 'principal',
+  access: 'constant'
+} as TypedAbiVariable<string>
+  },
+  constants: {
+  bORROWTOKEN: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc',
+  BPS: 10_000n,
+  cOLLATERALTOKEN: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.stbtc-token',
+  cOLLATERALVAULT: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stbtc',
+  eRRBADCONVERSION: {
+    isOk: false,
+    value: 880_006n
+  },
+  eRRDEBTREMAINS: {
+    isOk: false,
+    value: 880_007n
+  },
+  eRRNOTAUTHORIZED: {
+    isOk: false,
+    value: 880_001n
+  },
+  eRRNOTHINGTOSWEEP: {
+    isOk: false,
+    value: 880_005n
+  },
+  eRROVERUNSTACK: {
+    isOk: false,
+    value: 880_008n
+  },
+  eRRPAUSED: {
+    isOk: false,
+    value: 880_002n
+  },
+  eRRTRANSFERFAILED: {
+    isOk: false,
+    value: 880_003n
+  },
+  eRRWRONGTOKEN: {
+    isOk: false,
+    value: 880_004n
+  },
+  iNDEXPRECISION: 1_000_000_000_000n,
+  mAXCLOSEOVERSHOOTBPS: 20_000n,
+  mINUNWINDRATEBPS: 9_500n,
+  sBTCASSETID: 2n,
+  sTACKINGDAOCORE: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.stacking-dao-mock'
+},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'zv-ops-stbtc-0',
+  },
+zvStateStbtc0: {
+  "functions": {
+    addClaimLiability: {"name":"add-claim-liability","access":"public","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], Response<boolean, bigint>>,
+    addDeposited: {"name":"add-deposited","access":"public","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], Response<boolean, bigint>>,
+    claimOwnership: {"name":"claim-ownership","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>,
+    confirmPrincipalUpdate: {"name":"confirm-principal-update","access":"public","args":[{"name":"key","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[key: TypedAbiArg<Uint8Array, "key">], Response<boolean, bigint>>,
+    confirmUintUpdate: {"name":"confirm-uint-update","access":"public","args":[{"name":"key","type":{"buffer":{"length":1}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[key: TypedAbiArg<Uint8Array, "key">], Response<boolean, bigint>>,
+    deleteClaim: {"name":"delete-claim","access":"public","args":[{"name":"id","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[id: TypedAbiArg<number | bigint, "id">], Response<boolean, bigint>>,
+    nextClaimId: {"name":"next-claim-id","access":"public","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"uint128"}}}} as TypedAbiFunction<[], Response<bigint, bigint>>,
+    pauseVault: {"name":"pause-vault","access":"public","args":[],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[], Response<boolean, bigint>>,
+    receiveSbtcFromOps: {"name":"receive-sbtc-from-ops","access":"public","args":[{"name":"token","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"sender","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[token: TypedAbiArg<string, "token">, amount: TypedAbiArg<number | bigint, "amount">, sender: TypedAbiArg<string, "sender">], Response<boolean, bigint>>,
+    receiveYieldCollateral: {"name":"receive-yield-collateral","access":"public","args":[{"name":"token","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"sender","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[token: TypedAbiArg<string, "token">, amount: TypedAbiArg<number | bigint, "amount">, sender: TypedAbiArg<string, "sender">], Response<boolean, bigint>>,
+    requestOwnerTransfer: {"name":"request-owner-transfer","access":"public","args":[{"name":"new-owner","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newOwner: TypedAbiArg<string, "newOwner">], Response<boolean, bigint>>,
+    requestPrincipalUpdate: {"name":"request-principal-update","access":"public","args":[{"name":"key","type":{"buffer":{"length":1}}},{"name":"value","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[key: TypedAbiArg<Uint8Array, "key">, value: TypedAbiArg<string, "value">], Response<boolean, bigint>>,
+    requestUintUpdate: {"name":"request-uint-update","access":"public","args":[{"name":"key","type":{"buffer":{"length":1}}},{"name":"value","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[key: TypedAbiArg<Uint8Array, "key">, value: TypedAbiArg<number | bigint, "value">], Response<boolean, bigint>>,
+    setClaim: {"name":"set-claim","access":"public","args":[{"name":"id","type":"uint128"},{"name":"claim","type":{"tuple":[{"name":"assets","type":{"optional":"uint128"}},{"name":"fee","type":{"optional":"uint128"}},{"name":"fee-bps","type":"uint128"},{"name":"is-express","type":"bool"},{"name":"share-price","type":{"optional":"uint128"}},{"name":"shares","type":"uint128"},{"name":"ts","type":"uint128"},{"name":"user","type":"principal"}]}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[id: TypedAbiArg<number | bigint, "id">, claim: TypedAbiArg<{
+  "assets": number | bigint | null;
+  "fee": number | bigint | null;
+  "feeBps": number | bigint;
+  "isExpress": boolean;
+  "sharePrice": number | bigint | null;
+  "shares": number | bigint;
+  "ts": number | bigint;
+  "user": string;
+}, "claim">], Response<boolean, bigint>>,
+    setDepositCap: {"name":"set-deposit-cap","access":"public","args":[{"name":"value","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[value: TypedAbiArg<number | bigint, "value">], Response<boolean, bigint>>,
+    setDepositEnabled: {"name":"set-deposit-enabled","access":"public","args":[{"name":"enabled","type":"bool"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[enabled: TypedAbiArg<boolean, "enabled">], Response<boolean, bigint>>,
+    setExpressEnabled: {"name":"set-express-enabled","access":"public","args":[{"name":"enabled","type":"bool"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[enabled: TypedAbiArg<boolean, "enabled">], Response<boolean, bigint>>,
+    setFeeAnchors: {"name":"set-fee-anchors","access":"public","args":[{"name":"new-hwm","type":"uint128"},{"name":"new-ts","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newHwm: TypedAbiArg<number | bigint, "newHwm">, newTs: TypedAbiArg<number | bigint, "newTs">], Response<boolean, bigint>>,
+    setHotRole: {"name":"set-hot-role","access":"public","args":[{"name":"key","type":{"buffer":{"length":1}}},{"name":"value","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[key: TypedAbiArg<Uint8Array, "key">, value: TypedAbiArg<string, "value">], Response<boolean, bigint>>,
+    setRedeemEnabled: {"name":"set-redeem-enabled","access":"public","args":[{"name":"enabled","type":"bool"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[enabled: TypedAbiArg<boolean, "enabled">], Response<boolean, bigint>>,
+    setTimelockDuration: {"name":"set-timelock-duration","access":"public","args":[{"name":"duration","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[duration: TypedAbiArg<number | bigint, "duration">], Response<boolean, bigint>>,
+    setTradingEnabled: {"name":"set-trading-enabled","access":"public","args":[{"name":"enabled","type":"bool"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[enabled: TypedAbiArg<boolean, "enabled">], Response<boolean, bigint>>,
+    setVaultEnabled: {"name":"set-vault-enabled","access":"public","args":[{"name":"enabled","type":"bool"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[enabled: TypedAbiArg<boolean, "enabled">], Response<boolean, bigint>>,
+    subClaimLiability: {"name":"sub-claim-liability","access":"public","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], Response<boolean, bigint>>,
+    subDeposited: {"name":"sub-deposited","access":"public","args":[{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">], Response<boolean, bigint>>,
+    transferCollateralIn: {"name":"transfer-collateral-in","access":"public","args":[{"name":"token","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"sender","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[token: TypedAbiArg<string, "token">, amount: TypedAbiArg<number | bigint, "amount">, sender: TypedAbiArg<string, "sender">], Response<boolean, bigint>>,
+    transferCollateralOut: {"name":"transfer-collateral-out","access":"public","args":[{"name":"token","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"recipient","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[token: TypedAbiArg<string, "token">, amount: TypedAbiArg<number | bigint, "amount">, recipient: TypedAbiArg<string, "recipient">], Response<boolean, bigint>>,
+    transferCollateralToOps: {"name":"transfer-collateral-to-ops","access":"public","args":[{"name":"token","type":"trait_reference"},{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[token: TypedAbiArg<string, "token">, amount: TypedAbiArg<number | bigint, "amount">], Response<boolean, bigint>>,
+    transferSbtcIn: {"name":"transfer-sbtc-in","access":"public","args":[{"name":"token","type":"trait_reference"},{"name":"amount","type":"uint128"},{"name":"sender","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[token: TypedAbiArg<string, "token">, amount: TypedAbiArg<number | bigint, "amount">, sender: TypedAbiArg<string, "sender">], Response<boolean, bigint>>,
+    transferSbtcToOps: {"name":"transfer-sbtc-to-ops","access":"public","args":[{"name":"token","type":"trait_reference"},{"name":"amount","type":"uint128"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[token: TypedAbiArg<string, "token">, amount: TypedAbiArg<number | bigint, "amount">], Response<boolean, bigint>>,
+    getClaim: {"name":"get-claim","access":"read_only","args":[{"name":"id","type":"uint128"}],"outputs":{"type":{"optional":{"tuple":[{"name":"assets","type":{"optional":"uint128"}},{"name":"fee","type":{"optional":"uint128"}},{"name":"fee-bps","type":"uint128"},{"name":"is-express","type":"bool"},{"name":"share-price","type":{"optional":"uint128"}},{"name":"shares","type":"uint128"},{"name":"ts","type":"uint128"},{"name":"user","type":"principal"}]}}}} as TypedAbiFunction<[id: TypedAbiArg<number | bigint, "id">], {
+  "assets": bigint | null;
+  "fee": bigint | null;
+  "feeBps": bigint;
+  "isExpress": boolean;
+  "sharePrice": bigint | null;
+  "shares": bigint;
+  "ts": bigint;
+  "user": string;
+} | null>,
+    getCollateralToken: {"name":"get-collateral-token","access":"read_only","args":[],"outputs":{"type":"principal"}} as TypedAbiFunction<[], string>,
+    getDepositConfig: {"name":"get-deposit-config","access":"read_only","args":[],"outputs":{"type":{"tuple":[{"name":"deposit-cap","type":"uint128"},{"name":"deposit-enabled","type":"bool"},{"name":"min-deposit","type":"uint128"},{"name":"net-deposited","type":"uint128"},{"name":"vault-enabled","type":"bool"}]}}} as TypedAbiFunction<[], {
+  "depositCap": bigint;
+  "depositEnabled": boolean;
+  "minDeposit": bigint;
+  "netDeposited": bigint;
+  "vaultEnabled": boolean;
+}>,
+    getFeeConfig: {"name":"get-fee-config","access":"read_only","args":[],"outputs":{"type":{"tuple":[{"name":"fee-recipient","type":"principal"},{"name":"hwm-per-share","type":"uint128"},{"name":"last-fee-ts","type":"uint128"},{"name":"mgmt-fee-bps","type":"uint128"},{"name":"perf-fee-bps","type":"uint128"}]}}} as TypedAbiFunction<[], {
+  "feeRecipient": string;
+  "hwmPerShare": bigint;
+  "lastFeeTs": bigint;
+  "mgmtFeeBps": bigint;
+  "perfFeeBps": bigint;
+}>,
+    getFeeRecipient: {"name":"get-fee-recipient","access":"read_only","args":[],"outputs":{"type":"principal"}} as TypedAbiFunction<[], string>,
+    getFundedClaimLiability: {"name":"get-funded-claim-liability","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    getHwmPerShare: {"name":"get-hwm-per-share","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    getLastFeeTs: {"name":"get-last-fee-ts","access":"read_only","args":[],"outputs":{"type":"uint128"}} as TypedAbiFunction<[], bigint>,
+    getRedeemConfig: {"name":"get-redeem-config","access":"read_only","args":[],"outputs":{"type":{"tuple":[{"name":"cooldown","type":"uint128"},{"name":"exit-fee-bps","type":"uint128"},{"name":"express-cooldown","type":"uint128"},{"name":"express-enabled","type":"bool"},{"name":"express-fee-bps","type":"uint128"},{"name":"funded-claim-liability","type":"uint128"},{"name":"min-redeem","type":"uint128"},{"name":"redeem-enabled","type":"bool"},{"name":"vault-enabled","type":"bool"}]}}} as TypedAbiFunction<[], {
+  "cooldown": bigint;
+  "exitFeeBps": bigint;
+  "expressCooldown": bigint;
+  "expressEnabled": boolean;
+  "expressFeeBps": bigint;
+  "fundedClaimLiability": bigint;
+  "minRedeem": bigint;
+  "redeemEnabled": boolean;
+  "vaultEnabled": boolean;
+}>,
+    getTradingEnabled: {"name":"get-trading-enabled","access":"read_only","args":[],"outputs":{"type":"bool"}} as TypedAbiFunction<[], boolean>,
+    getVaultEnabled: {"name":"get-vault-enabled","access":"read_only","args":[],"outputs":{"type":"bool"}} as TypedAbiFunction<[], boolean>,
+    isEngine: {"name":"is-engine","access":"read_only","args":[{"name":"caller","type":"principal"}],"outputs":{"type":"bool"}} as TypedAbiFunction<[caller: TypedAbiArg<string, "caller">], boolean>,
+    isGuardian: {"name":"is-guardian","access":"read_only","args":[{"name":"caller","type":"principal"}],"outputs":{"type":"bool"}} as TypedAbiFunction<[caller: TypedAbiArg<string, "caller">], boolean>,
+    isManagerOrEngine: {"name":"is-manager-or-engine","access":"read_only","args":[{"name":"caller","type":"principal"}],"outputs":{"type":"bool"}} as TypedAbiFunction<[caller: TypedAbiArg<string, "caller">], boolean>,
+    isOps: {"name":"is-ops","access":"read_only","args":[{"name":"caller","type":"principal"}],"outputs":{"type":"bool"}} as TypedAbiFunction<[caller: TypedAbiArg<string, "caller">], boolean>,
+    isOwner: {"name":"is-owner","access":"read_only","args":[{"name":"caller","type":"principal"}],"outputs":{"type":"bool"}} as TypedAbiFunction<[caller: TypedAbiArg<string, "caller">], boolean>,
+    isRewarder: {"name":"is-rewarder","access":"read_only","args":[{"name":"caller","type":"principal"}],"outputs":{"type":"bool"}} as TypedAbiFunction<[caller: TypedAbiArg<string, "caller">], boolean>,
+    isTrader: {"name":"is-trader","access":"read_only","args":[{"name":"caller","type":"principal"}],"outputs":{"type":"bool"}} as TypedAbiFunction<[caller: TypedAbiArg<string, "caller">], boolean>
+  },
+  "maps": {
+    claims: {"name":"claims","key":{"tuple":[{"name":"claim-id","type":"uint128"}]},"value":{"tuple":[{"name":"assets","type":{"optional":"uint128"}},{"name":"fee","type":{"optional":"uint128"}},{"name":"fee-bps","type":"uint128"},{"name":"is-express","type":"bool"},{"name":"share-price","type":{"optional":"uint128"}},{"name":"shares","type":"uint128"},{"name":"ts","type":"uint128"},{"name":"user","type":"principal"}]}} as TypedAbiMap<{
+  "claimId": number | bigint;
+}, {
+  "assets": bigint | null;
+  "fee": bigint | null;
+  "feeBps": bigint;
+  "isExpress": boolean;
+  "sharePrice": bigint | null;
+  "shares": bigint;
+  "ts": bigint;
+  "user": string;
+}>,
+    pendingPrincipalUpdates: {"name":"pending-principal-updates","key":{"tuple":[{"name":"key","type":{"buffer":{"length":1}}}]},"value":{"tuple":[{"name":"activation-ts","type":"uint128"},{"name":"value","type":"principal"}]}} as TypedAbiMap<{
+  "key": Uint8Array;
+}, {
+  "activationTs": bigint;
+  "value": string;
+}>,
+    pendingUintUpdates: {"name":"pending-uint-updates","key":{"tuple":[{"name":"key","type":{"buffer":{"length":1}}}]},"value":{"tuple":[{"name":"activation-ts","type":"uint128"},{"name":"value","type":"uint128"}]}} as TypedAbiMap<{
+  "key": Uint8Array;
+}, {
+  "activationTs": bigint;
+  "value": bigint;
+}>
+  },
+  "variables": {
+    BPS_BASE: {
+  name: 'BPS-BASE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    COLLATERAL_TOKEN: {
+  name: 'COLLATERAL-TOKEN',
+  type: 'principal',
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    ERR_INSUFFICIENT_LIQUIDITY: {
+  name: 'ERR-INSUFFICIENT-LIQUIDITY',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_INVALID_KEY: {
+  name: 'ERR-INVALID-KEY',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NO_CLAIM: {
+  name: 'ERR-NO-CLAIM',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NO_PENDING_UPDATE: {
+  name: 'ERR-NO-PENDING-UPDATE',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_NOT_AUTHORIZED: {
+  name: 'ERR-NOT-AUTHORIZED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_TIMELOCK_NOT_READY: {
+  name: 'ERR-TIMELOCK-NOT-READY',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    ERR_WRONG_TOKEN: {
+  name: 'ERR-WRONG-TOKEN',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    KEY_COOLDOWN: {
+  name: 'KEY-COOLDOWN',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_ENGINE: {
+  name: 'KEY-ENGINE',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_EXIT_FEE_BPS: {
+  name: 'KEY-EXIT-FEE-BPS',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_EXPRESS_COOLDOWN: {
+  name: 'KEY-EXPRESS-COOLDOWN',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_EXPRESS_FEE_BPS: {
+  name: 'KEY-EXPRESS-FEE-BPS',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_FEE_RECIPIENT: {
+  name: 'KEY-FEE-RECIPIENT',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_GUARDIAN: {
+  name: 'KEY-GUARDIAN',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_MANAGER: {
+  name: 'KEY-MANAGER',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_MGMT_FEE_BPS: {
+  name: 'KEY-MGMT-FEE-BPS',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_MIN_DEPOSIT: {
+  name: 'KEY-MIN-DEPOSIT',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_MIN_REDEEM: {
+  name: 'KEY-MIN-REDEEM',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_OPS: {
+  name: 'KEY-OPS',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_PERF_FEE_BPS: {
+  name: 'KEY-PERF-FEE-BPS',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_REWARDER: {
+  name: 'KEY-REWARDER',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    KEY_TRADER: {
+  name: 'KEY-TRADER',
+  type: {
+    buffer: {
+      length: 1
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Uint8Array>,
+    MAX_COOLDOWN: {
+  name: 'MAX-COOLDOWN',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MAX_EXIT_FEE: {
+  name: 'MAX-EXIT-FEE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MAX_EXPRESS_FEE: {
+  name: 'MAX-EXPRESS-FEE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MAX_MGMT_FEE: {
+  name: 'MAX-MGMT-FEE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MAX_PERF_FEE: {
+  name: 'MAX-PERF-FEE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MAX_TIMELOCK: {
+  name: 'MAX-TIMELOCK',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    MIN_TIMELOCK: {
+  name: 'MIN-TIMELOCK',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    PCT_BASE: {
+  name: 'PCT-BASE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    SBTC_TOKEN: {
+  name: 'SBTC-TOKEN',
+  type: 'principal',
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    SHARE_BASE: {
+  name: 'SHARE-BASE',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    STX_WRAPPER_CONTRACT: {
+  name: 'STX-WRAPPER-CONTRACT',
+  type: 'principal',
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    authorizedEngine: {
+  name: 'authorized-engine',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    authorizedOps: {
+  name: 'authorized-ops',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    claimCounter: {
+  name: 'claim-counter',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    cooldown: {
+  name: 'cooldown',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    depositCap: {
+  name: 'deposit-cap',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    depositEnabled: {
+  name: 'deposit-enabled',
+  type: 'bool',
+  access: 'variable'
+} as TypedAbiVariable<boolean>,
+    exitFeeBps: {
+  name: 'exit-fee-bps',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    expressCooldown: {
+  name: 'express-cooldown',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    expressEnabled: {
+  name: 'express-enabled',
+  type: 'bool',
+  access: 'variable'
+} as TypedAbiVariable<boolean>,
+    expressFeeBps: {
+  name: 'express-fee-bps',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    feeRecipient: {
+  name: 'fee-recipient',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    fundedClaimLiability: {
+  name: 'funded-claim-liability',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    guardian: {
+  name: 'guardian',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    hwmPerShare: {
+  name: 'hwm-per-share',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    lastFeeTs: {
+  name: 'last-fee-ts',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    manager: {
+  name: 'manager',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    mgmtFeeBps: {
+  name: 'mgmt-fee-bps',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    minDeposit: {
+  name: 'min-deposit',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    minRedeem: {
+  name: 'min-redeem',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    netDeposited: {
+  name: 'net-deposited',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    owner: {
+  name: 'owner',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    pendingOwner: {
+  name: 'pending-owner',
+  type: {
+    optional: 'principal'
+  },
+  access: 'variable'
+} as TypedAbiVariable<string | null>,
+    perfFeeBps: {
+  name: 'perf-fee-bps',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    redeemEnabled: {
+  name: 'redeem-enabled',
+  type: 'bool',
+  access: 'variable'
+} as TypedAbiVariable<boolean>,
+    rewarder: {
+  name: 'rewarder',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    timelockDuration: {
+  name: 'timelock-duration',
+  type: 'uint128',
+  access: 'variable'
+} as TypedAbiVariable<bigint>,
+    trader: {
+  name: 'trader',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    tradingEnabled: {
+  name: 'trading-enabled',
+  type: 'bool',
+  access: 'variable'
+} as TypedAbiVariable<boolean>,
+    vaultEnabled: {
+  name: 'vault-enabled',
+  type: 'bool',
+  access: 'variable'
+} as TypedAbiVariable<boolean>
+  },
+  constants: {
+  bPSBASE: 10_000n,
+  cOLLATERALTOKEN: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.stbtc-token',
+  eRRINSUFFICIENTLIQUIDITY: {
+    isOk: false,
+    value: 860_007n
+  },
+  eRRINVALIDKEY: {
+    isOk: false,
+    value: 860_005n
+  },
+  eRRNOCLAIM: {
+    isOk: false,
+    value: 860_002n
+  },
+  eRRNOPENDINGUPDATE: {
+    isOk: false,
+    value: 860_004n
+  },
+  eRRNOTAUTHORIZED: {
+    isOk: false,
+    value: 860_001n
+  },
+  eRRTIMELOCKNOTREADY: {
+    isOk: false,
+    value: 860_003n
+  },
+  eRRWRONGTOKEN: {
+    isOk: false,
+    value: 860_006n
+  },
+  kEYCOOLDOWN: Uint8Array.from([5]),
+  kEYENGINE: Uint8Array.from([20]),
+  kEYEXITFEEBPS: Uint8Array.from([12]),
+  kEYEXPRESSCOOLDOWN: Uint8Array.from([6]),
+  kEYEXPRESSFEEBPS: Uint8Array.from([13]),
+  kEYFEERECIPIENT: Uint8Array.from([15]),
+  kEYGUARDIAN: Uint8Array.from([19]),
+  kEYMANAGER: Uint8Array.from([18]),
+  kEYMGMTFEEBPS: Uint8Array.from([10]),
+  kEYMINDEPOSIT: Uint8Array.from([3]),
+  kEYMINREDEEM: Uint8Array.from([4]),
+  kEYOPS: Uint8Array.from([21]),
+  kEYPERFFEEBPS: Uint8Array.from([11]),
+  kEYREWARDER: Uint8Array.from([17]),
+  kEYTRADER: Uint8Array.from([16]),
+  mAXCOOLDOWN: 2_592_000n,
+  mAXEXITFEE: 100n,
+  mAXEXPRESSFEE: 200n,
+  mAXMGMTFEE: 55n,
+  mAXPERFFEE: 3_000n,
+  mAXTIMELOCK: 2_592_000n,
+  mINTIMELOCK: 86_400n,
+  pCTBASE: 100n,
+  sBTCTOKEN: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc',
+  sHAREBASE: 100_000_000n,
+  sTXWRAPPERCONTRACT: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx',
+  authorizedEngine: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-engine-stbtc-0',
+  authorizedOps: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-ops-stbtc-0',
+  claimCounter: 0n,
+  cooldown: 259_200n,
+  depositCap: 0n,
+  depositEnabled: true,
+  exitFeeBps: 0n,
+  expressCooldown: 14_400n,
+  expressEnabled: false,
+  expressFeeBps: 50n,
+  feeRecipient: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+  fundedClaimLiability: 0n,
+  guardian: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+  hwmPerShare: 100_000_000n,
+  lastFeeTs: 0n,
+  manager: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+  mgmtFeeBps: 0n,
+  minDeposit: 100n,
+  minRedeem: 100n,
+  netDeposited: 0n,
+  owner: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+  pendingOwner: null,
+  perfFeeBps: 1_000n,
+  redeemEnabled: true,
+  rewarder: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+  timelockDuration: 86_400n,
+  trader: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+  tradingEnabled: true,
+  vaultEnabled: true
+},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'zv-state-stbtc-0',
+  },
+zvTraits: {
+  "functions": {
+    
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    
+  },
+  constants: {},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'zv-traits',
+  },
+zvstBTC: {
+  "functions": {
+    isAuthorized: {"name":"is-authorized","access":"private","args":[],"outputs":{"type":"bool"}} as TypedAbiFunction<[], boolean>,
+    burn: {"name":"burn","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"owner","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, owner: TypedAbiArg<string, "owner">], Response<boolean, bigint>>,
+    mint: {"name":"mint","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"recipient","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, recipient: TypedAbiArg<string, "recipient">], Response<boolean, bigint>>,
+    setAuthorizedMinter: {"name":"set-authorized-minter","access":"public","args":[{"name":"new-minter","type":"principal"}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[newMinter: TypedAbiArg<string, "newMinter">], Response<boolean, bigint>>,
+    setTokenName: {"name":"set-token-name","access":"public","args":[{"name":"value","type":{"string-ascii":{"length":32}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[value: TypedAbiArg<string, "value">], Response<boolean, bigint>>,
+    setTokenUri: {"name":"set-token-uri","access":"public","args":[{"name":"value","type":{"string-utf8":{"length":256}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[value: TypedAbiArg<string, "value">], Response<boolean, bigint>>,
+    transfer: {"name":"transfer","access":"public","args":[{"name":"amount","type":"uint128"},{"name":"sender","type":"principal"},{"name":"recipient","type":"principal"},{"name":"memo","type":{"optional":{"buffer":{"length":34}}}}],"outputs":{"type":{"response":{"ok":"bool","error":"uint128"}}}} as TypedAbiFunction<[amount: TypedAbiArg<number | bigint, "amount">, sender: TypedAbiArg<string, "sender">, recipient: TypedAbiArg<string, "recipient">, memo: TypedAbiArg<Uint8Array | null, "memo">], Response<boolean, bigint>>,
+    getBalance: {"name":"get-balance","access":"read_only","args":[{"name":"account","type":"principal"}],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[account: TypedAbiArg<string, "account">], Response<bigint, null>>,
+    getDecimals: {"name":"get-decimals","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>,
+    getName: {"name":"get-name","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"string-ascii":{"length":32}},"error":"none"}}}} as TypedAbiFunction<[], Response<string, null>>,
+    getSymbol: {"name":"get-symbol","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"string-ascii":{"length":7}},"error":"none"}}}} as TypedAbiFunction<[], Response<string, null>>,
+    getTokenUri: {"name":"get-token-uri","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":{"optional":{"string-utf8":{"length":256}}},"error":"none"}}}} as TypedAbiFunction<[], Response<string | null, null>>,
+    getTotalSupply: {"name":"get-total-supply","access":"read_only","args":[],"outputs":{"type":{"response":{"ok":"uint128","error":"none"}}}} as TypedAbiFunction<[], Response<bigint, null>>
+  },
+  "maps": {
+    
+  },
+  "variables": {
+    ERR_NOT_AUTHORIZED: {
+  name: 'ERR-NOT-AUTHORIZED',
+  type: {
+    response: {
+      ok: 'none',
+      error: 'uint128'
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<Response<null, bigint>>,
+    TOKEN_DECIMALS: {
+  name: 'TOKEN-DECIMALS',
+  type: 'uint128',
+  access: 'constant'
+} as TypedAbiVariable<bigint>,
+    TOKEN_SYMBOL: {
+  name: 'TOKEN-SYMBOL',
+  type: {
+    'string-ascii': {
+      length: 7
+    }
+  },
+  access: 'constant'
+} as TypedAbiVariable<string>,
+    authorizedMinter: {
+  name: 'authorized-minter',
+  type: 'principal',
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    tokenName: {
+  name: 'token-name',
+  type: {
+    'string-ascii': {
+      length: 32
+    }
+  },
+  access: 'variable'
+} as TypedAbiVariable<string>,
+    tokenUri: {
+  name: 'token-uri',
+  type: {
+    'string-utf8': {
+      length: 256
+    }
+  },
+  access: 'variable'
+} as TypedAbiVariable<string>
+  },
+  constants: {
+  eRRNOTAUTHORIZED: {
+    isOk: false,
+    value: 850_001n
+  },
+  tOKENDECIMALS: 8n,
+  tOKENSYMBOL: 'zvstBTC',
+  authorizedMinter: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-engine-stbtc-0',
+  tokenName: 'Zest stBTC Strategy Vault',
+  tokenUri: 'https://token-meta.s3.eu-central-1.amazonaws.com/zvstBTC.json'
+},
+  "non_fungible_tokens": [
+    
+  ],
+  "fungible_tokens":[{"name":"zvstbtc"}],"epoch":"Epoch40","clarity_version":"Clarity6",
+  contractName: 'zvstBTC',
   }
 } as const;
 
 export const accounts = {"deployer":{"address":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM","balance":"100000000000000"},"faucet":{"address":"STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6","balance":"100000000000000"},"wallet_1":{"address":"ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5","balance":"100000000000000"},"wallet_2":{"address":"ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG","balance":"100000000000000"},"wallet_3":{"address":"ST2JHG361ZXG51QTKY2NQCVBPPRRE2KZB1HR05NNC","balance":"100000000000000"},"wallet_4":{"address":"ST2NEB84ASENDXKYGJPQW86YXQCEFEX2ZQPG87ND","balance":"100000000000000"},"wallet_5":{"address":"ST2REHHS5J3CERCRBEPMGH7921Q6PYKAADT7JP2VB","balance":"100000000000000"},"wallet_6":{"address":"ST3AM1A56AK2C1XAFJ4115ZSV26EB49BVQ10MGCS0","balance":"100000000000000"},"wallet_7":{"address":"ST3PF13W7Z0RRM42A8VZRVFQ75SV1K26RXEP8YGKJ","balance":"100000000000000"},"wallet_8":{"address":"ST3NBRSFKX28FQ2ZJ1MAKX58HKHSDGNV5N7R21XCP","balance":"100000000000000"}} as const;
 
-export const identifiers = {"assets":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","daoExecutor":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","daoMultisig":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","daoTraits":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","daoTreasury":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","diaOracle":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle","egroup":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","ftTrait":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","market":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","marketTrait":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","marketVault":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","mockOracle":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","proposalCreateEgroupSbtcUsdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","proposalCreateMultipleEgroups":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","proposalInitAssets":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","proposalInitMarketVault":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","proposalInitVaults":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","proposalProtocolInit":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","proposalSetPriceStaleness":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","proposalSetSbtcInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","proposalSetStxInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","proposalSetUsdcInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","protocolData":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","pythGovernanceV3":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-governance-v3","pythOracleV4":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-oracle-v4","pythPnauDecoderV3":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-pnau-decoder-v3","pythStorageV4":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-storage-v4","pythTraitsV2":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-traits-v2","sbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","ststx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","ststxbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","traitDiaOracle":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","usdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","usdh":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","vaultSbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","vaultStstx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","vaultStstxbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","vaultStx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","vaultTraits":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","vaultUsdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","vaultUsdh":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","wormholeCoreV4":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-core-v4","wormholeTraitsV2":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-traits-v2","wstx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx"} as const
+export const identifiers = {"assets":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","daoExecutor":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","daoMultisig":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","daoTraits":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","daoTreasury":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","diaOracle":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle","egroup":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","ftTrait":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","market":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","marketTrait":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","marketVault":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","mockOracle":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","proposalCreateEgroupSbtcUsdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","proposalCreateMultipleEgroups":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","proposalInitAssets":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","proposalInitMarketVault":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","proposalInitVaults":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","proposalLazerRepoint":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-lazer-repoint","proposalProtocolInit":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","proposalSetMarketV1":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-market-v1","proposalSetPriceStaleness":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","proposalSetSbtcInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","proposalSetStxInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","proposalSetUsdcInterestRates":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","proposalTestZvClaimOwnership":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-test-zv-claim-ownership","proposalTestZvOwnerConfig":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-test-zv-owner-config","proposalTestZvSetMetadata":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-test-zv-set-metadata","protocolData":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","pythLazerDecoderV1":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-lazer-decoder-v1","pythLazerOracle":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-lazer-oracle","pythLazerTraits":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-lazer-traits","sbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","sbtcRegistry":"SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry","sbtcToken":"SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token","stackingDaoMock":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.stacking-dao-mock","stbtcToken":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.stbtc-token","ststx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","ststxbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","traitDiaOracle":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","usdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","usdh":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","vaultSbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","vaultStbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stbtc","vaultStstx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","vaultStstxbtc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","vaultStx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","vaultTraits":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","vaultUsdc":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","vaultUsdh":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","wstx":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx","zvEngineStbtc0":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-engine-stbtc-0","zvOpsStbtc0":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-ops-stbtc-0","zvStateStbtc0":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-state-stbtc-0","zvTraits":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-traits","zvstBTC":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zvstBTC"} as const
 
 export const simnet = {
   accounts,
@@ -12376,7 +14544,7 @@ export const simnet = {
 } as const;
 
 
-export const deployments = {"assets":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","testnet":null,"mainnet":null},"daoExecutor":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","testnet":null,"mainnet":null},"daoMultisig":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","testnet":null,"mainnet":null},"daoTraits":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","testnet":null,"mainnet":null},"daoTreasury":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","testnet":null,"mainnet":null},"diaOracle":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dia-oracle","simnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle","testnet":null,"mainnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle"},"egroup":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","testnet":null,"mainnet":null},"ftTrait":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","testnet":null,"mainnet":null},"market":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","testnet":null,"mainnet":null},"marketTrait":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","testnet":null,"mainnet":null},"marketVault":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","testnet":null,"mainnet":null},"mockOracle":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","testnet":null,"mainnet":null},"proposalCreateEgroupSbtcUsdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","testnet":null,"mainnet":null},"proposalCreateMultipleEgroups":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","testnet":null,"mainnet":null},"proposalInitAssets":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","testnet":null,"mainnet":null},"proposalInitMarketVault":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","testnet":null,"mainnet":null},"proposalInitVaults":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","testnet":null,"mainnet":null},"proposalProtocolInit":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","testnet":null,"mainnet":null},"proposalSetPriceStaleness":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","testnet":null,"mainnet":null},"proposalSetSbtcInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","testnet":null,"mainnet":null},"proposalSetStxInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","testnet":null,"mainnet":null},"proposalSetUsdcInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","testnet":null,"mainnet":null},"protocolData":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","testnet":null,"mainnet":null},"pythGovernanceV3":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-governance-v3","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-governance-v3","testnet":null,"mainnet":null},"pythOracleV4":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-oracle-v4","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-oracle-v4","testnet":null,"mainnet":null},"pythPnauDecoderV3":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-pnau-decoder-v3","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-pnau-decoder-v3","testnet":null,"mainnet":null},"pythStorageV4":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-storage-v4","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-storage-v4","testnet":null,"mainnet":null},"pythTraitsV2":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-traits-v2","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-traits-v2","testnet":null,"mainnet":null},"sbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","testnet":null,"mainnet":null},"ststx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","testnet":null,"mainnet":null},"ststxbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","testnet":null,"mainnet":null},"traitDiaOracle":{"devnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","simnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","testnet":null,"mainnet":null},"usdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","testnet":null,"mainnet":null},"usdh":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","testnet":null,"mainnet":null},"vaultSbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","testnet":null,"mainnet":null},"vaultStstx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","testnet":null,"mainnet":null},"vaultStstxbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","testnet":null,"mainnet":null},"vaultStx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","testnet":null,"mainnet":null},"vaultTraits":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","testnet":null,"mainnet":null},"vaultUsdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","testnet":null,"mainnet":null},"vaultUsdh":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","testnet":null,"mainnet":null},"wormholeCoreV4":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-core-v4","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-core-v4","testnet":null,"mainnet":null},"wormholeTraitsV2":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-traits-v2","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wormhole-traits-v2","testnet":null,"mainnet":null},"wstx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx","testnet":null,"mainnet":null}} as const;
+export const deployments = {"assets":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.assets","testnet":null,"mainnet":null},"daoExecutor":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-executor","testnet":null,"mainnet":null},"daoMultisig":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-multisig","testnet":null,"mainnet":null},"daoTraits":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-traits","testnet":null,"mainnet":null},"daoTreasury":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dao-treasury","testnet":null,"mainnet":null},"diaOracle":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.dia-oracle","simnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle","testnet":null,"mainnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle"},"egroup":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.egroup","testnet":null,"mainnet":null},"ftTrait":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait","testnet":null,"mainnet":null},"market":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market","testnet":null,"mainnet":null},"marketTrait":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-trait","testnet":null,"mainnet":null},"marketVault":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market-vault","testnet":null,"mainnet":null},"mockOracle":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.mock-oracle","testnet":null,"mainnet":null},"proposalCreateEgroupSbtcUsdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-egroup-sbtc-usdc","testnet":null,"mainnet":null},"proposalCreateMultipleEgroups":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-create-multiple-egroups","testnet":null,"mainnet":null},"proposalInitAssets":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-assets","testnet":null,"mainnet":null},"proposalInitMarketVault":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-market-vault","testnet":null,"mainnet":null},"proposalInitVaults":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-init-vaults","testnet":null,"mainnet":null},"proposalLazerRepoint":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-lazer-repoint","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-lazer-repoint","testnet":null,"mainnet":null},"proposalProtocolInit":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-protocol-init","testnet":null,"mainnet":null},"proposalSetMarketV1":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-market-v1","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-market-v1","testnet":null,"mainnet":null},"proposalSetPriceStaleness":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-price-staleness","testnet":null,"mainnet":null},"proposalSetSbtcInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-sbtc-interest-rates","testnet":null,"mainnet":null},"proposalSetStxInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-stx-interest-rates","testnet":null,"mainnet":null},"proposalSetUsdcInterestRates":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-set-usdc-interest-rates","testnet":null,"mainnet":null},"proposalTestZvClaimOwnership":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-test-zv-claim-ownership","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-test-zv-claim-ownership","testnet":null,"mainnet":null},"proposalTestZvOwnerConfig":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-test-zv-owner-config","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-test-zv-owner-config","testnet":null,"mainnet":null},"proposalTestZvSetMetadata":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-test-zv-set-metadata","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.proposal-test-zv-set-metadata","testnet":null,"mainnet":null},"protocolData":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.protocol-data","testnet":null,"mainnet":null},"pythLazerDecoderV1":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-lazer-decoder-v1","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-lazer-decoder-v1","testnet":null,"mainnet":null},"pythLazerOracle":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-lazer-oracle","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-lazer-oracle","testnet":null,"mainnet":null},"pythLazerTraits":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-lazer-traits","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.pyth-lazer-traits","testnet":null,"mainnet":null},"sbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.sbtc","testnet":null,"mainnet":null},"sbtcRegistry":{"devnet":"SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry","simnet":"SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry","testnet":null,"mainnet":null},"sbtcToken":{"devnet":"SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token","simnet":"SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token","testnet":null,"mainnet":null},"stackingDaoMock":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.stacking-dao-mock","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.stacking-dao-mock","testnet":null,"mainnet":null},"stbtcToken":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.stbtc-token","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.stbtc-token","testnet":null,"mainnet":null},"ststx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststx","testnet":null,"mainnet":null},"ststxbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ststxbtc","testnet":null,"mainnet":null},"traitDiaOracle":{"devnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","simnet":"SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.trait-dia-oracle","testnet":null,"mainnet":null},"usdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdc","testnet":null,"mainnet":null},"usdh":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.usdh","testnet":null,"mainnet":null},"vaultSbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-sbtc","testnet":null,"mainnet":null},"vaultStbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stbtc","testnet":null,"mainnet":null},"vaultStstx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststx","testnet":null,"mainnet":null},"vaultStstxbtc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-ststxbtc","testnet":null,"mainnet":null},"vaultStx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-stx","testnet":null,"mainnet":null},"vaultTraits":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-traits","testnet":null,"mainnet":null},"vaultUsdc":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdc","testnet":null,"mainnet":null},"vaultUsdh":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.vault-usdh","testnet":null,"mainnet":null},"wstx":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.wstx","testnet":null,"mainnet":null},"zvEngineStbtc0":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-engine-stbtc-0","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-engine-stbtc-0","testnet":null,"mainnet":null},"zvOpsStbtc0":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-ops-stbtc-0","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-ops-stbtc-0","testnet":null,"mainnet":null},"zvStateStbtc0":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-state-stbtc-0","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-state-stbtc-0","testnet":null,"mainnet":null},"zvTraits":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-traits","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zv-traits","testnet":null,"mainnet":null},"zvstBTC":{"devnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zvstBTC","simnet":"ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.zvstBTC","testnet":null,"mainnet":null}} as const;
 
 export const project = {
   contracts,

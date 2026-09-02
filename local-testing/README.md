@@ -1,7 +1,7 @@
 # Zest Protocol - Local Testing Environment
 
 **For Security Researchers:**
-Minimal simnet environment with example test templates to help you get started. Includes Clarity 4 contracts, protocol initialization reference, and audit reports.
+Minimal simnet environment with example test templates to help you get started. Includes the live lending market, the **Pyth Lazer** oracle integration, the **zvstBTC** strategy vault, protocol initialization reference, and audit reports.
 
 ## Quick Start
 
@@ -9,21 +9,22 @@ Minimal simnet environment with example test templates to help you get started. 
 - [Clarinet](https://github.com/stx-labs/clarinet)
 - [Clarigen](https://github.com/mechanismHQ/clarigen) - TypeScript type generator for Clarity
 - Node.js v18+
-- **Clarity 4**: All Zest Protocol v2 contracts use Clarity version 4 (see [references/sip-033-clarity4.md](references/sip-033-clarity4.md))
+- **pnpm** (this suite is pinned + lockfiled for pnpm)
+- **Clarity**: contracts target `clarity_version = 6`, `epoch = 4.0` (see [references/sip-033-clarity4.md](references/sip-033-clarity4.md) for the Clarity language reference)
 - **SIP-010**: Fungible token standard reference (see [references/sip-010-fungible-token-standard.md](references/sip-010-fungible-token-standard.md))
 
 ### Setup
 ```bash
 cd local-testing
-npm install
-npm run clarigen  # Generate TypeScript types
+pnpm install
+pnpm clarigen     # Generate TypeScript types
 ```
 
 ### Run Tests
 ```bash
-npm test                          # Run all tests
-npm test -- tests/security/       # Run security tests only
-npm test -- -t "authorization"    # Run specific test pattern
+pnpm test                          # Run all tests
+pnpm test tests/security/          # Run security tests only
+pnpm test -- -t "authorization"    # Run specific test pattern
 ```
 
 ## Example Tests
@@ -44,7 +45,19 @@ Starter test templates to help you build your own security tests:
 ### Setup Reference (1)
 8. **Protocol Init** (`tests/setup/protocol-init.test.ts`) - Initialization reference
 
+### Oracle (1)
+9. **Pyth Lazer Smoke** (`tests/components/oracle/pyth-lazer-smoke.test.ts`) - Inline Lazer price verification
+
+### zvstBTC Strategy Vault (3)
+10. **Deposit Cap** (`tests/strategy-vault/stbtc-0/zv-stbtc-0-deposit-cap.test.ts`) - Net external-deposit cap enforcement
+11. **DAO Ownership** (`tests/strategy-vault/stbtc-0/zv-stbtc-0-dao-ownership.test.ts`) - `dao-executor` owns + governs the vault via proposals
+12. **Cap + Loop + Express** (`tests/strategy-vault/stbtc-0/zv-stbtc-0-cap-loop-express.test.ts`) - Full flow: deposit to cap → loop (real `open-position` + StackingDAO yield) → express withdraw
+
 Use these as a base to develop comprehensive test suites for your security research.
+
+## Oracle: Pyth Lazer
+
+The market prices assets on-chain via **Pyth Lazer**: each market call that resolves a price carries a signed Lazer update in its `price-feeds` argument, verified in-transaction by `pyth-lazer-oracle` + `pyth-lazer-decoder-v1` (no on-chain price storage). In tests, `set_price(...)` registers a price and `priceFeeds()` builds the signed inline update — pass it as the last arg to `market.borrow` / `collateralAdd` / `collateralRemove` / `liquidate` (see `tests/setup/helpers/pyth-lazer-helpers.ts`). The Lazer contracts are an independently-audited adaptation of [stx-labs/stacks-pyth-lazer](https://github.com/stx-labs/stacks-pyth-lazer).
 
 ## Architecture
 
@@ -55,7 +68,9 @@ See [../docs/High-Level-Overview.md](../docs/High-Level-Overview.md) for complet
 - `market-vault.clar` - User position storage
 - `assets.clar` - Asset registry
 - `egroup.clar` - Risk parameters
-- `vault-*.clar` - 6 vaults issuing ztokens
+- `vault-*.clar` - vaults issuing ztokens (incl. `vault-stbtc`)
+- `pyth-lazer-*.clar` - Pyth Lazer oracle (in-tx price verification)
+- `strategy-vault/stbtc-0/*` - the `zvstBTC` leveraged stBTC strategy vault (`zv-engine` / `zv-state` / `zv-ops` / `zvstBTC` token)
 
 ## Documentation
 

@@ -7,219 +7,272 @@ cache_dir = './.cache'
 
 [contracts.assets]
 path = 'contracts/registry/assets.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.dao-treasury]
 path = 'contracts/dao/dao-treasury.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.dao-executor]
 path = 'contracts/dao/dao-executor.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.dao-multisig]
 path = 'contracts/dao/dao-multisig.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.dao-traits]
 path = 'contracts/dao/traits.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.egroup]
 path = 'contracts/registry/egroup.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.ft-trait]
 path = 'contracts/utility/token/ft-trait.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.market-trait]
 path = 'contracts/market/market-trait.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.market]
 path = 'contracts/market/market.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.market-vault]
 path = 'contracts/market/market-vault.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.sbtc]
 path = 'contracts/utility/token/sbtc.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.ststx]
 path = 'contracts/utility/token/ststx.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.usdc]
 path = 'contracts/utility/token/usdc.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.usdh]
 path = 'contracts/utility/token/usdh.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.vault-stx]
 path = 'contracts/vault/vault-stx.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.vault-sbtc]
 path = 'contracts/vault/vault-sbtc.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.vault-ststx]
 path = 'contracts/vault/vault-ststx.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.vault-usdc]
 path = 'contracts/vault/vault-usdc.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.vault-usdh]
 path = 'contracts/vault/vault-usdh.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.vault-ststxbtc]
 path = 'contracts/vault/vault-ststxbtc.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 # V2 Migration Vaults
 [contracts.vault-traits]
 path = 'contracts/vault/traits.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.wstx]
 path = 'contracts/utility/token/wstx.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.protocol-data]
 path = 'contracts/utility/protocol-data.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.ststxbtc]
 path = 'contracts/utility/token/ststxbtc.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.proposal-protocol-init]
 path = 'contracts/proposals/mainnet/proposal-protocol-init.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 # Production testing proposals (liquidation & bad debt)
 [contracts.proposal-init-assets]
 path = 'contracts/proposals/proposal-init-assets.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.proposal-init-vaults]
 path = 'contracts/proposals/proposal-init-vaults.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.proposal-init-market-vault]
 path = 'contracts/proposals/proposal-init-market-vault.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.proposal-set-price-staleness]
 path = 'contracts/proposals/proposal-set-price-staleness.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
+
+# Repoints base-asset oracle idents from the legacy Pyth v2 hash format to the
+# Pyth Lazer feed-id encoding (feed-id in the low 16 bytes). Run in test setup
+# after protocol-init so market price resolution works under Lazer.
+[contracts.proposal-lazer-repoint]
+path = 'contracts/proposals/proposal-lazer-repoint.clar'
+clarity_version = 6
+epoch = 4.0
 
 # Mock oracle for testing bad debt socialization
 [contracts.mock-oracle]
 path = 'contracts/utility/mock/mock-oracle.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 # Test proposals for assets registry
 [contracts.proposal-create-egroup-sbtc-usdc]
 path = 'contracts/proposals/proposal-create-egroup-sbtc-usdc.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.proposal-create-multiple-egroups]
 path = 'contracts/proposals/proposal-create-multiple-egroups.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 # Unified egroup proposals for migration (support both old and new vault tokens)
 [contracts.proposal-set-usdc-interest-rates]
 path = 'contracts/proposals/proposal-set-usdc-interest-rates.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.proposal-set-sbtc-interest-rates]
 path = 'contracts/proposals/proposal-set-sbtc-interest-rates.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
 [contracts.proposal-set-stx-interest-rates]
 path = 'contracts/proposals/proposal-set-stx-interest-rates.clar'
-clarity_version = 4
-epoch = 3.3
+clarity_version = 6
+epoch = 4.0
 
-# Pyth Oracle Contracts (for local testing)
-[contracts.pyth-governance-v3]
-path = 'contracts/pyth/contracts/pyth-governance-v3.clar'
-clarity_version = 4
-epoch = 3.3
+# Pyth Lazer oracle (in-tx price verification) — replaces the former pyth pnau/wormhole stack.
+# Independently audited upstream: https://github.com/stx-labs/stacks-pyth-lazer
+[contracts.pyth-lazer-traits]
+path = 'contracts/pyth-lazer/pyth-lazer-traits.clar'
+clarity_version = 6
+epoch = 4.0
 
-[contracts.pyth-oracle-v4]
-path = 'contracts/pyth/contracts/pyth-oracle-v4.clar'
-clarity_version = 4
-epoch = 3.3
+[contracts.pyth-lazer-decoder-v1]
+path = 'contracts/pyth-lazer/pyth-lazer-decoder-v1.clar'
+clarity_version = 6
+epoch = 4.0
 
-[contracts.pyth-pnau-decoder-v3]
-path = 'contracts/pyth/contracts/pyth-pnau-decoder-v3.clar'
-clarity_version = 4
-epoch = 3.3
+[contracts.pyth-lazer-oracle]
+path = 'contracts/pyth-lazer/pyth-lazer-oracle.clar'
+clarity_version = 6
+epoch = 4.0
 
-[contracts.pyth-storage-v4]
-path = 'contracts/pyth/contracts/pyth-storage-v4.clar'
-clarity_version = 4
-epoch = 3.3
+# StackingDAO mock (stBTC <-> sBTC conversion + ratio) for the strategy vault
+[contracts.stacking-dao-mock]
+path = 'contracts/mocks/stacking-dao-mock.clar'
+clarity_version = 6
+epoch = 4.0
 
-[contracts.pyth-traits-v2]
-path = 'contracts/pyth/contracts/pyth-traits-v2.clar'
-clarity_version = 4
-epoch = 3.3
+[contracts.stbtc-token]
+path = 'contracts/utility/token/stbtc-token.clar'
+clarity_version = 6
+epoch = 4.0
 
-[contracts.wormhole-core-v4]
-path = 'contracts/pyth/contracts/wormhole/wormhole-core-v4.clar'
-clarity_version = 4
-epoch = 3.3
+[contracts.vault-stbtc]
+path = 'contracts/vault/vault-stbtc.clar'
+clarity_version = 6
+epoch = 4.0
 
-[contracts.wormhole-traits-v2]
-path = 'contracts/pyth/contracts/wormhole/wormhole-traits-v2.clar'
-clarity_version = 4
-epoch = 3.3
+# zvstBTC leveraged stBTC strategy vault (stbtc-0)
+[contracts.zv-traits]
+path = 'contracts/strategy-vault/zv-traits.clar'
+clarity_version = 6
+epoch = 4.0
+
+[contracts.zvstBTC]
+path = 'contracts/strategy-vault/stbtc-0/zvstBTC.clar'
+clarity_version = 6
+epoch = 4.0
+
+[contracts.zv-state-stbtc-0]
+path = 'contracts/strategy-vault/stbtc-0/zv-state-stbtc-0.clar'
+clarity_version = 6
+epoch = 4.0
+
+[contracts.zv-ops-stbtc-0]
+path = 'contracts/strategy-vault/stbtc-0/zv-ops-stbtc-0.clar'
+clarity_version = 6
+epoch = 4.0
+
+[contracts.zv-engine-stbtc-0]
+path = 'contracts/strategy-vault/stbtc-0/zv-engine-stbtc-0.clar'
+clarity_version = 6
+epoch = 4.0
+
+# zvstBTC test proposals (DAO ownership + config + token metadata via dao-executor)
+[contracts.proposal-test-zv-claim-ownership]
+path = 'contracts/proposals/proposal-test-zv-claim-ownership.clar'
+clarity_version = 6
+epoch = 4.0
+
+[contracts.proposal-test-zv-owner-config]
+path = 'contracts/proposals/proposal-test-zv-owner-config.clar'
+clarity_version = 6
+epoch = 4.0
+
+[contracts.proposal-test-zv-set-metadata]
+path = 'contracts/proposals/proposal-test-zv-set-metadata.clar'
+clarity_version = 6
+epoch = 4.0
+
+# Registers the stBTC vault + zstBTC/sBTC egroup so the strategy vault can loop (e2e)
+[contracts.proposal-set-market-v1]
+path = 'contracts/proposals/proposal-set-market-v1.clar'
+clarity_version = 6
+epoch = 4.0
 
 [repl.analysis]
 passes = []
@@ -236,20 +289,8 @@ callee_filter = false
 # [[project.requirements]]
 # contract_id = 'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.reserve-v1'
 
-# TESTING ONLY: Commented out for local testing to avoid conflicts with local Pyth contracts
-# PRODUCTION: Uncomment these for mainnet/testnet deployments where we use deployed Pyth contracts
-# [[project.requirements]]
-# contract_id = 'SP1CGXWEAMG6P6FT04W66NVGJ7PQWMDAC19R7PJ0Y.pyth-oracle-v4'
-
-# [[project.requirements]]
-# contract_id = 'SP1CGXWEAMG6P6FT04W66NVGJ7PQWMDAC19R7PJ0Y.pyth-storage-v4'
-
-# [[project.requirements]]
-# contract_id = 'SP1CGXWEAMG6P6FT04W66NVGJ7PQWMDAC19R7PJ0Y.pyth-pnau-decoder-v3'
-
-# [[project.requirements]]
-# contract_id = 'SP1CGXWEAMG6P6FT04W66NVGJ7PQWMDAC19R7PJ0Y.wormhole-core-v4'
-
+# The Pyth Lazer oracle (pyth-lazer-oracle / pyth-lazer-decoder-v1) is included
+# locally under contracts/pyth-lazer/. DIA is pulled as a mainnet requirement.
 [[project.requirements]]
 contract_id = 'SP1G48FZ4Y7JY8G2Z0N51QTCYGBQ6F4J43J77BQC0.dia-oracle'
 

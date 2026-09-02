@@ -20,9 +20,9 @@ import { vitestSetupFilePath, getClarinetVitestsArgv } from "@stacks/clarinet-sd
 
 export default defineConfig({
   test: {
-    // Only include tests from our tests/ directory, exclude submodules
+    // Only include tests from our tests/ directory
     include: ['tests/**/*.{test,spec}.{js,ts}'],
-    exclude: ['**/node_modules/**', '**/contracts/pyth/**'],
+    exclude: ['**/node_modules/**'],
     
     environment: "clarinet", // use vitest-environment-clarinet
     pool: "forks",

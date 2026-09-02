@@ -12,20 +12,17 @@ import {
   executeDaoProposal,
   contracts,
   proposalCreateMultipleEgroups,
-  pythStorageV4,
 } from '../../setup/helpers';
 
 // Import asset config
 import { ASSET_IDS } from '../../assetConfig';
 
 // Import Pyth helpers
-import {
-  init_pyth,
+import { init_pyth,
   set_initial_price,
   set_price,
   PythFeedIds,
-  scalePriceForPyth,
-} from '../../setup/helpers/pyth-helpers';
+  scalePriceForPyth, priceFeeds } from '../../setup/helpers/pyth-helpers';
 
 // Contract instances
 const {
@@ -89,13 +86,13 @@ describe('Liquidation Tests - sBTC/USDC Custom Egroup', () => {
     // STEP 1: Alice deposits 1 sBTC as collateral
     const sbtcAmount = 100000000n; // 1 BTC (8 decimals)
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     console.log('✓ Alice deposited 1 sBTC as collateral ($60,000 value)');
     
     // STEP 2: Alice borrows $42,000 USDC (70% LTV - healthy)
     const borrowAmount = 42000000000n; // $42,000 USDC (6 decimals)
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     console.log('✓ Alice borrowed $42,000 USDC (70% LTV - healthy)');
     
@@ -132,13 +129,6 @@ describe('Liquidation Tests - sBTC/USDC Custom Egroup', () => {
       deployer
     );
     
-    // DEBUG: Verify price actually updated in Pyth
-    const btcPriceId = Buffer.from(PythFeedIds.BTC);
-    const pythPrice = rov(contracts.pythStorageV4.getPrice({ priceIdentifier: btcPriceId }));
-    console.log('🔍 DEBUG - Pyth price verification (Test 1):');
-    console.log('  Expected price:', targetPrice);
-    console.log('  Pyth returned:', pythPrice);
-    
     console.log(`✓ BTC price dropped to $${targetPrice.toFixed(2)}`);
     console.log(`  - Collateral value: $${targetPrice.toFixed(2)}`);
     console.log(`  - Debt value: $42,000`);
@@ -166,7 +156,7 @@ describe('Liquidation Tests - sBTC/USDC Custom Egroup', () => {
         liquidateAmount,
         0n,
         null,
-        null
+        priceFeeds()
       ),
       charlie
     );
@@ -226,13 +216,13 @@ describe('Liquidation Tests - sBTC/USDC Custom Egroup', () => {
     // STEP 1: Alice deposits 1 sBTC as collateral
     const sbtcAmount = 100000000n; // 1 BTC (8 decimals)
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
     
     console.log('✓ Alice deposited 1 sBTC as collateral ($60,000 value)');
     
     // STEP 2: Alice borrows $42,000 USDC (70% LTV - healthy)
     const borrowAmount = 42000000000n; // $42,000 USDC (6 decimals)
-    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, null), alice);
+    txOk(market.borrow(usdcToken.identifier, borrowAmount, alice, priceFeeds()), alice);
     
     console.log('✓ Alice borrowed $42,000 USDC (70% LTV - healthy)');
     
@@ -262,13 +252,6 @@ describe('Liquidation Tests - sBTC/USDC Custom Egroup', () => {
       deployer
     );
     
-    // DEBUG: Verify price actually updated in Pyth
-    const btcPriceId = Buffer.from(PythFeedIds.BTC);
-    const pythPrice = rov(contracts.pythStorageV4.getPrice({ priceIdentifier: btcPriceId }));
-    console.log('🔍 DEBUG - Pyth price verification (Test 2):');
-    console.log('  Expected price:', targetPrice);
-    console.log('  Pyth returned:', pythPrice);
-    
     console.log(`✓ BTC price dropped to $${targetPrice.toFixed(2)}`);
     console.log(`  - Collateral value: $${targetPrice.toFixed(2)}`);
     console.log(`  - Debt value: $42,000`);
@@ -297,7 +280,7 @@ describe('Liquidation Tests - sBTC/USDC Custom Egroup', () => {
         liquidateAmount,
         0n,
         null,
-        null
+        priceFeeds()
       ),
       charlie
     );
@@ -359,8 +342,8 @@ describe('Liquidation Tests - sBTC/USDC Custom Egroup', () => {
     // STEP 1: Alice deposits 1 sBTC and borrows $42,000 USDC (70% LTV)
     const sbtcAmount = 100000000n; // 1 BTC
     txOk(sbtcToken.mint(sbtcAmount, alice), deployer);
-    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, null), alice);
-    txOk(market.borrow(usdcToken.identifier, 42000000000n, alice, null), alice);
+    txOk(market.collateralAdd(sbtcToken.identifier, sbtcAmount, priceFeeds()), alice);
+    txOk(market.borrow(usdcToken.identifier, 42000000000n, alice, priceFeeds()), alice);
     
     console.log('✓ Alice has 70% LTV (healthy position)');
     console.log('  - Collateral: 1 BTC @ $60,000 = $60,000');
@@ -381,7 +364,7 @@ describe('Liquidation Tests - sBTC/USDC Custom Egroup', () => {
         1000000000n, // $1,000
         0n,
         null,
-        null
+        priceFeeds()
       ),
       charlie
     );

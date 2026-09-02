@@ -11,13 +11,11 @@ import {
   executeDaoProposal,
   proposalCreateMultipleEgroups,
 } from '../setup/helpers';
-import {
-  init_pyth,
+import { init_pyth,
   set_initial_price,
   set_price,
   PythFeedIds,
-  scalePriceForPyth,
-} from '../setup/helpers/pyth-helpers';
+  scalePriceForPyth, priceFeeds } from '../setup/helpers/pyth-helpers';
 
 const market = contracts.market;
 const marketVault = contracts.marketVault;
@@ -57,8 +55,8 @@ describe("Liquidation Gaming Attack Tests", () => {
   describe("ATK-LG-01: Cannot front-run liquidation with collateral add", () => {
     it("should allow adding collateral even when liquidatable (improves health)", async () => {
       // Setup: Alice creates a position that will become liquidatable
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice); // 1 sBTC = $60k
-      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, null), alice); // $42k at 70% LTV
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), alice); // 1 sBTC = $60k
+      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, priceFeeds()), alice); // $42k at 70% LTV
       
       // Drop price to make position liquidatable (87% LTV)
       const targetPrice = 48000;
@@ -66,7 +64,7 @@ describe("Liquidation Gaming Attack Tests", () => {
       
       // Position is now liquidatable (87% > 85% threshold)
       // Alice can add more sBTC collateral to improve health - protocol allows this
-      const result = txOk(market.collateralAdd(sbtcToken.identifier, 10000000n, null), alice);
+      const result = txOk(market.collateralAdd(sbtcToken.identifier, 10000000n, priceFeeds()), alice);
       
       // Adding collateral should succeed because it improves position health
       expect(result).toBeDefined();
@@ -76,8 +74,8 @@ describe("Liquidation Gaming Attack Tests", () => {
     
     it("should allow liquidation to proceed on fresh liquidatable position", async () => {
       // Setup fresh position (bob this time, alice is healthy from previous test)
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), bob);
-      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, null), bob);
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), bob);
+      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, priceFeeds()), bob);
       
       // Make liquidatable
       await set_price(PythFeedIds.BTC, scalePriceForPyth(48000, -8), -8, deployer);
@@ -92,7 +90,7 @@ describe("Liquidation Gaming Attack Tests", () => {
           5000000000n, // $5k
           0n,
           null,
-          null
+          priceFeeds()
         ),
         charlie
       );
@@ -108,8 +106,8 @@ describe("Liquidation Gaming Attack Tests", () => {
   describe("ATK-LG-02: Slippage protection prevents MEV extraction", () => {
     it("should use min_collateral_expected to prevent value extraction", async () => {
       // Setup liquidatable position
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice);
-      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, null), alice);
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), alice);
+      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, priceFeeds()), alice);
       
       // Make FULLY liquidatable (95% LTV)
       const targetPrice = 44200; // 95% LTV
@@ -135,7 +133,7 @@ describe("Liquidation Gaming Attack Tests", () => {
           debtToRepay,
           minExpected,
           null,
-          null
+          priceFeeds()
         ),
         charlie
       );
@@ -153,8 +151,8 @@ describe("Liquidation Gaming Attack Tests", () => {
   describe("ATK-LG-05: Bad debt cannot be artificially created", () => {
     it("should socialize bad debt when collateral is exhausted", async () => {
       // Setup: Alice has small collateral, large debt
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice); // 1 sBTC
-      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, null), alice); // $42k
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), alice); // 1 sBTC
+      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, priceFeeds()), alice); // $42k
       
       // Crash price severely to create bad debt scenario
       // At $10k per BTC: collateral = $10k, debt = $42k (massive underwater)
@@ -171,7 +169,7 @@ describe("Liquidation Gaming Attack Tests", () => {
           50000000000n, // Try to liquidate $50k (more than debt)
           0n,
           null,
-          null
+          priceFeeds()
         ),
         charlie
       );
@@ -192,13 +190,13 @@ describe("Liquidation Gaming Attack Tests", () => {
       // Attacker scenario: Try to create bad debt by manipulating their position
       // This should be prevented by health checks and liquidation mechanisms
       
-      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, null), alice);
-      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, null), alice);
+      txOk(market.collateralAdd(sbtcToken.identifier, 100000000n, priceFeeds()), alice);
+      txOk(market.borrow(usdcToken.identifier, 42000000000n, null, priceFeeds()), alice);
       
       // Alice tries to remove collateral when position would become unhealthy
       // This should fail
       const result = txErr(
-        market.collateralRemove(sbtcToken.identifier, 50000000n, null, null),
+        market.collateralRemove(sbtcToken.identifier, 50000000n, null, priceFeeds()),
         alice
       );
       

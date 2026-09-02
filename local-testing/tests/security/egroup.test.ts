@@ -11,12 +11,10 @@ import {
   executeDaoProposal,
   proposalCreateMultipleEgroups,
 } from '../setup/helpers';
-import {
-  init_pyth,
+import { init_pyth,
   set_initial_price,
   PythFeedIds,
-  scalePriceForPyth,
-} from '../setup/helpers/pyth-helpers';
+  scalePriceForPyth, priceFeeds } from '../setup/helpers/pyth-helpers';
 
 const market = contracts.market;
 const marketVault = contracts.marketVault;
@@ -63,10 +61,10 @@ describe("Egroup Tests", () => {
       // Egroup 10: sBTC+USDC collateral + USDC debt = 60% LTV (superset, lower LTV)
       
       // Alice adds sBTC collateral and borrows USDC (uses 70% LTV egroup)
-      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, null), alice); // 1 sBTC = $60k
+      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, priceFeeds()), alice); // 1 sBTC = $60k
       
       // Alice borrows max at 70% LTV = $42k USDC
-      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, null), alice);
+      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, priceFeeds()), alice);
       
       // Verify alice is using sBTC+USDC-debt egroup
       const positionResult = rov(marketVault.getPosition(alice, 0xffffffffffffffffn));
@@ -80,7 +78,7 @@ describe("Egroup Tests", () => {
       // This would transition to 60% LTV, making position unhealthy
       // Current capacity: $60k * 70% = $42k
       // Future capacity: $60k * 60% = $36k < $42k (violates!)
-      const result = txErr(market.collateralAdd(contracts.usdc.identifier, 1000000n, null), alice);
+      const result = txErr(market.collateralAdd(contracts.usdc.identifier, 1000000n, priceFeeds()), alice);
       
       // Should fail with ERR-UNHEALTHY (400005)
       expect(cvToValue(result.result).value).toBe('400005');
@@ -90,13 +88,13 @@ describe("Egroup Tests", () => {
     
     it("should allow adding collateral if capacity is maintained", async () => {
       // Alice adds sBTC and borrows at a safe level
-      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, null), alice);
-      txOk(market.borrow(contracts.usdc.identifier, 30000000000n, null, null), alice); // $30k at 50% LTV
+      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, priceFeeds()), alice);
+      txOk(market.borrow(contracts.usdc.identifier, 30000000000n, null, priceFeeds()), alice); // $30k at 50% LTV
       
       // Add significant USDC collateral - should work because:
       // Current: $60k * 70% = $42k capacity
       // Future: ($60k + $12k) * 60% = $43.2k capacity ≥ $42k (passes!)
-      txOk(market.collateralAdd(contracts.usdc.identifier, 12000000000n, null), alice); // 12k USDC
+      txOk(market.collateralAdd(contracts.usdc.identifier, 12000000000n, priceFeeds()), alice); // 12k USDC
       
       console.log("✓ Collateral addition allowed when capacity is maintained");
     });
@@ -105,14 +103,14 @@ describe("Egroup Tests", () => {
   describe("EG-02: Cannot self-liquidate via egroup transition", () => {
     it("should prevent egroup transition that makes position liquidatable", async () => {
       // Alice creates position at high but safe LTV with 70% egroup
-      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, null), alice); // 1 sBTC = $60k
-      txOk(market.borrow(contracts.usdc.identifier, 41000000000n, null, null), alice); // $41k at 68% LTV
+      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, priceFeeds()), alice); // 1 sBTC = $60k
+      txOk(market.borrow(contracts.usdc.identifier, 41000000000n, null, priceFeeds()), alice); // $41k at 68% LTV
       
       // Position is healthy (68% < 70% borrow threshold, < 85% liquidation threshold)
       // But adding USDC would transition to 60% LTV egroup, making it unhealthy
       
       // Attack: Try to add dust USDC
-      const result = txErr(market.collateralAdd(contracts.usdc.identifier, 1000000n, null), alice);
+      const result = txErr(market.collateralAdd(contracts.usdc.identifier, 1000000n, priceFeeds()), alice);
       
       // Should fail because capacity check prevents harmful transitions
       // Current capacity: $60k * 70% = $42k
@@ -126,26 +124,26 @@ describe("Egroup Tests", () => {
   describe("EG-03: Capacity check prevents harmful collateral additions", () => {
     it("should verify capacity formula: future_coll × future_ltv ≥ current_coll × current_ltv", async () => {
       // Alice: 1 sBTC ($60k) at 70% LTV
-      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, null), alice);
-      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, null), alice); // Max borrow $42k
+      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, priceFeeds()), alice);
+      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, priceFeeds()), alice); // Max borrow $42k
       
       // Current: $60k * 70% = $42k
       // Try adding $1k USDC → Future: ($60k + $1k) * 60% = $36.6k
       // $36.6k < $42k → FAILS capacity check
-      const result1 = txErr(market.collateralAdd(contracts.usdc.identifier, 1000000000n, null), alice);
+      const result1 = txErr(market.collateralAdd(contracts.usdc.identifier, 1000000000n, priceFeeds()), alice);
       expect(cvToValue(result1.result).value).toBe('400005');
       
       // But adding $12k USDC → Future: ($60k + $12k) * 60% = $43.2k
       // $43.2k > $42k → PASSES capacity check
-      txOk(market.collateralAdd(contracts.usdc.identifier, 12000000000n, null), alice);
+      txOk(market.collateralAdd(contracts.usdc.identifier, 12000000000n, priceFeeds()), alice);
       
       console.log("✓ Capacity formula correctly enforced");
     });
     
     it("should handle capacity check with price changes", async () => {
       // Alice: 1 sBTC at $60k, borrows max
-      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, null), alice);
-      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, null), alice);
+      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, priceFeeds()), alice);
+      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, priceFeeds()), alice);
       
       // Price drops: sBTC → $55k
       await set_initial_price(PythFeedIds.BTC, scalePriceForPyth(55000, -8), deployer);
@@ -154,7 +152,7 @@ describe("Egroup Tests", () => {
       // Position is unhealthy even without transition
       
       // Try to add USDC - should fail because position is already unhealthy
-      const result = txErr(market.collateralAdd(contracts.usdc.identifier, 1000000000n, null), alice);
+      const result = txErr(market.collateralAdd(contracts.usdc.identifier, 1000000000n, priceFeeds()), alice);
       expect(cvToValue(result.result).value).toBe('400005'); // ERR-UNHEALTHY
       
       console.log("✓ Capacity check works correctly with price volatility");
@@ -168,7 +166,7 @@ describe("Egroup Tests", () => {
       // - sBTC+USDC coll + USDC debt: 60% LTV
       
       // Test 1: sBTC collateral + USDC debt uses 70% LTV egroup
-      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, null), alice);
+      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, priceFeeds()), alice);
       let positionResult = rov(marketVault.getPosition(alice, 0xffffffffffffffffn));
       expect(positionResult.isOk).toBe(true);
       if (typeof positionResult.value === 'bigint') {
@@ -177,13 +175,13 @@ describe("Egroup Tests", () => {
       expect(positionResult.value.mask).toBe(getCollateralBitMask('sbtc')); // sBTC collateral only (no debt yet)
       
       // Can borrow up to 70% LTV
-      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, null), alice); // 70% of $60k
+      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, priceFeeds()), alice); // 70% of $60k
       
       // Repay for next test
       txOk(market.repay(contracts.usdc.identifier, 42000000000n, null), alice);
       
       // Test 2: Add USDC collateral → should use sBTC+USDC coll egroup (60%)
-      txOk(market.collateralAdd(contracts.usdc.identifier, 10000000000n, null), alice);
+      txOk(market.collateralAdd(contracts.usdc.identifier, 10000000000n, priceFeeds()), alice);
       positionResult = rov(marketVault.getPosition(alice, 0xffffffffffffffffn));
       expect(positionResult.isOk).toBe(true);
       if (typeof positionResult.value === 'bigint') {
@@ -192,7 +190,7 @@ describe("Egroup Tests", () => {
       expect(positionResult.value.mask).toBe(68n); // bits 2,6 = sBTC+USDC collateral (2^2 + 2^6 = 68)
       
       // Can only borrow 60% now (most specific superset)
-      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, null), alice); // 60% of $70k
+      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, priceFeeds()), alice); // 60% of $70k
       
       console.log("✓ Bucket resolution correctly finds most specific egroup");
     });
@@ -207,8 +205,8 @@ describe("Egroup Tests", () => {
       // sBTC+USDC coll + USDC debt: 60% LTV (superset has lower LTV ✓)
       
       // Test 1: sBTC collateral at 70%
-      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, null), alice);
-      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, null), alice); // 70% works
+      txOk(market.collateralAdd(contracts.sbtc.identifier, 100000000n, priceFeeds()), alice);
+      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, priceFeeds()), alice); // 70% works
       
       // Verify position
       const position1Result = rov(marketVault.getPosition(alice, 0xffffffffffffffffn));
@@ -222,14 +220,14 @@ describe("Egroup Tests", () => {
       txOk(market.repay(contracts.usdc.identifier, 42000000000n, null), alice);
       
       // Test 2: With sBTC+USDC collateral, max is 60%
-      txOk(market.collateralAdd(contracts.usdc.identifier, 10000000000n, null), alice);
+      txOk(market.collateralAdd(contracts.usdc.identifier, 10000000000n, priceFeeds()), alice);
       
       // Try to borrow 70% of total collateral ($70k) = $49k
-      const result = txErr(market.borrow(contracts.usdc.identifier, 49000000000n, null, null), alice);
+      const result = txErr(market.borrow(contracts.usdc.identifier, 49000000000n, null, priceFeeds()), alice);
       expect(cvToValue(result.result).value).toBe('400005'); // ERR-UNHEALTHY (exceeds 60%)
       
       // But 60% works: $70k * 0.60 = $42k
-      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, null), alice);
+      txOk(market.borrow(contracts.usdc.identifier, 42000000000n, null, priceFeeds()), alice);
       
       console.log("✓ Due to superset invariant: more collateral / debt types than previous group = always lower LTV");
     });

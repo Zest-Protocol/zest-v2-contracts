@@ -62,10 +62,10 @@ All price resolution logic is implemented in `market.clar`:
 
 ### 1. Pyth Lazer (TYPE-PYTH = 0x00)
 
-**Description:** Prices are delivered via **Pyth Lazer**: each market call carries up to 3 signed Lazer update buffers in its `price-feeds` argument. There is **no on-chain price storage** — the market verifies an update in-transaction via `pyth-lazer-oracle.verify-price-feeds` (+ `pyth-lazer-decoder-v1`), folds the decoded feeds into an in-tx `pyth-context`, and `resolve-pyth` reads from that context. The Lazer feed-id is carried in the **low 16 bytes** of the asset's 32-byte `ident`.
+**Description:** Prices are delivered via **Pyth Lazer**: each market call carries up to 3 signed Lazer update buffers in its `price-feeds` argument. There is **no on-chain price storage**. The market verifies an update in-transaction via `pyth-lazer-oracle.verify-price-feeds` (+ `pyth-lazer-decoder-v1`), folds the decoded feeds into an in-tx `pyth-context`, and `resolve-pyth` reads from that context. The Lazer feed-id is carried in the **low 16 bytes** of the asset's 32-byte `ident`.
 
 ```clarity
-;; In market.clar — verify one signed Lazer update inline (no storage write)
+;; In market.clar: verify one signed Lazer update inline (no storage write)
 (define-private (verify-lazer-update (update (buff 8192)))
   (contract-call? .pyth-lazer-oracle verify-price-feeds
     update .pyth-lazer-decoder-v1 none))

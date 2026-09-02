@@ -57,7 +57,7 @@ Use these as a base to develop comprehensive test suites for your security resea
 
 ## Oracle: Pyth Lazer
 
-The market prices assets on-chain via **Pyth Lazer**: each market call that resolves a price carries a signed Lazer update in its `price-feeds` argument, verified in-transaction by `pyth-lazer-oracle` + `pyth-lazer-decoder-v1` (no on-chain price storage). In tests, `set_price(...)` registers a price and `priceFeeds()` builds the signed inline update — pass it as the last arg to `market.borrow` / `collateralAdd` / `collateralRemove` / `liquidate` (see `tests/setup/helpers/pyth-lazer-helpers.ts`). The Lazer contracts are an independently-audited adaptation of [stx-labs/stacks-pyth-lazer](https://github.com/stx-labs/stacks-pyth-lazer).
+The market prices assets on-chain via **Pyth Lazer**: each market call that resolves a price carries a signed Lazer update in its `price-feeds` argument, verified in-transaction by `pyth-lazer-oracle` + `pyth-lazer-decoder-v1` (no on-chain price storage). In tests, `set_price(...)` registers a price and `priceFeeds()` builds the signed inline update. Pass it as the last arg to `market.borrow` / `collateralAdd` / `collateralRemove` / `liquidate` (see `tests/setup/helpers/pyth-lazer-helpers.ts`). The Lazer contracts are an independently-audited adaptation of [stx-labs/stacks-pyth-lazer](https://github.com/stx-labs/stacks-pyth-lazer).
 
 ## Architecture
 
@@ -95,6 +95,7 @@ Zest Protocol v2 has been audited by leading Clarity security firms. These repor
 - [**Clarity Alliance - Zest Protocol v2 Upgrade**](https://clarity-alliance.github.io/audits/Clarity%20Alliance%20-%20Zest%20Protocol%20v2%20Upgrade.pdf) - December 3rd, 2025
 - [**Greybeard Security - Zest Protocol v2**](https://drive.google.com/file/d/1ttWULriHM4yZZ_Y3kMJiSnrFaYee-IMi/view?usp=drive_link) - December 4th, 2025
 - [**Clarity Alliance - Zest Protocol v2 Upgrade V2**](https://clarity-alliance.github.io/audits/Clarity%20Alliance%20-%20Zest%20Protocol%20v2%20Upgrade%20V2.pdf) - December 20th, 2025
+- [**Clarity Alliance - Zest Protocol Strategy Vault**](https://clarity-alliance.github.io/audits/Clarity%20Alliance%20-%20Zest%20Protocol%20Strategy%20Vault.pdf) - September 2nd, 2026
 
 ## Mainnet Deployment
 

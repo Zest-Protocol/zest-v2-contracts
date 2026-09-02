@@ -30,6 +30,8 @@ Production deployment of Zest Protocol on Stacks mainnet.
 
 Leveraged stBTC strategy vault issuing the `zvstBTC` share token. Borrows sBTC on `v0-8-market` against zstBTC collateral and loops on StackingDAO.
 
+Audited by Clarity Alliance: [Zest Protocol Strategy Vault](https://clarity-alliance.github.io/audits/Clarity%20Alliance%20-%20Zest%20Protocol%20Strategy%20Vault.pdf) (September 2nd, 2026).
+
 | Contract Name | Explorer Link | Last Updated |
 |--------------|---------------|--------------|
 | [zv-traits](contracts/strategy-vault/zv-traits.clar) | [Link](https://explorer.hiro.so/txid/SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.zv-traits?chain=mainnet) | 2nd Sep 2026 |
@@ -58,10 +60,11 @@ Zest Protocol v2 has been audited by leading Clarity security firms:
 - [**Clarity Alliance - Zest Protocol v2 Upgrade**](https://clarity-alliance.github.io/audits/Clarity%20Alliance%20-%20Zest%20Protocol%20v2%20Upgrade.pdf) - December 3rd, 2025
 - [**Greybeard Security - Zest Protocol v2**](https://drive.google.com/file/d/1ttWULriHM4yZZ_Y3kMJiSnrFaYee-IMi/view?usp=drive_link) - December 4th, 2025
 - [**Clarity Alliance - Zest Protocol v2 Upgrade V2**](https://clarity-alliance.github.io/audits/Clarity%20Alliance%20-%20Zest%20Protocol%20v2%20Upgrade%20V2.pdf) - December 20th, 2025
+- [**Clarity Alliance - Zest Protocol Strategy Vault**](https://clarity-alliance.github.io/audits/Clarity%20Alliance%20-%20Zest%20Protocol%20Strategy%20Vault.pdf) - September 2nd, 2026
 
 ## Oracles
 
-Zest prices assets on-chain via **Pyth Lazer** (primary) with **DIA** as a secondary source, replacing the earlier Pyth pnau/Wormhole stack. Lazer updates are verified in-transaction by the `pyth-lazer-oracle` and `pyth-lazer-decoder-v1` contracts — an independently-audited adaptation of [stx-labs/stacks-pyth-lazer](https://github.com/stx-labs/stacks-pyth-lazer) (out of Zest's own audit scope) — and consumed directly by `v0-8-market` for gas-efficient health and liquidation checks.
+Zest prices assets on-chain via **Pyth Lazer** (primary) with **DIA** as a secondary source, replacing the earlier Pyth pnau/Wormhole stack. Lazer updates are verified in-transaction by the `pyth-lazer-oracle` and `pyth-lazer-decoder-v1` contracts (an independently-audited adaptation of [stx-labs/stacks-pyth-lazer](https://github.com/stx-labs/stacks-pyth-lazer), out of Zest's own audit scope) and consumed directly by `v0-8-market` for gas-efficient health and liquidation checks.
 
 Pyth Lazer feeds (oracle type `0x00`):
 
